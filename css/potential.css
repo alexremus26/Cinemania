@@ -1,0 +1,224 @@
+/* =========================================
+   1. FUNDAMENTE & TIPOGRAFIE
+   ========================================= */
+html {
+    font-size: 18px; 
+    transition: font-size 0.3s ease-in-out;
+    scroll-behavior: smooth;
+}
+
+* { transition: all 0.3s ease; box-sizing: border-box; }
+
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    --clr-base-red: #D92A27;   
+    --clr-black: #0d0d0d;      
+    --clr-dark-grey: #420D46;  
+    --clr-gold: #D96827;       
+    --clr-white: #F5F5F5;      
+    --clr-pink: #D92787;
+    --clr-orange-red: #D94927;
+    --clr-salmon: #DE9190;
+    
+    background-color: var(--clr-black); 
+    color: var(--clr-white);
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
+
+/* =========================================
+   2. GRID & RESPONSIVE
+   ========================================= */
+#grid-pagina {
+    display: grid;
+    gap: 30px;
+    padding: 40px var(--page-margin);
+}
+
+#welcome       { grid-area: zona1; }
+#orar          { grid-area: zona2; }
+#evenimente    { grid-area: zona3; }
+#anunturi      { grid-area: zona4; }
+#upcoming      { grid-area: zona5; }
+#account       { grid-area: zona6; }
+#locatii       { grid-area: zona7; }
+#facilitati    { grid-area: zona8; }
+
+#grid-pagina > section, footer {
+    background-color: var(--clr-dark-grey);
+    border: 1px solid var(--clr-base-red);
+    padding: 25px;
+    border-radius: 15px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 1024px) {
+    body { --page-margin: 8vw; }
+    #grid-pagina {
+        grid-template-columns: 1fr 2.5fr 1fr;
+        grid-template-areas:
+            "zona1 zona1 zona1"
+            "zona3 zona2 zona4"
+            "zona8 zona8 zona8"
+            "zona7 zona5 zona6";
+    }
+}
+
+@media (max-width: 1023px) {
+    html { font-size: 16px; }
+    body { --page-margin: 4vw; }
+    #grid-pagina {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "zona1 zona1" "zona3 zona4" "zona2 zona2" "zona8 zona8" "zona7 zona5" "zona6 zona6";
+    }
+}
+
+@media (max-width: 767px) {
+    html { font-size: 14px; }
+    #grid-pagina { grid-template-columns: 1fr; grid-template-areas: "zona1" "zona3" "zona4" "zona2" "zona8" "zona7" "zona5" "zona6"; }
+    * { transition: none !important; }
+}
+
+/* =========================================
+   3. HEADER & DROPDOWN (FIXED & CONTRAST)
+   ========================================= */
+.main-header {
+    background-color: #000000; 
+    border-bottom: 2px solid var(--clr-base-red);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 8px var(--page-margin);
+}
+
+.logo-area { display: flex; align-items: center; gap: 12px; }
+#Logo { height: 30px; border: none !important; }
+#title { color: var(--clr-gold); font-size: 1.4rem; letter-spacing: 2px; margin: 0; }
+
+.nav-main { 
+    list-style: none; 
+    display: flex; 
+    gap: 25px; 
+    margin: 0; 
+    padding: 0; 
+    align-items: center;
+}
+
+.nav-main > li {
+    position: relative; 
+}
+
+.nav-main a {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: block;
+    padding: 10px 0;
+}
+
+.nav-main a:hover { color: var(--clr-base-red); }
+
+.dropdown {
+    display: none; 
+    position: absolute; 
+    top: 100%; 
+    left: 0;
+    background-color: #000000; 
+    border: 1px solid var(--clr-base-red);
+    min-width: 200px; 
+    list-style: none; 
+    padding: 10px 0;
+    margin: 0;
+    z-index: 9999;
+}
+
+.nav-main li:hover > .dropdown {
+    display: block;
+}
+
+.dropdown li a { 
+    padding: 10px 20px; 
+    text-transform: none; 
+    font-size: 0.85rem; 
+    white-space: nowrap;
+}
+
+.dropdown li a:hover { background-color: var(--clr-dark-grey); color: var(--clr-gold); }
+
+/* =========================================
+   4. STILIZARE TABEL (AURIU & ROSU)
+   ========================================= */
+.table-rounded-container { border-radius: 15px; border: 2px solid var(--clr-base-red); overflow: hidden; background-color: var(--clr-black); }
+.table-scroll-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 15px; text-align: center; border: 1px solid rgba(166, 25, 46, 0.2); }
+td:nth-child(odd) { background-color: rgba(255, 255, 255, 0.01); }
+td:nth-child(even) { background-color: rgba(255, 255, 255, 0.04); }
+th { background-color: var(--clr-base-red); color: white; }
+tbody tr:hover { background-color: rgba(166, 25, 46, 0.15); }
+tbody td:hover { background-color: var(--clr-gold) !important; color: black; cursor: pointer; }
+caption { caption-side: bottom; padding: 10px; font-style: italic; color: var(--clr-gold); text-align: right; }
+tfoot td { background-color: #000; color: var(--clr-gold); font-weight: bold; }
+
+/* =========================================
+   5. IFRAME & FLEXBOX
+   ========================================= */
+.iframe-interface { display: flex; flex-direction: column; gap: 20px; }
+.iframe-nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.iframe-nav a { 
+    padding: 8px 16px; border: 1px solid var(--clr-gold); color: var(--clr-gold); 
+    text-decoration: none; font-size: 0.8rem; font-weight: bold; 
+}
+.iframe-nav a:hover { background: var(--clr-gold); color: black; }
+.iframe-wrapper { border: 4px solid white; line-height: 0; }
+.iframe-wrapper iframe { width: 100%; height: 350px; border: none; }
+
+/* =========================================
+   6. ZONA 1 (GALERIE POSTERE)
+   ========================================= */
+#welcome { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: linear-gradient(135deg, #121212, #2a050a); align-items: center; }
+#welcome .subtitlu { color: var(--clr-base-red); font-weight: bold; letter-spacing: 2px; }
+.btn-main { background: var(--clr-base-red); color: white; padding: 12px 24px; text-decoration: none; margin-right: 15px; font-weight: bold; }
+.btn-sub { border: 2px solid var(--clr-gold); color: var(--clr-gold); padding: 10px 22px; text-decoration: none; font-weight: bold; }
+.slider-mockup img { height: 250px; border: 2px solid var(--clr-base-red); transition: transform 0.3s ease; cursor: pointer; }
+.slider-mockup img:hover { transform: scale(1.1); border-color: var(--clr-gold); box-shadow: 0 0 20px var(--clr-base-red); }
+
+/* =========================================
+   7. BACK TO TOP (ANIMATED)
+   ========================================= */
+#link-top {
+    position: fixed; bottom: 30px; right: 30px; z-index: 2000;
+    text-decoration: none; display: block; width: 60px; height: 60px; opacity: 0.6;
+}
+#link-top:hover { opacity: 1; }
+.circle-outer {
+    width: 100%; height: 100%; background-color: var(--clr-dark-grey); border-radius: 50%;
+    position: relative; border-top: 4px solid var(--clr-base-red); border-bottom: 4px solid var(--clr-base-red);
+    border-left: 4px solid var(--clr-gold); border-right: 4px solid var(--clr-gold);
+    box-shadow: inset 0 0 10px #000; transition: transform 0.6s ease-in-out;
+}
+#link-top:hover .circle-outer { transform: rotate(360deg); }
+.arrow-icon {
+    font-size: 2rem; color: var(--clr-white); position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(0deg);
+    filter: blur(3px); transition: all 0.6s ease-in-out;
+}
+#link-top:hover .arrow-icon { filter: blur(0); transform: translate(-50%, -50%) rotate(-360deg); }
+.tooltip-text {
+    visibility: hidden; position: absolute; bottom: 125%; right: 0;
+    background: var(--clr-base-red); color: #fff; padding: 5px 10px;
+    border-radius: 5px; font-size: 0.8rem; white-space: nowrap; opacity: 0;
+}
+#link-top:hover .tooltip-text { visibility: visible; opacity: 1; }
+
+footer { margin-top: 40px; text-align: center; font-size: 0.9rem; }
+.cat-card { border: 1px solid var(--clr-gold); padding: 20px; text-align: center; border-radius: 10px; text-decoration: none; color: inherit; display: block; transition: all 0.3s ease; }
+.cat-card:hover { background: rgba(229, 177, 67, 0.1); transform: translateY(-5px); box-shadow: 0 5px 15px var(--clr-base-red); }

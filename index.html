@@ -5,435 +5,196 @@
     <meta charset="UTF-8">
     <meta name="author" content="Remus Alexandru-Stoicescu">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cinemania este locul ideal pentru a viziona un film.
-                                    Bucură-te de o selecție inegalabilă de filme si tehnologie de ultima generatie!">
-    <meta name="keywords" content="Cinemania, cinema, 3d, imax, 4dx, cinematograf, film, program film">
-    <title>Cinema</title>
+    <meta name="description" content="Cinemania - Rezervă bilete la cele mai noi filme. Descoperă programul cinema, premierele săptămânii, experiențe IMAX și 4DX.">
+    <meta name="keywords" content="cinema, filme noi, bilete cinema, program cinema, premiere, imax, 4dx, rezervari bilete, popcorn, cinemania">
+    <title>Cinemania - Acasă</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    
     <link rel="icon" type="image/png" href="./resources/images/favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./resources/images/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./resources/images/favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./resources/images/favicon/apple-touch-icon.png" />
-    <link rel="manifest" href="./resources/images/favicon/site.webmanifest" />
-    <meta name="msapplication-TileColor" content="#1a1a2e">
+    <link href="css/general.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Kit pentru Iconițe -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="msapplication-TileColor" content="#D92A27">
 </head>
 
 <body>
-    <!-- 8 -->
-    <header>
-        <h1>Cinemania</h1>
+    <!-- Ancora pentru Back to Top -->
+    <div id="top-anchor"></div>
+
+    <header class="main-header">
+        <div class="logo-area">
+            <img src="./resources/images/CinemaniaLogo.png" id="Logo" alt="Cinemania Logo" />
+            <h1 id="title">Cinemania</h1>
+        </div>
         <nav>
-            <ul>
-                <li><a href="#welcome">Acasă</a>
-                    <ul>
-                        <li><a href="#welcome">Bine ați venit!</a></li>
-                        <li><a href="#promotii">Promoții</a></li>
-                        <li><a href="#evenimente">Evenimente</a></li>
+            <ul class="nav-main">
+                <li class="has-dropdown">
+                    <a href="index.html">Acasă</a>
+                    <ul class="dropdown">
+                        <li><a href="#orar">Program Curent</a></li>
+                        <li><a href="#upcoming">În Curând</a></li>
                     </ul>
                 </li>
-                <li><a href="program.html">Filme</a></li>
-                <li><a href="locatii.html">Cinematografe</a></li>
-                <li><a href="bilete.html">Bilete și Servicii</a></li>
+                <li><a href="filme.html">Filme</a></li>
+                <li><a href="program.html">Program</a></li>
+                <li><a href="contul-meu.html">Contul Meu</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <div id="grid-pagina">
 
-            <!-- 7 -->
-            <section id="welcome">
-                <hgroup>
-                    <h2>Bine ați venit la Cinemania</h2>
-                    <p class="subtitlu">Experiența de cinematograf la un alt nivel.</p>
-                </hgroup>
-
-                <p class="intro">Vă mulțumim că ne vizitați site-ul!
-                </p>
-
-                <div class="gen-filme">
-                    <h3>Genuri de filme disponibile</h3>
-                    <ul>
-                        <li><a href="#actiune">Actiune</a></li>
-                        <li><a href="#drama">Dramă</a></li>
-                        <li><a href="#comedie">Comedie</a></li>
-                        <li><a href="#science-fiction">Science-Fiction</a></li>
-                        <li><a href="#thriller">Thriller</a></li>
-                    </ul>
+    <main id="grid-pagina">
+        <!-- ZONA 1 -->
+        <section id="welcome">
+            <div class="welcome-content">
+                <p class="subtitlu">PREMIERELE SĂPTĂMÂNII</p>
+                <h2>Acum în cinema</h2>
+                <p class="intro">Descoperă experiența vizuală supremă în sălile noastre dotate cu tehnologie de vârf.</p>
+                <div class="cta-buttons">
+                    <a href="contul-meu.html" class="btn-main">Rezervă Locuri</a>
+                    <a href="program.html" class="btn-sub">Vezi Program</a>
                 </div>
-                <p class="anunt intro">Bucură-te de experiența cinematografică supremă în confortul sălilor noastre de
-                    ultim nivel, cu proiecție 4DX și ecrane IMAX.</p>
-                <div id="dv-prezentare-1">
-                    <div id="dv-prezentare">
-                        <!-- 11 -->
-                        <figure>
-                            <picture>
-                                <source srcset="./resources/images/MartySupreme_small.png" media="(max-width:700px)" />
-
-                                <source srcset="./resources/images/MartySupreme_medium.png"
-                                    media="(max-width:1200px)" />
-
-                                <img src="./resources/images/MartySupreme_big.png" alt="Poster Film Nou"
-                                    title="Poster detaliat pentru avanpremiera noului blockbuster"
-                                    style="max-width: 15%; height: auto;" />
-                            </picture>
-                            <figcaption>Marty Supreme - Premiera</figcaption>
-                        </figure>
-                    </div>
-                </div>
+            </div>
+            <div class="slider-mockup">
+                <img src="./resources/images/MartySupreme_big.png" alt="Poster 1" />
+            </div>
         </section>
 
-        <!-- 9 -->
-        <section id="welcome-mesaj">
-            <h2>Despre noi</h2>
-            <p><!-- 12a -->Cinemania îți aduce cele mai <b>bune filme</b>
-                direct în oraș tău, oferind o experiență <b>cinematografică de dimensiuni imax</b> cu tehnologia
-                <b>4D</b>.
-            </p>
-
-            <blockquote>
-                <q><!-- 12c -->Cinemania oferă cea mai imersivă experiență</q>
-                <!-- 12g -->din raportul <cite>Revista Cinefosfor
-                    2026</cite>.
-            </blockquote>
-            <!-- 12h -->
-            <p><strong>Anunț Important:</strong> Tehnologia <dfn title="Experiență cinematografică medie">imax</dfn>
-                este un format de proiecție care folosește ecrane mai mari și rezoluție superioară pentru o
-                imersiune vizuală maximă. Descoperă această inovație în toate salele noastre premium!</p>
-        </section>
-
-        <section id="promotii">
-            <h2>Promoții și oferte</h2>
-            <article>
-                <h3 class="titlu">Super ofertă de weekend</h3>
-                <p><b>Cinemania</b> oferă <b>reduceri de <s>10%</s> <ins>20%</ins></b> pentru bilete cumpărate în
-                    intervalul 10-14.</p>
-                <p>Oferta este valabilă doar în zilele de sâmbătă și duminică la toate sediile <abbr
-                        title="Cinemania Cinematografe">CM</abbr>.</p>
-                <p>în cazul în care cumpărați mai mult de trei <b>bilete</b> primiți și o băutură la alegere gratuit
-                    din bar!</p>
-            </article>
-            <article>
-                <h3>Ofertă pachet cinema</h3>
-                <p>Cinemania oferă pachete cuprinzând:</p>
-                <ol>
-                    <li><i lang="en">premium popcorn</i></li>
-                    <li>Un set de 2 bilete pentru o proiecție la alegere</li>
-                    <li>O băutură la alegere</li>
-                    <li>Un <i>candy mix</i></li>
-                    <li>Gratis: acces VIP la sala de așteptare cu recliner seats</li>
-                    <li>Gratis: card de fidelitate Cinemania cu 10% reducere la viitoarele achizițiuni</li>
-                </ol>
-            </article>
-            <article>
-                <h3 id="actiune-promo">Filme de acțiune</h3>
-                <p>Noi aducem cele mai spectaculoase filme de acțiune direct în sălile noastre!</p>
-                <p>În martie avem următoarele premiere:</p>
-                <ol>
-                    <li>Blockbuster-ul așteptat cu scene de urmărire spectaculoase</li>
-                    <li>Film de spioni cu plot-twist-uri surprinzătoare</li>
-                    <li>Secvela mult așteptată a franșizei favorite a publicului</li>
-                </ol>
-            </article>
-        </section>
-        <!-- 6 -->
-        <section id="filme">
-            <h2>Filme</h2>
-            <p>Explorează catalogul nostru împărțit pe următoarele categorii:</p>
-        </section>
-        <!-- 15 -->
+        <!-- ZONA 2 -->
         <section id="orar">
-            <h2>Program cinematografe</h2>
-            <table id="tab-orar">
-                <caption>Program normal de funcționare</caption>
-                <thead>
-                    <tr>
-                        <th>Cod</th>
-                        <th>Perioadă</th>
-                        <th>Zi</th>
-                        <th>Primă sesiune</th>
-                        <th>Pauza</th>
-                        <th>Sesiune seară</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td rowspan="5">Zile<br>Lucrătoare</td>
-                        <td>Luni</td>
-                        <td>10-12</td>
-                        <td>12-14</td>
-                        <td>14-20</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Marti</td>
-                        <td>9-12</td>
-                        <td>12-14</td>
-                        <td>14-21</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Miercuri</td>
-                        <td>9-11</td>
-                        <td>11-13</td>
-                        <td>14-21</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Joi</td>
-                        <td>9-11</td>
-                        <td>11-13</td>
-                        <td>14-21</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Vineri</td>
-                        <td>9-12</td>
-                        <td>12-14</td>
-                        <td>14-19</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td rowspan="2">Weekend</td>
-                        <td>Sambata</td>
-                        <td>10-12</td>
-                        <td>12-13</td>
-                        <td>13-16</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Duminica</td>
-                        <td>10-14</td>
-                        <td>-</td>
-                        <td>inchis</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="6">Închis cu ocazia sărbătorilor legale. Pentru informații actualizate, verificați pagina noastră de contact.</td>
-                    </tr>
-                </tfoot>
-            </table>
-            <p><strong>Atentie!!!</strong> Duminica este INCHIS.</p>
-        </section>
-        <section id="categorii">
-        <h2>Categorii de filme</h2>
-        <p>Avem următoarele categorii de filme disponibile</p>
-        <section id="actiune">
-            <h3>Filme de Acțiune</h3>
-            <!-- 12d -->
-            <p>Pentru cei care nu pot sta prea mult pe scaun fiindcă filmul îi ține pe marginea spăturii, acesta e
-                genul <em>perfect</em>!</p>
-            <p>Exemple de filme disponibile:</p>
-            <ul>
-                <li>Mad Max: Fury Road</li>
-                <li>John Wick</li>
-                <li>Avengers: Endgame</li>
-                <li>The Dark Knight</li>
-                <li>Die Hard</li>
-                <li>Gladiator</li>
-            </ul>
-        </section>
-        <section id="drama">
-            <h3>Filme de Dramă</h3>
-            <!-- 12b -->
-            <p>Pentru cei care iubesc povestile emoționante și <i lang="fr">cinéma</i> de autor!</p>
-            <p>Exemple de filme disponibile:</p>
-            <ul>
-                <li>The Shawshank Redemption</li>
-                <li>Forrest Gump</li>
-                <li>The Godfather</li>
-                <li>Schindler's List</li>
-                <li>Parasite</li>
-                <li>12 Years a Slave</li>
-            </ul>
-        </section>
-
-        <section id="comedie">
-            <h3>Filme de Comedie</h3>
-            <p>Pentru zile când ai nevoie de un râs bun:</p>
-            <ul>
-                <li>The Grand Budapest Hotel</li>
-                <li>Superbad</li>
-                <li>Groundhog Day</li>
-                <li>Ferris Bueller's Day Off</li>
-                <li>Shaun of the Dead</li>
-                <li>What We Do in the Shadows</li>
-            </ul>
-        </section>
-        <section id="science-fiction">
-            <h3>Filme Science-Fiction</h3>
-            <ul>
-                <li>Blade Runner 2049</li>
-                <li>Interstellar</li>
-                <li>The Matrix</li>
-                <li>Inception</li>
-                <li>Arrival</li>
-                <li>Dune</li>
-            </ul>
-        </section>
-        <section id="thriller">
-            <h3>Filme Thriller</h3>
-            <ul>
-                <li>Se7en</li>
-                <li>Gone Girl</li>
-                <li>Parasite</li>
-                <li>Shutter Island</li>
-                <li>Oldboy</li>
-                <li>The Silence of the Lambs</li>
-            </ul>
-        </section>
-        </section>
-
-
-
-        <!-- 10 -->
-        <section id="evenimente">
-            <h2>Evenimente</h2>
-            <ul>
-                <li>
-                    <time datetime="2026-03-01T19:00">1 Martie 2026 ora 19:00</time>,
-                    <b>Inaugurare sală 4DX</b> - Vino să testezi noua noastră locație din centru, cu popcorn din
-                    partea casei!
-                </li>
-                <li>
-                    <time datetime="2026-03-15T20:30">15 Martie 2026 ora 20:30</time>,
-                    <b>Maratonul Lord of the Rings</b> - Proiectăm trilogia extinsă cu scurte pauze.
-                </li>
-            </ul>
-        </section>
-        </div>
-        <section id="galerie-statica">
-            <h2>Galerie - Postere Filme</h2>
-            <div id="grid-galerie">
-                <figure>
-                    <div>
-                        <img src="resources/images/poster-cinema.jpg" alt="Poster film">
-                    </div>
-                    <figcaption>Poster 1</figcaption>
-                </figure>
-                <figure>
-                    <img src="resources/images/poster-cinema.jpg" alt="Poster film">
-                    <figcaption>Poster 2</figcaption>
-                </figure>
-                <figure>
-                    <img src="resources/images/poster-cinema.jpg" alt="Poster film">
-                    <figcaption>Poster 3</figcaption>
-                </figure>
-                <figure>
-                    <img src="resources/images/poster-cinema.jpg" alt="Poster film">
-                    <figcaption>Poster 4</figcaption>
-                </figure>
-                <figure>
-                    <img src="resources/images/poster-cinema.jpg" alt="Poster film">
-                    <figcaption>Poster 5</figcaption>
-                </figure>
-                <figure>
-                    <img src="resources/images/poster-cinema.jpg" alt="Poster film">
-                    <figcaption>Poster 6</figcaption>
-                </figure>
-                <figure>
-                    <img src="resources/images/poster-cinema.jpg" alt="Poster film">
-                    <figcaption>Poster 7</figcaption>
-                </figure>
-            </div>
-        </section>
-        <!-- 16 -->
-        <section id="intrebari-frecvente">
-            <h2>Întrebări frecvente</h2>
-            <details>
-                <summary>Câte sali are Cinemania?</summary>
-                <p>Avem 5 săli, dintre care două IMAX și una 4DX.</p>
-            </details>
-            <details>
-                <summary>Se pot cumpăra bilete online?</summary>
-                <p>Da, pe site-ul nostru și prin aplicație mobilă.</p>
-            </details>
-            <details>
-                <summary>Există reduceri pentru studenți?</summary>
-                <p>Da, studenții primesc 20% discount cu carnetul valabil.</p>
-            </details>
-            <details>
-                <summary>Se oferă opțiuni vegane la bar?</summary>
-                <p>Desigur, avem popcorn, nachos și sosuri vegane.</p>
-            </details>
-        </section>
-
-        <section id="trailer">
-            <h2>Trailers și Preview-uri</h2>
-            <p>Vezi preview-urile filmelor care vin în curând la Cinemania. Alege din oferta noastră și pregătește-te
-                pentru o experiență <s>ordinară</s> extraordinară în cinema!</p>
-            <div class="container-iframe">
-                <div class="taburi-iframe">
-                    <a href="https://www.youtube.com/embed/Mzw2ttJD2qQ" target="ifr-video">Trailer
-                        Acțiune |</a>
-                    <a href="https://www.youtube.com/embed/xYcgQMxQwmk" target="ifr-video"> Trailer Dramă |</a>
-                    <a href="https://www.youtube.com/embed/e9HXmMnUEdE" target="ifr-video"> Trailer Comedie</a><br>
+            <h2>Top Premiere</h2>
+            <div class="table-rounded-container">
+                <div class="table-scroll-container">
+                    <table>
+                        <caption>* Toate premierele includ Combo Premiera.</caption>
+                        <thead>
+                            <tr>
+                                <th>Film</th>
+                                <th>Format</th>
+                                <th>Data Lansării</th>
+                                <th>Sala</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="2">Marty Supreme</td>
+                                <td>4DX</td>
+                                <td>15 Martie</td>
+                                <td>S1</td>
+                            </tr>
+                            <tr>
+                                <td>2D</td>
+                                <td>15 Martie</td>
+                                <td>S4</td>
+                            </tr>
+                            <tr>
+                                <td>Interstellar</td>
+                                <td>IMAX</td>
+                                <td>10 Martie</td>
+                                <td>S2</td>
+                            </tr>
+                            <tr>
+                                <td>The Joker</td>
+                                <td>2D</td>
+                                <td colspan="2">Disponibil în toate sălile standard</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr><td colspan="4">Premierele săptămânii beneficiază de bilet 1+1 marțea.</td></tr>
+                        </tfoot>
+                    </table>
                 </div>
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/Mzw2ttJD2qQ"
-                    name="ifr-video" title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </section>
 
+        <!-- ZONA 3 -->
+        <section id="evenimente">
+            <h2>Meniu Cinema</h2>
+            <div class="table-rounded-container">
+                <div class="table-scroll-container">
+                    <table>
+                        <caption>* Ofertele combo sunt valabile în limita stocului.</caption>
+                        <thead>
+                            <tr><th>Produs</th><th>Mărime</th><th>Preț</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td rowspan="2">Popcorn</td><td>Mediu</td><td>15 RON</td></tr>
+                            <tr><td>Mare</td><td>22 RON</td></tr>
+                            <tr><td>Nachos</td><td>Standard</td><td>25 RON</td></tr>
+                            <tr><td>Suc / Apă</td><td colspan="2">De la 10 RON</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
+        <!-- ZONA 4 -->
+        <section id="anunturi">
+            <h2>Promoții Active</h2>
+            <div class="promo-box">
+                <p><strong>Miercurea Cinematografică:</strong> Bilete la 15 RON!</p>
+                <p><strong>Combo Premieră:</strong> Popcorn mare + Suc la doar 25 RON.</p>
+            </div>
+        </section>
 
-    <!-- 17 -->
-    <section id="criterii">
-        <h2>Calitate și Măsurători</h2>
-        <article id="review-cinematu">
-            <!-- 17a -->
-            <h3>Recenzii de pe <abbr title="International Movie Database">IMDb</abbr></h3>
-            <p>Pelicula noastră de debut Marty Supreme a primit o evaluare de:</p>
-            <meter id="meter-low" value="3.2" min="0" max="10" low="4" high="7.5" optimum="8">3.2 din 10</meter> - Criticilor nu le place jocul de ping pong.
-        </article>
+        <!-- ZONA 5 -->
+        <section id="upcoming">
+            <h2>Trailere Noi</h2>
+            <div class="iframe-interface">
+                <nav class="iframe-nav">
+                    <a href="https://www.youtube.com/embed/Mzw2ttJD2qQ" target="video-frame">Trailer 1</a>
+                    <a href="https://www.youtube.com/embed/xYcgQMxQwmk" target="video-frame">Trailer 2</a>
+                    <a href="https://www.youtube.com/embed/e9HXmMnUEdE" target="video-frame">Trailer 3</a>
+                </nav>
+                <div class="iframe-wrapper">
+                    <iframe name="video-frame" src="https://www.youtube.com/embed/Mzw2ttJD2qQ" title="Trailer"></iframe>
+                </div>
+            </div>
+        </section>
 
-        <article id="satisfactie-client">
-            <!-- 17b -->
-            <h3>Satisfacția Clienților</h3>
-            <p>Rata de satisfacție în luna martie:</p>
-            <meter id="meter-high" value="8.7" min="0" max="10" low="4" high="7.5" optimum="9">8.7 din 10</meter> -
-            Clienții noștri sunt foarte fericiți de experiența oferită!
-        </article>
-    </section>
+        <!-- ZONA 6 -->
+        <section id="account">
+            <h2>Info Cont</h2>
+            <p>Loghează-te pe pagina <strong>Contul meu</strong> pentru istoricul achizițiilor tale.</p>
+        </section>
 
-    <section id="linkuri-filme">
-        <h2>Resurse Cinematografice</h2>
-        <!-- 13a -->
-        <p><a href="https://www.imdb.com/search/title/?genres=action" target="_blank">Descoperă filmele de acțiune cel mai bine cotate pe IMDb</a></p>
-        <!-- 13b -->
-        <p>Ghid avansat:
-            <a href="https://www.cinemahistory.org/guides/cinematography#modern-techniques">
-                https://www.cinemahistory.<wbr>org/guides/<wbr>cinematography#modern-<wbr>techniques
-            </a>
-        </p>
+        <!-- ZONA 7 -->
+        <section id="locatii">
+            <h2>Status Rezervări</h2>
+            <p>Server Status: <span style="color: #00ff00; font-weight: bold;">Online</span></p>
+            <p>Sistemul de plăți este funcțional.</p>
+        </section>
 
-        <!-- 13e -->
-        <p><a href="./resources/images/MartySupreme_big.png" download="poster_cinemania.jpg">Descarcă posterul</a></p>
-    </section>
-
-    </main>
-    <footer>
-        <!-- 13c -->
-        <p><a href="#welcome">↑ Înapoi la început</a></p>
-
-        <!-- 18 -->
-        <address>
-            <p><strong>Contactați-ne</strong></p>
-            <!-- 18a -->
-            <p>Telefon: <a href="tel:+40123456789">+40 (123) 456-789</a></p>
-
-            <!-- 18b -->
-            <p>Locație:
-                <a href="https://www.google.com/maps/search/Facultatea+de+Matematica+si+Informatica" target="_blank">
-                    Str. Academiei nr. 14,<br>
-                    Sector 1,<br>
-                    București 70109<br>
-                    România
+        <!-- ZONA 8 -->
+        <section id="facilitati">
+            <h2>Tehnologii</h2>
+            <div class="creative-grid">
+                <a href="https://ro.wikipedia.org/wiki/IMAX" target="_blank" class="cat-card">
+                    <i class="fa-solid fa-film fa-2x" style="color: var(--clr-gold); margin-bottom: 10px;"></i>
+                    <h3>IMAX</h3>
+                    <p>Experiența vizuală supremă.</p>
                 </a>
-            </p>
+                <a href="https://ro.wikipedia.org/wiki/4DX" target="_blank" class="cat-card">
+                    <i class="fa-solid fa-gear fa-spin fa-2x" style="color: var(--clr-base-red); margin-bottom: 10px;"></i>
+                    <h3>4DX</h3>
+                    <p>Imersiune totală senzorială.</p>
+                </a>
+            </div>
+        </section>
+    </main>
 
-        </address>
+    <!-- Back to top -->
+    <a href="#top-anchor" id="link-top">
+        <div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
+        <span class="tooltip-text">Revino la Acasă</span>
+    </a>
+
+    <footer>
+        <p>&copy; 2026 Cinemania. Toate drepturile rezervate.</p>
+        <p>Telefon: <a href="tel:+40123456789">+40 (123) 456-789</a></p>
     </footer>
 </body>
+
 </html>
