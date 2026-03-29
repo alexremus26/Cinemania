@@ -1,6 +1,3 @@
-/* =========================================
-   1. FUNDAMENTE & TIPOGRAFIE
-   ========================================= */
 html {
     font-size: 18px; 
     transition: font-size 0.3s ease-in-out;
@@ -29,9 +26,6 @@ body {
 
 h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
 
-/* =========================================
-   2. GRID & RESPONSIVE
-   ========================================= */
 #grid-pagina {
     display: grid;
     gap: 30px;
@@ -82,9 +76,6 @@ h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
     * { transition: none !important; }
 }
 
-/* =========================================
-   3. HEADER & DROPDOWN (FIXED & CONTRAST)
-   ========================================= */
 .main-header {
     background-color: #000000; 
     border-bottom: 2px solid var(--clr-base-red);
@@ -153,9 +144,6 @@ h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
 
 .dropdown li a:hover { background-color: var(--clr-dark-grey); color: var(--clr-gold); }
 
-/* =========================================
-   4. STILIZARE TABEL (AURIU & ROSU)
-   ========================================= */
 .table-rounded-container { border-radius: 15px; border: 2px solid var(--clr-base-red); overflow: hidden; background-color: var(--clr-black); }
 .table-scroll-container { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; }
@@ -168,9 +156,7 @@ tbody td:hover { background-color: var(--clr-gold) !important; color: black; cur
 caption { caption-side: bottom; padding: 10px; font-style: italic; color: var(--clr-gold); text-align: right; }
 tfoot td { background-color: #000; color: var(--clr-gold); font-weight: bold; }
 
-/* =========================================
-   5. IFRAME & FLEXBOX
-   ========================================= */
+
 .iframe-interface { display: flex; flex-direction: column; gap: 20px; }
 .iframe-nav { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
 .iframe-nav a { 
@@ -181,9 +167,7 @@ tfoot td { background-color: #000; color: var(--clr-gold); font-weight: bold; }
 .iframe-wrapper { border: 4px solid white; line-height: 0; }
 .iframe-wrapper iframe { width: 100%; height: 350px; border: none; }
 
-/* =========================================
-   6. ZONA 1 (GALERIE POSTERE)
-   ========================================= */
+
 #welcome { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: linear-gradient(135deg, #121212, #2a050a); align-items: center; }
 #welcome .subtitlu { color: var(--clr-base-red); font-weight: bold; letter-spacing: 2px; }
 .btn-main { background: var(--clr-base-red); color: white; padding: 12px 24px; text-decoration: none; margin-right: 15px; font-weight: bold; }
@@ -191,9 +175,7 @@ tfoot td { background-color: #000; color: var(--clr-gold); font-weight: bold; }
 .slider-mockup img { height: 250px; border: 2px solid var(--clr-base-red); transition: transform 0.3s ease; cursor: pointer; }
 .slider-mockup img:hover { transform: scale(1.1); border-color: var(--clr-gold); box-shadow: 0 0 20px var(--clr-base-red); }
 
-/* =========================================
-   7. BACK TO TOP (ANIMATED)
-   ========================================= */
+
 #link-top {
     position: fixed; bottom: 30px; right: 30px; z-index: 2000;
     text-decoration: none; display: block; width: 60px; height: 60px; opacity: 0.6;

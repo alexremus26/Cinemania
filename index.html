@@ -15,13 +15,11 @@
     
     <link rel="icon" type="image/png" href="./resources/images/favicon/favicon-96x96.png" sizes="96x96" />
     <link href="css/general.css" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Kit pentru Iconițe -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="msapplication-TileColor" content="#D92A27">
 </head>
 
 <body>
-    <!-- Ancora pentru Back to Top -->
     <div id="top-anchor"></div>
 
     <header class="main-header">
@@ -29,24 +27,89 @@
             <img src="./resources/images/CinemaniaLogo.png" id="Logo" alt="Cinemania Logo" />
             <h1 id="title">Cinemania</h1>
         </div>
-        <nav>
+        <nav class="site-nav" aria-label="Navigare principala">
+            <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Deschide meniul" />
+            <label for="menu-toggle" class="burger-btn" aria-label="Meniu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
             <ul class="nav-main">
+                <li class="mobile-home-only">
+                    <a href="index.html" aria-label="Acasa">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="nav-text">Acasa</span>
+                    </a>
+                </li>
+
                 <li class="has-dropdown">
-                    <a href="index.html">Acasă</a>
-                    <ul class="dropdown">
+                    <a href="index.html" aria-label="Acasa">
+                        <i class="fa-solid fa-house"></i>
+                        <span class="nav-text">Acasa</span>
+                    </a>
+                    <ul class="dropdown submenu-sections">
                         <li><a href="#orar">Program Curent</a></li>
-                        <li><a href="#upcoming">În Curând</a></li>
+                        <li><a href="#upcoming">Trailere Noi</a></li>
+                        <li><a href="#evenimente">Meniu Cinema</a></li>
+                        <li><a href="#facilitati">Tehnologii</a></li>
                     </ul>
                 </li>
-                <li><a href="filme.html">Filme</a></li>
-                <li><a href="program.html">Program</a></li>
-                <li><a href="contul-meu.html">Contul Meu</a></li>
+
+                <li class="has-dropdown">
+                    <a href="filme.html" aria-label="Filme">
+                        <i class="fa-solid fa-film"></i>
+                        <span class="nav-text">Filme</span>
+                    </a>
+                    <ul class="dropdown submenu-pages">
+                        <li><a href="filme.html">Program Curent</a></li>
+                        <li><a href="in-curand.html">In curand</a></li>
+                        <li><a href="arhiva-topuri.html">Arhiva si Topuri</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="program.html" aria-label="Program">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span class="nav-text">Program</span>
+                    </a>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="locatii.html" aria-label="Cinematografe">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span class="nav-text">Cinematografe</span>
+                    </a>
+                    <ul class="dropdown submenu-pages">
+                        <li><a href="locatii.html">Locatii</a></li>
+                        <li><a href="facilitati.html">Facilitati</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="bilete.html" aria-label="Bilete si servicii">
+                        <i class="fa-solid fa-ticket"></i>
+                        <span class="nav-text">Bilete</span>
+                    </a>
+                    <ul class="dropdown submenu-pages">
+                        <li><a href="bilete.html">Cumpara sau Rezerva</a></li>
+                        <li><a href="preturi.html">Preturi</a></li>
+                        <li><a href="abonamente.html">Abonamente</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="contul-meu.html" aria-label="Contul meu">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="nav-text">Contul Meu</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main id="grid-pagina">
-        <!-- ZONA 1 -->
         <section id="welcome">
             <div class="welcome-content">
                 <p class="subtitlu">PREMIERELE SĂPTĂMÂNII</p>
@@ -61,8 +124,6 @@
                 <img src="./resources/images/MartySupreme_big.png" alt="Poster 1" />
             </div>
         </section>
-
-        <!-- ZONA 2 -->
         <section id="orar">
             <h2>Top Premiere</h2>
             <div class="table-rounded-container">
@@ -108,8 +169,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- ZONA 3 -->
         <section id="evenimente">
             <h2>Meniu Cinema</h2>
             <div class="table-rounded-container">
@@ -129,8 +188,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- ZONA 4 -->
         <section id="anunturi">
             <h2>Promoții Active</h2>
             <div class="promo-box">
@@ -138,8 +195,6 @@
                 <p><strong>Combo Premieră:</strong> Popcorn mare + Suc la doar 25 RON.</p>
             </div>
         </section>
-
-        <!-- ZONA 5 -->
         <section id="upcoming">
             <h2>Trailere Noi</h2>
             <div class="iframe-interface">
@@ -153,21 +208,15 @@
                 </div>
             </div>
         </section>
-
-        <!-- ZONA 6 -->
         <section id="account">
             <h2>Info Cont</h2>
             <p>Loghează-te pe pagina <strong>Contul meu</strong> pentru istoricul achizițiilor tale.</p>
         </section>
-
-        <!-- ZONA 7 -->
         <section id="locatii">
             <h2>Status Rezervări</h2>
             <p>Server Status: <span style="color: #00ff00; font-weight: bold;">Online</span></p>
             <p>Sistemul de plăți este funcțional.</p>
         </section>
-
-        <!-- ZONA 8 -->
         <section id="facilitati">
             <h2>Tehnologii</h2>
             <div class="creative-grid">
@@ -184,8 +233,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Back to top -->
     <a href="#top-anchor" id="link-top">
         <div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
         <span class="tooltip-text">Revino la Acasă</span>

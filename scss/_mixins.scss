@@ -1,0 +1,14 @@
+@mixin absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+
+@mixin smooth($prop, $time: 0.3s, $ease: ease) {
+  transition: $prop $time $ease;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
