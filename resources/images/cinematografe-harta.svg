@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" width="500" height="400">
+  <defs>
+    <style>
+      .map-bg { fill: #f5f5f5; }
+      .map-city { fill: #e0e0e0; stroke: #999; stroke-width: 1; }
+      .cinema-marker { fill: #A6192E; stroke: #fff; stroke-width: 2; cursor: pointer; }
+      .cinema-marker:hover { r: 25; filter: drop-shadow(0 0 10px #A6192E); }
+      .cinema-label { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #000; text-anchor: middle; }
+      .city-name { font-family: Arial, sans-serif; font-size: 12px; fill: #666; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="500" height="400" class="map-bg"/>
+  
+  <!-- Simplified Bucharest districts -->
+  <circle cx="250" cy="200" r="150" class="map-city" opacity="0.3"/>
+  
+  <!-- City label -->
+  <text x="250" y="380" class="city-name">București - Hartă Cinematografe Cinemania</text>
+  
+  <!-- Cinema locations with circles -->
+  <!-- Cinemania Center - Piața Română -->
+  <circle cx="200" cy="150" r="20" class="cinema-marker"/>
+  <text x="200" y="155" class="cinema-label">1</text>
+  <text x="200" y="190" style="font-size: 11px; text-anchor: middle; fill: #333;">Piața Română</text>
+  
+  <!-- Cinemania North - Băneasa -->
+  <circle cx="320" cy="120" r="20" class="cinema-marker"/>
+  <text x="320" y="125" class="cinema-label">2</text>
+  <text x="320" y="160" style="font-size: 11px; text-anchor: middle; fill: #333;">Băneasa</text>
+  
+  <!-- Cinemania South - Vitan -->
+  <circle cx="280" cy="280" r="20" class="cinema-marker"/>
+  <text x="280" y="285" class="cinema-label">3</text>
+  <text x="280" y="320" style="font-size: 11px; text-anchor: middle; fill: #333;">Vitan</text>
+  
+  <!-- Legend -->
+  <circle cx="50" cy="30" r="8" class="cinema-marker"/>
+  <text x="70" y="35" style="font-size: 11px; fill: #333;">Locație Cinema</text>
+</svg>

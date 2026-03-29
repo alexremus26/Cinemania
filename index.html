@@ -213,9 +213,39 @@
             <p>Loghează-te pe pagina <strong>Contul meu</strong> pentru istoricul achizițiilor tale.</p>
         </section>
         <section id="locatii">
-            <h2>Status Rezervări</h2>
-            <p>Server Status: <span style="color: #00ff00; font-weight: bold;">Online</span></p>
-            <p>Sistemul de plăți este funcțional.</p>
+            <h2>Calculator Preț Bilet</h2>
+            <div class="formula-box" style="margin-top: 15px;">
+                <p style="margin: 0 0 10px 0;"><strong>Formula Preț Bilet:</strong></p>
+                <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" style="text-align: center; font-size: 1.05rem; margin: 12px 0;">
+                    <mi>P</mi>
+                    <msub>
+                        <mi></mi>
+                        <mi>final</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mi>P</mi>
+                    <msub>
+                        <mi></mi>
+                        <mi>base</mi>
+                    </msub>
+                    <mo>×</mo>
+                    <mrow>
+                        <mo>(</mo>
+                        <mn>1</mn>
+                        <mo>−</mo>
+                        <mi>r</mi>
+                        <mo>)</mo>
+                    </mrow>
+                    <mo>+</mo>
+                    <mi>taxa</mi>
+                </math>
+                <p style="margin: 8px 0 0 0; font-size: 0.95rem;">
+                    <strong>r</strong> = rata de reducere (ex: student <strong>r = 0.20</strong>, senior <strong>r = 0.30</strong>, fără reducere <strong>r = 0</strong>).
+                </p>
+                <p style="margin: 8px 0 0 0; font-size: 0.9rem;">
+                    Exemplu rapid (P<sub>base</sub>=30, taxa=1): student = 25 RON, senior = 22 RON, standard = 31 RON.
+                </p>
+            </div>
         </section>
         <section id="facilitati">
             <h2>Tehnologii</h2>
@@ -233,14 +263,57 @@
             </div>
         </section>
     </main>
+    
+    <div id="bonus-section" style="padding: 40px var(--page-margin); margin-top: 30px;">
+        <section id="program-pdf">
+            <h2>Program Săptămânal</h2>
+            <object
+                data="./resources/Program-Saptamanal.pdf"
+                type="application/pdf"
+                width="100%"
+                height="500">
+                <embed
+                    src="./resources/Program-Saptamanal.pdf"
+                    type="application/pdf"
+                    width="100%"
+                    height="500" />
+            </object>
+        </section>
+        <section id="cinematografe-harta">
+            <h2>Cinematografele Noastre</h2>
+            <p>Vizitează una dintre locațiile noastre în București:</p>
+            <img src="./resources/images/cinematografe-harta.svg" alt="Hartă cinematografe Cinemania" usemap="#cinema-map" style="max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0;">
+            <map name="cinema-map">
+                <area shape="circle" coords="200,150,20" alt="Cinemania Center" href="locatii.html" title="Cinemania Center - Piața Română">
+                <area shape="circle" coords="320,120,20" alt="Cinemania North" href="locatii.html" title="Cinemania North - Băneasa">
+                <area shape="circle" coords="280,280,20" alt="Cinemania South" href="locatii.html" title="Cinemania South - Vitan">
+            </map>
+        </section>
+        <section id="contact" style="margin-top: 40px;">
+            <h2>Adresa Centrală</h2>
+            <iframe src="https://maps.google.com/maps?q=Facultatea%20de%20Matematica%20si%20Informatica%20Universitatea%20din%20Bucuresti&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="400" style="border:0; border-radius: 8px; margin-top: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+    </div>
     <a href="#top-anchor" id="link-top">
         <div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
         <span class="tooltip-text">Revino la Acasă</span>
     </a>
 
     <footer>
-        <p>&copy; 2026 Cinemania. Toate drepturile rezervate.</p>
-        <p>Telefon: <a href="tel:+40123456789">+40 (123) 456-789</a></p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>&copy; 2026 Cinemania. Toate drepturile rezervate.</p>
+                <p>Telefon: <a href="tel:+40123456789">+40 (123) 456-789</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Program Săptămânal</h4>
+                <p>
+                    <a href="./resources/Program-Saptamanal.pdf" download class="pdf-link">
+                        <i class="fa-solid fa-file"></i> Descarcă Program
+                    </a>
+                </p>
+            </div>
+        </div>
     </footer>
 </body>
 
