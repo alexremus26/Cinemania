@@ -579,6 +579,75 @@ footer { margin-top: 40px; text-align: center; font-size: 0.9rem; }
     box-shadow: 0 10px 20px var(--clr-pure-black);
 }
 
+math {
+    display: block !important;
+    margin: 0 auto !important;
+    padding: 15px 0 !important;
+}
+
+math mrow {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.3em !important;
+}
+
+math mi {
+    color: var(--clr-gold) !important;
+    font-style: italic !important;
+    font-weight: 600 !important;
+    display: inline-block !important;
+}
+
+math mn {
+    color: #FF6B6B !important;
+    font-weight: bold !important;
+    display: inline-block !important;
+}
+
+math mo {
+    color: var(--clr-white) !important;
+    margin: 0 0.15em !important;
+    display: inline-block !important;
+}
+
+math msub {
+    display: inline-block !important;
+    position: relative !important;
+    margin: 0 0.1em !important;
+}
+
+math msub > mi:first-child {
+    color: var(--clr-gold) !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+}
+
+math msub > mi:last-child {
+    font-size: 0.7em !important;
+    color: #A3D5FF !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    margin-left: -0.1em !important;
+}
+
+math mrow mo,
+math mrow mn,
+math mrow mi {
+    display: inline-block !important;
+}
+
+.formula-box math:hover mi {
+    color: #FFD700 !important;
+    text-shadow: 0 0 8px rgba(229, 177, 67, 0.6) !important;
+}
+
+.formula-box math:hover mn {
+    color: #FF8888 !important;
+    text-shadow: 0 0 8px rgba(255, 107, 107, 0.6) !important;
+}
+
 #cinematografe-harta, #contact {
     width: 100%;
 }
