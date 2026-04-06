@@ -1,0 +1,38 @@
+{
+  "cale_baza": "/resurse/imagini/erori",
+  "eroare_default": {
+    "titlu": "Eroare generica",
+    "text": "A aparut o eroare neasteptata. Incearca din nou mai tarziu.",
+    "imagine": "500.png"
+  },
+  "info_erori": [
+    {
+      "identificator": 400,
+      "status": true,
+      "titlu": "Cerere invalida",
+      "text": "Cererea trimisa nu este valida pentru aceasta resursa.",
+      "imagine": "400.png"
+    },
+    {
+      "identificator": 403,
+      "status": true,
+      "titlu": "Acces interzis",
+      "text": "Nu ai permisiunea necesara pentru a accesa aceasta resursa.",
+      "imagine": "403.png"
+    },
+    {
+      "identificator": 404,
+      "status": true,
+      "titlu": "Pagina nu a fost gasita",
+      "text": "Resursa ceruta nu exista pe server.",
+      "imagine": "404.png"
+    },
+    {
+      "identificator": 500,
+      "status": true,
+      "titlu": "Eroare interna",
+      "text": "Serverul a intampinat o eroare la procesarea cererii.",
+      "imagine": "500.png"
+    }
+  ]
+}

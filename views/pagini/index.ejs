@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<%- include('../fragmente/head') %>
+
+<body>
+	<div id="top-anchor"></div>
+
+	<%- include('../fragmente/header') %>
+
+	<main id="grid-pagina">
+		<section id="welcome">
+			<div class="welcome-content">
+				<p class="subtitlu">PREMIERELE SĂPTĂMÂNII</p>
+				<h2>Acum în cinema</h2>
+				<p class="intro">Descoperă experiența vizuală supremă în sălile noastre dotate cu tehnologie de vârf.</p>
+				<div class="cta-buttons">
+					<a href="/contul-meu" class="btn-main">Rezervă Locuri</a>
+					<a href="/program" class="btn-sub">Vezi Program</a>
+				</div>
+			</div>
+			<div class="slider-mockup">
+				<img src="/resurse/imagini/MartySupreme_big.png" alt="Poster 1" />
+			</div>
+		</section>
+		<section id="orar">
+			<h2>Top Premiere</h2>
+			<div class="table-rounded-container">
+				<div class="table-scroll-container">
+					<table>
+						<caption>* Toate premierele includ Combo Premiera.</caption>
+						<thead>
+							<tr>
+								<th>Film</th>
+								<th>Format</th>
+								<th>Data Lansării</th>
+								<th>Sala</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td rowspan="2">Marty Supreme</td>
+								<td>4DX</td>
+								<td>15 Martie</td>
+								<td>S1</td>
+							</tr>
+							<tr>
+								<td>2D</td>
+								<td>15 Martie</td>
+								<td>S4</td>
+							</tr>
+							<tr>
+								<td>Interstellar</td>
+								<td>IMAX</td>
+								<td>10 Martie</td>
+								<td>S2</td>
+							</tr>
+							<tr>
+								<td>The Joker</td>
+								<td>2D</td>
+								<td colspan="2">Disponibil în toate sălile standard</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr><td colspan="4">Premierele săptămânii beneficiază de bilet 1+1 marțea.</td></tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</section>
+		<section id="evenimente">
+			<h2>Meniu Cinema</h2>
+			<div class="table-rounded-container">
+				<div class="table-scroll-container">
+					<table>
+						<caption>* Ofertele combo sunt valabile în limita stocului.</caption>
+						<thead>
+							<tr><th>Produs</th><th>Mărime</th><th>Preț</th></tr>
+						</thead>
+						<tbody>
+							<tr><td rowspan="2">Popcorn</td><td>Mediu</td><td>15 RON</td></tr>
+							<tr><td>Mare</td><td>22 RON</td></tr>
+							<tr><td>Nachos</td><td>Standard</td><td>25 RON</td></tr>
+							<tr><td>Suc / Apă</td><td colspan="2">De la 10 RON</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+		<section id="anunturi">
+			<h2>Promoții Active</h2>
+			<div class="promo-box">
+				<p><strong>Miercurea Cinematografică:</strong> Bilete la 15 RON!</p>
+				<p><strong>Combo Premieră:</strong> Popcorn mare + Suc la doar 25 RON.</p>
+			</div>
+		</section>
+		<section id="upcoming">
+			<h2>Trailere Noi</h2>
+			<div class="iframe-interface">
+				<nav class="iframe-nav">
+					<a href="https://www.youtube.com/embed/Mzw2ttJD2qQ" target="video-frame">Trailer 1</a>
+					<a href="https://www.youtube.com/embed/xYcgQMxQwmk" target="video-frame">Trailer 2</a>
+					<a href="https://www.youtube.com/embed/e9HXmMnUEdE" target="video-frame">Trailer 3</a>
+				</nav>
+				<div class="iframe-wrapper">
+					<iframe name="video-frame" src="https://www.youtube.com/embed/Mzw2ttJD2qQ" title="Trailer"></iframe>
+				</div>
+			</div>
+		</section>
+		<section id="account">
+			<h2>Info Cont</h2>
+			<p>Loghează-te pe pagina <strong>Contul meu</strong> pentru istoricul achizițiilor tale.</p>
+		</section>
+		<section id="locatii">
+			<h2>Calculator Preț Bilet</h2>
+			<div class="formula-box" style="margin-top: 15px;">
+				<p style="margin: 0 0 10px 0;"><strong>Formula Preț Bilet:</strong></p>
+				<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" style="text-align: center; font-size: 1.1rem; margin: 20px 0;">
+					<mrow>
+						<msub>
+							<mi>P</mi>
+							<mi>final</mi>
+						</msub>
+						<mo>=</mo>
+						<msub>
+							<mi>P</mi>
+							<mi>base</mi>
+						</msub>
+						<mo>×</mo>
+						<mrow>
+							<mo>(</mo>
+							<mn>1</mn>
+							<mo>−</mo>
+							<mi>r</mi>
+							<mo>)</mo>
+						</mrow>
+						<mo>+</mo>
+						<mi>taxa</mi>
+					</mrow>
+				</math>
+				<p style="margin: 8px 0 0 0; font-size: 0.95rem;">
+					<strong>r</strong> = rata de reducere (ex: student <strong>r = 0.20</strong>, senior <strong>r = 0.30</strong>, fără reducere <strong>r = 0</strong>).
+				</p>
+				<p style="margin: 8px 0 0 0; font-size: 0.9rem;">
+					Exemplu rapid (P<sub>base</sub>=30, taxa=1): student = 25 RON, senior = 22 RON, standard = 31 RON.
+				</p>
+			</div>
+		</section>
+		<section id="facilitati">
+			<h2>Tehnologii</h2>
+			<div class="creative-grid">
+				<a href="https://ro.wikipedia.org/wiki/IMAX" target="_blank" class="cat-card">
+					<i class="fa-solid fa-film fa-2x" style="color: var(--clr-gold); margin-bottom: 10px;"></i>
+					<h3>IMAX</h3>
+					<p>Experiența vizuală supremă.</p>
+				</a>
+				<a href="https://ro.wikipedia.org/wiki/4DX" target="_blank" class="cat-card">
+					<i class="fa-solid fa-gear fa-spin fa-2x" style="color: var(--clr-base-red); margin-bottom: 10px;"></i>
+					<h3>4DX</h3>
+					<p>Imersiune totală senzorială.</p>
+				</a>
+			</div>
+		</section>
+	</main>
+    
+	<div id="bonus-section" style="padding: 40px var(--page-margin); margin-top: 30px;">
+		<section id="program-pdf">
+			<h2>Program Săptămânal</h2>
+			<object
+				data="/resurse/documente/Program-Saptamanal.pdf"
+				type="application/pdf"
+				width="100%"
+				height="500">
+				<embed
+					src="/resurse/documente/Program-Saptamanal.pdf"
+					type="application/pdf"
+					width="100%"
+					height="500" />
+			</object>
+		</section>
+		<section id="cinematografe-harta">
+			<h2>Cinematografele Noastre</h2>
+			<p>Vizitează una dintre locațiile noastre în București:</p>
+			<img src="/resurse/imagini/cinematografe-harta.svg" alt="Hartă cinematografe Cinemania" usemap="#cinema-map" style="max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0;">
+			<map name="cinema-map">
+				<area shape="circle" coords="200,150,20" alt="Cinemania Center" href="/locatii" title="Cinemania Center - Piața Română">
+				<area shape="circle" coords="320,120,20" alt="Cinemania North" href="/locatii" title="Cinemania North - Băneasa">
+				<area shape="circle" coords="280,280,20" alt="Cinemania South" href="/locatii" title="Cinemania South - Vitan">
+			</map>
+		</section>
+		<section id="contact" style="margin-top: 40px;">
+			<h2>Adresa Centrală</h2>
+			<iframe src="https://maps.google.com/maps?q=Facultatea%20de%20Matematica%20si%20Informatica%20Universitatea%20din%20Bucuresti&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="400" style="border:0; border-radius: 8px; margin-top: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+		</section>
+	</div>
+	<a href="#top-anchor" id="link-top">
+		<div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
+		<span class="tooltip-text">Revino la Acasă</span>
+	</a>
+
+	<%- include('../fragmente/footer') %>
+</body>
+
+</html>

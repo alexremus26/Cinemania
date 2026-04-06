@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<%- include('../fragmente/head') %>
+
+<body>
+    <div id="top-anchor"></div>
+
+    <%- include('../fragmente/header') %>
+
+    <main id="grid-pagina">
+        <section id="welcome">
+            <div class="welcome-content">
+                <p class="subtitlu">A APARUT O EROARE</p>
+                <h2><%= titlu %></h2>
+                <p class="intro"><%= text %></p>
+                <div class="cta-buttons">
+                    <a href="/" class="btn-main">Inapoi Acasa</a>
+                </div>
+            </div>
+            <% if (imagine) { %>
+                <div class="slider-mockup">
+                    <img src="<%= imagine %>" alt="Imagine eroare" />
+                </div>
+            <% } %>
+        </section>
+    </main>
+
+    <%- include('../fragmente/footer') %>
+</body>
+
+</html>
