@@ -23,6 +23,7 @@ body {
     --clr-overlay-white-light: rgba(255, 255, 255, 0.01);
     --clr-overlay-white-mid: rgba(255, 255, 255, 0.04);
     --clr-hover-red: rgba(166, 25, 46, 0.15);
+    --clr-link-visited: #E5B143;
     --nav-overlay-border: rgba(255, 244, 214, 0.45);
     --nav-overlay-bg: rgba(229, 177, 67, 0.08);
     --nav-overlay-glow: inset 0 0 18px rgba(255, 230, 180, 0.2);
@@ -462,6 +463,48 @@ tfoot td { background-color: var(--clr-pure-black); color: var(--clr-gold); font
 .iframe-wrapper { border: 4px solid var(--clr-white); line-height: 0; }
 .iframe-wrapper iframe { width: 100%; height: 350px; border: none; }
 
+main a,
+#bonus-section a {
+    position: relative;
+    background-image: radial-gradient(circle, rgba(229, 177, 67, 0.22) 0%, rgba(229, 177, 67, 0.22) 40%, transparent 80%, transparent 100%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0 0;
+    transition: background-size 0.35s ease, color 0.25s ease;
+}
+
+main a:hover,
+#bonus-section a:hover {
+    background-size: 100% 100%;
+}
+
+main a:active,
+#bonus-section a:active {
+    outline: 2px solid var(--clr-gold);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+main a:visited,
+#bonus-section a:visited,
+footer a:visited {
+    color: var(--clr-link-visited);
+}
+
+main a[href^="http"]::before,
+#bonus-section a[href^="http"]::before,
+footer a[href^="http"]::before {
+    content: "⮳ ";
+    font-size: 1.5em;
+    color: var(--clr-gold);
+}
+
+main a[href^="http"]:hover::before,
+#bonus-section a[href^="http"]:hover::before,
+footer a[href^="http"]:hover::before {
+    color: var(--clr-base-red);
+}
+
 #welcome { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; background: linear-gradient(135deg, var(--clr-black), var(--clr-gradient-dark)); align-items: center; }
 #welcome .subtitlu { color: var(--clr-base-red); font-weight: bold; letter-spacing: 2px; }
 .cta-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -563,6 +606,10 @@ footer { margin-top: 40px; text-align: center; font-size: 0.9rem; }
     .footer-content { grid-template-columns: 1fr; }
     .youtube-playlist-wrapper iframe { min-height: 300px; }
     #contact iframe { min-height: 300px; }
+    .video-box {
+        width: 95%;
+        min-width: 220px;
+    }
 }
 
 #bonus-section {
@@ -577,6 +624,34 @@ footer { margin-top: 40px; text-align: center; font-size: 0.9rem; }
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 10px 20px var(--clr-pure-black);
+}
+
+.video-box {
+    width: 85%;
+    min-width: 280px;
+    max-width: 960px;
+    margin: 20px auto 0;
+}
+
+.video-box video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid var(--clr-base-red);
+    box-shadow: 0 8px 18px var(--clr-pure-black);
+    background: #000;
+}
+
+#trailer-cinemania::cue {
+    background: transparent;
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+#school-banner {
+    font-weight: 700;
+    color: var(--clr-gold);
+    margin-top: 14px;
 }
 
 math {
