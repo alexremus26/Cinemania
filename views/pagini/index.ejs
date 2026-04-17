@@ -178,6 +178,31 @@
 					height="500" />
 			</object>
 		</section>
+		<section id="video-prezentare-section">
+			<h2>Trailer Dune 3</h2>
+			<p>Urmărește trailerul celui mai așteptat film al anului!.</p>
+			<div class="video-box">
+				<video
+					id="trailer-cinemania"
+					controls
+					preload="none"
+					poster="<%= typeof videoPoster !== 'undefined' ? videoPoster : '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp' %>">
+					<% if (videoMp4) { %>
+						<source src="/resurse/video/<%= videoMp4 %>" type="video/mp4">
+					<% } %>
+					<% if (videoWebm) { %>
+						<source src="/resurse/video/<%= videoWebm %>" type="video/webm">
+					<% } %>
+					<track src="/resurse/video/subtitrari/trailer-ro.vtt" kind="subtitles" srclang="ro" label="Română" default>
+					<track src="/resurse/video/subtitrari/trailer-en.vtt" kind="subtitles" srclang="en" label="English">
+					<% if (!videoWebm && !videoMp4) { %>
+						Nu exista inca fisiere video in /resurse/video.
+					<% } else { %>
+						Browserul tău nu suportă elementul video.
+					<% } %>
+				</video>
+			</div>
+		</section>
 		<section id="cinematografe-harta">
 			<h2>Cinematografele Noastre</h2>
 			<p>Vizitează una dintre locațiile noastre în București:</p>

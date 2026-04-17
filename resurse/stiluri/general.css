@@ -459,6 +459,9 @@ tfoot td { background-color: var(--clr-pure-black); color: var(--clr-gold); font
     padding: 8px 16px; border: 1px solid var(--clr-gold); color: var(--clr-gold); 
     text-decoration: none; font-size: 0.8rem; font-weight: bold; 
 }
+.iframe-nav a::after {
+    transition: background-size 1.2s ease;
+}
 .iframe-nav a:hover { background: var(--clr-gold); color: var(--clr-pure-black); }
 .iframe-wrapper { border: 4px solid var(--clr-white); line-height: 0; }
 .iframe-wrapper iframe { width: 100%; height: 350px; border: none; }
@@ -466,15 +469,31 @@ tfoot td { background-color: var(--clr-pure-black); color: var(--clr-gold); font
 main a,
 #bonus-section a {
     position: relative;
-    background-image: radial-gradient(circle, rgba(229, 177, 67, 0.22) 0%, rgba(229, 177, 67, 0.22) 40%, transparent 80%, transparent 100%);
+    overflow: hidden;
+    transition: color 0.25s ease;
+}
+
+main a::after,
+#bonus-section a::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-image: radial-gradient(circle, rgba(229, 177, 67, 0.38) 0%, rgba(229, 177, 67, 0.38) 40%, transparent 80%, transparent 100%);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 0 0;
-    transition: background-size 0.35s ease, color 0.25s ease;
+    transition: background-size 0.7s ease;
+    pointer-events: none;
 }
 
 main a:hover,
 #bonus-section a:hover {
+    color: inherit;
+}
+
+main a:hover::after,
+#bonus-section a:hover::after {
     background-size: 100% 100%;
 }
 

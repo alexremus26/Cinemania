@@ -115,13 +115,28 @@ app.use('/resurse', (req, res, next) => {
 });
 
 app.use('/resurse', express.static(path.join(__dirname, 'resurse')));
+app.use('/fisiere_uploadate', express.static(path.join(__dirname, 'fisiere_uploadate')));
 
 app.get(['/index', '/index.html', '/index.ejs'], (req, res) => {
     res.redirect('/');
 });
 
 app.get(['/', '/index', '/home'], (req, res) => {
-    res.render('pagini/index');
+    const mp4File = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.mp4');
+    const webmFile = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.webm');
+    const posterFile = path.join(__dirname, 'resurse', 'imagini', 'trailer_dune3', '3_9vCamtuPY-HD-1200w.webp');
+
+    const videoMp4 = fs.existsSync(mp4File) ? 'trailer_dune3.mp4' : null;
+    const videoWebm = fs.existsSync(webmFile) ? 'trailer_dune3.webm' : null;
+    const videoPoster = fs.existsSync(posterFile)
+        ? '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp'
+        : '/resurse/imagini/MartySupreme_big.png';
+
+    res.render('pagini/index', {
+        videoWebm,
+        videoMp4,
+        videoPoster
+    });
 });
 
 app.get('/*splat', (req, res) => {
