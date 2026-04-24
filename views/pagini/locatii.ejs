@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+	<%- include('../fragmente/head') %>
+	<title>Locații - Cinemania</title>
+</head>
+<body>
+	<%- include('../fragmente/header') %>
+
+	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
+		<section id="locatii-principale">
+			<h1>Cinematografele Noastre</h1>
+			<p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
+				Vizitează una dintre locațiile noastre în București și bucură-te de o experiență cinematică de neuitat.
+			</p>
+
+			<!-- Hartă cinematografe -->
+			<div style="margin: 2rem 0; text-align: center;">
+				<img src="/resurse/imagini/cinematografe-harta.svg" alt="Hartă cinematografe Cinemania" usemap="#cinema-map" style="max-width: 100%; height: auto; border-radius: 8px;">
+				<map name="cinema-map">
+					<area shape="circle" coords="200,150,20" alt="Cinemania Center" href="#center" title="Cinemania Center - Piața Română">
+					<area shape="circle" coords="320,120,20" alt="Cinemania North" href="#north" title="Cinemania North - Băneasa">
+					<area shape="circle" coords="280,280,20" alt="Cinemania South" href="#south" title="Cinemania South - Vitan">
+				</map>
+			</div>
+
+			<!-- Locații detaliate -->
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0;">
+				<!-- Cinemania Center -->
+				<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden;" id="center">
+					<div style="background: linear-gradient(135deg, var(--clr-gold), var(--clr-base-red)); padding: 1.5rem; color: white;">
+						<h2 style="margin: 0; font-size: 1.5rem;">Cinemania Center</h2>
+						<p style="margin: 0.5rem 0 0; opacity: 0.9;">Piața Română, București</p>
+					</div>
+					<div class="card-body">
+						<p style="color: #666;">
+							<strong>Adresă:</strong> Piața Română 1, Sector 1, București<br>
+							<strong>Tel:</strong> +40 (0)21 123 4567<br>
+							<strong>Email:</strong> center@cinemania.ro
+						</p>
+						<h3 style="font-size: 1rem; margin-top: 1rem;">Sali disponibile:</h3>
+						<ul style="list-style: none; padding: 0;">
+							<li>✓ Sala 1 (4DX) - 150 locuri</li>
+							<li>✓ Sala 2 (IMAX) - 200 locuri</li>
+							<li>✓ Sala 3 (2D Standard) - 120 locuri</li>
+							<li>✓ Sala 4 (2D Standard) - 120 locuri</li>
+						</ul>
+						<h3 style="font-size: 1rem; margin-top: 1rem;">Tehnologii:</h3>
+						<div style="margin: 0.5rem 0;">
+							<span class="badge bg-primary">4DX</span>
+							<span class="badge bg-info">IMAX</span>
+							<span class="badge bg-success">Dolby Atmos</span>
+						</div>
+						<a href="/contact" class="btn btn-primary btn-sm" style="margin-top: 1rem;">Contact</a>
+					</div>
+				</div>
+
+				<!-- Cinemania North -->
+				<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden;" id="north">
+					<div style="background: linear-gradient(135deg, var(--clr-gold), var(--clr-base-red)); padding: 1.5rem; color: white;">
+						<h2 style="margin: 0; font-size: 1.5rem;">Cinemania North</h2>
+						<p style="margin: 0.5rem 0 0; opacity: 0.9;">Băneasa, București</p>
+					</div>
+					<div class="card-body">
+						<p style="color: #666;">
+							<strong>Adresă:</strong> Bulevardul Băneasa 50, Sector 1, București<br>
+							<strong>Tel:</strong> +40 (0)21 234 5678<br>
+							<strong>Email:</strong> north@cinemania.ro
+						</p>
+						<h3 style="font-size: 1rem; margin-top: 1rem;">Sali disponibile:</h3>
+						<ul style="list-style: none; padding: 0;">
+							<li>✓ Sala 1 (2D Standard) - 100 locuri</li>
+							<li>✓ Sala 2 (2D Standard) - 100 locuri</li>
+							<li>✓ Sala 3 (4DX) - 150 locuri</li>
+						</ul>
+						<h3 style="font-size: 1rem; margin-top: 1rem;">Tehnologii:</h3>
+						<div style="margin: 0.5rem 0;">
+							<span class="badge bg-primary">4DX</span>
+							<span class="badge bg-success">Dolby Atmos</span>
+						</div>
+						<a href="/contact" class="btn btn-primary btn-sm" style="margin-top: 1rem;">Contact</a>
+					</div>
+				</div>
+
+				<!-- Cinemania South -->
+				<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden;" id="south">
+					<div style="background: linear-gradient(135deg, var(--clr-gold), var(--clr-base-red)); padding: 1.5rem; color: white;">
+						<h2 style="margin: 0; font-size: 1.5rem;">Cinemania South</h2>
+						<p style="margin: 0.5rem 0 0; opacity: 0.9;">Vitan, București</p>
+					</div>
+					<div class="card-body">
+						<p style="color: #666;">
+							<strong>Adresă:</strong> Bulevardul Vitan 100, Sector 3, București<br>
+							<strong>Tel:</strong> +40 (0)21 345 6789<br>
+							<strong>Email:</strong> south@cinemania.ro
+						</p>
+						<h3 style="font-size: 1rem; margin-top: 1rem;">Sali disponibile:</h3>
+						<ul style="list-style: none; padding: 0;">
+							<li>✓ Sala 1 (2D Standard) - 120 locuri</li>
+							<li>✓ Sala 2 (2D Standard) - 120 locuri</li>
+						</ul>
+						<h3 style="font-size: 1rem; margin-top: 1rem;">Tehnologii:</h3>
+						<div style="margin: 0.5rem 0;">
+							<span class="badge bg-success">Dolby Atmos</span>
+						</div>
+						<a href="/contact" class="btn btn-primary btn-sm" style="margin-top: 1rem;">Contact</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Facilitati și Servicii -->
+			<section style="margin-top: 4rem; background: #f8f9fa; padding: 2rem; border-radius: 12px;">
+				<h2>Facilitati la Toate Locațiile</h2>
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+					<div style="text-align: center;">
+						<i class="fa-solid fa-utensils fa-2x" style="color: var(--clr-gold); margin-bottom: 1rem;"></i>
+						<h3 style="font-size: 1.1rem;">Meniu Cinema Complet</h3>
+						<p>Popcorn, nachos, băuturi și mult mai mult.</p>
+					</div>
+					<div style="text-align: center;">
+						<i class="fa-solid fa-wheelchair fa-2x" style="color: var(--clr-gold); margin-bottom: 1rem;"></i>
+						<h3 style="font-size: 1.1rem;">Acces pentru Persoane cu Dizabilități</h3>
+						<p>Sali adaptate și parcare dedicată.</p>
+					</div>
+					<div style="text-align: center;">
+						<i class="fa-solid fa-wifi fa-2x" style="color: var(--clr-gold); margin-bottom: 1rem;"></i>
+						<h3 style="font-size: 1.1rem;">WiFi Gratuit</h3>
+						<p>Conectare la internet în toată clădirea.</p>
+					</div>
+					<div style="text-align: center;">
+						<i class="fa-solid fa-car fa-2x" style="color: var(--clr-gold); margin-bottom: 1rem;"></i>
+						<h3 style="font-size: 1.1rem;">Parcare Gratuită</h3>
+						<p>Locuri de parcare pentru toți clienții.</p>
+					</div>
+				</div>
+			</section>
+
+			<section id="contact" style="margin-top: 2.5rem;">
+				<h2>Adresa Centrală</h2>
+				<p style="color: #666; margin-bottom: 1rem;">
+					Pentru administrație și parteneriate, ne găsești la sediul central de mai jos.
+				</p>
+				<iframe
+					src="https://maps.google.com/maps?q=Facultatea%20de%20Matematica%20si%20Informatica%20Universitatea%20din%20Bucuresti&t=&z=15&ie=UTF8&iwloc=&output=embed"
+					width="100%"
+					height="360"
+					style="border:0; border-radius: 8px;"
+					allowfullscreen=""
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"></iframe>
+			</section>
+		</section>
+	</main>
+
+	<%- include('../fragmente/footer') %>
+</body>
+</html>

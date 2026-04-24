@@ -1,0 +1,65 @@
+{
+  "cale_galerie": "/resurse/imagini",
+  "imagini": [
+    {
+      "cale_imagine": "dune.jpg",
+      "titlu": "Dune",
+      "descriere": "Dune movie poster",
+      "alt": "Dune poster"
+    },
+    {
+      "cale_imagine": "fightclub.jpg",
+      "titlu": "Fight Club",
+      "descriere": "Fight Club movie poster",
+      "alt": "Fight Club poster"
+    },
+    {
+      "cale_imagine": "interstellar.jpg",
+      "titlu": "Interstellar",
+      "descriere": "Interstellar movie poster",
+      "alt": "Interstellar poster"
+    },
+    {
+      "cale_imagine": "lahaine.jpg",
+      "titlu": "La Haine",
+      "descriere": "La Haine movie poster",
+      "alt": "La Haine poster"
+    },
+    {
+      "cale_imagine": "martysupreme.jpg",
+      "titlu": "Marty Supreme",
+      "descriere": "Marty Supreme movie poster",
+      "alt": "Marty Supreme poster"
+    },
+    {
+      "cale_imagine": "nocountryforoldmen.jpg",
+      "titlu": "No Country for Old Men",
+      "descriere": "No Country for Old Men movie poster",
+      "alt": "No Country for Old Men poster"
+    },
+    {
+      "cale_imagine": "nootherchoice.jpg",
+      "titlu": "No Other Choice",
+      "descriere": "No Other Choice movie poster",
+      "alt": "No Other Choice poster"
+    },
+    {
+      "cale_imagine": "parasite.jpg",
+      "titlu": "Parasite",
+      "descriere": "Parasite movie poster",
+      "alt": "Parasite poster"
+    },
+    {
+      "cale_imagine": "thetrumanshow.jpg",
+      "titlu": "The Truman Show",
+      "descriere": "The Truman Show movie poster",
+      "alt": "The Truman Show poster"
+    },
+    {
+      "cale_imagine": "challengers.jpg",
+      "titlu": "Challengers",
+      "descriere": "Challengers movie poster",
+      "alt": "Challengers poster"
+    }
+  ]
+}

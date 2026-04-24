@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+	<%- include('../fragmente/head') %>
+	<title>Program Filme - Cinemania</title>
+</head>
+<body>
+	<%- include('../fragmente/header') %>
+
+	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
+		<section id="program-filme">
+			<h1>Program Filme</h1>
+			<p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
+				Programul actualizat al săptămânii, trailerul principal și documentul PDF cu orele complete.
+			</p>
+
+			<section id="video-prezentare-section" style="margin-bottom: 2.5rem;">
+				<h2>Trailer Dune 3</h2>
+				<p>Urmărește trailerul celui mai așteptat film al anului.</p>
+				<div class="video-box">
+					<video
+						id="trailer-cinemania"
+						controls
+						preload="none"
+						poster="<%= typeof videoPoster !== 'undefined' ? videoPoster : '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp' %>">
+						<% if (typeof videoMp4 !== 'undefined' && videoMp4) { %>
+							<source src="/resurse/video/<%= videoMp4 %>" type="video/mp4">
+						<% } %>
+						<% if (typeof videoWebm !== 'undefined' && videoWebm) { %>
+							<source src="/resurse/video/<%= videoWebm %>" type="video/webm">
+						<% } %>
+						<track src="/resurse/video/subtitrari/trailer-ro.vtt" kind="subtitles" srclang="ro" label="Română" default>
+						<track src="/resurse/video/subtitrari/trailer-en.vtt" kind="subtitles" srclang="en" label="English">
+						<% if ((!videoWebm && !videoMp4) || (typeof videoWebm === 'undefined' && typeof videoMp4 === 'undefined')) { %>
+							Nu exista inca fisiere video in /resurse/video.
+						<% } else { %>
+							Browserul tău nu suportă elementul video.
+						<% } %>
+					</video>
+				</div>
+			</section>
+
+			<section id="program-pdf" style="margin-bottom: 3rem;">
+				<h2>Program Săptămânal</h2>
+				<object data="/resurse/documente/Program-Saptamanal.pdf" type="application/pdf" width="100%" height="500">
+					<embed src="/resurse/documente/Program-Saptamanal.pdf" type="application/pdf" width="100%" height="500" />
+				</object>
+			</section>
+
+			<h2>Filmele Momentului</h2>
+			<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<img src="/resurse/imagini/dune.jpg" class="card-img-top" alt="Dune" style="height: 250px; object-fit: cover;">
+					<div class="card-body">
+						<h3 class="card-title">Dune</h3>
+						<p class="card-text" style="color: #666;">SF epic pe ecran mare, disponibil în 4DX și IMAX.</p>
+						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
+					</div>
+				</div>
+
+				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<img src="/resurse/imagini/fightclub.jpg" class="card-img-top" alt="Fight Club" style="height: 250px; object-fit: cover;">
+					<div class="card-body">
+						<h3 class="card-title">Fight Club</h3>
+						<p class="card-text" style="color: #666;">Re-release cult, proiecții seara în format 2D.</p>
+						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
+					</div>
+				</div>
+
+				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<img src="/resurse/imagini/interstellar.jpg" class="card-img-top" alt="Interstellar" style="height: 250px; object-fit: cover;">
+					<div class="card-body">
+						<h3 class="card-title">Interstellar</h3>
+						<p class="card-text" style="color: #666;">Experiență IMAX, cu sunet Dolby Atmos.</p>
+						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
+					</div>
+				</div>
+
+				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<img src="/resurse/imagini/parasite.jpg" class="card-img-top" alt="Parasite" style="height: 250px; object-fit: cover;">
+					<div class="card-body">
+						<h3 class="card-title">Parasite</h3>
+						<p class="card-text" style="color: #666;">Thriller premiat, proiecții de weekend.</p>
+						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
+					</div>
+				</div>
+
+				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<img src="/resurse/imagini/thetrumanshow.jpg" class="card-img-top" alt="The Truman Show" style="height: 250px; object-fit: cover;">
+					<div class="card-body">
+						<h3 class="card-title">The Truman Show</h3>
+						<p class="card-text" style="color: #666;">Clasic modern în sloturile de după-amiază.</p>
+						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
+					</div>
+				</div>
+
+				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<img src="/resurse/imagini/challengers.jpg" class="card-img-top" alt="Challengers" style="height: 250px; object-fit: cover;">
+					<div class="card-body">
+						<h3 class="card-title">Challengers</h3>
+						<p class="card-text" style="color: #666;">Dramă sportivă nou intrată în program.</p>
+						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
+					</div>
+				</div>
+			</div>
+
+			<section style="margin-top: 3rem;">
+				<h2>Program Actualizat - Săptămâna Curentă</h2>
+				<div class="table-rounded-container">
+					<div class="table-scroll-container">
+						<table>
+							<caption>* Program orientativ. Verifică orele finale în PDF.</caption>
+							<thead>
+								<tr>
+									<th>Film</th>
+									<th>Format</th>
+									<th>Ore</th>
+									<th>Săli</th>
+									<th>Acțiune</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr><td>Dune</td><td>4DX / IMAX</td><td>12:00, 16:00, 20:30</td><td>S1, S2</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>Fight Club</td><td>2D</td><td>18:00, 21:00</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>Interstellar</td><td>IMAX</td><td>14:30, 19:30</td><td>S2</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>La Haine</td><td>2D</td><td>17:00</td><td>S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>Marty Supreme</td><td>4DX / 2D</td><td>13:00, 18:30</td><td>S1, S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>No Country for Old Men</td><td>2D</td><td>20:00</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>No Other Choice</td><td>2D</td><td>15:30</td><td>S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>Parasite</td><td>2D</td><td>19:00</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>The Truman Show</td><td>2D</td><td>16:30</td><td>S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+								<tr><td>Challengers</td><td>2D</td><td>21:30</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+		</section>
+	</main>
+
+	<%- include('../fragmente/footer') %>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+	<%- include('../fragmente/head') %>
+	<title>Contul Meu - Cinemania</title>
+</head>
+<body>
+	<%- include('../fragmente/header') %>
+
+	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
+		<section id="contul-meu">
+			<h1>Contul Meu</h1>
+
+			<!-- Login/Register Info -->
+			<div style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+				<p style="color: #666; font-size: 1.1rem;">
+					Gestionează-ți informațiile personale, rezevarile și istoricul achizițiilor de bilete.
+				</p>
+			</div>
+
+			<!-- Account Info Cards -->
+			<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+				<!-- Profil -->
+				<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<div style="background: linear-gradient(135deg, var(--clr-gold), var(--clr-base-red)); padding: 1.5rem; color: white;">
+						<i class="fa-solid fa-user fa-2x" style="margin-bottom: 0.5rem; display: block;"></i>
+						<h3 style="margin: 0; font-size: 1.2rem;">Profil Personal</h3>
+					</div>
+					<div class="card-body">
+						<p style="color: #666; margin: 0;">
+							<strong>Utilizator:</strong> [Conectează-te pentru a vedea]<br>
+							<strong>Email:</strong> [Conectează-te pentru a vedea]<br>
+							<strong>Membru din:</strong> [Data inscriere]
+						</p>
+						<button style="width: 100%; padding: 0.75rem; margin-top: 1rem; background: var(--clr-base-red); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Editeaza Profil</button>
+					</div>
+				</div>
+
+				<!-- Bilete Active -->
+				<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<div style="background: linear-gradient(135deg, var(--clr-gold), var(--clr-base-red)); padding: 1.5rem; color: white;">
+						<i class="fa-solid fa-ticket fa-2x" style="margin-bottom: 0.5rem; display: block;"></i>
+						<h3 style="margin: 0; font-size: 1.2rem;">Bilete Active</h3>
+					</div>
+					<div class="card-body">
+						<p style="color: #666; margin: 0;">
+							<strong>0 bilete</strong> programate<br>
+							<strong>Următoarea vizită:</strong> [Nu exista]
+						</p>
+						<a href="/program" style="display: inline-block; margin-top: 1rem; padding: 0.75rem 1rem; background: var(--clr-base-red); color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-weight: bold;">Cumpară Bilet</a>
+					</div>
+				</div>
+
+				<!-- Abonament -->
+				<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden;">
+					<div style="background: linear-gradient(135deg, var(--clr-gold), var(--clr-base-red)); padding: 1.5rem; color: white;">
+						<i class="fa-solid fa-calendar-days fa-2x" style="margin-bottom: 0.5rem; display: block;"></i>
+						<h3 style="margin: 0; font-size: 1.2rem;">Abonament</h3>
+					</div>
+					<div class="card-body">
+						<p style="color: #666; margin: 0;">
+							<strong>Status:</strong> Inactiv<br>
+							<strong>Bilete rămase:</strong> 0
+						</p>
+						<a href="/bilete" style="display: inline-block; margin-top: 1rem; padding: 0.75rem 1rem; background: var(--clr-gold); color: white; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-weight: bold;">Alege Abonament</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Istoric Achizitii -->
+			<section style="margin-top: 2rem;">
+				<h2>Istoric Achizitii</h2>
+				<div class="table-rounded-container">
+					<div class="table-scroll-container">
+						<table>
+							<caption>Următoarele sunt achizițiile tale trecute.</caption>
+							<thead>
+								<tr>
+									<th>Data</th>
+									<th>Film</th>
+									<th>Ora</th>
+									<th>Format</th>
+									<th>Preț</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td colspan="6" style="text-align: center; padding: 2rem; color: #999;">
+										Nu ai nicio achizitie. <a href="/program">Cumpara bilete acum!</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<!-- Preferințe și Notificari -->
+			<section style="margin-top: 3rem; background: #f8f9fa; padding: 2rem; border-radius: 12px;">
+				<h2>Preferințe și Notificari</h2>
+				<div style="margin-top: 1rem;">
+					<label style="display: flex; align-items: center; margin-bottom: 1rem; cursor: pointer;">
+						<input type="checkbox" checked style="width: 1.2rem; height: 1.2rem; margin-right: 1rem; cursor: pointer;">
+						<span>Primește notificări email despre noi filme și promoții</span>
+					</label>
+					<label style="display: flex; align-items: center; margin-bottom: 1rem; cursor: pointer;">
+						<input type="checkbox" style="width: 1.2rem; height: 1.2rem; margin-right: 1rem; cursor: pointer;">
+						<span>Primește SMS-uri cu promotirii speciale</span>
+					</label>
+					<label style="display: flex; align-items: center; cursor: pointer;">
+						<input type="checkbox" checked style="width: 1.2rem; height: 1.2rem; margin-right: 1rem; cursor: pointer;">
+						<span>Notifică-mă înainte de filmele pe lista mea de dorințe</span>
+					</label>
+					<button style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: var(--clr-base-red); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Salveaza Preferinte</button>
+				</div>
+			</section>
+
+			<!-- Logout -->
+			<section style="margin-top: 2rem; text-align: center;">
+				<button style="padding: 0.75rem 2rem; background: #ccc; color: #333; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Deconectare</button>
+			</section>
+		</section>
+	</main>
+
+	<%- include('../fragmente/footer') %>
+</body>
+</html>
