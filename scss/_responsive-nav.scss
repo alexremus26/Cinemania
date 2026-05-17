@@ -1,6 +1,9 @@
 @use "variables" as *;
 @use "mixins" as *;
 
+// ═══════════════════════════════════════════
+// MEDIUM SCREENS – icons only, smaller text
+// ═══════════════════════════════════════════
 @media (max-width: $bp-medium) {
   .site-nav {
     .nav-main {
@@ -10,6 +13,7 @@
         font-size: 0.78rem;
         padding: 11px 12px;
 
+        // Hide text, show only icon
         .nav-text {
           display: none;
         }
@@ -23,8 +27,13 @@
   }
 }
 
+// ═══════════════════════════════════════════
+// SMALL SCREENS – hamburger / burger menu
+// Zigzag wipe transition on open
+// ═══════════════════════════════════════════
 @media (max-width: $bp-small) {
   .site-nav {
+    // ─── Burger button ───
     .burger-btn {
       @include flex-center;
       flex-direction: column;
@@ -45,6 +54,7 @@
         position: relative;
       }
 
+      // Staggered bar animation with @for
       @for $i from 1 through 3 {
         span:nth-child(#{$i}) {
           animation-delay: ($i - 1) * 0.3s;
@@ -52,101 +62,128 @@
       }
     }
 
+    // ─── Mobile nav panel — starts right below header ───
     .nav-main {
-      position: absolute;
-      top: calc(100% + 10px);
-      right: 0;
-      width: min(92vw, 370px);
+      position: fixed;
+      top: 56px; // right below the sticky header
+      left: 0;
+      width: 100vw;
+      height: calc(100vh - 56px);
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid var(--clr-base-red);
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.98));
-      box-shadow: 0 18px 32px rgba(0, 0, 0, 0.42);
+      justify-content: flex-start; // items stack from top, right below header
+      align-items: stretch;
+      gap: 0;
+      padding: 0;
+      margin: 0;
+      border-radius: 0;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      z-index: 999;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-8px);
-      @include smooth(opacity, 0.25s);
-      @include smooth(transform, 0.25s);
+      transition: opacity 0.1s ease;
 
       > li {
         width: 100%;
-        opacity: 0;
-        transform: translateX(16px);
-        @include smooth(transform, 0.35s);
-        @include smooth(opacity, 0.35s);
+        // No flex:1 — items size naturally, no huge gaps
+        display: block;
+        margin: 0;
 
         > a {
+          display: flex;
+          align-items: center;
           justify-content: flex-start;
+          gap: 12px;
           width: 100%;
           overflow: hidden;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.02);
-          clip-path: polygon(0 0, 0 0, 0 50%, 0 100%, 0 100%, 0 50%);
+          border: none;
+          border-radius: 0;
+          padding: 16px 30px;
+          font-size: 1.05rem;
+          // Solid black — forms the triangle shapes
+          background: var(--clr-pure-black);
+          // Start off-screen to the left + arrow clip-path
+          transform: translateX(-110%);
+          // 5-point arrow polygon (same point count for smooth animation)
+          clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%);
 
           .nav-text {
             display: inline;
           }
         }
 
+        // ─── Mobile dropdown — slides down below parent ───
         .dropdown {
           position: static;
-          min-width: 0;
-          width: calc(100% - 18px);
-          margin: 6px 0 0 auto;
-          transform: scale(1, 0);
-          transform-origin: top left;
-          opacity: 1;
-          visibility: visible;
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          background: var(--clr-pure-black);
+          border: none;
+          border-radius: 0;
+          box-shadow: none;
           max-height: 0;
           overflow: hidden;
+          opacity: 1;
+          visibility: visible;
+          transform: none;
+          transition: max-height $underline-speed ease;
+
+          li a {
+            font-size: 0.95rem;
+            padding: 12px 50px;
+          }
         }
 
         &:hover > .dropdown,
         &:focus-within > .dropdown {
-          transform: scale(1, 1);
           max-height: 420px;
         }
       }
 
+      // Show mobile-only home icon
       .mobile-home-only {
         display: block;
       }
 
+      // Hide the desktop "Acasă" with dropdown (2nd li)
       > li.has-dropdown:nth-child(2) {
         display: none;
       }
     }
 
+    // Mobile home — icon only, no text
     .mobile-home-only > a .nav-text {
       display: none !important;
     }
 
+    // ─── CHECKED STATE: trigger the zigzag wipe animation ───
     .menu-toggle:checked ~ .nav-main {
       opacity: 1;
       pointer-events: auto;
-      transform: translateY(0);
 
-      > li {
-        opacity: 1;
-        transform: translateX(0);
-
-        > a {
-          animation: mobile-item-reveal 0.48s cubic-bezier(0.2, 0.9, 0.25, 1) forwards;
-        }
+      > li > a {
+        // 4-phase animation: slide in as arrow → zigzag → reveal menu → retract points
+        // Slow enough (1.8s) to clearly see the items coming from the left
+        animation: zigzag-wipe 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
       }
     }
 
+    // Staggered delays per item with @for
+    // Each triangle enters 80ms after the previous — cascading zigzag effect
     @for $i from 1 through $menu-item-count {
-      .menu-toggle:checked ~ .nav-main > li:nth-child(#{$i}) {
-        transition-delay: $i * 0.04s;
+      .menu-toggle:checked ~ .nav-main > li:nth-child(#{$i}) > a {
+        animation-delay: ($i - 1) * 0.08s;
       }
     }
 
+    // ─── Burger X-transform ───
     .menu-toggle:checked + .burger-btn {
+      z-index: 1001;
+      position: relative;
+
       span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
       }
@@ -160,20 +197,54 @@
       }
     }
 
-    @keyframes mobile-item-reveal {
+    // ═══════════════════════════════════════
+    // ZIGZAG WIPE — 4 phases
+    // ═══════════════════════════════════════
+    //
+    // Phase 1 (0%–35%): Triangle slides in from left with arrow clip-path
+    //   → aggressive "cutting" motion
+    //
+    // Phase 2 (35%–55%): Triangle arrived, still has arrow shape
+    //   → zigzag edge visible on the right side, content peeks through
+    //
+    // Phase 3 (55%–80%): Arrow points retract toward right edge
+    //   → gaps close, screen becomes solid black, menu text readable
+    //
+    // Phase 4 (80%–100%): Full rectangle, clean menu
+    //   → points fully retracted, menu items shown normally
+
+    @keyframes zigzag-wipe {
       0% {
-        clip-path: polygon(0 0, 0 0, 0 50%, 0 100%, 0 100%, 0 50%);
+        transform: translateX(-110%);
+        clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%);
       }
 
-      65% {
+      35% {
+        // Arrived at final X position, arrow shape still visible
+        transform: translateX(0);
+        clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%);
+      }
+
+      55% {
+        // Brief hold — zigzag pattern on screen
+        transform: translateX(0);
+        clip-path: polygon(0 0, 75% 0, 100% 50%, 75% 100%, 0 100%);
+      }
+
+      80% {
+        // Points retracting to the right
+        transform: translateX(0);
         clip-path: polygon(0 0, 96% 0, 100% 50%, 96% 100%, 0 100%);
       }
 
       100% {
-        clip-path: polygon(0 0, 94% 0, 100% 50%, 94% 100%, 0 100%);
+        // Full rectangle — clean menu item
+        transform: translateX(0);
+        clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
       }
     }
 
+    // Burger bar entrance
     @keyframes barAppear {
       0% {
         opacity: 0;

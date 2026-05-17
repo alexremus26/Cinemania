@@ -15,6 +15,7 @@
     
     <link rel="icon" type="image/png" href="./resources/images/favicon/favicon-96x96.png" sizes="96x96" />
     <link href="css/general.css" rel="stylesheet" type="text/css" />
+    <link href="css/nav.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="msapplication-TileColor" content="#D92A27">
 </head>
@@ -126,6 +127,7 @@
         </section>
         <section id="orar">
             <h2>Top Premiere</h2>
+            <!-- Identificator: stilizare-tabel (markup tabel cu caption, rowspan/colspan) -->
             <div class="table-rounded-container">
                 <div class="table-scroll-container">
                     <table>
@@ -197,6 +199,7 @@
         </section>
         <section id="upcoming">
             <h2>Trailere Noi</h2>
+            <!-- Identificator: stilizare-taburi (linkuri tip tab care controleaza iframe-ul) -->
             <div class="iframe-interface">
                 <nav class="iframe-nav">
                     <a href="https://www.youtube.com/embed/Mzw2ttJD2qQ" target="video-frame">Trailer 1</a>
@@ -294,8 +297,10 @@
             <iframe src="https://maps.google.com/maps?q=Facultatea%20de%20Matematica%20si%20Informatica%20Universitatea%20din%20Bucuresti&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="400" style="border:0; border-radius: 8px; margin-top: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
     </div>
+    <!-- Identificator: link-top -->
     <a href="#top-anchor" id="link-top">
-        <div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
+        <div class="circle-outer"></div>
+        <span class="arrow-icon">&#8593;</span>
         <span class="tooltip-text">Revino la Acasă</span>
     </a>
 
