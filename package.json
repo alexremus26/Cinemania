@@ -1,0 +1,29 @@
+{
+  "name": "cinemania",
+  "version": "1.0.0",
+  "description": "Alpha",
+  "keywords": [
+    "cinemania"
+  ],
+  "homepage": "https://github.com/alexremus26/cinemania#readme",
+  "bugs": {
+    "url": "https://github.com/alexremus26/cinemania/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexremus26/cinemania.git"
+  },
+  "license": "ISC",
+  "author": "Stoicescu Remus-Alexandru",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1"
+  }
+}
