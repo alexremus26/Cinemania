@@ -1,6 +1,9 @@
 @use "variables" as *;
 @use "mixins" as *;
 
+// ─── @extend placeholders (reusable blocks, DRY) ───
+
+// Base style shared by all top-level nav links
 %nav-link-base {
   position: relative;
   display: flex;
@@ -16,27 +19,34 @@
   overflow: hidden;
 }
 
+// Base style shared by all submenu links
 %submenu-link-base {
   position: relative;
   display: block;
   color: var(--clr-white);
   text-transform: none;
   font-size: 0.9rem;
-  padding: 10px 18px;
+  padding: 10px $underline-inset;
   text-decoration: none;
+  white-space: nowrap;
 }
+
+// ─── Main desktop nav ───
 
 .site-nav {
   position: relative;
 
+  // Hidden checkbox toggle (for mobile burger)
   .menu-toggle {
     display: none;
   }
 
+  // Burger button hidden on desktop
   .burger-btn {
     display: none;
   }
 
+  // ─── Top-level list ───
   .nav-main {
     list-style: none;
     display: flex;
@@ -45,26 +55,33 @@
     margin: 0;
     padding: 0;
 
+    // Each top-level <li>
     > li {
       list-style: none;
       position: relative;
 
+      // Top-level link
       > a {
         @extend %nav-link-base;
 
+        // Hover overlay: ::before rectangle that scales vertically from 0
+        // Transparent bg overlay with light border + inner box-shadow gradient
         &::before {
           content: "";
           @include absolute-fill;
           background: $overlay-bg;
           border: 1px solid $overlay-border;
-          box-shadow: $shadow-glow;
+          box-shadow: $overlay-box-shadow;
           border-radius: inherit;
           transform: scaleY(0);
           transform-origin: center;
-          @include smooth(transform, $hover-speed);
+          opacity: 0;
+          transition: transform $hover-speed ease, opacity $hover-speed ease;
           pointer-events: none;
+          z-index: 1;
         }
 
+        // Icon above the overlay
         i {
           position: relative;
           z-index: 2;
@@ -72,21 +89,25 @@
           text-align: center;
         }
 
+        // Text above the overlay
         .nav-text {
           position: relative;
           z-index: 2;
         }
       }
 
+      // Hover / focus: reveal the overlay, change text color
       &:hover > a,
       &:focus-within > a {
         color: var(--clr-gold);
 
         &::before {
           transform: scaleY(1);
+          opacity: 1;
         }
       }
 
+      // ─── Dropdown (submenu) ───
       .dropdown {
         list-style: none;
         position: absolute;
@@ -96,15 +117,17 @@
         margin: 0;
         padding: 8px 0;
         border-radius: $nav-radius;
-        background: linear-gradient(160deg, rgba(0, 0, 0, 0.96), rgba(30, 30, 30, 0.96));
+        background: $dropdown-bg;
         border: 1px solid var(--clr-base-red);
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+        box-shadow: $dropdown-shadow;
+        z-index: 1200;
+
+        // Hidden by default, scales from top-left corner
         opacity: 0;
         visibility: hidden;
         transform: scale(0);
         transform-origin: top left;
-        @include smooth(transform, $item-speed);
-        @include smooth(opacity, 0.25s);
+        transition: transform $item-speed ease, opacity $underline-speed ease;
 
         li {
           list-style: none;
@@ -112,25 +135,31 @@
           a {
             @extend %submenu-link-base;
 
+            // Double underline via ::before and ::after
             &::before,
             &::after {
               content: "";
               position: absolute;
-              bottom: 7px;
               width: 0;
-              height: 3px;
+              height: $underline-height;
               background: var(--clr-gold);
-              @include smooth(width, 0.3s);
+              opacity: 0;
+              transition: width $underline-speed ease,
+                opacity $underline-speed ease;
+              left: $underline-inset;
             }
 
+            // First underline
             &::before {
-              left: 18px;
+              bottom: 9px;
             }
 
+            // Second underline (offset below)
             &::after {
-              right: 18px;
+              bottom: 3px;
             }
 
+            // On hover: reveal double underline, change color
             &:hover,
             &:focus-visible {
               color: var(--clr-gold);
@@ -138,13 +167,15 @@
 
               &::before,
               &::after {
-                width: calc(100% - 56px);
+                width: calc(100% - #{$underline-inset * 2 + 20px});
+                opacity: 1;
               }
             }
           }
         }
       }
 
+      // Show dropdown on hover / focus
       &:hover > .dropdown,
       &:focus-within > .dropdown {
         opacity: 1;
@@ -153,6 +184,7 @@
       }
     }
 
+    // First <li> is the mobile-only home icon
     .mobile-home-only {
       display: none;
     }
