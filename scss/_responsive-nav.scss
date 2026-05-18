@@ -1,19 +1,16 @@
 @use "variables" as *;
 @use "mixins" as *;
 
-// ═══════════════════════════════════════════
-// MEDIUM SCREENS – icons only, smaller text
-// ═══════════════════════════════════════════
+
 @media (max-width: $bp-medium) {
   .site-nav {
     .nav-main {
       gap: 6px;
 
-      > li > a {
+      >li>a {
         font-size: 0.78rem;
         padding: 11px 12px;
 
-        // Hide text, show only icon
         .nav-text {
           display: none;
         }
@@ -27,17 +24,12 @@
   }
 }
 
-// ═══════════════════════════════════════════
-// SMALL SCREENS – hamburger / burger menu
-// Zigzag wipe transition on open
-// ═══════════════════════════════════════════
 @media (max-width: $bp-small) {
   .site-nav {
-    // ─── Burger button ───
+
     .burger-btn {
-      @include flex-center;
-      flex-direction: column;
-      gap: 5px;
+      display: block; 
+      position: relative;
       width: 44px;
       height: 44px;
       border-radius: 10px;
@@ -51,7 +43,21 @@
         height: 2px;
         background: var(--clr-white);
         animation: barAppear 0.6s ease-out forwards;
-        position: relative;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      span:nth-child(1) {
+        top: 14px;
+      }
+
+      span:nth-child(2) {
+        top: 20px;
+      }
+
+      span:nth-child(3) {
+        top: 26px;
       }
 
       // Staggered bar animation with @for
@@ -62,7 +68,6 @@
       }
     }
 
-    // ─── Mobile nav panel — starts right below header ───
     .nav-main {
       position: fixed;
       top: 56px; // right below the sticky header
@@ -85,13 +90,13 @@
       pointer-events: none;
       transition: opacity 0.1s ease;
 
-      > li {
+      >li {
         width: 100%;
         // No flex:1 — items size naturally, no huge gaps
         display: block;
         margin: 0;
 
-        > a {
+        >a {
           display: flex;
           align-items: center;
           justify-content: flex-start;
@@ -137,8 +142,8 @@
           }
         }
 
-        &:hover > .dropdown,
-        &:focus-within > .dropdown {
+        &:hover>.dropdown,
+        &:focus-within>.dropdown {
           max-height: 420px;
         }
       }
@@ -149,22 +154,22 @@
       }
 
       // Hide the desktop "Acasă" with dropdown (2nd li)
-      > li.has-dropdown:nth-child(2) {
+      >li.has-dropdown:nth-child(2) {
         display: none;
       }
     }
 
     // Mobile home — icon only, no text
-    .mobile-home-only > a .nav-text {
+    .mobile-home-only>a .nav-text {
       display: none !important;
     }
 
     // ─── CHECKED STATE: trigger the zigzag wipe animation ───
-    .menu-toggle:checked ~ .nav-main {
+    .menu-toggle:checked~.nav-main {
       opacity: 1;
       pointer-events: auto;
 
-      > li > a {
+      >li>a {
         // 4-phase animation: slide in as arrow → zigzag → reveal menu → retract points
         // Slow enough (1.8s) to clearly see the items coming from the left
         animation: zigzag-wipe 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
@@ -174,18 +179,18 @@
     // Staggered delays per item with @for
     // Each triangle enters 80ms after the previous — cascading zigzag effect
     @for $i from 1 through $menu-item-count {
-      .menu-toggle:checked ~ .nav-main > li:nth-child(#{$i}) > a {
+      .menu-toggle:checked~.nav-main>li:nth-child(#{$i})>a {
         animation-delay: ($i - 1) * 0.08s;
       }
     }
 
     // ─── Burger X-transform ───
-    .menu-toggle:checked + .burger-btn {
+    .menu-toggle:checked+.burger-btn {
       z-index: 1001;
       position: relative;
 
       span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
+        transform: translateX(-50%) translateY(6px) rotate(45deg);
       }
 
       span:nth-child(2) {
@@ -193,7 +198,7 @@
       }
 
       span:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
+        transform: translateX(-50%) translateY(-6px) rotate(-45deg);
       }
     }
 
@@ -248,19 +253,19 @@
     @keyframes barAppear {
       0% {
         opacity: 0;
-        transform: scaleY(0) scaleX(0.5);
+        transform: translateX(-50%) scaleY(0) scaleX(0.5);
         background: var(--clr-base-red);
       }
 
       50% {
         opacity: 0.8;
-        transform: scaleY(1.1) scaleX(0.9);
+        transform: translateX(-50%) scaleY(1.1) scaleX(0.9);
         background: var(--clr-gold);
       }
 
       100% {
         opacity: 1;
-        transform: scaleY(1) scaleX(1);
+        transform: translateX(-50%) scaleY(1) scaleX(1);
         background: var(--clr-white);
       }
     }

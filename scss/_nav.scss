@@ -1,9 +1,6 @@
 @use "variables" as *;
 @use "mixins" as *;
 
-// ─── @extend placeholders (reusable blocks, DRY) ───
-
-// Base style shared by all top-level nav links
 %nav-link-base {
   position: relative;
   display: flex;
@@ -78,7 +75,7 @@
           opacity: 0;
           transition: transform $hover-speed ease, opacity $hover-speed ease;
           pointer-events: none;
-          z-index: 1;
+          z-index: 1; // stratul 1
         }
 
         // Icon above the overlay
@@ -92,7 +89,7 @@
         // Text above the overlay
         .nav-text {
           position: relative;
-          z-index: 2;
+          z-index: 2; // stratul 2
         }
       }
 

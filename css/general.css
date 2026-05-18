@@ -223,7 +223,6 @@ footer { margin-top: 40px; text-align: center; font-size: 0.9rem; }
 .cat-card:hover { background: rgba(229, 177, 67, 0.1); transform: translateY(-5px); box-shadow: 0 5px 15px var(--clr-base-red); }
 
  
-/* Formula mathml*/
 .formula-box {
     background: var(--clr-dark-grey);
     border: 2px solid var(--clr-gold);
@@ -376,4 +375,267 @@ math mrow mi {
 
 #cinematografe-harta, #contact {
     width: 100%;
+}
+
+/* Identificator: css-printare */
+@media print {
+
+    /* ═══ Margini pagină: stânga 2cm/1cm, dreapta 1cm/2cm ═══ */
+    @page :left {
+        margin: 1cm 1cm 1cm 2cm;
+    }
+    @page :right {
+        margin: 1cm 2cm 1cm 1cm;
+    }
+
+    /* ═══ Reset global pentru print ═══ */
+    * {
+        transition: none !important;
+        animation: none !important;
+        background: transparent !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    html, body {
+        background: white !important;
+        color: black !important;
+        font-family: 'Montserrat', sans-serif;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important; /* Previne tăierea paginilor și oprirea la doar o pagină blank */
+        height: auto !important;
+    }
+
+    body {
+        padding-top: 60px !important; /* Împinge conținutul în jos ca să nu mai fie acoperit de banner-ul din dreapta-sus */
+    }
+
+    /* ═══ Asigurăm vizibilitatea și afișarea corectă a conținutului ═══ */
+    main, section, article {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        overflow: visible !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+
+    /* Reset forțat pe link-urile de meniu cu transform/clip-path din modul mobil */
+    .nav-main > li > a {
+        transform: none !important;
+        clip-path: none !important;
+        animation: none !important;
+    }
+
+    /* ═══ Watermark — pe fiecare pagină ═══
+       Lățime 60%, înălțime 10%, centrat, culoare neagră cu opacitate 0.3 pe culoare */
+    body::after {
+        content: "Stoicescu\A Remus-Alexandru";
+        white-space: pre;
+        position: fixed;  /* fixed = se repetă pe FIECARE pagină tipărită */
+        top: 45%;
+        left: 20%;
+        width: 60%;
+        height: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        font-weight: bold;
+        color: rgba(0, 0, 0, 0.3) !important; /* opacitate pe culoare, nu pe element */
+        background: transparent !important;
+        z-index: 9998; /* POZITIV: deasupra paginii, dar sub banner (9999) */
+        pointer-events: none;
+        text-align: center;
+    }
+
+    /* ═══ Banner proiect școlar — dreapta-sus a primei pagini, border dublu, 50% lățime ═══ */
+    .banner-proiect {
+        position: absolute; /* Schimbat din fixed ca să apară DOAR pe prima pagină */
+        top: 0;
+        right: 0;
+        width: 50%;
+        box-sizing: border-box; /* Previne depășirea lățimii din cauza border-ului */
+        border: 3px double black !important;
+        text-align: center;
+        font-weight: bold;
+        padding: 8px;
+        background: white !important;
+        color: black !important;
+        display: block !important;
+        z-index: 9999;
+        font-size: 12pt;
+    }
+
+    /* ═══ Ascundem elemente media + elemente dependente de ele ═══ */
+    img, video, iframe, object, embed, canvas, svg, picture, audio, source,
+    .slider-mockup, .iframe-interface, .welcome-poster,
+    #link-top,
+    .burger-btn, .menu-toggle,
+    .fa-solid, .fa-brands, i[class^="fa-"], i[class*=" fa-"],
+    figcaption, .img-description, .video-description,
+    .poster-card img, .cat-card img,
+    #contact, #cinematografe-harta, #program-pdf {
+        display: none !important;
+    }
+
+    /* ═══ Header — resetat la block, static ═══ */
+    .main-header {
+        position: static !important;
+        background: transparent !important;
+        display: block !important;
+        width: 100% !important;
+        padding: 0 !important;
+        border: none !important;
+    }
+
+    .logo-area {
+        display: block !important;
+        text-align: center !important;
+    }
+
+    /* ═══ H1 centrat pe orizontală pe prima pagină ═══ */
+    #title {
+        text-align: center !important;
+        color: black !important;
+        font-size: 24pt !important;
+        margin: 30px auto 20px auto;
+        display: block !important;
+    }
+
+    /* ═══ Toate linkurile — text normal, necolorate, nesubliniate ═══ */
+    a {
+        color: black !important;
+        text-decoration: none !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    /* ═══ Meniu — listă neordonată, elemente unele sub altele ═══ */
+    .site-nav {
+        display: block !important;
+        position: static !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .nav-main {
+        display: block !important;
+        position: static !important;
+        list-style-type: disc !important;
+        padding-left: 25px !important;
+        margin: 10px 0 20px 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+        overflow: visible !important;
+    }
+
+    .nav-main > li {
+        display: list-item !important;
+        list-style-type: disc !important;
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        height: auto !important;
+        max-height: none !important;
+        transform: none !important;
+        clip-path: none !important;
+        background: transparent !important;
+        color: black !important;
+        margin-bottom: 5px;
+    }
+
+    /* Ascundem duplicatul mobile-only la print */
+    .nav-main > li.mobile-home-only {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .nav-main > li > a {
+        display: inline !important;
+        padding: 3px 0 !important;
+        font-size: 12pt !important;
+        color: black !important;
+        border: none !important;
+    }
+
+    .nav-text {
+        display: inline !important;
+        color: black !important;
+    }
+
+    /* ═══ Submeniuri — subliste indentate ═══ */
+    .dropdown {
+        display: block !important;
+        position: static !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        list-style-type: circle !important;
+        padding-left: 20px !important;
+        margin: 3px 0 5px 0 !important;
+        border: none !important;
+    }
+
+    .dropdown li {
+        display: list-item !important;
+        list-style-type: circle !important;
+        position: static !important;
+        background: transparent !important;
+        color: black !important;
+    }
+
+    .dropdown li a {
+        display: inline !important;
+        font-size: 11pt !important;
+        padding: 2px 0 !important;
+        color: black !important;
+        border: none !important;
+    }
+
+    /* Eliminăm pseudoelementele decorative din meniu */
+    .nav-main a::before,
+    .nav-main a::after,
+    .dropdown a::before,
+    .dropdown a::after {
+        display: none !important;
+    }
+
+    /* ═══ Page break DUPĂ meniu ═══ */
+    .site-nav {
+        page-break-after: always;
+        break-after: page;
+    }
+
+    /* ═══ Grid pagină afișat ca block pentru a preveni tăierea celulelor ═══ */
+    #grid-pagina, .creative-grid, #welcome {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    #grid-pagina > *, .creative-grid > *, #welcome > * {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        display: block !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* ═══ Page break ÎNAINTE de footer ═══ */
+    footer {
+        page-break-before: always;
+        break-before: page;
+        display: block !important;
+        position: static !important;
+    }
+
+    .footer-content {
+        display: block !important;
+    }
 }
