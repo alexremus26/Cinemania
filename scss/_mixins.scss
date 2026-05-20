@@ -12,3 +12,15 @@
   align-items: center;
   justify-content: center;
 }
+
+@mixin respond-medium {
+  @media (max-width: $bp-medium) {
+    @content;
+  }
+}
+
+@mixin respond-small {
+  @media (max-width: $bp-small) {
+    @content;
+  }
+}

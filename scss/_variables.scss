@@ -1,12 +1,45 @@
+// ─── Breakpoints ───
 $bp-medium: 1023px;
 $bp-small: 767px;
+
+// ─── Layout ───
 $nav-height: 64px;
 $submenu-min-width: 250px;
 $nav-radius: 12px;
-$hover-speed: 0.35s;
+
+// ─── Speeds ───
+$hover-speed: 0.6s;
 $item-speed: 0.45s;
+$underline-speed: 0.35s;
+$burger-bar-speed: 0.25s;
+
+// ─── Item count (used in @for loops) ───
 $menu-item-count: 8;
 
+// ─── Overlay / hover pseudo-element ───
 $shadow-glow: inset 0 0 18px rgba(255, 230, 180, 0.2);
-$overlay-border: rgba(255, 244, 214, 0.45);
-$overlay-bg: rgba(229, 177, 67, 0.08);
+$overlay-border: rgba(220, 220, 220, 0.7);
+$overlay-bg: rgba(140, 140, 140, 0.28);
+$overlay-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25),
+  inset 0 0 14px rgba(0, 0, 0, 0.35);
+
+// ─── Dropdown ───
+$dropdown-bg: linear-gradient(
+  160deg,
+  rgba(0, 0, 0, 0.96),
+  rgba(30, 30, 30, 0.96)
+);
+$dropdown-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+
+// ─── Underline ───
+$underline-height: 3px;
+$underline-inset: 18px;
+
+// ─── Mobile ───
+$mobile-menu-width: min(92vw, 370px);
+$mobile-menu-bg: linear-gradient(
+  180deg,
+  rgba(0, 0, 0, 0.98),
+  rgba(20, 20, 20, 0.98)
+);
+$mobile-menu-shadow: 0 18px 32px rgba(0, 0, 0, 0.42);
