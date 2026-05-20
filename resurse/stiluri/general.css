@@ -35,6 +35,13 @@ body {
 
 h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
 
+h1 { font-size: 1.8rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.1rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.9rem; }
+
 #grid-pagina {
     display: grid;
     gap: 30px;
@@ -94,10 +101,6 @@ h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
 @media (max-width: 767px) {
     html { font-size: 14px; }
     #grid-pagina { grid-template-columns: 1fr; grid-template-areas: "zona1" "zona3" "zona4" "zona2" "zona8" "zona7" "zona5" "zona6"; }
-
-    #grid-pagina.grid-single {
-        display: block;
-    }
 
     #welcome {
         grid-template-columns: 1fr;
@@ -312,11 +315,12 @@ h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
 }
 
 @media (max-width: 767px) {
+    /* ─── Burger button ─── */
     .burger-btn {
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         gap: 5px;
         width: 44px;
         height: 44px;
@@ -331,104 +335,133 @@ h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
         width: 22px;
         height: 2px;
         background: var(--clr-white);
-        transition: transform 0.25s ease, opacity 0.25s ease;
+        animation: barAppear 0.6s ease-out forwards;
+        position: relative;
     }
 
+    /* Staggered bar animation */
+    .burger-btn span:nth-child(1) { animation-delay: 0s; }
+    .burger-btn span:nth-child(2) { animation-delay: 0.3s; }
+    .burger-btn span:nth-child(3) { animation-delay: 0.6s; }
+
+    /* ─── Mobile nav panel — full-screen below header ─── */
     .nav-main {
-        position: absolute;
-        top: calc(100% + 10px);
-        right: 0;
-        width: min(92vw, 370px);
+        position: fixed;
+        top: 56px;
+        left: 0;
+        width: 100vw;
+        height: calc(100vh - 56px);
+        display: flex;
         flex-direction: column;
+        justify-content: flex-start;
         align-items: stretch;
-        gap: 8px;
-        padding: 12px;
-        border-radius: 14px;
-        border: 1px solid var(--clr-base-red);
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 20, 0.98));
-        box-shadow: 0 18px 32px rgba(0, 0, 0, 0.42);
+        gap: 0;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        z-index: 999;
         opacity: 0;
         pointer-events: none;
-        transform: translateY(-8px);
-        transition: opacity 0.25s ease, transform 0.25s ease;
+        transition: opacity 0.1s ease;
     }
 
     .nav-main > li {
         width: 100%;
-        opacity: 0;
-        transform: translateX(16px);
-        transition: transform 0.35s ease, opacity 0.35s ease;
+        display: block;
+        margin: 0;
     }
 
     .nav-main > li > a {
+        display: flex;
+        align-items: center;
         justify-content: flex-start;
+        gap: 12px;
         width: 100%;
         overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.02);
-        clip-path: polygon(0 0, 0 0, 0 50%, 0 100%, 0 100%, 0 50%);
+        border: none;
+        border-radius: 0;
+        padding: 16px 30px;
+        font-size: 1.05rem;
+        background: var(--clr-pure-black);
+        transform: translateX(-110%);
+        clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%);
     }
 
     .nav-main > li > a .nav-text {
         display: inline;
     }
 
+    /* ─── Mobile dropdown — slides down below parent ─── */
     .nav-main > li .dropdown {
         position: static;
-        min-width: 0;
-        width: calc(100% - 18px);
-        margin: 6px 0 0 auto;
-        transform: scale(1, 0);
-        transform-origin: top left;
-        opacity: 1;
-        visibility: visible;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: var(--clr-pure-black);
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
         max-height: 0;
         overflow: hidden;
-        transition: transform 0.35s ease, max-height 0.35s ease;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        transition: max-height 0.35s ease;
+    }
+
+    .nav-main > li .dropdown li a {
+        font-size: 0.95rem;
+        padding: 12px 50px;
     }
 
     .nav-main > li:hover > .dropdown,
     .nav-main > li:focus-within > .dropdown {
-        transform: scale(1, 1);
         max-height: 420px;
     }
 
+    /* Show mobile-only home icon */
     .mobile-home-only {
         display: block;
     }
 
+    /* Hide the desktop "Acasă" with dropdown (2nd li) */
     .nav-main > li.has-dropdown:nth-child(2) {
         display: none;
     }
 
+    /* Mobile home — icon only, no text */
     .mobile-home-only > a .nav-text {
         display: none !important;
     }
 
+    /* ─── CHECKED STATE: trigger the zigzag wipe animation ─── */
     .menu-toggle:checked ~ .nav-main {
         opacity: 1;
         pointer-events: auto;
-        transform: translateY(0);
-    }
-
-    .menu-toggle:checked ~ .nav-main > li {
-        opacity: 1;
-        transform: translateX(0);
     }
 
     .menu-toggle:checked ~ .nav-main > li > a {
-        animation: mobile-item-reveal 0.48s cubic-bezier(0.2, 0.9, 0.25, 1) forwards;
+        animation: zigzag-wipe 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
     }
 
-    .menu-toggle:checked ~ .nav-main > li:nth-child(1) { transition-delay: 0.04s; }
-    .menu-toggle:checked ~ .nav-main > li:nth-child(2) { transition-delay: 0.08s; }
-    .menu-toggle:checked ~ .nav-main > li:nth-child(3) { transition-delay: 0.12s; }
-    .menu-toggle:checked ~ .nav-main > li:nth-child(4) { transition-delay: 0.16s; }
-    .menu-toggle:checked ~ .nav-main > li:nth-child(5) { transition-delay: 0.20s; }
-    .menu-toggle:checked ~ .nav-main > li:nth-child(6) { transition-delay: 0.24s; }
-    .menu-toggle:checked ~ .nav-main > li:nth-child(7) { transition-delay: 0.28s; }
-    .menu-toggle:checked ~ .nav-main > li:nth-child(8) { transition-delay: 0.32s; }
+    /* Staggered delays — cascading zigzag effect (80ms apart) */
+    .menu-toggle:checked ~ .nav-main > li:nth-child(1) > a { animation-delay: 0s; }
+    .menu-toggle:checked ~ .nav-main > li:nth-child(2) > a { animation-delay: 0.08s; }
+    .menu-toggle:checked ~ .nav-main > li:nth-child(3) > a { animation-delay: 0.16s; }
+    .menu-toggle:checked ~ .nav-main > li:nth-child(4) > a { animation-delay: 0.24s; }
+    .menu-toggle:checked ~ .nav-main > li:nth-child(5) > a { animation-delay: 0.32s; }
+    .menu-toggle:checked ~ .nav-main > li:nth-child(6) > a { animation-delay: 0.40s; }
+    .menu-toggle:checked ~ .nav-main > li:nth-child(7) > a { animation-delay: 0.48s; }
+    .menu-toggle:checked ~ .nav-main > li:nth-child(8) > a { animation-delay: 0.56s; }
+
+    /* ─── Burger X-transform ─── */
+    .menu-toggle:checked + .burger-btn {
+        z-index: 1001;
+        position: relative;
+    }
 
     .menu-toggle:checked + .burger-btn span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
@@ -442,17 +475,53 @@ h1, h2, h3, #title { font-family: 'Oswald', sans-serif; }
         transform: translateY(-7px) rotate(-45deg);
     }
 
-    @keyframes mobile-item-reveal {
+    /* ═══════════════════════════════════════
+       ZIGZAG WIPE — 4 phases
+       ═══════════════════════════════════════
+       Phase 1 (0%–35%):  Triangle slides in from left with arrow clip-path
+       Phase 2 (35%–55%): Triangle arrived, arrow shape still visible
+       Phase 3 (55%–80%): Arrow points retract toward right edge
+       Phase 4 (80%–100%): Full rectangle, clean menu
+    */
+    @keyframes zigzag-wipe {
         0% {
-            clip-path: polygon(0 0, 0 0, 0 50%, 0 100%, 0 100%, 0 50%);
+            transform: translateX(-110%);
+            clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%);
         }
-
-        65% {
+        35% {
+            transform: translateX(0);
+            clip-path: polygon(0 0, 65% 0, 100% 50%, 65% 100%, 0 100%);
+        }
+        55% {
+            transform: translateX(0);
+            clip-path: polygon(0 0, 75% 0, 100% 50%, 75% 100%, 0 100%);
+        }
+        80% {
+            transform: translateX(0);
             clip-path: polygon(0 0, 96% 0, 100% 50%, 96% 100%, 0 100%);
         }
-
         100% {
-            clip-path: polygon(0 0, 94% 0, 100% 50%, 94% 100%, 0 100%);
+            transform: translateX(0);
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+        }
+    }
+
+    /* Burger bar entrance animation */
+    @keyframes barAppear {
+        0% {
+            opacity: 0;
+            transform: scaleY(0) scaleX(0.5);
+            background: var(--clr-base-red);
+        }
+        50% {
+            opacity: 0.8;
+            transform: scaleY(1.1) scaleX(0.9);
+            background: var(--clr-gold);
+        }
+        100% {
+            opacity: 1;
+            transform: scaleY(1) scaleX(1);
+            background: var(--clr-white);
         }
     }
 }
@@ -724,9 +793,12 @@ footer a[href^="http"]:hover::before {
 }
 
 .promo-columns-text {
+    margin: 14px 0 0 0;
+    color: rgba(245, 245, 245, 0.9);
+    line-height: 1.6;
     column-count: 2;
-    column-gap: 2rem;
-    column-rule: 1px solid rgba(229, 177, 67, 0.55);
+    column-gap: 1.6rem;
+    column-rule: 1px solid rgba(229, 177, 67, 0.35);
 }
 
 .cinema-hr {
@@ -802,10 +874,6 @@ footer a[href^="http"]:hover::before {
     border-radius: 5px; font-size: 0.8rem; white-space: nowrap; opacity: 0;
 }
 #link-top:hover .tooltip-text { visibility: visible; opacity: 1; }
-
-footer { margin-top: 40px; text-align: center; font-size: 0.9rem; }
-.cat-card { border: 1px solid var(--clr-gold); padding: 20px; text-align: center; border-radius: 10px; text-decoration: none; color: inherit; display: block; transition: all 0.3s ease; }
-.cat-card:hover { background: rgba(229, 177, 67, 0.1); transform: translateY(-5px); box-shadow: 0 5px 15px var(--clr-base-red); }
 
 footer { margin-top: 40px; text-align: center; font-size: 0.9rem; }
 .cat-card { border: 1px solid var(--clr-gold); padding: 20px; text-align: center; border-radius: 10px; text-decoration: none; color: inherit; display: block; transition: all 0.3s ease; }
@@ -993,15 +1061,6 @@ math mrow mi {
 }
 
 /* Etapa 5: efecte CSS (ajustate dupa feedback) */
-
-.promo-columns-text {
-    margin: 14px 0 0 0;
-    color: rgba(245, 245, 245, 0.9);
-    line-height: 1.6;
-    column-count: 2;
-    column-gap: 1.6rem;
-    column-rule: 1px solid rgba(229, 177, 67, 0.35);
-}
 
 .anunt-recurent {
     width: 100%;

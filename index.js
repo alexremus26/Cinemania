@@ -113,6 +113,271 @@ function watchScssFolder() {
     });
 }
 
+/**
+ * verificareEroriJson()
+ * Validates the erori.json file at server startup.
+ * Checks A–G cover structural integrity, file system consistency,
+ * duplicate key detection, and duplicate identifier detection.
+ */
+function verificareEroriJson() {
+    const jsonPath = path.join(__dirname, 'erori.json');
+    let continutBrut;
+    let obJson;
+
+    // [A] Verificare: fisierul erori.json nu exista (0.025p)
+    // Daca fisierul lipseste, afisam mesaj detaliat si oprim aplicatia.
+    if (!fs.existsSync(jsonPath)) {
+        console.error('==============================================================');
+        console.error('[EROARE CRITICA - A] Fisierul "erori.json" nu a fost gasit!');
+        console.error(`  Calea asteptata: ${jsonPath}`);
+        console.error('  Aplicatia nu poate functiona fara acest fisier de configurare a erorilor.');
+        console.error('  Creati fisierul erori.json in directorul radacina al proiectului');
+        console.error('  cu proprietatile: cale_baza, eroare_default, info_erori.');
+        console.error('==============================================================');
+        process.exit(1);
+    }
+
+    // Citim continutul brut (string) pentru verificarea F
+    continutBrut = fs.readFileSync(jsonPath, 'utf-8');
+
+    try {
+        obJson = JSON.parse(continutBrut);
+    } catch (parseErr) {
+        console.error('==============================================================');
+        console.error('[EROARE - A] Fisierul "erori.json" nu contine JSON valid!');
+        console.error(`  Detalii: ${parseErr.message}`);
+        console.error('==============================================================');
+        process.exit(1);
+    }
+
+    // [B] Verificare: lipsesc proprietati obligatorii (info_erori, cale_baza, eroare_default) (0.025p)
+    // Verificam existenta fiecareia din cele 3 proprietati de baza ale fisierului.
+    const proprietatiObligatorii = ['info_erori', 'cale_baza', 'eroare_default'];
+    const proprietatiLipsa = proprietatiObligatorii.filter(prop => !(prop in obJson));
+
+    if (proprietatiLipsa.length > 0) {
+        console.error('==============================================================');
+        console.error('[EROARE - B] Fisierul "erori.json" nu contine toate proprietatile obligatorii!');
+        proprietatiLipsa.forEach(prop => {
+            console.error(`  ✗ Proprietatea "${prop}" lipseste din fisier.`);
+        });
+        console.error(`  Proprietati necesare: ${proprietatiObligatorii.join(', ')}`);
+        console.error('==============================================================');
+    }
+
+    // [C] Verificare: eroare_default nu are titlu, text sau imagine (0.025p)
+    // Daca eroare_default exista, verificam ca are toate cele 3 sub-proprietati necesare.
+    if (obJson.eroare_default) {
+        const propDefault = ['titlu', 'text', 'imagine'];
+        const propDefaultLipsa = propDefault.filter(prop => !(prop in obJson.eroare_default));
+
+        if (propDefaultLipsa.length > 0) {
+            console.error('==============================================================');
+            console.error('[EROARE - C] Obiectul "eroare_default" nu contine toate proprietatile necesare!');
+            propDefaultLipsa.forEach(prop => {
+                console.error(`  ✗ Proprietatea "${prop}" lipseste din eroare_default.`);
+            });
+            console.error(`  Proprietati necesare in eroare_default: ${propDefault.join(', ')}`);
+            console.error('==============================================================');
+        }
+    }
+
+    // [D] Verificare: folderul cale_baza nu exista in sistemul de fisiere (0.025p)
+    // Rezolvam calea relativa la directorul proiectului si verificam existenta.
+    if (obJson.cale_baza) {
+        const caleBazaRelatia = obJson.cale_baza.startsWith('/') ? obJson.cale_baza.substring(1) : obJson.cale_baza;
+        const caleBazaAbsoluta = path.join(__dirname, caleBazaRelatia);
+
+        if (!fs.existsSync(caleBazaAbsoluta)) {
+            console.error('==============================================================');
+            console.error('[EROARE - D] Folderul specificat in "cale_baza" nu exista pe disc!');
+            console.error(`  Valoarea din JSON: "${obJson.cale_baza}"`);
+            console.error(`  Calea absoluta verificata: ${caleBazaAbsoluta}`);
+            console.error('  Creati folderul sau corectati valoarea "cale_baza" din erori.json.');
+            console.error('==============================================================');
+        }
+    }
+
+    // [E] Verificare: fisiere imagine asociate erorilor nu exista pe disc (0.05p)
+    // Verificam imaginea din eroare_default si imaginile din fiecare eroare din info_erori.
+    if (obJson.cale_baza) {
+        const caleBazaRelatia = obJson.cale_baza.startsWith('/') ? obJson.cale_baza.substring(1) : obJson.cale_baza;
+        const caleBazaAbsoluta = path.join(__dirname, caleBazaRelatia);
+
+        // Verificam imaginea din eroare_default
+        if (obJson.eroare_default && obJson.eroare_default.imagine) {
+            const caleImagineDefault = path.join(caleBazaAbsoluta, path.basename(obJson.eroare_default.imagine));
+            if (!fs.existsSync(caleImagineDefault)) {
+                console.error('==============================================================');
+                console.error('[EROARE - E] Imaginea din eroare_default nu exista pe disc!');
+                console.error(`  Imagine: "${obJson.eroare_default.imagine}"`);
+                console.error(`  Calea verificata: ${caleImagineDefault}`);
+                console.error('==============================================================');
+            }
+        }
+
+        // Verificam imaginile din fiecare eroare din info_erori
+        if (Array.isArray(obJson.info_erori)) {
+            obJson.info_erori.forEach((eroare, index) => {
+                if (eroare.imagine) {
+                    const caleImagine = path.join(caleBazaAbsoluta, path.basename(eroare.imagine));
+                    if (!fs.existsSync(caleImagine)) {
+                        console.error('==============================================================');
+                        console.error(`[EROARE - E] Imaginea pentru eroarea cu identificatorul ${eroare.identificator || `(index ${index})`} nu exista pe disc!`);
+                        console.error(`  Imagine: "${eroare.imagine}"`);
+                        console.error(`  Calea verificata: ${caleImagine}`);
+                        console.error('==============================================================');
+                    }
+                }
+            });
+        }
+    }
+
+    // [F] Verificare: proprietate specificata de mai multe ori in acelasi obiect JSON (0.2p)
+    // JSON.parse() ignora cheile duplicate (pastreaza ultima valoare), asa ca trebuie sa
+    // parcurgem string-ul brut caracter cu caracter, urmarind nivelul de acolade,
+    // si sa extragem cheile din fiecare obiect la fiecare nivel de adancime.
+    (function verificareCheiiDuplicate() {
+        // Parsam manual string-ul JSON, caracter cu caracter
+        // Tinem un stack de obiecte; fiecare nivel de adancime are propriul set de chei
+        const stackChei = [];         // stack de Map<string, number> (cheie -> numar aparitii)
+        const stackContext = [];      // stack de string-uri ce descriu contextul curent
+        let inString = false;
+        let escapeNext = false;
+        let currentKey = '';
+        let collectingKey = false;
+        let lastExtractedKey = '';
+        let foundDuplicates = false;
+        let afterColon = false;
+
+        for (let i = 0; i < continutBrut.length; i++) {
+            const ch = continutBrut[i];
+
+            if (escapeNext) {
+                if (collectingKey) currentKey += ch;
+                escapeNext = false;
+                continue;
+            }
+
+            if (ch === '\\') {
+                escapeNext = true;
+                if (collectingKey) currentKey += ch;
+                continue;
+            }
+
+            if (ch === '"') {
+                if (!inString) {
+                    inString = true;
+                    if (!afterColon && stackChei.length > 0) {
+                        // Incepem sa colectam o cheie
+                        collectingKey = true;
+                        currentKey = '';
+                    }
+                } else {
+                    inString = false;
+                    if (collectingKey) {
+                        collectingKey = false;
+                        lastExtractedKey = currentKey;
+                    }
+                }
+                continue;
+            }
+
+            if (inString) {
+                if (collectingKey) currentKey += ch;
+                continue;
+            }
+
+            // In afara string-ului
+            if (ch === ':') {
+                // Am gasit o cheie completa
+                afterColon = true;
+                if (stackChei.length > 0 && lastExtractedKey) {
+                    const nivel = stackChei[stackChei.length - 1];
+                    const count = (nivel.get(lastExtractedKey) || 0) + 1;
+                    nivel.set(lastExtractedKey, count);
+
+                    if (count > 1) {
+                        foundDuplicates = true;
+                        const context = stackContext[stackContext.length - 1] || 'radacina';
+                        console.error('==============================================================');
+                        console.error(`[EROARE - F] Proprietatea "${lastExtractedKey}" apare de ${count} ori in acelasi obiect!`);
+                        console.error(`  Context: ${context}`);
+                        console.error(`  In fisierul: erori.json`);
+                        console.error('  JSON.parse() va pastra doar ultima valoare, celelalte se pierd.');
+                        console.error('==============================================================');
+                    }
+                    lastExtractedKey = '';
+                }
+            } else if (ch === '{') {
+                afterColon = false;
+                // Determinam contextul
+                let context = 'obiectul radacina';
+                if (stackChei.length > 0 && stackChei[stackChei.length - 1].size > 0) {
+                    // Ultima cheie adaugata este contextul nostru
+                    const cheileNivel = Array.from(stackChei[stackChei.length - 1].keys());
+                    if (cheileNivel.length > 0) {
+                        context = `obiectul din proprietatea "${cheileNivel[cheileNivel.length - 1]}"`;
+                    }
+                }
+                stackChei.push(new Map());
+                stackContext.push(context);
+            } else if (ch === '}') {
+                afterColon = false;
+                stackChei.pop();
+                stackContext.pop();
+            } else if (ch === ',') {
+                afterColon = false;
+            } else if (ch === '[' || ch === ']') {
+                afterColon = false;
+            }
+        }
+
+        if (!foundDuplicates) {
+            // Nu afisam nimic daca nu sunt chei duplicate — totul este ok
+        }
+    })();
+
+    // [G] Verificare: erori cu acelasi identificator (0.15p)
+    // Grupam erorile dupa identificator si afisam proprietatile (fara identificator)
+    // pentru toate erorile care au acelasi identificator, ca sa fie usor de gasit.
+    if (Array.isArray(obJson.info_erori)) {
+        const grupeIdentificator = {};
+
+        obJson.info_erori.forEach((eroare) => {
+            const id = eroare.identificator;
+            if (id === undefined) return;
+
+            if (!grupeIdentificator[id]) {
+                grupeIdentificator[id] = [];
+            }
+            grupeIdentificator[id].push(eroare);
+        });
+
+        Object.entries(grupeIdentificator).forEach(([id, erori]) => {
+            if (erori.length > 1) {
+                console.error('==============================================================');
+                console.error(`[EROARE - G] Exista ${erori.length} erori cu identificatorul "${id}" in vectorul info_erori!`);
+                console.error('  Proprietatile erorilor duplicate (fara identificator):');
+
+                erori.forEach((eroare, index) => {
+                    // Afisam toate proprietatile FARA identificator
+                    const propFaraId = Object.entries(eroare)
+                        .filter(([cheie]) => cheie !== 'identificator')
+                        .map(([cheie, valoare]) => `${cheie}: "${valoare}"`)
+                        .join(', ');
+                    console.error(`    Eroarea ${index + 1}: [${propFaraId}]`);
+                });
+
+                console.error('  Fiecare eroare trebuie sa aiba un identificator unic.');
+                console.error('==============================================================');
+            }
+        });
+    }
+
+    console.log('[VERIFICARE] Verificarea fisierului erori.json s-a incheiat.');
+}
+
 function initErori() {
     const jsonPath = path.join(__dirname, 'erori.json');
     const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
@@ -201,6 +466,7 @@ function getTrailerAssets() {
     };
 }
 
+verificareEroriJson();
 initErori();
 initGalerie();
 compileAllScss();

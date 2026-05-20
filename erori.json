@@ -3,7 +3,7 @@
   "eroare_default": {
     "titlu": "Eroare generica",
     "text": "A aparut o eroare neasteptata. Incearca din nou mai tarziu.",
-    "imagine": "500.png"
+    "imagine": "default.png"
   },
   "info_erori": [
     {
