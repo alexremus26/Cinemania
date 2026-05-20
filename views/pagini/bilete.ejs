@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+	<%- include('../fragmente/head') %>
+	<title>Bilete și Servicii - Cinemania</title>
+</head>
+<body>
+	<%- include('../fragmente/header') %>
+
+	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
+		<section id="bilete-servicii">
+			<h1>Bilete și Servicii</h1>
+			<p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
+				Alege între a cumpăra bilet direct sau a face o rezervare cu loc garantat. 
+				Oferte speciale disponibile pentru grupuri și abonamente.
+			</p>
+
+			<!-- Tabel Preturi -->
+			<section style="margin-bottom: 3rem;">
+				<h2>Tarife Bilete</h2>
+				<div class="table-rounded-container">
+					<div class="table-scroll-container">
+						<table>
+							<caption>Prețuri pentru filme în diferite formate.</caption>
+							<thead>
+								<tr>
+									<th>Categorie</th>
+									<th>2D Standard</th>
+									<th>4DX</th>
+									<th>IMAX</th>
+									<th>Note</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><strong>Adult</strong></td>
+									<td>30 RON</td>
+									<td>45 RON</td>
+									<td>50 RON</td>
+									<td>Pful pret complet</td>
+								</tr>
+								<tr>
+									<td><strong>Student/Pensionar</strong></td>
+									<td>24 RON (-20%)</td>
+									<td>36 RON (-20%)</td>
+									<td>40 RON (-20%)</td>
+									<td>Cu document valabil</td>
+								</tr>
+								<tr>
+									<td><strong>Copil (3-12 ani)</strong></td>
+									<td>21 RON (-30%)</td>
+									<td>31.5 RON (-30%)</td>
+									<td>35 RON (-30%)</td>
+									<td>Numai premiere special</td>
+								</tr>
+								<tr>
+									<td><strong>Marți (Toți)</strong></td>
+									<td>1+1 GRATUIT</td>
+									<td>1+1 GRATUIT</td>
+									<td>1+1 -50%</td>
+									<td>Oferta specială zilei</td>
+								</tr>
+								<tr>
+									<td colspan="5" style="background: #f0f0f0; text-align: left;"><strong>Taxa de serviciu:</strong> +1 RON pentru bilete online. <strong>Reduceri cumulabile:</strong> Nu.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<!-- Calculator Preț -->
+			<section id="calculator-pret" style="background: #f8f9fa; padding: 2rem; border-radius: 12px; margin-bottom: 3rem;">
+				<h2>Calculator Preț Bilet</h2>
+				<p style="color: #666;">Calculează pretul exact pentru biletele tale.</p>
+				
+				<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+					<div>
+						<label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Preț Bilet Bază (RON):</label>
+						<input type="number" id="priceBaza" value="30" min="10" max="100" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+					</div>
+
+					<div>
+						<label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Tip Reducere:</label>
+						<select id="tipreducere" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+							<option value="0">Fără Reducere (0%)</option>
+							<option value="20">Student/Pensionar (-20%)</option>
+							<option value="30">Copil 3-12 ani (-30%)</option>
+						</select>
+					</div>
+				</div>
+
+				<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+					<div>
+						<label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Taxa de Serviciu (RON):</label>
+						<input type="number" id="taxa" value="1" min="0" max="5" step="0.5" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+					</div>
+
+					<div style="display: flex; align-items: flex-end;">
+						<button onclick="calculeazaPret()" style="width: 100%; padding: 0.75rem; background: var(--clr-base-red); color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; font-weight: bold;">Calculează</button>
+					</div>
+				</div>
+
+				<div style="margin-top: 2rem; padding: 1.5rem; background: white; border-radius: 8px; border-left: 4px solid var(--clr-gold);">
+					<p style="margin: 0;">
+						<strong>Preț Final:</strong> <span id="rezultat" style="font-size: 1.3rem; color: var(--clr-base-red);">31 RON</span>
+					</p>
+					<p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">*Prețul include taxa de serviciu. Nicio comision suplimentar.</p>
+				</div>
+			</section>
+
+			<!-- Promoții și Abonamente -->
+			<section style="margin-bottom: 3rem;">
+				<h2>Promoții Speciale</h2>
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+					<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden; border-top: 4px solid var(--clr-gold);">
+						<div style="padding: 1.5rem;">
+							<h3 style="color: var(--clr-base-red); margin-top: 0;">Marți - Ziua Filmelor</h3>
+							<p style="font-size: 1.2rem; font-weight: bold; color: var(--clr-gold); margin: 0.5rem 0;">1 Bilet = 2 Bilete</p>
+							<p style="color: #666;">Fiecare marți, cumpără 1 bilet și primești 1 GRATUIT la formatul 2D. 4DX și IMAX au 50% reducere.</p>
+							<a href="/program" class="btn btn-primary btn-sm" style="margin-top: 1rem;">Vezi Program</a>
+						</div>
+					</div>
+
+					<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden; border-top: 4px solid var(--clr-gold);">
+						<div style="padding: 1.5rem;">
+							<h3 style="color: var(--clr-base-red); margin-top: 0;">Abonament Lunar</h3>
+							<p style="font-size: 1.2rem; font-weight: bold; color: var(--clr-gold); margin: 0.5rem 0;">99 RON / lună</p>
+							<p style="color: #666;">8 bilete 2D Standard pe lună. Perfect pentru pasionații de cinema. Anulare oricând.</p>
+							<a href="/contact" class="btn btn-primary btn-sm" style="margin-top: 1rem;">Abonează-te</a>
+						</div>
+					</div>
+
+					<div class="card shadow-sm" style="border-radius: 12px; overflow: hidden; border-top: 4px solid var(--clr-gold);">
+						<div style="padding: 1.5rem;">
+							<h3 style="color: var(--clr-base-red); margin-top: 0;">Bilete Grup (10+)</h3>
+							<p style="font-size: 1.2rem; font-weight: bold; color: var(--clr-gold); margin: 0.5rem 0;">-15% Reducere</p>
+							<p style="color: #666;">Groupuri de 10+ persoane primesc 15% reducere. Perfect pentru școli, companii și organizații.</p>
+							<a href="/contact" class="btn btn-primary btn-sm" style="margin-top: 1rem;">Contactează</a>
+						</div>
+					</div>
+				</div>
+				<p class="promo-columns-text" style="margin-top: 1.25rem; color: #555;">Cinemania activeaza periodic campanii promotionale pentru diferite intervale orare, tipuri de bilet si pachete din foyer. Ofertele sunt gandite pentru sesiuni rapide in timpul saptamanii, dar si pentru seri de weekend in care fluxul de spectatori este mai mare, astfel incat accesul in sala sa ramana clar si organizat. Pentru a evita aglomeratia, rezervarea online si sosirea cu cateva minute inainte de startul proiectiei raman cele mai eficiente optiuni.</p>
+			</section>
+
+			<!-- CTA Cumpără Bilete -->
+			<section style="background: linear-gradient(135deg, var(--clr-base-red), var(--clr-gold)); color: white; padding: 3rem; border-radius: 12px; text-align: center;">
+				<h2 style="color: white; margin-top: 0;">Gata? Cumpără Biletele Acum!</h2>
+				<p style="font-size: 1.1rem; margin-bottom: 1.5rem;">Alege filmul, ziua și ora, și finalizează cumpărarea în câteva clicuri.</p>
+				<a href="/program" class="btn btn-light btn-lg" style="background: white; color: var(--clr-base-red); border: none; font-weight: bold;">Selectează Film și Cumpără</a>
+			</section>
+		</section>
+	</main>
+
+	<script>
+		function calculeazaPret() {
+			const priceBaza = parseFloat(document.getElementById('priceBaza').value);
+			const tipreducere = parseFloat(document.getElementById('tipreducere').value);
+			const taxa = parseFloat(document.getElementById('taxa').value);
+
+			const priceAfterDiscount = priceBaza * (1 - tipreducere / 100);
+			const priceFinal = priceAfterDiscount + taxa;
+
+			document.getElementById('rezultat').textContent = priceFinal.toFixed(2) + ' RON';
+		}
+
+		// Calculează la refresh
+		window.addEventListener('DOMContentLoaded', calculeazaPret);
+	</script>
+
+	<%- include('../fragmente/footer') %>
+</body>
+</html>

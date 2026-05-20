@@ -1,0 +1,185 @@
+<style>
+	.galerie-grid {
+		display: grid;
+		gap: 1.5rem;
+		width: 100%;
+		padding: 1rem 0 0;
+		counter-reset: galerie-counter;
+	}
+
+	/* Large screens: 3-2-2-3 O-shape layout */
+	@media (min-width: 1024px) {
+		.galerie-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.galerie-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+		.galerie-item:nth-child(2) { grid-column: 2; grid-row: 1; }
+		.galerie-item:nth-child(3) { grid-column: 3; grid-row: 1; }
+
+		.galerie-item:nth-child(4) { grid-column: 1; grid-row: 2; }
+		.galerie-item:nth-child(5) { grid-column: 3; grid-row: 2; }
+
+		.galerie-item:nth-child(6) { grid-column: 1; grid-row: 3; }
+		.galerie-item:nth-child(7) { grid-column: 3; grid-row: 3; }
+
+		.galerie-item:nth-child(8) { grid-column: 1; grid-row: 4; }
+		.galerie-item:nth-child(9) { grid-column: 2; grid-row: 4; }
+		.galerie-item:nth-child(10) { grid-column: 3; grid-row: 4; }
+		}
+	}
+
+	/* Medium screens: 2 columns */
+	@media (min-width: 768px) and (max-width: 1023px) {
+		.galerie-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	/* Small screens: 1 column */
+	@media (max-width: 767px) {
+		.galerie-grid {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+	}
+
+	.galerie-item {
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		background: white;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+	}
+
+	.galerie-item:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	}
+
+	.galerie-item picture {
+		display: block;
+		width: 100%;
+		background: #f0f0f0;
+		overflow: hidden;
+	}
+
+	.galerie-media {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.galerie-item img {
+		width: 100%;
+		height: auto;
+		display: block;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		transition: transform 0.35s ease-in-out;
+		border: none;
+	}
+
+	.galerie-item img:hover {
+		transform: scale(1.03);
+	}
+
+	.dune-duotone .galerie-media {
+		isolation: isolate;
+	}
+
+	.dune-duotone .galerie-media::before,
+	.dune-duotone .galerie-media::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		transition: background-color 0.55s ease;
+	}
+
+	.dune-duotone .galerie-media::before {
+		background-color: #0f2d4d;
+		mix-blend-mode: lighten;
+	}
+
+	.dune-duotone .galerie-media::after {
+		background-color: #c93b3b;
+		mix-blend-mode: multiply;
+	}
+
+	.dune-duotone:hover .galerie-media::before {
+		background-color: #244f24;
+	}
+
+	.dune-duotone:hover .galerie-media::after {
+		background-color: #f0bf45;
+	}
+
+	.galerie-item figcaption {
+		padding: 0.75rem 0.75rem;
+		text-align: center;
+		font-size: 0.92rem;
+		line-height: 1.35;
+		width: 100%;
+		color: #222;
+		background: #fafafa;
+		font-weight: 500;
+		word-break: break-word;
+	}
+
+	.galerie-item figcaption::before {
+		content: counter(galerie-counter, upper-roman) ". ";
+		counter-increment: galerie-counter;
+		font-weight: bold;
+		margin-right: 0.3rem;
+		color: #dc3545;
+		font-size: 1.1rem;
+	}
+
+	.galerie-credit {
+		font-size: 0.8rem;
+		font-style: italic;
+		color: #999;
+		margin-top: 0.25rem;
+		display: block;
+		padding: 0 0.4rem 0.4rem;
+	}
+
+	.galerie-empty {
+		grid-column: 1 / -1;
+		text-align: center;
+		padding: 3rem 2rem;
+		color: #999;
+		font-size: 1.1rem;
+		background: #f8f9fa;
+		border-radius: 8px;
+	}
+</style>
+
+<div class="galerie-grid">
+	<% if (galerieDate && galerieDate.length > 0) { %>
+		<% galerieDate.forEach((imagine, idx) => { %>
+			<figure class="galerie-item<%= idx === 0 ? ' dune-duotone' : '' %>">
+				<div class="galerie-media">
+					<img 
+						src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>" 
+						alt="<%= imagine.alt || imagine.cale_imagine %>"
+						title="<%= imagine.descriere %>"
+					>
+				</div>
+				<figcaption>
+					<%= imagine.titlu %>
+					<% if (imagine.credit) { %>
+						<div class="galerie-credit"><%= imagine.credit %></div>
+					<% } %>
+				</figcaption>
+			</figure>
+		<% }); %>
+	<% } else { %>
+		<div class="galerie-empty">
+			Nu sunt imagini disponibile în acest moment.
+		</div>
+	<% } %>
+</div>

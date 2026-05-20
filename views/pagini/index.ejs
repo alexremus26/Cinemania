@@ -10,18 +10,13 @@
 
 	<main id="grid-pagina">
 		<section id="welcome">
-			<div class="welcome-content">
-				<p class="subtitlu">PREMIERELE SĂPTĂMÂNII</p>
-				<h2>Acum în cinema</h2>
-				<p class="intro">Descoperă experiența vizuală supremă în sălile noastre dotate cu tehnologie de vârf.</p>
-				<div class="cta-buttons">
-					<a href="/contul-meu" class="btn-main">Rezervă Locuri</a>
-					<a href="/program" class="btn-sub">Vezi Program</a>
-				</div>
-			</div>
-			<div class="slider-mockup">
-				<img src="/resurse/imagini/MartySupreme_big.png" alt="Poster 1" />
-			</div>
+			<p class="subtitlu">PREMIERELE SĂPTĂMÂNII</p>
+			<h2 class="reflect-title" aria-label="Acum in cinema">
+				<span class="reflect-main">Acum in cinema</span>
+				<span class="reflect-copy" aria-hidden="true">Acum in cinema</span>
+			</h2>
+			<p class="intro">Descoperă experiența vizuală supremă în sălile noastre dotate cu tehnologie de vârf.</p>
+			<%- include('../fragmente/galerie') %>
 		</section>
 		<section id="orar">
 			<h2>Top Premiere</h2>
@@ -89,12 +84,35 @@
 		</section>
 		<section id="anunturi">
 			<h2>Promoții Active</h2>
-			<div class="promo-box">
-				<p><strong>Miercurea Cinematografică:</strong> Bilete la 15 RON!</p>
-				<p><strong>Combo Premieră:</strong> Popcorn mare + Suc la doar 25 RON.</p>
+			<div class="anunt-recurent" aria-label="Anunturi rapide Cinemania">
+				<p class="anunt-recurent-track">
+					<span>Program extins vineri-sambata pana la 01:00 • Bilete online cu selectie locuri • Combo Premiera activ in foyer •</span>
+				</p>
+			</div>
+			<div class="promo-grid">
+				<article class="promo-card promo-card-secondary">
+					<div class="promo-icon"><i class="fas fa-popcorn"></i></div>
+					<div class="promo-content">
+						<p class="promo-label">Combo Premieră</p>
+						<h3>Popcorn mare + suc la 25 RON</h3>
+						<p class="promo-text">Pachet bun pentru seri de premieră.</p>
+						<span class="promo-chip promo-chip-success">Disponibil în foyer</span>
+					</div>
+				</article>
+
+				<article class="promo-card promo-card-primary">
+					<div class="promo-icon"><i class="fas fa-calendar-check"></i></div>
+					<div class="promo-content">
+						<p class="promo-label">Miercurea Cinematografică</p>
+						<h3>Bilete la 15 RON</h3>
+						<p class="promo-text">Acces rapid la locuri bune.</p>
+						<span class="promo-chip promo-chip-danger">Doar miercurea</span>
+					</div>
+				</article>
 			</div>
 		</section>
 		<section id="upcoming">
+			<hr class="cinema-hr" aria-hidden="true">
 			<h2>Trailere Noi</h2>
 			<div class="iframe-interface">
 				<nav class="iframe-nav">
@@ -162,62 +180,7 @@
 			</div>
 		</section>
 	</main>
-    
-	<div id="bonus-section" style="padding: 40px var(--page-margin); margin-top: 30px;">
-		<section id="program-pdf">
-			<h2>Program Săptămânal</h2>
-			<object
-				data="/resurse/documente/Program-Saptamanal.pdf"
-				type="application/pdf"
-				width="100%"
-				height="500">
-				<embed
-					src="/resurse/documente/Program-Saptamanal.pdf"
-					type="application/pdf"
-					width="100%"
-					height="500" />
-			</object>
-		</section>
-		<section id="video-prezentare-section">
-			<h2>Trailer Dune 3</h2>
-			<p>Urmărește trailerul celui mai așteptat film al anului!.</p>
-			<div class="video-box">
-				<video
-					id="trailer-cinemania"
-					controls
-					preload="none"
-					poster="<%= typeof videoPoster !== 'undefined' ? videoPoster : '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp' %>">
-					<% if (videoMp4) { %>
-						<source src="/resurse/video/<%= videoMp4 %>" type="video/mp4">
-					<% } %>
-					<% if (videoWebm) { %>
-						<source src="/resurse/video/<%= videoWebm %>" type="video/webm">
-					<% } %>
-					<track src="/resurse/video/subtitrari/trailer-ro.vtt" kind="subtitles" srclang="ro" label="Română" default>
-					<track src="/resurse/video/subtitrari/trailer-en.vtt" kind="subtitles" srclang="en" label="English">
-					<% if (!videoWebm && !videoMp4) { %>
-						Nu exista inca fisiere video in /resurse/video.
-					<% } else { %>
-						Browserul tău nu suportă elementul video.
-					<% } %>
-				</video>
-			</div>
-		</section>
-		<section id="cinematografe-harta">
-			<h2>Cinematografele Noastre</h2>
-			<p>Vizitează una dintre locațiile noastre în București:</p>
-			<img src="/resurse/imagini/cinematografe-harta.svg" alt="Hartă cinematografe Cinemania" usemap="#cinema-map" style="max-width: 100%; height: auto; border-radius: 8px; margin: 20px 0;">
-			<map name="cinema-map">
-				<area shape="circle" coords="200,150,20" alt="Cinemania Center" href="/locatii" title="Cinemania Center - Piața Română">
-				<area shape="circle" coords="320,120,20" alt="Cinemania North" href="/locatii" title="Cinemania North - Băneasa">
-				<area shape="circle" coords="280,280,20" alt="Cinemania South" href="/locatii" title="Cinemania South - Vitan">
-			</map>
-		</section>
-		<section id="contact" style="margin-top: 40px;">
-			<h2>Adresa Centrală</h2>
-			<iframe src="https://maps.google.com/maps?q=Facultatea%20de%20Matematica%20si%20Informatica%20Universitatea%20din%20Bucuresti&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="400" style="border:0; border-radius: 8px; margin-top: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-		</section>
-	</div>
+
 	<a href="#top-anchor" id="link-top">
 		<div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
 		<span class="tooltip-text">Revino la Acasă</span>

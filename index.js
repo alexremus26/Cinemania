@@ -1,14 +1,18 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const sass = require('sass');
 
 const app = express();
 const PORT = 8080;
 const obGlobal = {
-    obErori: null
+    obErori: null,
+    obGalerie: null,
+    folderScss: path.join(__dirname, 'scss'),
+    folderCss: path.join(__dirname, 'resurse', 'stiluri')
 };
 
-const vect_foldere = ['temp', 'logs', 'backup', 'fisiere_uploadate'];
+const vect_foldere = ['temp', 'logs', 'backup', 'fisiere_uploadate', 'backup/resurse/css'];
 
 vect_foldere.forEach((numeFolder) => {
     const caleFolder = path.join(__dirname, numeFolder);
@@ -27,6 +31,86 @@ function toClientImagePath(basePath, imagePath) {
     }
 
     return path.posix.join(basePath, imagePath);
+}
+
+function compileazaScss(caleScss, caleCss) {
+    try {
+        // Resolve paths
+        const pathScss = path.isAbsolute(caleScss) ? caleScss : path.join(obGlobal.folderScss, caleScss);
+        let pathCss = caleCss ? (path.isAbsolute(caleCss) ? caleCss : path.join(obGlobal.folderCss, caleCss)) : null;
+        
+        // Auto-derive CSS filename if not provided
+        if (!pathCss) {
+            const nameNoExt = path.parse(caleScss).name;
+            pathCss = path.join(obGlobal.folderCss, `${nameNoExt}.css`);
+        }
+        
+        // Backup old CSS if it exists
+        if (fs.existsSync(pathCss)) {
+            const backupDir = path.join(__dirname, 'backup', 'resurse', 'css');
+            const cssFileName = path.basename(pathCss);
+            const backupPath = path.join(backupDir, cssFileName);
+            
+            try {
+                // Ensure backup directory exists
+                if (!fs.existsSync(backupDir)) {
+                    fs.mkdirSync(backupDir, { recursive: true });
+                }
+                
+                fs.copyFileSync(pathCss, backupPath);
+                console.log(`[SCSS] Backed up: ${cssFileName}`);
+            } catch (backupError) {
+                console.error(`[SCSS ERROR] Failed to backup ${cssFileName}:`, backupError.message);
+            }
+        }
+        
+        // Compile SCSS to CSS
+        const result = sass.compile(pathScss, {
+            style: 'compressed',
+            loadPaths: [obGlobal.folderScss, path.join(__dirname, 'node_modules')],
+            quietDeps: true
+        });
+        
+        // Write CSS file
+        fs.writeFileSync(pathCss, result.css);
+        console.log(`[SCSS] Compiled: ${path.relative(__dirname, pathScss)} → ${path.basename(pathCss)}`);
+    } catch (error) {
+        console.error(`[SCSS ERROR] Failed to compile ${caleScss}:`, error.message);
+    }
+}
+
+function compileAllScss() {
+    try {
+        const files = fs.readdirSync(obGlobal.folderScss);
+        const scssFiles = files.filter(f => f.endsWith('.scss') && !f.startsWith('_'));
+        
+        if (scssFiles.length === 0) {
+            console.log('[SCSS] No SCSS files to compile.');
+            return;
+        }
+        
+        scssFiles.forEach(file => {
+            compileazaScss(file, null);
+        });
+        
+        console.log(`[SCSS] Compiled ${scssFiles.length} SCSS file(s).`);
+    } catch (error) {
+        console.error('[SCSS ERROR] Failed to compile all SCSS files:', error.message);
+    }
+}
+
+function watchScssFolder() {
+    console.log('[SCSS] Watching folder for changes:', obGlobal.folderScss);
+    
+    fs.watch(obGlobal.folderScss, (eventType, filename) => {
+        if (filename && filename.endsWith('.scss')) {
+            console.log(`[SCSS] File changed: ${filename}`);
+            // Debounce by adding small delay
+            setTimeout(() => {
+                compileazaScss(filename, null);
+            }, 100);
+        }
+    });
 }
 
 function initErori() {
@@ -75,7 +159,52 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     });
 }
 
+function getQuarterHour(date) {
+    const minutes = date.getMinutes();
+    return Math.floor(minutes / 15) + 1;
+}
+
+function filterGaleryByQuarter(date, obGalerie) {
+    // Display first 10 images to match 3x4 desktop O-shape layout
+    return obGalerie.imagini.slice(0, 10).map((imagine) => ({
+        ...imagine,
+        cale_galerie: obGalerie.cale_galerie,
+        alt: imagine.alt || imagine.cale_imagine
+    }));
+}
+
+function initGalerie() {
+    const jsonPath = path.join(__dirname, 'resurse', 'documente', 'galerie.json');
+    try {
+        const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
+        const obGalerie = JSON.parse(jsonContent);
+        const basePath = obGalerie.cale_galerie.startsWith('/') ? obGalerie.cale_galerie : `/${obGalerie.cale_galerie}`;
+        obGalerie.cale_galerie = basePath;
+        obGlobal.obGalerie = obGalerie;
+    } catch (error) {
+        console.error('Error loading gallery JSON:', error);
+        obGlobal.obGalerie = { cale_galerie: '/resurse/imagini/galerie', imagini: [] };
+    }
+}
+
+function getTrailerAssets() {
+    const mp4File = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.mp4');
+    const webmFile = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.webm');
+    const posterFile = path.join(__dirname, 'resurse', 'imagini', 'trailer_dune3', '3_9vCamtuPY-HD-1200w.webp');
+
+    return {
+        videoMp4: fs.existsSync(mp4File) ? 'trailer_dune3.mp4' : null,
+        videoWebm: fs.existsSync(webmFile) ? 'trailer_dune3.webm' : null,
+        videoPoster: fs.existsSync(posterFile)
+            ? '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp'
+            : '/resurse/imagini/MartySupreme_big.png'
+    };
+}
+
 initErori();
+initGalerie();
+compileAllScss();
+watchScssFolder();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -122,20 +251,32 @@ app.get(['/index', '/index.html', '/index.ejs'], (req, res) => {
 });
 
 app.get(['/', '/index', '/home'], (req, res) => {
-    const mp4File = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.mp4');
-    const webmFile = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.webm');
-    const posterFile = path.join(__dirname, 'resurse', 'imagini', 'trailer_dune3', '3_9vCamtuPY-HD-1200w.webp');
+    const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
 
-    const videoMp4 = fs.existsSync(mp4File) ? 'trailer_dune3.mp4' : null;
-    const videoWebm = fs.existsSync(webmFile) ? 'trailer_dune3.webm' : null;
-    const videoPoster = fs.existsSync(posterFile)
-        ? '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp'
-        : '/resurse/imagini/MartySupreme_big.png';
+    const galerieDate = filterGaleryByQuarter(new Date(), obGlobal.obGalerie);
 
     res.render('pagini/index', {
         videoWebm,
         videoMp4,
+        videoPoster,
+        galerieDate
+    });
+});
+
+app.get('/program', (req, res) => {
+    const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
+
+    res.render('pagini/program', {
+        videoWebm,
+        videoMp4,
         videoPoster
+    });
+});
+
+app.get('/galerie', (req, res) => {
+    const galerieDate = filterGaleryByQuarter(new Date(), obGlobal.obGalerie);
+    res.render('pagini/galerie', {
+        galerieDate
     });
 });
 

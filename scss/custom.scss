@@ -1,0 +1,406 @@
+/**
+ * Custom Bootstrap Configuration
+ * Project: Cinemania
+ * 
+ * This file customizes Bootstrap 5 with project-specific colors, typography, and layouts.
+ * Variables defined here override Bootstrap defaults before the framework is imported.
+ */
+
+@use "sass:color";
+@use "sass:map";
+
+// ============================================================================
+// COLOR VARIABLES - Custom Schema (Cinemania Theme)
+// ============================================================================
+
+// Primary color: Cinemania red
+$primary: #A6192E;
+$primary-alt: #c32640;
+
+// Secondary color: Cinemania gold accent
+$secondary: #E5B143;
+$secondary-alt: #f2ca76;
+
+// Success color: Emerald green
+$success: #2ecc71;
+
+// Danger color: Red
+$danger: #A6192E;
+
+// Warning color: Golden orange
+$warning: #f39c12;
+
+// Info color: Sky blue
+$info: #3498db;
+
+// Light backgrounds: Neutral light
+$light: #f5f4f1;
+
+// Dark backgrounds: Cinemania near-black
+$dark: #121212;
+
+// Additional custom colors
+$color-premium: #1E1E1E;  // Dark grey
+$color-accent: #E5B143;   // Gold accent
+$color-light-bg: #f5f5f5; // Neutral light background
+
+// ============================================================================
+// TYPOGRAPHY VARIABLES
+// ============================================================================
+
+// Font families
+$font-family-sans-serif: 'Montserrat', sans-serif;
+$font-family-serif: Georgia, 'Times New Roman', serif;
+$font-family-monospace: 'SFMono-Regular', 'Menlo', 'Monaco', 'Courier New', monospace;
+
+// Base font family
+$font-family-base: $font-family-sans-serif;
+
+// Font family for headings
+$headings-font-family: 'Oswald', sans-serif;
+$headings-font-weight: 700;
+$headings-line-height: 1.3;
+$headings-color: $secondary;
+
+// Base font sizes
+$font-size-base: 1rem;          // 16px base
+
+// Heading font sizes (larger for cinematic feel)
+$h1-font-size: 3.5rem;          // 56px
+$h2-font-size: 2.875rem;        // 46px
+$h3-font-size: 2.25rem;         // 36px
+$h4-font-size: 1.75rem;         // 28px
+$h5-font-size: 1.375rem;        // 22px
+$h6-font-size: 1.125rem;        // 18px
+
+// Line height
+$line-height-base: 1.6;
+$line-height-lg: 1.8;
+$line-height-sm: 1.4;
+
+// Letter spacing (adds elegance)
+$letter-spacing-expanded: 0.05em;
+
+// ============================================================================
+// BREAKPOINTS - Custom for Cinemania
+// ============================================================================
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,      // Medium screens (tablets)
+  lg: 1024px,     // Large screens (desktop)
+  xl: 1280px,     // Extra large screens (wide monitors)
+  xxl: 1400px     // 2K+ monitors
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+// ============================================================================
+// SPACING & SIZING VARIABLES
+// ============================================================================
+
+// Spacer (increment unit)
+$spacer: 1rem;
+
+// Border radius
+$border-radius: 8px;
+$border-radius-lg: 12px;
+$border-radius-sm: 4px;
+$border-radius-pill: 50rem;
+
+// Button sizing
+$btn-padding-y: 0.75rem;
+$btn-padding-x: 1.5rem;
+$btn-font-size: 1rem;
+$btn-font-weight: 600;
+$btn-border-radius: $border-radius;
+
+// Input sizing
+$input-padding-y: 0.75rem;
+$input-padding-x: 1rem;
+$input-border-radius: $border-radius;
+$input-font-size: 1rem;
+
+// Card styling
+$card-spacer-y: 1.5rem;
+$card-spacer-x: 1.5rem;
+$card-border-radius: $border-radius-lg;
+$card-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+// Shadow effects (for premium feel)
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+$box-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+$box-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+// ============================================================================
+// TRANSITION & ANIMATION VARIABLES
+// ============================================================================
+
+$transition-base: all 0.3s ease-in-out;
+$transition-fade: opacity 0.15s linear;
+$transition-collapse: height 0.35s ease;
+
+// ============================================================================
+// FORM VARIABLES
+// ============================================================================
+
+$form-label-margin-bottom: 0.5rem;
+$form-label-font-weight: 600;
+$form-label-color: $primary;
+
+// ============================================================================
+// COMPONENT VARIABLES
+// ============================================================================
+
+// Alert styling
+$alert-padding-y: 1rem;
+$alert-padding-x: 1.5rem;
+$alert-border-radius: $border-radius;
+
+// Badge styling
+$badge-padding-y: 0.35em;
+$badge-padding-x: 0.65em;
+$badge-font-size: 0.875rem;
+$badge-font-weight: 600;
+$badge-border-radius: $border-radius-sm;
+
+// ============================================================================
+// IMPORT BOOTSTRAP
+// ============================================================================
+// Must come AFTER all variable definitions to allow overrides
+
+@use "bootstrap/scss/bootstrap" as bootstrap with (
+    $primary: $primary,
+    $secondary: $secondary,
+    $success: $success,
+    $danger: $danger,
+    $warning: $warning,
+    $info: $info,
+    $light: $light,
+    $dark: $dark,
+    $font-family-sans-serif: $font-family-sans-serif,
+    $font-family-monospace: $font-family-monospace,
+    $font-family-base: $font-family-base,
+    $headings-font-family: $headings-font-family,
+    $headings-font-weight: $headings-font-weight,
+    $headings-line-height: $headings-line-height,
+    $headings-color: $headings-color,
+    $font-size-base: $font-size-base,
+    $h1-font-size: $h1-font-size,
+    $h2-font-size: $h2-font-size,
+    $h3-font-size: $h3-font-size,
+    $h4-font-size: $h4-font-size,
+    $h5-font-size: $h5-font-size,
+    $h6-font-size: $h6-font-size,
+    $line-height-base: $line-height-base,
+    $line-height-lg: $line-height-lg,
+    $line-height-sm: $line-height-sm,
+    $grid-breakpoints: $grid-breakpoints,
+    $container-max-widths: $container-max-widths,
+    $spacer: $spacer,
+    $border-radius: $border-radius,
+    $border-radius-lg: $border-radius-lg,
+    $border-radius-sm: $border-radius-sm,
+    $border-radius-pill: $border-radius-pill,
+    $btn-padding-y: $btn-padding-y,
+    $btn-padding-x: $btn-padding-x,
+    $btn-font-size: $btn-font-size,
+    $btn-font-weight: $btn-font-weight,
+    $btn-border-radius: $btn-border-radius,
+    $input-padding-y: $input-padding-y,
+    $input-padding-x: $input-padding-x,
+    $input-border-radius: $input-border-radius,
+    $input-font-size: $input-font-size,
+    $card-spacer-y: $card-spacer-y,
+    $card-spacer-x: $card-spacer-x,
+    $card-border-radius: $card-border-radius,
+    $card-box-shadow: $card-box-shadow,
+    $box-shadow: $box-shadow,
+    $box-shadow-lg: $box-shadow-lg,
+    $box-shadow-sm: $box-shadow-sm,
+    $transition-base: $transition-base,
+    $transition-fade: $transition-fade,
+    $transition-collapse: $transition-collapse,
+    $form-label-margin-bottom: $form-label-margin-bottom,
+    $form-label-font-weight: $form-label-font-weight,
+    $form-label-color: $form-label-color,
+    $alert-padding-y: $alert-padding-y,
+    $alert-padding-x: $alert-padding-x,
+    $alert-border-radius: $alert-border-radius,
+    $badge-padding-y: $badge-padding-y,
+    $badge-padding-x: $badge-padding-x,
+    $badge-font-size: $badge-font-size,
+    $badge-font-weight: $badge-font-weight,
+    $badge-border-radius: $badge-border-radius
+);
+
+// ============================================================================
+// CUSTOM PROJECT STYLING & ENHANCEMENTS
+// ============================================================================
+
+// Override body color with custom dark background
+body {
+    background-color: $dark;
+    color: $light;
+    font-family: $font-family-base;
+}
+
+// Elegant heading styling
+h1, h2, h3, h4, h5, h6 {
+    color: $secondary;
+    font-family: $headings-font-family;
+    letter-spacing: $letter-spacing-expanded;
+}
+
+// Premium button styling
+.btn {
+    border-radius: $border-radius;
+    font-weight: 600;
+    transition: $transition-base;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $box-shadow-lg;
+    }
+}
+
+// Primary button with custom colors
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+    
+    &:hover {
+        background-color: color.adjust($primary, $lightness: -10%);
+        border-color: color.adjust($primary, $lightness: -10%);
+    }
+    
+    &:active, &.active {
+        background-color: color.adjust($primary, $lightness: -15%);
+        border-color: color.adjust($primary, $lightness: -15%);
+    }
+}
+
+// Secondary button with gold accent
+.btn-secondary {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: #000;
+    
+    &:hover {
+        background-color: color.adjust($secondary, $lightness: -10%);
+        border-color: color.adjust($secondary, $lightness: -10%);
+    }
+}
+
+// Card styling enhancement
+.card {
+    border: none;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow;
+    transition: $transition-base;
+    
+    &:hover {
+        box-shadow: $box-shadow-lg;
+        transform: translateY(-4px);
+    }
+}
+
+// Alert styling
+.alert {
+    border-radius: $border-radius;
+    border: none;
+    
+    &-primary {
+        background-color: color.adjust($primary, $lightness: 40%);
+        color: $primary;
+    }
+    
+    &-secondary {
+        background-color: color.adjust($secondary, $lightness: 30%);
+        color: color.adjust($secondary, $lightness: -20%);
+    }
+}
+
+// Badge styling
+.badge {
+    border-radius: $border-radius-sm;
+    font-weight: 600;
+    padding: $badge-padding-y $badge-padding-x;
+}
+
+// Form controls
+.form-control, .form-select {
+    border-radius: $border-radius;
+    border: 1px solid #ddd;
+    
+    &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+    }
+}
+
+// Nav styling
+.nav-link {
+    color: $light;
+    font-weight: 500;
+    transition: $transition-base;
+    
+    &:hover {
+        color: $primary;
+    }
+    
+    &.active {
+        color: $primary;
+        font-weight: 600;
+    }
+}
+
+// Tables
+.table {
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    
+    thead {
+        background-color: color.adjust($primary, $lightness: 40%);
+        
+        th {
+            color: $primary;
+            font-weight: 600;
+            border-bottom: 2px solid $primary;
+        }
+    }
+    
+    tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        
+        &:hover {
+            background-color: rgba(166, 25, 46, 0.12);
+        }
+    }
+}
+
+// Responsive adjustments for medium and large screens
+@media (min-width: map.get($grid-breakpoints, md)) {
+    // Slightly larger text on medium screens
+    body {
+        font-size: 1.05rem;
+    }
+}
+
+@media (min-width: map.get($grid-breakpoints, lg)) {
+    // Even more spacing and larger typography on large screens
+    h1 {
+        font-size: 4rem;
+    }
+    
+    h2 {
+        font-size: 3rem;
+    }
+}
