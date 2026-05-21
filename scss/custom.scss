@@ -123,12 +123,20 @@ $btn-padding-x: 1.5rem;
 $btn-font-size: 1rem;
 $btn-font-weight: 600;
 $btn-border-radius: $border-radius;
+$btn-border-width: 2px;
 
 // Input sizing
 $input-padding-y: 0.75rem;
 $input-padding-x: 1rem;
 $input-border-radius: $border-radius;
 $input-font-size: 1rem;
+$input-border-width: 2px;
+
+// Range customisation (Stage 6)
+$form-range-track-bg: #444;
+$form-range-thumb-width: 1.5rem;
+$form-range-thumb-height: 1.5rem;
+$form-range-thumb-bg: $secondary;
 
 // Card styling
 $card-spacer-y: 1.5rem;
@@ -216,10 +224,16 @@ $badge-border-radius: $border-radius-sm;
     $btn-font-size: $btn-font-size,
     $btn-font-weight: $btn-font-weight,
     $btn-border-radius: $btn-border-radius,
+    $btn-border-width: $btn-border-width,
     $input-padding-y: $input-padding-y,
     $input-padding-x: $input-padding-x,
     $input-border-radius: $input-border-radius,
     $input-font-size: $input-font-size,
+    $input-border-width: $input-border-width,
+    $form-range-track-bg: $form-range-track-bg,
+    $form-range-thumb-width: $form-range-thumb-width,
+    $form-range-thumb-height: $form-range-thumb-height,
+    $form-range-thumb-bg: $form-range-thumb-bg,
     $card-spacer-y: $card-spacer-y,
     $card-spacer-x: $card-spacer-x,
     $card-border-radius: $card-border-radius,
@@ -406,3 +420,376 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 3rem;
     }
 }
+
+// ============================================================================
+// LIGHT MODE CUSTOM THEME (SCSS Overrides in SASS)
+// ============================================================================
+html.light-mode {
+    // Override Bootstrap native light mode CSS variables for components
+    --bs-body-bg: #F8F9FA;
+    --bs-body-color: #212529;
+    --bs-tertiary-bg: #E9ECEF;
+    
+    body {
+        --clr-black: #FFFFFF;              // Card background
+        --clr-dark-grey: #F1F3F5;          // Background accent
+        --clr-white: #212529;              // Main text color
+        --clr-pure-black: rgba(0, 0, 0, 0.08); // Subtle drop shadow color
+        --clr-pure-white: #121212;         // Inverted pure white
+        --clr-gradient-dark: #EAECEF;      // Card gradient secondary
+        --clr-overlay-red: rgba(166, 25, 46, 0.08);
+        --clr-overlay-white-light: rgba(0, 0, 0, 0.02);
+        --clr-overlay-white-mid: rgba(0, 0, 0, 0.04);
+        --clr-hover-red: rgba(166, 25, 46, 0.1);
+        --clr-link-visited: #8A6D3B;
+        --nav-overlay-border: rgba(166, 25, 46, 0.2);
+        --nav-overlay-bg: rgba(166, 25, 46, 0.03);
+        --nav-overlay-glow: inset 0 0 10px rgba(166, 25, 46, 0.05);
+
+        // Global page background override for body
+        background-color: #F8F9FA !important;
+        color: #212529 !important;
+    }
+
+    // Additional styling adjustments to look gorgeous in light mode
+    .main-header {
+        background-color: #FFFFFF !important;
+        border-bottom: 2px solid #A6192E !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    // Ensure links in header are highly visible and premium
+    .nav-main > li > a {
+        color: #212529 !important;
+        
+        &:hover {
+            color: #A6192E !important;
+        }
+    }
+
+    // Interactive button styling for light mode
+    #theme-toggle {
+        color: #A6192E !important;
+    }
+
+    // Dropdown list in header - premium look in light mode
+    .nav-main > li .dropdown {
+        background: linear-gradient(160deg, #FFFFFF, #F1F3F5) !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+        border: 1px solid rgba(166, 25, 46, 0.15);
+        
+        li > a {
+            color: #212529 !important;
+            
+            &:hover {
+                background: rgba(166, 25, 46, 0.05) !important;
+                color: #A6192E !important;
+            }
+        }
+    }
+
+    // Custom sections inside #grid-pagina
+    #grid-pagina > section, footer {
+        background: linear-gradient(135deg, #FFFFFF, #F8F9FA) !important;
+        border: 1px solid rgba(166, 25, 46, 0.2) !important;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
+        color: #212529 !important;
+    }
+
+    // Adjust titles to look elegant and high-contrast
+    h1, h2, h3, #title, .reflect-title {
+        color: #A6192E !important;
+    }
+    
+    .nav-main > li:hover > a {
+        color: #A6192E !important;
+    }
+
+    // Custom tables in light mode
+    .table-rounded-container {
+        border: 2px solid #A6192E !important;
+        background-color: #FFFFFF !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    th {
+        background-color: #A6192E !important;
+        color: #FFFFFF !important;
+    }
+    
+    tfoot td {
+        background-color: #F1F3F5 !important;
+        color: #A6192E !important;
+    }
+
+    // Fix contrast of specific elements (e.g. category cards)
+    .cat-card {
+        border: 1px solid #A6192E !important;
+        color: #212529 !important;
+        
+        &:hover {
+            background: rgba(166, 25, 46, 0.05) !important;
+            box-shadow: 0 5px 15px rgba(166, 25, 46, 0.15) !important;
+        }
+    }
+
+    // Textarea input and selects
+    .form-control, .form-select {
+        background-color: #FFFFFF !important;
+        color: #212529 !important;
+        border: 1px solid #CCCCCC !important;
+        
+        &:focus {
+            border-color: #A6192E !important;
+            box-shadow: 0 0 0 0.2rem rgba(166, 25, 46, 0.15) !important;
+        }
+    }
+
+    // Product cards premium overrides in light mode (collection page)
+    .produs-card {
+        background: #FFFFFF !important;
+        border: 1px solid rgba(166, 25, 46, 0.15) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+        color: #212529 !important;
+        
+        &:hover {
+            box-shadow: 0 8px 24px rgba(166, 25, 46, 0.12) !important;
+        }
+
+        h3 {
+            border-bottom: 1px solid rgba(166, 25, 46, 0.15) !important;
+            a {
+                color: #A6192E !important;
+            }
+        }
+
+        .descriere-produs {
+            color: #495057 !important;
+        }
+
+        .categorie-label, .pret-label {
+            color: #212529 !important;
+        }
+    }
+
+    details {
+        background: #F1F3F5 !important;
+        border: 1px solid rgba(166, 25, 46, 0.1) !important;
+        color: #212529 !important;
+        
+        summary {
+            color: #A6192E !important;
+        }
+        
+        li {
+            color: #495057 !important;
+            
+            strong {
+                color: #212529 !important;
+            }
+            
+            em {
+                color: #495057 !important;
+            }
+        }
+    }
+
+    // Single product page overrides in light mode
+    .produs-container {
+        background: #FFFFFF !important;
+        border: 1px solid rgba(166, 25, 46, 0.15) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+        color: #212529 !important;
+
+        .produs-detalii {
+            h1 {
+                border-bottom: 2px solid rgba(166, 25, 46, 0.15) !important;
+                color: #A6192E !important;
+            }
+        }
+
+        .detaliu-item {
+            color: #212529 !important;
+            
+            strong {
+                color: #495057 !important;
+            }
+        }
+
+        .descriere-extinsa {
+            background: #F1F3F5 !important;
+            border-left: 4px solid #A6192E !important;
+            color: #212529 !important;
+
+            h3 {
+                color: #A6192E !important;
+            }
+
+            p {
+                color: #495057 !important;
+            }
+        }
+    }
+
+    // Filter container premium overrides in light mode
+    .filtre-container {
+        background: #FFFFFF !important;
+        border: 1px solid rgba(166, 25, 46, 0.15) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+        color: #212529 !important;
+
+        // Override Bootstrap's text-light utility on labels inside filtre-container
+        .text-light, label.text-light {
+            color: #212529 !important;
+        }
+
+        // Textarea with explicit dark classes in EJS
+        #inp-descriere {
+            background-color: #FFFFFF !important;
+            color: #212529 !important;
+            border-color: #CCCCCC !important;
+            
+            &:focus {
+                border-color: #A6192E !important;
+                box-shadow: 0 0 0 0.2rem rgba(166, 25, 46, 0.15) !important;
+            }
+        }
+        
+        // Muted values on range slider
+        .text-muted {
+            color: #6C757D !important;
+        }
+
+        // Value text for active filters
+        #valoare-pret {
+            color: #A6192E !important;
+        }
+
+        // Select options
+        option {
+            background-color: #FFFFFF !important;
+            color: #212529 !important;
+            
+            &:checked {
+                background-color: rgba(166, 25, 46, 0.15) !important;
+                color: #A6192E !important;
+            }
+        }
+
+        // Fix btn-outline-primary in light mode (Rating Vârstă radios)
+        .btn-outline-primary {
+            color: #A6192E !important;
+            border-color: #A6192E !important;
+            background-color: #FFFFFF !important;
+
+            &:hover {
+                background-color: #A6192E !important;
+                color: #FFFFFF !important;
+                border-color: #A6192E !important;
+            }
+        }
+
+        // Active state when checked (Bootstrap uses .btn-check:checked + .btn-outline-primary)
+        .btn-check:checked + .btn-outline-primary {
+            background-color: #A6192E !important;
+            color: #FFFFFF !important;
+            border-color: #A6192E !important;
+            font-weight: bold;
+        }
+
+        // Fix btn-outline-secondary in light mode (Discount / Promo checkbox)
+        .btn-outline-secondary {
+            color: #8A6D3B !important; // High contrast dark warm gold/bronze
+            border-color: #B38624 !important; // High contrast dark gold border
+            background-color: #FFFFFF !important;
+
+            &:hover {
+                background-color: #E5B143 !important;
+                color: #212529 !important;
+                border-color: #B38624 !important;
+            }
+        }
+
+        // Active state when checked (Discount/Promo toggle active state)
+        .btn-check:checked + .btn-outline-secondary {
+            background-color: #E5B143 !important;
+            color: #212529 !important;
+            border-color: #B38624 !important;
+            font-weight: bold;
+        }
+
+        // Overrides for standard secondary buttons in the filter row (e.g., sort, calculate buttons)
+        .btn-secondary {
+            background-color: #E5B143 !important;
+            border-color: #B38624 !important;
+            color: #212529 !important;
+            font-weight: 600;
+
+            &:hover {
+                background-color: #d49f2b !important;
+                border-color: #9d7018 !important;
+                color: #212529 !important;
+            }
+        }
+    }
+
+    // Active Promotions section premium overrides in light mode
+    .promo-card {
+        background: #FFFFFF !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05) !important;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+
+        &:hover {
+            box-shadow: 0 12px 28px rgba(166, 25, 46, 0.08) !important;
+        }
+
+        .promo-content h3 {
+            color: #212529 !important;
+        }
+
+        .promo-text {
+            color: #495057 !important; // High contrast dark charcoal grey for the text under Popcorn
+        }
+    }
+
+    .promo-card-primary {
+        background: linear-gradient(145deg, rgba(166, 25, 46, 0.08), rgba(166, 25, 46, 0.02)) !important;
+        border: 1px solid rgba(166, 25, 46, 0.25) !important;
+
+        .promo-label {
+            color: #A6192E !important; // Crimson red label for contrast
+        }
+
+        &:hover {
+            border-color: rgba(166, 25, 46, 0.5) !important;
+        }
+    }
+
+    .promo-card-secondary {
+        background: linear-gradient(145deg, rgba(229, 177, 67, 0.12), rgba(229, 177, 67, 0.03)) !important;
+        border: 1px solid rgba(229, 177, 67, 0.4) !important;
+
+        .promo-label {
+            color: #8A6D3B !important; // Dark gold label for contrast
+        }
+
+        &:hover {
+            border-color: rgba(229, 177, 67, 0.7) !important;
+        }
+    }
+
+    .promo-chip-danger {
+        background: rgba(166, 25, 46, 0.1) !important;
+        color: #A6192E !important;
+        border: 1px solid rgba(166, 25, 46, 0.3) !important;
+    }
+
+    .promo-chip-success {
+        background: rgba(138, 109, 59, 0.1) !important;
+        color: #8A6D3B !important;
+        border: 1px solid rgba(138, 109, 59, 0.3) !important;
+    }
+}
+
+
+

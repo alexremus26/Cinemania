@@ -1,64 +1,77 @@
-    <header class="main-header">
-        <div class="logo-area">
-            <img src="/resurse/imagini/CinemaniaLogo.png" id="Logo" alt="Cinemania Logo" />
-            <h1 id="title">Cinemania</h1>
-        </div>
-        <nav class="site-nav" aria-label="Navigare principala">
-            <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Deschide meniul" />
-            <label for="menu-toggle" class="burger-btn" aria-label="Meniu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
+<header class="main-header">
+    <div class="logo-area">
+        <img src="/resurse/imagini/CinemaniaLogo.png" id="Logo" alt="Cinemania Logo" />
+        <h1 id="title">Cinemania</h1>
+    </div>
+    <nav class="site-nav" aria-label="Navigare principala">
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Deschide meniul" />
+        <label for="menu-toggle" class="burger-btn" aria-label="Meniu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
 
-            <ul class="nav-main">
-                <li class="mobile-home-only">
-                    <a href="/" aria-label="Acasa">
-                        <i class="fa-solid fa-house"></i>
-                        <span class="nav-text">Acasa</span>
-                    </a>
-                </li>
+        <ul class="nav-main">
+            <li class="mobile-home-only">
+                <a href="/" aria-label="Acasa">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="nav-text">Acasa</span>
+                </a>
+            </li>
 
-                <li class="has-dropdown">
-                    <a href="/" aria-label="Acasa">
-                        <i class="fa-solid fa-house"></i>
-                        <span class="nav-text">Acasa</span>
-                    </a>
-                    <ul class="dropdown submenu-sections">
-                        <li><a href="#orar">Program Curent</a></li>
-                        <li><a href="#welcome">Galerie</a></li>
-                        <li><a href="#upcoming">Trailere Noi</a></li>
-                        <li><a href="#facilitati">Tehnologii</a></li>
-                    </ul>
-                </li>
+            <li class="has-dropdown">
+                <a href="/" aria-label="Acasa">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="nav-text">Acasa</span>
+                </a>
+                <ul class="dropdown submenu-sections">
+                    <li><a href="#orar">Program Curent</a></li>
+                    <li><a href="#welcome">Galerie</a></li>
+                    <li><a href="#upcoming">Trailere Noi</a></li>
+                    <li><a href="#facilitati">Tehnologii</a></li>
+                </ul>
+            </li>
 
-                <li>
-                    <a href="/program" aria-label="Program Filme">
-                        <i class="fa-solid fa-film"></i>
-                        <span class="nav-text">Program</span>
-                    </a>
-                </li>
+            <li class="has-dropdown">
+                <a href="/program" aria-label="Produse Filme">
+                    <i class="fa-solid fa-film"></i>
+                    <span class="nav-text">Produse</span>
+                </a>
+                <ul class="dropdown submenu-sections">
+                    <li><a href="/program">Toate</a></li>
+                    <% if (typeof categorii !== 'undefined' && Array.isArray(categorii)) { %>
+                        <% categorii.forEach(function(cat) { %>
+                            <li><a href="/program?tip=<%= cat %>"><%= cat.charAt(0).toUpperCase() + cat.slice(1) %></a></li>
+                        <% }) %>
+                    <% } %>
+                </ul>
+            </li>
 
-                <li>
-                    <a href="/locatii" aria-label="Cinematografe">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <span class="nav-text">Locatii</span>
-                    </a>
-                </li>
+            <li>
+                <a href="/locatii" aria-label="Cinematografe">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span class="nav-text">Locatii</span>
+                </a>
+            </li>
 
-                <li>
-                    <a href="/bilete" aria-label="Bilete si servicii">
-                        <i class="fa-solid fa-ticket"></i>
-                        <span class="nav-text">Bilete</span>
-                    </a>
-                </li>
+            <li>
+                <a href="/bilete" aria-label="Bilete si servicii">
+                    <i class="fa-solid fa-ticket"></i>
+                    <span class="nav-text">Bilete</span>
+                </a>
+            </li>
 
-                <li>
-                    <a href="/contul-meu" aria-label="Contul meu">
-                        <i class="fa-solid fa-user"></i>
-                        <span class="nav-text">Contul Meu</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+            <li>
+                <a href="/contul-meu" aria-label="Contul meu">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="nav-text">Contul Meu</span>
+                </a>
+            </li>
+            <li class="d-flex align-items-center ps-2 ps-lg-3" style="min-height: 40px;">
+                <button id="theme-toggle" class="btn btn-link text-light p-0 border-0 d-flex align-items-center justify-content-center" style="cursor: pointer; font-size: 1.2rem; outline: none; background: none; text-decoration: none;" aria-label="Schimbă tema">
+                    <i id="theme-icon" class="fa-solid fa-moon"></i>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>

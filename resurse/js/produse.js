@@ -16,6 +16,18 @@ window.addEventListener("DOMContentLoaded", function() {
         };
     }
 
+    // Textarea validation dynamic trigger (Stage 6 floating label is-invalid)
+    const inpDescriereEl = document.getElementById("inp-descriere");
+    if (inpDescriereEl) {
+        inpDescriereEl.addEventListener("input", function() {
+            if (this.value.length > 0 && this.value.trim() === "") {
+                this.classList.add("is-invalid");
+            } else {
+                this.classList.remove("is-invalid");
+            }
+        });
+    }
+
     // ----- Validarea Inputurilor -----
     function valideazaInputuri() {
         const inpNume = document.getElementById("inp-nume").value.trim();
@@ -29,11 +41,16 @@ window.addEventListener("DOMContentLoaded", function() {
             }
         }
 
-        const inpDescriere = document.getElementById("inp-descriere").value;
-        // Daca utilizatorul a scris ceva, sa nu fie doar spatii
-        if (inpDescriere.length > 0 && inpDescriere.trim() === "") {
-            alert("Eroare: Descrierea introdusă conține doar spații!");
-            return false;
+        const inpDescriere = document.getElementById("inp-descriere");
+        if (inpDescriere) {
+            const val = inpDescriere.value;
+            if (val.length > 0 && val.trim() === "") {
+                inpDescriere.classList.add("is-invalid");
+                alert("Eroare: Descrierea introdusă conține doar spații!");
+                return false;
+            } else {
+                inpDescriere.classList.remove("is-invalid");
+            }
         }
         
         const inpLuni = document.getElementById("inp-luna-lansare");
@@ -188,7 +205,11 @@ window.addEventListener("DOMContentLoaded", function() {
             document.querySelector('input[name="rad-rating"][value="toate"]').checked = true;
             
             document.getElementById("inp-voucher").checked = false;
-            document.getElementById("inp-descriere").value = "";
+            const inpDesc = document.getElementById("inp-descriere");
+            if (inpDesc) {
+                inpDesc.value = "";
+                inpDesc.classList.remove("is-invalid");
+            }
             document.getElementById("inp-durata").value = "oricare";
             
             // Multiple select - bifam totul inapoi

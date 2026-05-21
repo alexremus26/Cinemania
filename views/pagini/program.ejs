@@ -9,9 +9,6 @@
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 30px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
             border: 1px solid var(--border-color, #333);
         }
         .filtru-grup {
@@ -154,85 +151,142 @@
 
 			<!-- SECTIUNE FILTRE -->
 			<section id="filtre-produse" class="filtre-container">
-				<div class="filtru-grup">
-					<label for="inp-nume">Căutare după nume:</label>
-					<input type="text" id="inp-nume" placeholder="Ex: Dune">
-				</div>
+				<div class="row">
+					<!-- Nume -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="filtru-grup">
+							<label for="inp-nume" class="form-label text-light fw-bold">Căutare după nume:</label>
+							<input type="text" id="inp-nume" class="form-control" placeholder="Ex: Dune">
+						</div>
+					</div>
 
-				<div class="filtru-grup">
-					<label for="inp-pret">Preț maxim: <span id="valoare-pret"></span></label>
-					<div class="range-container">
-						<span id="pret-min">10</span>
-						<input type="range" id="inp-pret" min="10" max="100" value="100" step="1">
-						<span id="pret-max">100</span>
+					<!-- Preț -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="filtru-grup">
+							<label for="inp-pret" class="form-label text-light fw-bold">Preț maxim: <span id="valoare-pret">100</span> RON</label>
+							<div class="d-flex align-items-center gap-2">
+								<span class="text-muted fs-6" id="pret-min">10</span>
+								<input type="range" id="inp-pret" class="form-range flex-grow-1" min="10" max="100" value="100" step="1">
+								<span class="text-muted fs-6" id="pret-max">100</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- Format -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="filtru-grup">
+							<label for="inp-format" class="form-label text-light fw-bold">Format vizionare:</label>
+							<input type="text" id="inp-format" class="form-control" list="lista-formate" placeholder="Alegeți format">
+							<datalist id="lista-formate">
+								<option value="2D">
+								<option value="3D">
+								<option value="IMAX">
+								<option value="4DX">
+							</datalist>
+						</div>
+					</div>
+
+					<!-- Rating Vârstă Toggle Buttons -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="filtru-grup">
+							<label class="form-label text-light fw-bold">Rating Vârstă:</label>
+							<div class="btn-group d-flex flex-wrap gap-1" role="group" aria-label="Rating Vârstă">
+								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-toate" value="toate" checked autocomplete="off">
+								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-toate">Toate</label>
+
+								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-ag" value="AG" autocomplete="off">
+								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-ag">AG</label>
+
+								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-ap12" value="AP12" autocomplete="off">
+								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-ap12">AP12</label>
+
+								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-n15" value="N15" autocomplete="off">
+								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-n15">N15</label>
+
+								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-im18" value="IM18" autocomplete="off">
+								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-im18">IM18</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- Voucher Toggle Button -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="filtru-grup">
+							<label class="form-label text-light fw-bold">Discount / Promo:</label>
+							<div class="w-100">
+								<input type="checkbox" class="btn-check" id="inp-voucher" autocomplete="off">
+								<label class="btn btn-outline-secondary btn-sm w-100" for="inp-voucher">
+									<i class="bi bi-tag-fill me-1"></i> afișează doar cu discount pe baza criteriului acceptării de vouchere
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- Descriere (Floating Label) -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="form-floating">
+							<textarea id="inp-descriere" class="form-control text-light bg-dark border-secondary" placeholder="Ex: exploratori..." style="height: 58px; min-height: 58px;"></textarea>
+							<label for="inp-descriere" class="text-secondary">Cuvinte cheie descriere</label>
+						</div>
+					</div>
+
+					<!-- Durată -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="filtru-grup">
+							<label for="inp-durata" class="form-label text-light fw-bold">Durată minimă:</label>
+							<select id="inp-durata" class="form-select">
+								<option value="oricare" selected>Oricare</option>
+								<option value="90">90+ minute</option>
+								<option value="120">120+ minute</option>
+								<option value="150">150+ minute</option>
+							</select>
+						</div>
+					</div>
+
+					<!-- Lună Lansare -->
+					<div class="col-12 col-md-6 col-lg-4 mb-3">
+						<div class="filtru-grup">
+							<label for="inp-luna-lansare" class="form-label text-light fw-bold">Luna lansării:</label>
+							<select id="inp-luna-lansare" class="form-select" multiple size="3">
+								<option value="0" selected>Ianuarie</option>
+								<option value="1" selected>Februarie</option>
+								<option value="2" selected>Martie</option>
+								<option value="3" selected>Aprilie</option>
+								<option value="4" selected>Mai</option>
+								<option value="5" selected>Iunie</option>
+								<option value="6" selected>Iulie</option>
+								<option value="7" selected>August</option>
+								<option value="8" selected>Septembrie</option>
+								<option value="9" selected>Octombrie</option>
+								<option value="10" selected>Noiembrie</option>
+								<option value="11" selected>Decembrie</option>
+							</select>
+						</div>
 					</div>
 				</div>
 
-				<div class="filtru-grup">
-					<label for="inp-format">Format vizionare:</label>
-					<input type="text" id="inp-format" list="lista-formate" placeholder="Alegeți format">
-					<datalist id="lista-formate">
-						<option value="2D">
-						<option value="3D">
-						<option value="IMAX">
-						<option value="4DX">
-					</datalist>
-				</div>
-
-				<div class="filtru-grup radio-grup">
-					<label>Rating Vârstă:</label>
-					<label><input type="radio" name="rad-rating" value="toate" checked> Toate</label>
-					<label><input type="radio" name="rad-rating" value="AG"> AG</label>
-					<label><input type="radio" name="rad-rating" value="AP12"> AP12</label>
-					<label><input type="radio" name="rad-rating" value="N15"> N15</label>
-					<label><input type="radio" name="rad-rating" value="IM18"> IM18</label>
-				</div>
-
-				<div class="filtru-grup">
-					<label>
-						<input type="checkbox" id="inp-voucher"> Afișează doar cu discount (Permite Voucher = Da)
-					</label>
-				</div>
-
-				<div class="filtru-grup">
-					<label for="inp-descriere">Cuvinte cheie descriere:</label>
-					<textarea id="inp-descriere" rows="2" placeholder="Ex: exploratori, extraterestru"></textarea>
-				</div>
-
-				<div class="filtru-grup">
-					<label for="inp-durata">Durată minimă:</label>
-					<select id="inp-durata">
-						<option value="oricare" selected>Oricare</option>
-						<option value="90">90+ minute</option>
-						<option value="120">120+ minute</option>
-						<option value="150">150+ minute</option>
-					</select>
-				</div>
-
-				<div class="filtru-grup">
-					<label for="inp-luna-lansare">Luna lansării (Select multiplu):</label>
-					<select id="inp-luna-lansare" multiple size="4">
-						<option value="0" selected>Ianuarie</option>
-						<option value="1" selected>Februarie</option>
-						<option value="2" selected>Martie</option>
-						<option value="3" selected>Aprilie</option>
-						<option value="4" selected>Mai</option>
-						<option value="5" selected>Iunie</option>
-						<option value="6" selected>Iulie</option>
-						<option value="7" selected>August</option>
-						<option value="8" selected>Septembrie</option>
-						<option value="9" selected>Octombrie</option>
-						<option value="10" selected>Noiembrie</option>
-						<option value="11" selected>Decembrie</option>
-					</select>
-				</div>
-
-				<div class="butoane-filtre">
-					<button id="btn-filtrare" class="btn btn-primary">Filtrează</button>
-					<button id="btn-sort-asc" class="btn btn-secondary">Sortare Ascendentă</button>
-					<button id="btn-sort-desc" class="btn btn-secondary">Sortare Descendentă</button>
-					<button id="btn-calculeaza" class="btn btn-secondary">Medie Preț Afișate</button>
-					<button id="btn-reset" class="btn btn-danger">Resetare Filtre</button>
+				<!-- Butoane Filtre cu Bootstrap Icons si Responsive Display -->
+				<div class="butoane-filtre mt-3 d-flex flex-wrap gap-2">
+					<button id="btn-filtrare" class="btn btn-primary d-flex align-items-center gap-1">
+						<i class="bi bi-filter"></i>
+						<span class="d-none d-md-inline">Filtrează</span>
+					</button>
+					<button id="btn-sort-asc" class="btn btn-secondary d-flex align-items-center gap-1">
+						<i class="bi bi-sort-numeric-down"></i>
+						<span class="d-none d-md-inline">Sortare Ascendentă</span>
+					</button>
+					<button id="btn-sort-desc" class="btn btn-secondary d-flex align-items-center gap-1">
+						<i class="bi bi-sort-numeric-up-alt"></i>
+						<span class="d-none d-md-inline">Sortare Descendentă</span>
+					</button>
+					<button id="btn-calculeaza" class="btn btn-secondary d-flex align-items-center gap-1">
+						<i class="bi bi-calculator"></i>
+						<span class="d-none d-md-inline">Medie Preț Afișate</span>
+					</button>
+					<button id="btn-reset" class="btn btn-danger d-flex align-items-center gap-1">
+						<i class="bi bi-arrow-clockwise"></i>
+						<span class="d-none d-md-inline">Resetare Filtre</span>
+					</button>
 				</div>
 			</section>
 
@@ -331,17 +385,6 @@
 							Browserul tău nu suportă elementul video.
 						<% } %>
 					</video>
-				</div>
-			</section>
-
-			<section id="program-pdf" style="margin-bottom: 3rem;">
-				<h2>Program Săptămânal</h2>
-				<object data="/resurse/documente/Program-Saptamanal.pdf" type="application/pdf" width="100%" height="500">
-					<embed src="/resurse/documente/Program-Saptamanal.pdf" type="application/pdf" width="100%" height="500" />
-				</object>
-			</section>
-
-
 
 		</section>
 	</main>
