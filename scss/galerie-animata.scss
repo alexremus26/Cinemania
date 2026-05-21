@@ -1,17 +1,18 @@
+@use "sass:math";
 @use "variables" as *;
 @use "mixins" as *;
 
 $galerie-animata-count: 7 !default;
 $galerie-animata-duration: 3.5s !default;
 $galerie-animata-border-image: "/resurse/imagini/cinematografe-harta.svg" !default;
-$galerie-animata-height: 420px !default;
+$galerie-animata-height: 540px !default;
 $galerie-animata-border-slice: 28 !default;
 $galerie-animata-border-width: 10px !default;
 
 $galerie-animata-total: $galerie-animata-duration * $galerie-animata-count;
 
 // Procentajul din ciclul total pe care fiecare imagine il ocupa.
-$per: 100 / $galerie-animata-count;
+$per: math.div(100, $galerie-animata-count);
 
 // Fazele animatiei in interiorul ferestrei active (0% -> $per%)
 // $kf-hold: pauza initiala, imagine complet vizibila
@@ -28,10 +29,14 @@ $kf-hide-start: $per + 0.001;
 $kf-hide-end: 100 - $per;
 $kf-show-start: 100 - $per + 0.001;
 
+.galerie-animata-titlu {
+  display: none;
+}
+
 .galerie-animata {
   display: none;
   position: relative;
-  width: min(100%, 920px);
+  width: min(100%, 360px);
   height: $galerie-animata-height;
   margin: 1rem auto 0;
   border: $galerie-animata-border-width solid transparent;
@@ -43,6 +48,9 @@ $kf-show-start: 100 - $per + 0.001;
 }
 
 @media (min-width: #{$bp-medium + 1}) {
+  .galerie-animata-titlu {
+    display: block;
+  }
   .galerie-animata {
     display: block;
   }
@@ -61,7 +69,7 @@ $kf-show-start: 100 - $per + 0.001;
 .galerie-animata__img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; // Changed from contain to cover to fill the 2:3 frame perfectly
   display: block;
 }
 
@@ -103,43 +111,43 @@ $kf-show-start: 100 - $per + 0.001;
     clip-path: circle(75% at 50% 50%);
     transform: rotate(0deg);
   }
-  #{percentage($kf-hold / 100)} {
+  #{math.percentage(math.div($kf-hold, 100))} {
     z-index: 10;
     opacity: 1;
     clip-path: circle(75% at 50% 50%);
     transform: rotate(0deg);
   }
-  #{percentage($kf-shrink / 100)} {
+  #{math.percentage(math.div($kf-shrink, 100))} {
     z-index: 10;
     opacity: 1;
     clip-path: circle(25% at 50% 50%);
     transform: rotate(0deg);
   }
-  #{percentage($kf-spin / 100)} {
+  #{math.percentage(math.div($kf-spin, 100))} {
     z-index: 10;
     opacity: 0.3;
     clip-path: circle(5% at 50% 50%);
     transform: rotate(90deg);
   }
-  #{percentage($kf-exit / 100)} {
+  #{math.percentage(math.div($kf-exit, 100))} {
     z-index: 10;
     opacity: 0;
     clip-path: circle(0% at 50% 50%);
     transform: rotate(180deg);
   }
-  #{percentage($kf-hide-start / 100)} {
+  #{math.percentage(math.div($kf-hide-start, 100))} {
     z-index: 0;
     opacity: 0;
     clip-path: circle(0% at 50% 50%);
     transform: rotate(0deg);
   }
-  #{percentage($kf-hide-end / 100)} {
+  #{math.percentage(math.div($kf-hide-end, 100))} {
     z-index: 0;
     opacity: 0;
     clip-path: circle(0% at 50% 50%);
     transform: rotate(0deg);
   }
-  #{percentage($kf-show-start / 100)} {
+  #{math.percentage(math.div($kf-show-start, 100))} {
     z-index: 1;
     opacity: 1;
     clip-path: circle(75% at 50% 50%);

@@ -10,13 +10,26 @@ Cinemania is now structured as a Node.js + Express application with EJS template
 npm install
 ```
 
-2. Start server:
+2. Initialize the database (requires PostgreSQL):
+
+```bash
+# IMPORTANT: If you are using WSL, you must start the PostgreSQL service first:
+sudo service postgresql start
+
+# Then run the initialization script:
+sudo -u postgres psql -f db_setup.sql
+
+# On Windows/macOS (using pgAdmin or Postico):
+# Connect to your local server and execute the contents of db_setup.sql
+```
+
+3. Start server:
 
 ```bash
 npm start
 ```
 
-3. Open in browser:
+4. Open in browser:
 
 ```text
 http://localhost:8080

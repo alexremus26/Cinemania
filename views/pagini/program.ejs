@@ -3,6 +3,145 @@
 <head>
 	<%- include('../fragmente/head') %>
 	<title>Program Filme - Cinemania</title>
+	<style>
+        .filtre-container {
+            background-color: var(--secondary-bg, #1a1a1a);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            border: 1px solid var(--border-color, #333);
+        }
+        .filtru-grup {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .filtru-grup label {
+            font-weight: bold;
+            color: var(--text-color, #f5f5f5);
+        }
+        .filtru-grup input[type="text"],
+        .filtru-grup textarea,
+        .filtru-grup select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-color, #444);
+            border-radius: 4px;
+            background: var(--input-bg, #2a2a2a);
+            color: var(--text-color, #fff);
+        }
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .radio-grup label {
+            font-weight: normal;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-right: 10px;
+        }
+        .butoane-filtre {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .produse-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+        }
+        .produs-card {
+            background: var(--card-bg, #1e1e1e);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid var(--border-color, #333);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .produs-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.5);
+        }
+        .produs-card h3 {
+            margin-top: 0;
+            color: var(--primary-color, #e50914);
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .produs-card h3 a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .produs-card h3 a:hover {
+            text-decoration: underline;
+        }
+        .produs-coloane {
+            display: flex;
+            gap: 15px;
+        }
+        .coloana-1 {
+            flex: 0 0 150px;
+        }
+        .coloana-2 {
+            flex: 1;
+        }
+        .img-produs {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            object-fit: cover;
+            aspect-ratio: 2/3;
+        }
+        .pret-label {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4caf50;
+        }
+        details {
+            background: #2a2a2a;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        details summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        details ul {
+            margin-top: 10px;
+            padding-left: 20px;
+            list-style-type: square;
+        }
+        .descriere-produs {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: #ccc;
+        }
+
+        #div-calcul {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9);
+            color: #fff;
+            padding: 20px 40px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            z-index: 1000;
+            border: 2px solid var(--primary-color, #e50914);
+        }
+    </style>
+	<script src="/resurse/js/produse.js" defer></script>
 </head>
 <body>
 	<%- include('../fragmente/header') %>
@@ -10,7 +149,166 @@
 	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
 		<section id="program-filme">
 
-			<section id="video-prezentare-section" style="margin-bottom: 2.5rem;">
+			<!-- SECTIUNE PRODUSE (Filtre + Grid) -->
+			<h2 style="margin-bottom: 1.5rem; color: var(--primary-color, #e50914);">Filme Cinemania</h2>
+
+			<!-- SECTIUNE FILTRE -->
+			<section id="filtre-produse" class="filtre-container">
+				<div class="filtru-grup">
+					<label for="inp-nume">Căutare după nume:</label>
+					<input type="text" id="inp-nume" placeholder="Ex: Dune">
+				</div>
+
+				<div class="filtru-grup">
+					<label for="inp-pret">Preț maxim: <span id="valoare-pret"></span></label>
+					<div class="range-container">
+						<span id="pret-min">10</span>
+						<input type="range" id="inp-pret" min="10" max="100" value="100" step="1">
+						<span id="pret-max">100</span>
+					</div>
+				</div>
+
+				<div class="filtru-grup">
+					<label for="inp-format">Format vizionare:</label>
+					<input type="text" id="inp-format" list="lista-formate" placeholder="Alegeți format">
+					<datalist id="lista-formate">
+						<option value="2D">
+						<option value="3D">
+						<option value="IMAX">
+						<option value="4DX">
+					</datalist>
+				</div>
+
+				<div class="filtru-grup radio-grup">
+					<label>Rating Vârstă:</label>
+					<label><input type="radio" name="rad-rating" value="toate" checked> Toate</label>
+					<label><input type="radio" name="rad-rating" value="AG"> AG</label>
+					<label><input type="radio" name="rad-rating" value="AP12"> AP12</label>
+					<label><input type="radio" name="rad-rating" value="N15"> N15</label>
+					<label><input type="radio" name="rad-rating" value="IM18"> IM18</label>
+				</div>
+
+				<div class="filtru-grup">
+					<label>
+						<input type="checkbox" id="inp-voucher"> Afișează doar cu discount (Permite Voucher = Da)
+					</label>
+				</div>
+
+				<div class="filtru-grup">
+					<label for="inp-descriere">Cuvinte cheie descriere:</label>
+					<textarea id="inp-descriere" rows="2" placeholder="Ex: exploratori, extraterestru"></textarea>
+				</div>
+
+				<div class="filtru-grup">
+					<label for="inp-durata">Durată minimă:</label>
+					<select id="inp-durata">
+						<option value="oricare" selected>Oricare</option>
+						<option value="90">90+ minute</option>
+						<option value="120">120+ minute</option>
+						<option value="150">150+ minute</option>
+					</select>
+				</div>
+
+				<div class="filtru-grup">
+					<label for="inp-luna-lansare">Luna lansării (Select multiplu):</label>
+					<select id="inp-luna-lansare" multiple size="4">
+						<option value="0" selected>Ianuarie</option>
+						<option value="1" selected>Februarie</option>
+						<option value="2" selected>Martie</option>
+						<option value="3" selected>Aprilie</option>
+						<option value="4" selected>Mai</option>
+						<option value="5" selected>Iunie</option>
+						<option value="6" selected>Iulie</option>
+						<option value="7" selected>August</option>
+						<option value="8" selected>Septembrie</option>
+						<option value="9" selected>Octombrie</option>
+						<option value="10" selected>Noiembrie</option>
+						<option value="11" selected>Decembrie</option>
+					</select>
+				</div>
+
+				<div class="butoane-filtre">
+					<button id="btn-filtrare" class="btn btn-primary">Filtrează</button>
+					<button id="btn-sort-asc" class="btn btn-secondary">Sortare Ascendentă</button>
+					<button id="btn-sort-desc" class="btn btn-secondary">Sortare Descendentă</button>
+					<button id="btn-calculeaza" class="btn btn-secondary">Medie Preț Afișate</button>
+					<button id="btn-reset" class="btn btn-danger">Resetare Filtre</button>
+				</div>
+			</section>
+
+			<!-- SECTIUNE PRODUSE -->
+			<section id="grid-produse" class="produse-grid">
+				<% if (typeof produse !== 'undefined' && produse.length > 0) { %>
+					<% produse.forEach(function(produs) { %>
+						<article id="produs_<%= produs.id %>" class="produs-card <%= produs.categorie_mare %>">
+							<h3><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></h3>
+							<div class="produs-coloane">
+								<div class="coloana-1">
+									<figure>
+										<img src="<%= produs.imagine %>" alt="Poster <%= produs.nume %>" class="img-produs">
+									</figure>
+									<p class="categorie-label">Categorie: <strong><span class="val-categorie"><%= produs.categorie_mare %></span></strong></p>
+									<p class="pret-label">Preț: <span class="val-pret"><%= produs.pret %></span> RON</p>
+								</div>
+								<div class="coloana-2">
+									<details>
+										<summary>Specificații</summary>
+										<ul>
+											<li><strong>Rating:</strong> <em><span class="val-rating"><%= produs.rating_varsta %></span></em></li>
+											<li><strong>Limbi audio:</strong> <em><span class="val-limbi"><%= produs.limbi_audio %></span></em></li>
+											<li><strong>Durată (min):</strong> <em><span class="val-durata"><%= produs.durata_minute %></span></em></li>
+											<li><strong>Data Lansare:</strong> 
+												<em>
+													<% 
+														const zile = ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata'];
+														const luni = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
+														const data = new Date(produs.data_lansare);
+														const textData = `${data.getDate()}-${luni[data.getMonth()]}-${data.getFullYear()} (${zile[data.getDay()]})`;
+													%>
+													<time class="val-data" datetime="<%= data.toISOString() %>"><%= textData %></time>
+												</em>
+											</li>
+											<li><strong>Permite Voucher:</strong> <em><span class="val-voucher"><%= produs.permite_voucher ? 'Da' : 'Nu' %></span></em></li>
+											<li><strong>Format:</strong> <em><span class="val-format"><%= produs.categorie_minora %></span></em></li>
+										</ul>
+									</details>
+									<div class="descriere-produs">
+										<p class="val-descriere"><%= produs.descriere %></p>
+									</div>
+								</div>
+							</div>
+						</article>
+					<% }) %>
+				<% } else { %>
+					<p>Nu există filme în această categorie momentan.</p>
+				<% } %>
+			</section>
+			<!-- END SECTIUNE PRODUSE -->
+
+			<!-- Galerie animata -->
+			<h2 class="galerie-animata-titlu" style="margin-top: 3.5rem; margin-bottom: 1.5rem; text-align: center; color: var(--primary-color, #e50914);">Filmele Momentului</h2>
+			<% if (typeof galerieAnimataCss !== 'undefined' && galerieAnimataCss) { %>
+				<style><%- galerieAnimataCss %></style>
+			<% } %>
+			<div class="galerie-animata" id="galerie-animata" aria-label="Galerie animata filme" data-count="<%= (typeof galerieAnimata !== 'undefined' && Array.isArray(galerieAnimata)) ? galerieAnimata.length : 0 %>" data-source-count="<%= typeof galerieAnimataSourceCount !== 'undefined' ? galerieAnimataSourceCount : 0 %>">
+				<% if (typeof galerieAnimata !== 'undefined' && galerieAnimata.length > 0) { %>
+					<% galerieAnimata.forEach((imagine) => { %>
+						<figure class="galerie-animata__item">
+							<img
+								class="galerie-animata__img"
+								src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>"
+								alt="<%= imagine.alt || imagine.cale_imagine %>"
+								title="<%= imagine.titlu || imagine.descriere || imagine.cale_imagine %>"
+							>
+						</figure>
+					<% }); %>
+				<% } else { %>
+					<div class="galerie-animata__empty">Galeria nu este disponibila.</div>
+				<% } %>
+			</div>
+			<!-- End Galerie animata -->
+
+			<section id="video-prezentare-section" style="margin-top: 3rem; margin-bottom: 2.5rem;">
 				<h2>Trailer Dune 3</h2>
 				<p>Urmărește trailerul celui mai așteptat film al anului.</p>
 				<div class="video-box">
@@ -43,60 +341,8 @@
 				</object>
 			</section>
 
-			<h2>Filmele Momentului</h2>
-			<!-- Galerie animata -->
-			<% if (typeof galerieAnimataCss !== 'undefined' && galerieAnimataCss) { %>
-				<style><%- galerieAnimataCss %></style>
-			<% } %>
-			<div class="galerie-animata" aria-label="Galerie animata filme" data-count="<%= (typeof galerieAnimata !== 'undefined' && Array.isArray(galerieAnimata)) ? galerieAnimata.length : 0 %>" data-source-count="<%= typeof galerieAnimataSourceCount !== 'undefined' ? galerieAnimataSourceCount : 0 %>">
-				<% if (typeof galerieAnimata !== 'undefined' && galerieAnimata.length > 0) { %>
-					<% galerieAnimata.forEach((imagine) => { %>
-						<figure class="galerie-animata__item">
-							<img
-								class="galerie-animata__img"
-								src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>"
-								alt="<%= imagine.alt || imagine.cale_imagine %>"
-								title="<%= imagine.titlu || imagine.descriere || imagine.cale_imagine %>"
-							>
-						</figure>
-					<% }); %>
-				<% } else { %>
-					<div class="galerie-animata__empty">Galeria nu este disponibila.</div>
-				<% } %>
-			</div>
-			<!-- End Galerie animata -->
 
-			<section style="margin-top: 3rem;">
-				<h2>Program Actualizat - Săptămâna Curentă</h2>
-				<div class="table-rounded-container">
-					<div class="table-scroll-container">
-						<table>
-							<caption>* Program orientativ. Verifică orele finale în PDF.</caption>
-							<thead>
-								<tr>
-									<th>Film</th>
-									<th>Format</th>
-									<th>Ore</th>
-									<th>Săli</th>
-									<th>Acțiune</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr><td>Dune</td><td>4DX / IMAX</td><td>12:00, 16:00, 20:30</td><td>S1, S2</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>Fight Club</td><td>2D</td><td>18:00, 21:00</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>Interstellar</td><td>IMAX</td><td>14:30, 19:30</td><td>S2</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>La Haine</td><td>2D</td><td>17:00</td><td>S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>Marty Supreme</td><td>4DX / 2D</td><td>13:00, 18:30</td><td>S1, S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>No Country for Old Men</td><td>2D</td><td>20:00</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>No Other Choice</td><td>2D</td><td>15:30</td><td>S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>Parasite</td><td>2D</td><td>19:00</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>The Truman Show</td><td>2D</td><td>16:30</td><td>S4</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-								<tr><td>Challengers</td><td>2D</td><td>21:30</td><td>S3</td><td><a href="/bilete" class="btn btn-sm btn-primary">Rezervă</a></td></tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</section>
+
 		</section>
 	</main>
 

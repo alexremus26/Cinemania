@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <%- include('../fragmente/head') %>
+    <title><%= produs.nume %> - Cinemania</title>
+    <style>
+        .produs-container {
+            display: flex;
+            gap: 40px;
+            background: var(--card-bg, #1e1e1e);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .produs-imagine {
+            flex: 0 0 300px;
+        }
+        .produs-imagine img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+        .produs-detalii {
+            flex: 1;
+            min-width: 300px;
+        }
+        .produs-detalii h1 {
+            color: var(--primary-color, #e50914);
+            margin-top: 0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
+        }
+        .detaliu-item {
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        .detaliu-item strong {
+            color: #aaa;
+            display: inline-block;
+            width: 150px;
+        }
+        .pret-mare {
+            font-size: 1.8em;
+            color: #4caf50;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .descriere-extinsa {
+            margin-top: 30px;
+            line-height: 1.6;
+            color: #ddd;
+            font-size: 1.1em;
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color, #e50914);
+        }
+    </style>
+</head>
+<body>
+    <%- include('../fragmente/header') %>
+    
+    <main class="page-container" style="padding: 2rem var(--page-margin); min-height: 80vh;">
+        <a href="/produse" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Înapoi la filme</a>
+        
+        <article class="produs-container">
+            <div class="produs-imagine">
+                <img src="<%= produs.imagine %>" alt="Poster <%= produs.nume %>">
+            </div>
+            
+            <div class="produs-detalii">
+                <h1><%= produs.nume %></h1>
+                
+                <div class="pret-mare">
+                    <%= produs.pret %> RON
+                </div>
+                
+                <div class="detaliu-item">
+                    <strong>Categorie Principală:</strong> <%= produs.categorie_mare.charAt(0).toUpperCase() + produs.categorie_mare.slice(1) %>
+                </div>
+                <div class="detaliu-item">
+                    <strong>Format Vizionare:</strong> <%= produs.categorie_minora %>
+                </div>
+                <div class="detaliu-item">
+                    <strong>Durată:</strong> <%= produs.durata_minute %> minute
+                </div>
+                <div class="detaliu-item">
+                    <strong>Rating Vârstă:</strong> <%= produs.rating_varsta %>
+                </div>
+                <div class="detaliu-item">
+                    <strong>Limbi Audio:</strong> <%= produs.limbi_audio %>
+                </div>
+                <div class="detaliu-item">
+                    <strong>Data Lansării:</strong> 
+                    <% 
+                        const data = new Date(produs.data_lansare);
+                        const zile = ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata'];
+                        const luni = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
+                        const textData = `${data.getDate()}-${luni[data.getMonth()]}-${data.getFullYear()} (${zile[data.getDay()]})`;
+                    %>
+                    <time datetime="<%= data.toISOString() %>"><%= textData %></time>
+                </div>
+                <div class="detaliu-item">
+                    <strong>Admite Voucher:</strong> <%= produs.permite_voucher ? 'Da, discount aplicabil' : 'Nu este eligibil' %>
+                </div>
+                
+                <div class="descriere-extinsa">
+                    <h3>Povestea Filmului</h3>
+                    <p><%= produs.descriere %></p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <%- include('../fragmente/footer') %>
+</body>
+</html>

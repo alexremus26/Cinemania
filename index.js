@@ -3,6 +3,20 @@ const fs = require('fs');
 const path = require('path');
 const sass = require('sass');
 const sharp = require('sharp');
+const { Pool } = require('pg');
+
+const pool = new Pool({
+    user: process.env.DB_USER || 'cinemania_user',
+    host: process.env.DB_HOST || 'localhost',
+    database: process.env.DB_NAME || 'cinemania',
+    password: process.env.DB_PASSWORD || 'cinemania_pass',
+    port: process.env.DB_PORT || 5432,
+});
+
+let categoriiFilme = [];
+pool.query("SELECT unnest(enum_range(NULL::gen_film)) AS categorie")
+    .then(res => { categoriiFilme = res.rows.map(r => r.categorie); })
+    .catch(err => console.error('[DB] Eroare la preluarea categoriilor (asigură-te că BD este pornită și configurată):', err));
 
 const app = express();
 const PORT = 8080;
@@ -515,55 +529,55 @@ function getRandomOdd(min, max) {
 }
 
 function buildGalerieAnimataItems() {
-    let galerieSource;
-
     try {
         const jsonPath = path.join(__dirname, 'resurse', 'documente', 'galerie.json');
-        const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
-        const parsed = JSON.parse(jsonContent);
-        const basePath = parsed.cale_galerie && parsed.cale_galerie.startsWith('/')
+        const parsed = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+        const scaleGalerie = parsed.cale_galerie && parsed.cale_galerie.startsWith('/')
             ? parsed.cale_galerie
             : `/${parsed.cale_galerie || 'resurse/imagini'}`;
-        parsed.cale_galerie = basePath;
-        galerieSource = parsed;
-    } catch (error) {
-        console.error('[GALERIE ANIMATA] Failed to load galerie.json:', error.message);
-        return { items: [], targetCount: 0 };
-    }
 
-    const targetCount = getRandomOdd(GALERIE_ANIMATA_CONFIG.minCount, GALERIE_ANIMATA_CONFIG.maxCount);
-    const seen = new Set();
-    const items = [];
+        const targetCount = getRandomOdd(GALERIE_ANIMATA_CONFIG.minCount, GALERIE_ANIMATA_CONFIG.maxCount);
 
-    for (let i = galerieSource.imagini.length - 1; i >= 0 && items.length < targetCount; i--) {
-        const imagine = galerieSource.imagini[i];
-        const key = imagine.cale_imagine;
+        // Păstrăm doar filmele ale căror postere există fizic pe disc (evită link-urile stricate)
+        const imaginiValide = (parsed.imagini || []).filter(img => {
+            if (!img.cale_imagine) return false;
+            const caleFizicaPoster = path.join(__dirname, 'resurse', 'imagini', img.cale_imagine);
+            return fs.existsSync(caleFizicaPoster);
+        });
 
-        if (!key || seen.has(key)) {
-            continue;
+        // Deduplicăm și luăm cele mai recente imagini din JSON (parcurgem de la sfârșit spre început)
+        const seen = new Set();
+        const itemsUnice = [];
+        for (let i = imaginiValide.length - 1; i >= 0; i--) {
+            const img = imaginiValide[i];
+            if (!seen.has(img.cale_imagine)) {
+                seen.add(img.cale_imagine);
+                itemsUnice.push({
+                    ...img,
+                    cale_galerie: scaleGalerie,
+                    alt: img.alt || img.cale_imagine
+                });
+            }
         }
 
-        seen.add(key);
-        items.push({
-            ...imagine,
-            cale_galerie: galerieSource.cale_galerie,
-            alt: imagine.alt || imagine.cale_imagine
-        });
-    }
+        // Amestecăm aleatoriu imaginile pentru ca la fiecare refresh să apară poze diferite în ordine diferită
+        const shuffled = itemsUnice.sort(() => Math.random() - 0.5);
+        const items = shuffled.slice(0, targetCount);
 
-    if (items.length % 2 === 0 && items.length > 1) {
-        items.pop();
-    }
+        // Ne asigurăm că numărul de elemente rămâne impar
+        if (items.length % 2 === 0 && items.length > 1) {
+            items.pop();
+        }
 
-    if (items.length < GALERIE_ANIMATA_CONFIG.minCount) {
-        console.warn(`[GALERIE ANIMATA] Not enough distinct images. Found ${items.length}, expected at least ${GALERIE_ANIMATA_CONFIG.minCount}.`);
-    }
+        if (items.length < GALERIE_ANIMATA_CONFIG.minCount) {
+            console.warn(`[GALERIE ANIMATA] Not enough distinct images with posters on disk. Found ${items.length}, expected at least ${GALERIE_ANIMATA_CONFIG.minCount}.`);
+        }
 
-    if (items.length === 0) {
-        console.warn('[GALERIE ANIMATA] No images available for the animated gallery.');
+        return { items, targetCount };
+    } catch (error) {
+        console.error('[GALERIE ANIMATA] Failed to load or build gallery items:', error.message);
+        return { items: [], targetCount: 0 };
     }
-
-    return { items, targetCount };
 }
 
 function compileGalerieAnimataCss(imageCount) {
@@ -647,6 +661,7 @@ app.use((req, res, next) => {
     res.locals.galerieAnimata = galerieAnimataData.items;
     res.locals.galerieAnimataCss = galerieAnimataData.css;
     res.locals.galerieAnimataSourceCount = galerieAnimataData.items.length;
+    res.locals.categorii = categoriiFilme;
     next();
 });
 
@@ -699,7 +714,7 @@ app.get(['/', '/index', '/home'], async (req, res) => {
     });
 });
 
-app.get('/program', (req, res) => {
+app.get('/program', async (req, res) => {
     const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
     const galerieAnimataData = getGalerieAnimataRenderData();
 
@@ -710,10 +725,25 @@ app.get('/program', (req, res) => {
         console.warn(`[GALERIE ANIMATA] Program page has no items. Total galerie images: ${totalImages}.`);
     }
 
+    let produse = [];
+    try {
+        let query = 'SELECT * FROM filme';
+        let params = [];
+        if (req.query.tip && categoriiFilme.includes(req.query.tip)) {
+            query += ' WHERE categorie_mare = $1';
+            params.push(req.query.tip);
+        }
+        const rezultat = await pool.query(query, params);
+        produse = rezultat.rows;
+    } catch (error) {
+        console.error('[DB] Eroare la preluarea produselor pentru pagina program:', error);
+    }
+
     res.render('pagini/program', {
         videoWebm,
         videoMp4,
         videoPoster,
+        produse,
         galerieAnimata: galerieAnimataData.items,
         galerieAnimataCss: galerieAnimataData.css
     });
@@ -726,11 +756,35 @@ app.get('/galerie', async (req, res) => {
     });
 });
 
+app.get('/produs/:id', async (req, res) => {
+    try {
+        // Validation for SQL Injection: ensure ID is numeric and use parameterized query
+        const idNumeric = parseInt(req.params.id, 10);
+        if (isNaN(idNumeric)) {
+            return afisareEroare(res, 400, 'ID Invalid', 'Identificatorul produsului trebuie să fie numeric.');
+        }
+
+        const rezultat = await pool.query('SELECT * FROM filme WHERE id = $1', [idNumeric]);
+        if (rezultat.rows.length === 0) {
+            return afisareEroare(res, 404, 'Produs Negăsit', 'Nu a fost găsit niciun film cu acest ID.');
+        }
+        
+        res.render('pagini/produs', { produs: rezultat.rows[0] });
+    } catch (error) {
+        console.error('[DB] Eroare la preluarea produsului:', error);
+        afisareEroare(res, 500);
+    }
+});
+
 app.get('/*splat', (req, res) => {
     const paginaCeruta = req.path.replace(/^\/+/g, '').replace(/\/+$/g, '');
 
     if (!paginaCeruta) {
         return res.redirect('/');
+    }
+
+    if (paginaCeruta.startsWith('resurse/')) {
+        return afisareEroare(res, 404);
     }
 
     res.render(path.join('pagini', paginaCeruta), (eroare, rezultatRandare) => {

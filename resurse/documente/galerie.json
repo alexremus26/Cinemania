@@ -2,288 +2,284 @@
   "cale_galerie": "/resurse/imagini",
   "imagini": [
     {
-      "cale_imagine": "dune.jpg",
-      "titlu": "Dune: Part One",
-      "descriere": "O călătorie mitică și încărcată de emoții a unui erou.",
-      "sfert_ora": "1",
-      "alt": "Dune movie poster landscape",
-      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
+      "titlu": "Furiosa",
+      "descriere": "O poveste epica plasata in universul Mad Max, in care Furiosa lupta pentru supravietuire intr-o lume post-apocaliptica dura si nemiloasa.",
+      "cale_imagine": "filme/furiosa.webp",
+      "alt": "Poster Furiosa",
+      "sfert_ora": "1"
     },
     {
-      "cale_imagine": "fightclub.jpg",
-      "titlu": "Fight Club",
-      "descriere": "Un angajat nemulțumit de birou și un săpunar nonconformist.",
-      "sfert_ora": "1",
-      "alt": "Fight club poster landscape"
+      "titlu": "Back to the Future",
+      "descriere": "Un adolescent este trimis accidental in trecut cu ajutorul unei masini a timpului construite de prietenul sau excentric.",
+      "cale_imagine": "filme/backtothefuture.webp",
+      "alt": "Poster Back to the Future",
+      "sfert_ora": "1"
     },
     {
-      "cale_imagine": "interstellar.jpg",
+      "titlu": "Deadpool & Wolverine",
+      "descriere": "Cei mai indragiti anti-eroi din universul Marvel fac echipa intr-o comedie de actiune plina de umor negru si spargerea celui de-al patrulea perete.",
+      "cale_imagine": "filme/deadpool.webp",
+      "alt": "Poster Deadpool & Wolverine",
+      "sfert_ora": "1"
+    },
+    {
+      "titlu": "Inside Out 2",
+      "descriere": "Emotiile din mintea lui Riley se confrunta cu noi provocari odata cu trecerea in adolescenta si aparitia unor noi sentimente complexe.",
+      "cale_imagine": "filme/insideout2.webp",
+      "alt": "Poster Inside Out 2",
+      "sfert_ora": "1"
+    },
+    {
+      "titlu": "Oppenheimer",
+      "descriere": "Povestea fascinanta a lui J. Robert Oppenheimer si rolul sau in dezvoltarea bombei atomice, explorand dilemele morale si consecintele actiunilor sale.",
+      "cale_imagine": "filme/oppenheimer.webp",
+      "alt": "Poster Oppenheimer",
+      "sfert_ora": "1"
+    },
+    {
+      "titlu": "Alien Romulus",
+      "descriere": "Un grup de tineri colonisti spatiali, explorand o statie spatiala abandonata, se confrunta cu cea mai terifianta forma de viata din univers.",
+      "cale_imagine": "filme/alienromulus.webp",
+      "alt": "Poster Alien Romulus",
+      "sfert_ora": "1"
+    },
+    {
+      "titlu": "Gladiator 2",
+      "descriere": "La ani distanta de la evenimentele din primul film, o noua generatie de gladiatori intra in arena, luptand pentru onoare si libertate.",
+      "cale_imagine": "filme/gladiator2.webp",
+      "alt": "Poster Gladiator 2",
+      "sfert_ora": "1"
+    },
+    {
+      "titlu": "The Substance",
+      "descriere": "Un thriller psihologic ce exploreaza obsesia pentru tinerete, folosind o substanta experimentala care permite crearea unei versiuni mai tinere a sinelui.",
+      "cale_imagine": "filme/substance.webp",
+      "alt": "Poster The Substance",
+      "sfert_ora": "1"
+    },
+    {
       "titlu": "Interstellar",
-      "descriere": "O echipă de exploratori călătorește printr-o gaură de vierme.",
-      "sfert_ora": "1",
-      "alt": "Interstellar cosmic voyage"
+      "descriere": "O echipa de exploratori calatoreste printr-o gaura de vierme in spatiu intr-o incercare disperata de a gasi o noua casa pentru omenire.",
+      "cale_imagine": "filme/interstellar.webp",
+      "alt": "Poster Interstellar",
+      "sfert_ora": "1"
     },
     {
-      "cale_imagine": "lahaine.jpg",
-      "titlu": "La Haine",
-      "descriere": "Trei tineri din suburbiile Parisului trăiesc o zi tensionată.",
-      "sfert_ora": "1",
-      "alt": "La Haine cinematic shot"
+      "titlu": "Joker: Folie a Deux",
+      "descriere": "Arthur Fleck revine, de data aceasta alaturandu-se lui Harley Quinn intr-o poveste intunecata despre nebunie impartasita, intr-un format muzical inedit.",
+      "cale_imagine": "filme/joker2.webp",
+      "alt": "Poster Joker: Folie a Deux",
+      "sfert_ora": "1"
     },
     {
-      "cale_imagine": "martysupreme.jpg",
-      "titlu": "Marty Supreme",
-      "descriere": "O incursiune de excepție în lumea tenisului de masă.",
-      "sfert_ora": "1",
-      "alt": "Marty Supreme dynamic scene"
+      "titlu": "Smile 2",
+      "descriere": "Teroarea continua atunci cand o entitate demonica care se hraneste cu trauma se raspandeste, trecand de la o victima la alta prin zambete sinistre.",
+      "cale_imagine": "filme/smile2.webp",
+      "alt": "Poster Smile 2",
+      "sfert_ora": "2"
     },
     {
-      "cale_imagine": "nocountryforoldmen.jpg",
-      "titlu": "No Country for Old Men",
-      "descriere": "Violență și haos se dezlănțuie după ce o afacere dă greș.",
-      "sfert_ora": "1",
-      "alt": "No Country desert sunset"
+      "titlu": "Kingdom of the Planet of the Apes",
+      "descriere": "La generatii dupa Cezar, maimutele sunt specia dominanta, iar oamenii traiesc in salbaticie. Un tanar cimpanzeu porneste intr-o calatorie de descoperire.",
+      "cale_imagine": "filme/apes.webp",
+      "alt": "Poster Kingdom of the Planet of the Apes",
+      "sfert_ora": "2"
     },
     {
-      "cale_imagine": "nootherchoice.jpg",
-      "titlu": "No Other Choice",
-      "descriere": "Tensiune dramatică și decizii la limita supraviețuirii.",
-      "sfert_ora": "1",
-      "alt": "No Other Choice action posture"
+      "titlu": "Kung Fu Panda 4",
+      "descriere": "Po, acum Lider Spiritual al Vaii Pacii, trebuie sa aleaga un nou Razboinic Dragon, in timp ce se confrunta cu o noua amenintare formidabila.",
+      "cale_imagine": "filme/kungfupanda4.webp",
+      "alt": "Poster Kung Fu Panda 4",
+      "sfert_ora": "2"
     },
     {
-      "cale_imagine": "parasite.jpg",
-      "titlu": "Parasite",
-      "descriere": "Lăcomia și discriminarea de clasă amenință o relație.",
-      "sfert_ora": "1",
-      "alt": "Parasite architectural mansion"
+      "titlu": "The Batman",
+      "descriere": "Un Bruce Wayne tanar investigheaza crimele sadice ale lui Riddler in Gotham City, explorand coruptia profunda ce ii afecteaza propria familie.",
+      "cale_imagine": "filme/batman.webp",
+      "alt": "Poster The Batman",
+      "sfert_ora": "2"
     },
     {
-      "cale_imagine": "thetrumanshow.jpg",
-      "titlu": "The Truman Show",
-      "descriere": "Un agent de asigurări descoperă că viața lui e o emisiune.",
-      "sfert_ora": "1",
-      "alt": "Truman waving under dome"
+      "titlu": "Avatar: The Way of Water",
+      "descriere": "Jake Sully si familia sa se confrunta cu noi pericole pe Pandora, explorand oceanele planetei si luptand din nou impotriva invaziei umane.",
+      "cale_imagine": "filme/avatar2.webp",
+      "alt": "Poster Avatar: The Way of Water",
+      "sfert_ora": "2"
     },
     {
-      "cale_imagine": "challengers.jpg",
+      "titlu": "A Quiet Place: Day One",
+      "descriere": "Descopera cum lumea a cazut in tacere odata cu primele momente ale invaziei extraterestrilor cu auz hipersensibil, aducand panica in oras.",
+      "cale_imagine": "filme/quietplace.webp",
+      "alt": "Poster A Quiet Place: Day One",
+      "sfert_ora": "2"
+    },
+    {
       "titlu": "Challengers",
-      "descriere": "Trei jucători de tenis se întâlnesc din nou într-un turneu.",
-      "sfert_ora": "1",
-      "alt": "Challengers court tension"
-    },
-    {
-      "cale_imagine": "dune.jpg",
-      "titlu": "Dune: Destinul lui Paul",
-      "descriere": "Lupta pentru controlul celei mai valoroase substanțe.",
-      "sfert_ora": "2",
-      "alt": "Dune movie poster landscape",
-      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
-    },
-    {
-      "cale_imagine": "fightclub.jpg",
-      "titlu": "Fight Club: Proiectul Chaos",
-      "descriere": "Eliberarea prin auto-distrugere fizică și mentală.",
-      "sfert_ora": "2",
-      "alt": "Fight club poster landscape"
-    },
-    {
-      "cale_imagine": "interstellar.jpg",
-      "titlu": "Interstellar: Căutarea",
-      "descriere": "Călătoria cosmică dincolo de orizontul cunoașterii.",
-      "sfert_ora": "2",
-      "alt": "Interstellar cosmic voyage"
-    },
-    {
-      "cale_imagine": "lahaine.jpg",
-      "titlu": "La Haine: Orașul Rebel",
-      "descriere": "Realitatea dură a marginalizării sociale pariziene.",
-      "sfert_ora": "2",
-      "alt": "La Haine cinematic shot"
-    },
-    {
-      "cale_imagine": "martysupreme.jpg",
-      "titlu": "Marty Supreme: Campionul",
-      "descriere": "Un portret electrizant al unui geniu excentric.",
-      "sfert_ora": "2",
-      "alt": "Marty Supreme dynamic scene"
-    },
-    {
-      "cale_imagine": "nocountryforoldmen.jpg",
-      "titlu": "No Country: Destinul",
-      "descriere": "Vânătoarea necruțătoare a unui ucigaș tăcut.",
-      "sfert_ora": "2",
-      "alt": "No Country desert sunset"
-    },
-    {
-      "cale_imagine": "nootherchoice.jpg",
-      "titlu": "No Other Choice: Ultima Opțiune",
-      "descriere": "Fiecare secundă contează în confruntarea finală.",
-      "sfert_ora": "2",
-      "alt": "No Other Choice action posture"
-    },
-    {
-      "cale_imagine": "parasite.jpg",
-      "titlu": "Parasite: Simbioza",
-      "descriere": "Două familii din lumi total diferite se întrepătrund.",
-      "sfert_ora": "2",
-      "alt": "Parasite architectural mansion"
-    },
-    {
-      "cale_imagine": "thetrumanshow.jpg",
-      "titlu": "Truman: Lumea Artificială",
-      "descriere": "Zidurile invizibile ale unui studio TV gigantic.",
-      "sfert_ora": "2",
-      "alt": "Truman waving under dome"
-    },
-    {
+      "descriere": "Trei jucători de tenis se reîntâlnesc într-un turneu, dezvăluind un trecut complicat de iubire și rivalitate.",
       "cale_imagine": "challengers.jpg",
-      "titlu": "Challengers: Meciul Vieții",
-      "descriere": "Competiție sportivă dublată de o rivalitate pasională.",
-      "sfert_ora": "2",
-      "alt": "Challengers court tension"
+      "alt": "Poster Challengers",
+      "sfert_ora": "2"
     },
     {
+      "titlu": "Dune",
+      "descriere": "Prima parte a epopeii spatiale în care familia Atreides este atrasă într-o cursă mortală pentru controlul planetei Arrakis.",
       "cale_imagine": "dune.jpg",
-      "titlu": "Dune: Deșertul Cosmic",
-      "descriere": "Prețul profețiilor și destinul mesianic al unui tânăr.",
-      "sfert_ora": "3",
-      "alt": "Dune movie poster landscape",
-      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
+      "alt": "Poster Dune",
+      "sfert_ora": "2"
     },
     {
+      "titlu": "Fight Club",
+      "descriere": "Un corporatist insomniac formează un club de lupte subteran alături de un vânzător de săpun anarhist.",
       "cale_imagine": "fightclub.jpg",
-      "titlu": "Fight Club: Anarhia",
-      "descriere": "Când iluziile societății moderne se destramă.",
-      "sfert_ora": "3",
-      "alt": "Fight club poster landscape"
+      "alt": "Poster Fight Club",
+      "sfert_ora": "2"
     },
     {
-      "cale_imagine": "interstellar.jpg",
-      "titlu": "Interstellar: Singularitatea",
-      "descriere": "O legătură dincolo de spațiu și timp salvează omenirea.",
-      "sfert_ora": "3",
-      "alt": "Interstellar cosmic voyage"
-    },
-    {
+      "titlu": "La Haine",
+      "descriere": "Povestea a 24 de ore din viața a trei tineri din suburbiile Parisului după o noapte de revolte violente.",
       "cale_imagine": "lahaine.jpg",
-      "titlu": "La Haine: Conflictul",
-      "descriere": "Furia acumulată explodează în stradă pe parcursul nopții.",
-      "sfert_ora": "3",
-      "alt": "La Haine cinematic shot"
+      "alt": "Poster La Haine",
+      "sfert_ora": "2"
     },
     {
+      "titlu": "Marty Supreme",
+      "descriere": "Viața unui jucător profesionist de tenis de masă și provocările sale în circuitul internațional.",
       "cale_imagine": "martysupreme.jpg",
-      "titlu": "Marty Supreme: Tenisul de Masă",
-      "descriere": "O legendă reinventată într-un stil de neegalat.",
-      "sfert_ora": "3",
-      "alt": "Marty Supreme dynamic scene"
+      "alt": "Poster Marty Supreme",
+      "sfert_ora": "3"
     },
     {
+      "titlu": "No Country for Old Men",
+      "descriere": "Un vânător găsește o geantă cu bani din droguri, fiind urmărit de un asasin psihopat necruțător.",
       "cale_imagine": "nocountryforoldmen.jpg",
-      "titlu": "No Country: Confruntarea",
-      "descriere": "Într-o lume lipsită de reguli clare, supraviețuirea e la noroc.",
-      "sfert_ora": "3",
-      "alt": "No Country desert sunset"
+      "alt": "Poster No Country for Old Men",
+      "sfert_ora": "3"
     },
     {
+      "titlu": "No Other Choice",
+      "descriere": "Un thriller tensionat unde protagonistul trebuie să ia o decizie imposibilă pentru a-și salva familia.",
       "cale_imagine": "nootherchoice.jpg",
-      "titlu": "No Other Choice: Adevărul",
-      "descriere": "Secretele ies la iveală în momentele critice.",
-      "sfert_ora": "3",
-      "alt": "No Other Choice action posture"
+      "alt": "Poster No Other Choice",
+      "sfert_ora": "3"
     },
     {
+      "titlu": "Parasite",
+      "descriere": "O familie săracă se infiltrează inteligent în casa unei familii bogate, ducând la consecințe imprevizibile.",
       "cale_imagine": "parasite.jpg",
-      "titlu": "Parasite: Subsolul",
-      "descriere": "Adevărata față a diferențelor sociale se dezvăluie brusc.",
-      "sfert_ora": "3",
-      "alt": "Parasite architectural mansion"
+      "alt": "Poster Parasite",
+      "sfert_ora": "3"
     },
     {
+      "titlu": "The Truman Show",
+      "descriere": "Un agent de asigurări descoperă că întreaga sa viață este de fapt un reality show urmărit de milioane de oameni.",
       "cale_imagine": "thetrumanshow.jpg",
-      "titlu": "Truman: Evadarea",
-      "descriere": "Îndrăzneala de a trece dincolo de decorurile vieții.",
-      "sfert_ora": "3",
-      "alt": "Truman waving under dome"
+      "alt": "Poster The Truman Show",
+      "sfert_ora": "3"
     },
     {
-      "cale_imagine": "challengers.jpg",
-      "titlu": "Challengers: Rivalii",
-      "descriere": "Punctul decisiv într-o ecuație amoroasă complicată.",
-      "sfert_ora": "3",
-      "alt": "Challengers court tension"
+      "titlu": "The Matrix",
+      "descriere": "Un hacker descoperă că lumea sa este de fapt o simulare.",
+      "cale_imagine": "filme/matrix.webp",
+      "alt": "Poster The Matrix",
+      "sfert_ora": "3"
     },
     {
-      "cale_imagine": "dune.jpg",
-      "titlu": "Dune: Puterea Mirodeniei",
-      "descriere": "Cea mai mare epopee S.F. a generației noastre.",
-      "sfert_ora": "4",
-      "alt": "Dune movie poster landscape",
-      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
+      "titlu": "Inception",
+      "descriere": "Un hoț care fură secrete corporative prin utilizarea tehnologiei viselor.",
+      "cale_imagine": "filme/inception.webp",
+      "alt": "Poster Inception",
+      "sfert_ora": "3"
     },
     {
-      "cale_imagine": "fightclub.jpg",
-      "titlu": "Fight Club: Tyler Durden",
-      "descriere": "O minte dedublată și renașterea prin haos organizat.",
-      "sfert_ora": "4",
-      "alt": "Fight club poster landscape"
+      "titlu": "The Godfather",
+      "descriere": "Liderul în vârstă al unei dinastii de crimă organizată.",
+      "cale_imagine": "filme/godfather.webp",
+      "alt": "Poster The Godfather",
+      "sfert_ora": "3"
     },
     {
-      "cale_imagine": "interstellar.jpg",
-      "titlu": "Interstellar: Dincolo de Stele",
-      "descriere": "O capodoperă despre dragoste, gravitație și explorare cosmică.",
-      "sfert_ora": "4",
-      "alt": "Interstellar cosmic voyage"
+      "titlu": "The Dark Knight",
+      "descriere": "Amenințarea cunoscută sub numele de Joker provoacă haos.",
+      "cale_imagine": "filme/darkknight.webp",
+      "alt": "Poster The Dark Knight",
+      "sfert_ora": "3"
     },
     {
-      "cale_imagine": "lahaine.jpg",
-      "titlu": "La Haine: Punctul Critic",
-      "descriere": "Nu contează căderea, ci aterizarea.",
-      "sfert_ora": "4",
-      "alt": "La Haine cinematic shot"
+      "titlu": "Forrest Gump",
+      "descriere": "Evenimentele majore din istoria SUA prin ochii unui om simplu.",
+      "cale_imagine": "filme/forrestgump.webp",
+      "alt": "Poster Forrest Gump",
+      "sfert_ora": "3"
     },
     {
-      "cale_imagine": "martysupreme.jpg",
-      "titlu": "Marty Supreme: Ascensiunea",
-      "descriere": "Spectacolul desăvârșit al unei minți neînțelese.",
-      "sfert_ora": "4",
-      "alt": "Marty Supreme dynamic scene"
+      "titlu": "Star Wars: A New Hope",
+      "descriere": "Luke Skywalker face echipă cu un Jedi pentru a salva galaxia.",
+      "cale_imagine": "filme/starwars.webp",
+      "alt": "Poster Star Wars: A New Hope",
+      "sfert_ora": "4"
     },
     {
-      "cale_imagine": "nocountryforoldmen.jpg",
-      "titlu": "No Country: Nicio Șansă",
-      "descriere": "Un thriller neo-western de o intensitate copleșitoare.",
-      "sfert_ora": "4",
-      "alt": "No Country desert sunset"
+      "titlu": "The Avengers",
+      "descriere": "Cei mai puternici eroi trebuie să se adune pentru a opri o armată extraterestră.",
+      "cale_imagine": "filme/avengers.webp",
+      "alt": "Poster The Avengers",
+      "sfert_ora": "4"
     },
     {
-      "cale_imagine": "nootherchoice.jpg",
-      "titlu": "No Other Choice: Epilog",
-      "descriere": "Urmările unor alegeri inevitabile și extrem de dure.",
-      "sfert_ora": "4",
-      "alt": "No Other Choice action posture"
+      "titlu": "Jurassic Park",
+      "descriere": "Un parc tematic cu dinozauri clonați scapă de sub control.",
+      "cale_imagine": "filme/jurassicpark.webp",
+      "alt": "Poster Jurassic Park",
+      "sfert_ora": "4"
     },
     {
-      "cale_imagine": "parasite.jpg",
-      "titlu": "Parasite: Ploaia",
-      "descriere": "O noapte furtunoasă spală iluziile confortului aparent.",
-      "sfert_ora": "4",
-      "alt": "Parasite architectural mansion"
+      "titlu": "Spider-Man: No Way Home",
+      "descriere": "Peter Parker îi cere ajutorul Doctorului Strange.",
+      "cale_imagine": "filme/spiderman.webp",
+      "alt": "Poster Spider-Man: No Way Home",
+      "sfert_ora": "4"
     },
     {
-      "cale_imagine": "thetrumanshow.jpg",
-      "titlu": "Truman: Bună Dimineața!",
-      "descriere": "În caz că nu ne mai vedem: o zi bună și o noapte bună!",
-      "sfert_ora": "4",
-      "alt": "Truman waving under dome"
+      "titlu": "Shrek",
+      "descriere": "Un căpcăun morocănos pornește într-o misiune pentru a salva o prințesă.",
+      "cale_imagine": "filme/shrek.webp",
+      "alt": "Poster Shrek",
+      "sfert_ora": "4"
     },
     {
-      "cale_imagine": "challengers.jpg",
-      "titlu": "Challengers: Campionatul",
-      "descriere": "Ultima minge de meci decide viitorul tuturor.",
-      "sfert_ora": "4",
-      "alt": "Challengers court tension"
+      "titlu": "Toy Story",
+      "descriere": "Aventurile lui Woody și Buzz Lightyear.",
+      "cale_imagine": "filme/toystory.webp",
+      "alt": "Poster Toy Story",
+      "sfert_ora": "4"
+    },
+    {
+      "titlu": "Titanic",
+      "descriere": "O poveste de dragoste la bordul legendarului R.M.S. Titanic.",
+      "cale_imagine": "filme/titanic.webp",
+      "alt": "Poster Titanic",
+      "sfert_ora": "4"
+    },
+    {
+      "titlu": "The Lord of the Rings",
+      "descriere": "Un hobbit moștenește Inelul Unic și trebuie să-l distrugă.",
+      "cale_imagine": "filme/lotr.webp",
+      "alt": "Poster The Lord of the Rings",
+      "sfert_ora": "4"
+    },
+    {
+      "titlu": "Gladiator",
+      "descriere": "Un general roman trădat caută răzbunare ca gladiator.",
+      "cale_imagine": "filme/gladiator.webp",
+      "alt": "Poster Gladiator",
+      "sfert_ora": "4"
+    },
+    {
+      "titlu": "Se7en",
+      "descriere": "Doi detectivi vânează un criminal în serie obsedat de cele 7 păcate capitale.",
+      "cale_imagine": "filme/seven.webp",
+      "alt": "Poster Se7en",
+      "sfert_ora": "4"
     }
   ]
 }
