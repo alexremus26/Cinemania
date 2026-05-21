@@ -2,6 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const sass = require('sass');
+const sharp = require('sharp');
 
 const app = express();
 const PORT = 8080;
@@ -33,6 +34,7 @@ function toClientImagePath(basePath, imagePath) {
     return path.posix.join(basePath, imagePath);
 }
 
+// Compilare automata scss (0.25p)
 function compileazaScss(caleScss, caleCss) {
     try {
         // Resolve paths
@@ -48,7 +50,9 @@ function compileazaScss(caleScss, caleCss) {
         // Backup old CSS if it exists
         if (fs.existsSync(pathCss)) {
             const backupDir = path.join(__dirname, 'backup', 'resurse', 'css');
-            const cssFileName = path.basename(pathCss);
+            const parsedCssPath = path.parse(pathCss);
+            const timestamp = Date.now();
+            const cssFileName = `${parsedCssPath.name}_${timestamp}${parsedCssPath.ext}`;
             const backupPath = path.join(backupDir, cssFileName);
             
             try {
@@ -424,20 +428,177 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     });
 }
 
-function getQuarterHour(date) {
-    const minutes = date.getMinutes();
-    return Math.floor(minutes / 15) + 1;
+// Variable to mock the current date and time for testing the 4 gallery quarters
+// Example: const GALERIE_TEST_DATE = new Date("2026-05-20T22:35:00"); // Quarter 3
+const GALERIE_TEST_DATE = null;
+
+async function asiguraImaginiDimensionate(imagine, basePath) {
+    // TODO(security): Prevent directory traversal by sanitizing image filename using path.basename()
+    const originalBasename = path.basename(imagine.cale_imagine);
+    const originalPath = path.join(__dirname, 'resurse', 'imagini', originalBasename);
+    
+    const mediuDir = path.join(__dirname, 'resurse', 'imagini', 'mediu');
+    const micDir = path.join(__dirname, 'resurse', 'imagini', 'mic');
+    
+    if (!fs.existsSync(mediuDir)) {
+        fs.mkdirSync(mediuDir, { recursive: true });
+    }
+    if (!fs.existsSync(micDir)) {
+        fs.mkdirSync(micDir, { recursive: true });
+    }
+    
+    const mediuPath = path.join(mediuDir, originalBasename);
+    const micPath = path.join(micDir, originalBasename);
+    
+    if (fs.existsSync(originalPath)) {
+        try {
+            if (!fs.existsSync(mediuPath)) {
+                await sharp(originalPath)
+                    .resize({ width: 300 })
+                    .toFile(mediuPath);
+            }
+            if (!fs.existsSync(micPath)) {
+                await sharp(originalPath)
+                    .resize({ width: 150 })
+                    .toFile(micPath);
+            }
+        } catch (error) {
+            console.error(`Error generating resized images for ${originalBasename}:`, error);
+        }
+    }
 }
 
-function filterGaleryByQuarter(date, obGalerie) {
-    // Display first 10 images to match 3x4 desktop O-shape layout
-    return obGalerie.imagini.slice(0, 10).map((imagine) => ({
+async function filterGaleryByQuarter(date, obGalerie) {
+    const targetDate = GALERIE_TEST_DATE || date;
+    const minutes = targetDate.getMinutes();
+    const currentQuarter = Math.floor(minutes / 15) + 1;
+    
+    if (!obGalerie || !obGalerie.imagini) {
+        return [];
+    }
+    
+    // Filter images matching current quarter
+    const matchingImagini = obGalerie.imagini.filter(img => parseInt(img.sfert_ora) === currentQuarter);
+    
+    // Truncate to maximum 10 items
+    const truncatedImagini = matchingImagini.slice(0, 10);
+    
+    // Asynchronously verify and generate medium/small dimensions using sharp
+    for (const img of truncatedImagini) {
+        await asiguraImaginiDimensionate(img, obGalerie.cale_galerie);
+    }
+    
+    return truncatedImagini.map((imagine) => ({
         ...imagine,
         cale_galerie: obGalerie.cale_galerie,
         alt: imagine.alt || imagine.cale_imagine
     }));
 }
 
+const GALERIE_ANIMATA_CONFIG = {
+    minCount: 5,
+    maxCount: 11,
+    perImageSeconds: 3.5,
+    borderImage: '/resurse/imagini/cinematografe-harta.svg'
+};
+
+function getRandomOdd(min, max) {
+    const minOdd = min % 2 === 0 ? min + 1 : min;
+    const maxOdd = max % 2 === 0 ? max - 1 : max;
+
+    if (minOdd > maxOdd) {
+        return min;
+    }
+
+    const countOdds = Math.floor((maxOdd - minOdd) / 2) + 1;
+    return minOdd + 2 * Math.floor(Math.random() * countOdds);
+}
+
+function buildGalerieAnimataItems() {
+    let galerieSource;
+
+    try {
+        const jsonPath = path.join(__dirname, 'resurse', 'documente', 'galerie.json');
+        const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
+        const parsed = JSON.parse(jsonContent);
+        const basePath = parsed.cale_galerie && parsed.cale_galerie.startsWith('/')
+            ? parsed.cale_galerie
+            : `/${parsed.cale_galerie || 'resurse/imagini'}`;
+        parsed.cale_galerie = basePath;
+        galerieSource = parsed;
+    } catch (error) {
+        console.error('[GALERIE ANIMATA] Failed to load galerie.json:', error.message);
+        return { items: [], targetCount: 0 };
+    }
+
+    const targetCount = getRandomOdd(GALERIE_ANIMATA_CONFIG.minCount, GALERIE_ANIMATA_CONFIG.maxCount);
+    const seen = new Set();
+    const items = [];
+
+    for (let i = galerieSource.imagini.length - 1; i >= 0 && items.length < targetCount; i--) {
+        const imagine = galerieSource.imagini[i];
+        const key = imagine.cale_imagine;
+
+        if (!key || seen.has(key)) {
+            continue;
+        }
+
+        seen.add(key);
+        items.push({
+            ...imagine,
+            cale_galerie: galerieSource.cale_galerie,
+            alt: imagine.alt || imagine.cale_imagine
+        });
+    }
+
+    if (items.length % 2 === 0 && items.length > 1) {
+        items.pop();
+    }
+
+    if (items.length < GALERIE_ANIMATA_CONFIG.minCount) {
+        console.warn(`[GALERIE ANIMATA] Not enough distinct images. Found ${items.length}, expected at least ${GALERIE_ANIMATA_CONFIG.minCount}.`);
+    }
+
+    if (items.length === 0) {
+        console.warn('[GALERIE ANIMATA] No images available for the animated gallery.');
+    }
+
+    return { items, targetCount };
+}
+
+function compileGalerieAnimataCss(imageCount) {
+    if (!imageCount || imageCount < GALERIE_ANIMATA_CONFIG.minCount) {
+        return '';
+    }
+
+    const scssContent = `
+@use "galerie-animata" with (
+  $galerie-animata-count: ${imageCount},
+  $galerie-animata-duration: ${GALERIE_ANIMATA_CONFIG.perImageSeconds}s,
+  $galerie-animata-border-image: "${GALERIE_ANIMATA_CONFIG.borderImage}"
+);
+`;
+
+    try {
+        const result = sass.compileString(scssContent, {
+            style: 'compressed',
+            loadPaths: [obGlobal.folderScss, path.join(__dirname, 'node_modules')],
+            quietDeps: true
+        });
+        return result.css;
+    } catch (error) {
+        console.error('[GALERIE ANIMATA] Failed to compile CSS:', error.message);
+        return '';
+    }
+}
+
+function getGalerieAnimataRenderData() {
+    const { items, targetCount } = buildGalerieAnimataItems();
+    const css = compileGalerieAnimataCss(items.length || targetCount);
+    return { items, css };
+}
+
+// Galeria statica (0.35p)
 function initGalerie() {
     const jsonPath = path.join(__dirname, 'resurse', 'documente', 'galerie.json');
     try {
@@ -476,7 +637,16 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use((req, res, next) => {
+    res.set('X-Debug', '1');
     res.locals.ipUtilizator = req.ip;
+    next();
+});
+
+app.use((req, res, next) => {
+    const galerieAnimataData = getGalerieAnimataRenderData();
+    res.locals.galerieAnimata = galerieAnimataData.items;
+    res.locals.galerieAnimataCss = galerieAnimataData.css;
+    res.locals.galerieAnimataSourceCount = galerieAnimataData.items.length;
     next();
 });
 
@@ -516,10 +686,10 @@ app.get(['/index', '/index.html', '/index.ejs'], (req, res) => {
     res.redirect('/');
 });
 
-app.get(['/', '/index', '/home'], (req, res) => {
+app.get(['/', '/index', '/home'], async (req, res) => {
     const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
 
-    const galerieDate = filterGaleryByQuarter(new Date(), obGlobal.obGalerie);
+    const galerieDate = await filterGaleryByQuarter(new Date(), obGlobal.obGalerie);
 
     res.render('pagini/index', {
         videoWebm,
@@ -531,16 +701,26 @@ app.get(['/', '/index', '/home'], (req, res) => {
 
 app.get('/program', (req, res) => {
     const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
+    const galerieAnimataData = getGalerieAnimataRenderData();
+
+    if (!Array.isArray(galerieAnimataData.items) || galerieAnimataData.items.length === 0) {
+        const totalImages = obGlobal.obGalerie && Array.isArray(obGlobal.obGalerie.imagini)
+            ? obGlobal.obGalerie.imagini.length
+            : 0;
+        console.warn(`[GALERIE ANIMATA] Program page has no items. Total galerie images: ${totalImages}.`);
+    }
 
     res.render('pagini/program', {
         videoWebm,
         videoMp4,
-        videoPoster
+        videoPoster,
+        galerieAnimata: galerieAnimataData.items,
+        galerieAnimataCss: galerieAnimataData.css
     });
 });
 
-app.get('/galerie', (req, res) => {
-    const galerieDate = filterGaleryByQuarter(new Date(), obGlobal.obGalerie);
+app.get('/galerie', async (req, res) => {
+    const galerieDate = await filterGaleryByQuarter(new Date(), obGlobal.obGalerie);
     res.render('pagini/galerie', {
         galerieDate
     });

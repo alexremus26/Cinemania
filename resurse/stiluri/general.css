@@ -636,6 +636,7 @@ footer a[href^="http"]:hover::before {
 #welcome .intro { margin-bottom: 10px; }
 #welcome .galerie-grid { margin-top: 14px; }
 
+/* Reflexie (0.15p) - Cerință individuală */
 .reflect-title {
     display: inline-flex;
     flex-direction: column;
@@ -792,6 +793,7 @@ footer a[href^="http"]:hover::before {
     margin: 14px auto 0;
 }
 
+/* Scrierea textului pe coloane (0.025p) */
 .promo-columns-text {
     margin: 14px 0 0 0;
     color: rgba(245, 245, 245, 0.9);
@@ -801,6 +803,7 @@ footer a[href^="http"]:hover::before {
     column-rule: 1px solid rgba(229, 177, 67, 0.35);
 }
 
+/* Stilizare hr (0.1p) - Cerință individuală */
 .cinema-hr {
     height: 10px;
     border: 0;
@@ -1062,6 +1065,7 @@ math mrow mi {
 
 /* Etapa 5: efecte CSS (ajustate dupa feedback) */
 
+/* text care se plimba orizontal sau vertical (0.05p) */
 .anunt-recurent {
     width: 100%;
     max-width: 100%;
@@ -1121,6 +1125,7 @@ math mrow mi {
     }
 }
 
+/* Schimbarea afișării implicite a textului selectat (0.025p) */
 ::selection {
     background: var(--clr-gold);
     color: var(--clr-pure-black);

@@ -1,0 +1,154 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+$galerie-animata-count: 7 !default;
+$galerie-animata-duration: 3.5s !default;
+$galerie-animata-border-image: "/resurse/imagini/cinematografe-harta.svg" !default;
+$galerie-animata-height: 420px !default;
+$galerie-animata-border-slice: 28 !default;
+$galerie-animata-border-width: 10px !default;
+
+$galerie-animata-total: $galerie-animata-duration * $galerie-animata-count;
+
+// Procentajul din ciclul total pe care fiecare imagine il ocupa.
+$per: 100 / $galerie-animata-count;
+
+// Fazele animatiei in interiorul ferestrei active (0% -> $per%)
+// $kf-hold: pauza initiala, imagine complet vizibila
+// $kf-shrink: cercul se micsoreaza, FARA rotatie, opacity: 1
+// $kf-spin: cercul a ajuns mic (ex. 10%) si porneste rotatia + fade-out
+// $kf-exit: complet disparut
+$kf-hold: $per * 0.15;
+$kf-shrink: $per * 0.65;
+$kf-spin: $per * 0.85;
+$kf-exit: $per;
+
+// Fazele pentru ascundere si asteptare dedesubt (z-index manipulation)
+$kf-hide-start: $per + 0.001;
+$kf-hide-end: 100 - $per;
+$kf-show-start: 100 - $per + 0.001;
+
+.galerie-animata {
+  display: none;
+  position: relative;
+  width: min(100%, 920px);
+  height: $galerie-animata-height;
+  margin: 1rem auto 0;
+  border: $galerie-animata-border-width solid transparent;
+  border-image: url(#{$galerie-animata-border-image}) $galerie-animata-border-slice round;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0f0f0f;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+@media (min-width: #{$bp-medium + 1}) {
+  .galerie-animata {
+    display: block;
+  }
+}
+
+.galerie-animata__item {
+  @include absolute-fill;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  animation: galerie-animata-cycle $galerie-animata-total linear infinite;
+  transform-origin: center;
+  will-change: clip-path, transform, opacity, z-index;
+}
+
+.galerie-animata__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.galerie-animata__empty {
+  @include absolute-fill;
+  @include flex-center;
+  color: #f1f1f1;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.galerie-animata:hover .galerie-animata__item {
+  animation-play-state: paused;
+}
+
+// Distribuim imaginile in timp.
+// Folosind `(Count - i + 1) % Count`, setam delay-uri negative astfel incat:
+// 1. Imaginea 1 incepe la 0s.
+// 2. Imaginea 2 "asteapta" dedesubt (fiind la finalul ciclului ei cand porneste pag).
+// Astfel respectam si z-index-urile si ordinea logica.
+@for $i from 1 through $galerie-animata-count {
+  $d: ($galerie-animata-count - $i + 1) % $galerie-animata-count;
+  .galerie-animata__item:nth-child(#{$i}) {
+    animation-delay: -#{$d * $galerie-animata-duration};
+  }
+}
+
+// Animația EXACT conform descrierii:
+// 1. Cercul descrește (până la $kf-shrink) fără efect de spin.
+// 2. Când e mic, SE BAGĂ efectul de spin și opacity fade (până la $kf-exit).
+// 3. Folosim z-index pentru a menține imaginea curentă deasupra în timpul tranziției,
+//    și dedesubt când se pregătește să apară iar.
+@keyframes galerie-animata-cycle {
+  0% {
+    z-index: 10;
+    opacity: 1;
+    clip-path: circle(75% at 50% 50%);
+    transform: rotate(0deg);
+  }
+  #{percentage($kf-hold / 100)} {
+    z-index: 10;
+    opacity: 1;
+    clip-path: circle(75% at 50% 50%);
+    transform: rotate(0deg);
+  }
+  #{percentage($kf-shrink / 100)} {
+    z-index: 10;
+    opacity: 1;
+    clip-path: circle(25% at 50% 50%);
+    transform: rotate(0deg);
+  }
+  #{percentage($kf-spin / 100)} {
+    z-index: 10;
+    opacity: 0.3;
+    clip-path: circle(5% at 50% 50%);
+    transform: rotate(90deg);
+  }
+  #{percentage($kf-exit / 100)} {
+    z-index: 10;
+    opacity: 0;
+    clip-path: circle(0% at 50% 50%);
+    transform: rotate(180deg);
+  }
+  #{percentage($kf-hide-start / 100)} {
+    z-index: 0;
+    opacity: 0;
+    clip-path: circle(0% at 50% 50%);
+    transform: rotate(0deg);
+  }
+  #{percentage($kf-hide-end / 100)} {
+    z-index: 0;
+    opacity: 0;
+    clip-path: circle(0% at 50% 50%);
+    transform: rotate(0deg);
+  }
+  #{percentage($kf-show-start / 100)} {
+    z-index: 1;
+    opacity: 1;
+    clip-path: circle(75% at 50% 50%);
+    transform: rotate(0deg);
+  }
+  100% {
+    z-index: 1;
+    opacity: 1;
+    clip-path: circle(75% at 50% 50%);
+    transform: rotate(0deg);
+  }
+}

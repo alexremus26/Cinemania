@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+	<%- include('../fragmente/head') %>
+	<title>Galerie Imagini - Cinemania</title>
+</head>
+<body>
+	<%- include('../fragmente/header') %>
+
+	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
+		<section id="galerie-imagini">
+			<h1>Galerie Imagini</h1>
+			<p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
+				Descoperă cele mai emblematice imagini din universul Cinemania, randate în funcție de sfertul de oră curent.
+			</p>
+
+			<%- include('../fragmente/galerie') %>
+		</section>
+	</main>
+
+	<%- include('../fragmente/footer') %>
+</body>
+</html>

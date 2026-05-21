@@ -9,10 +9,6 @@
 
 	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
 		<section id="program-filme">
-			<h1>Program Filme</h1>
-			<p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">
-				Programul actualizat al săptămânii, trailerul principal și documentul PDF cu orele complete.
-			</p>
 
 			<section id="video-prezentare-section" style="margin-bottom: 2.5rem;">
 				<h2>Trailer Dune 3</h2>
@@ -48,61 +44,27 @@
 			</section>
 
 			<h2>Filmele Momentului</h2>
-			<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
-				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-					<img src="/resurse/imagini/dune.jpg" class="card-img-top" alt="Dune" style="height: 250px; object-fit: cover;">
-					<div class="card-body">
-						<h3 class="card-title">Dune</h3>
-						<p class="card-text" style="color: #666;">SF epic pe ecran mare, disponibil în 4DX și IMAX.</p>
-						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
-					</div>
-				</div>
-
-				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-					<img src="/resurse/imagini/fightclub.jpg" class="card-img-top" alt="Fight Club" style="height: 250px; object-fit: cover;">
-					<div class="card-body">
-						<h3 class="card-title">Fight Club</h3>
-						<p class="card-text" style="color: #666;">Re-release cult, proiecții seara în format 2D.</p>
-						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
-					</div>
-				</div>
-
-				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-					<img src="/resurse/imagini/interstellar.jpg" class="card-img-top" alt="Interstellar" style="height: 250px; object-fit: cover;">
-					<div class="card-body">
-						<h3 class="card-title">Interstellar</h3>
-						<p class="card-text" style="color: #666;">Experiență IMAX, cu sunet Dolby Atmos.</p>
-						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
-					</div>
-				</div>
-
-				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-					<img src="/resurse/imagini/parasite.jpg" class="card-img-top" alt="Parasite" style="height: 250px; object-fit: cover;">
-					<div class="card-body">
-						<h3 class="card-title">Parasite</h3>
-						<p class="card-text" style="color: #666;">Thriller premiat, proiecții de weekend.</p>
-						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
-					</div>
-				</div>
-
-				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-					<img src="/resurse/imagini/thetrumanshow.jpg" class="card-img-top" alt="The Truman Show" style="height: 250px; object-fit: cover;">
-					<div class="card-body">
-						<h3 class="card-title">The Truman Show</h3>
-						<p class="card-text" style="color: #666;">Clasic modern în sloturile de după-amiază.</p>
-						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
-					</div>
-				</div>
-
-				<div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-					<img src="/resurse/imagini/challengers.jpg" class="card-img-top" alt="Challengers" style="height: 250px; object-fit: cover;">
-					<div class="card-body">
-						<h3 class="card-title">Challengers</h3>
-						<p class="card-text" style="color: #666;">Dramă sportivă nou intrată în program.</p>
-						<a href="/bilete" class="btn btn-primary btn-sm btn-block" style="width: 100%; margin-top: 1rem;">Rezervă Bilet</a>
-					</div>
-				</div>
+			<!-- Galerie animata -->
+			<% if (typeof galerieAnimataCss !== 'undefined' && galerieAnimataCss) { %>
+				<style><%- galerieAnimataCss %></style>
+			<% } %>
+			<div class="galerie-animata" aria-label="Galerie animata filme" data-count="<%= (typeof galerieAnimata !== 'undefined' && Array.isArray(galerieAnimata)) ? galerieAnimata.length : 0 %>" data-source-count="<%= typeof galerieAnimataSourceCount !== 'undefined' ? galerieAnimataSourceCount : 0 %>">
+				<% if (typeof galerieAnimata !== 'undefined' && galerieAnimata.length > 0) { %>
+					<% galerieAnimata.forEach((imagine) => { %>
+						<figure class="galerie-animata__item">
+							<img
+								class="galerie-animata__img"
+								src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>"
+								alt="<%= imagine.alt || imagine.cale_imagine %>"
+								title="<%= imagine.titlu || imagine.descriere || imagine.cale_imagine %>"
+							>
+						</figure>
+					<% }); %>
+				<% } else { %>
+					<div class="galerie-animata__empty">Galeria nu este disponibila.</div>
+				<% } %>
 			</div>
+			<!-- End Galerie animata -->
 
 			<section style="margin-top: 3rem;">
 				<h2>Program Actualizat - Săptămâna Curentă</h2>

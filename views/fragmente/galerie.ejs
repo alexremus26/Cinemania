@@ -1,4 +1,5 @@
 <style>
+	/* Galeria statica (0.35p) */
 	.galerie-grid {
 		display: grid;
 		gap: 1.5rem;
@@ -7,7 +8,7 @@
 		counter-reset: galerie-counter;
 	}
 
-	/* Large screens: 3-2-2-3 O-shape layout */
+	/* Large screens: 3x4 O-shape layout (10 elements) */
 	@media (min-width: 1024px) {
 		.galerie-grid {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -26,7 +27,6 @@
 		.galerie-item:nth-child(8) { grid-column: 1; grid-row: 4; }
 		.galerie-item:nth-child(9) { grid-column: 2; grid-row: 4; }
 		.galerie-item:nth-child(10) { grid-column: 3; grid-row: 4; }
-		}
 	}
 
 	/* Medium screens: 2 columns */
@@ -78,14 +78,18 @@
 		display: block;
 		aspect-ratio: 16 / 10;
 		object-fit: cover;
-		transition: transform 0.35s ease-in-out;
-		border: none;
+		border: 0px solid #E5B143; /* Base color or var(--clr-gold) */
+		box-sizing: border-box;
+		transition: transform 1.2s ease-in-out, border-width 1.2s ease-in-out;
 	}
 
-	.galerie-item img:hover {
-		transform: scale(1.03);
+	/* Hover transition: scales by 25%, rotates 10deg left, border grows to 4px, takes 1.2s */
+	.galerie-item:hover img {
+		transform: scale(1.25) rotate(-10deg);
+		border-width: 4px;
 	}
 
+	/* Duotone (0.05p) - Cerință individuală */
 	.dune-duotone .galerie-media {
 		isolation: isolate;
 	}
@@ -163,14 +167,18 @@
 		<% galerieDate.forEach((imagine, idx) => { %>
 			<figure class="galerie-item<%= idx === 0 ? ' dune-duotone' : '' %>">
 				<div class="galerie-media">
-					<img 
-						src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>" 
-						alt="<%= imagine.alt || imagine.cale_imagine %>"
-						title="<%= imagine.descriere %>"
-					>
+					<picture>
+						<source srcset="<%= (imagine.cale_galerie || '/resurse/imagini') + '/mic/' + imagine.cale_imagine %>" media="(max-width: 576px)">
+						<source srcset="<%= (imagine.cale_galerie || '/resurse/imagini') + '/mediu/' + imagine.cale_imagine %>" media="(max-width: 1024px)">
+						<img 
+							src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>" 
+							alt="<%= imagine.alt || imagine.cale_imagine %>"
+							title="<%= imagine.descriere %>"
+						>
+					</picture>
 				</div>
 				<figcaption>
-					<%= imagine.titlu %>
+					<strong><%= imagine.titlu %></strong>: <%= imagine.descriere %>
 					<% if (imagine.credit) { %>
 						<div class="galerie-credit"><%= imagine.credit %></div>
 					<% } %>

@@ -3,63 +3,287 @@
   "imagini": [
     {
       "cale_imagine": "dune.jpg",
-      "titlu": "Dune",
-      "descriere": "Dune movie poster",
-      "alt": "Dune poster"
+      "titlu": "Dune: Part One",
+      "descriere": "O călătorie mitică și încărcată de emoții a unui erou.",
+      "sfert_ora": "1",
+      "alt": "Dune movie poster landscape",
+      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
     },
     {
       "cale_imagine": "fightclub.jpg",
       "titlu": "Fight Club",
-      "descriere": "Fight Club movie poster",
-      "alt": "Fight Club poster"
+      "descriere": "Un angajat nemulțumit de birou și un săpunar nonconformist.",
+      "sfert_ora": "1",
+      "alt": "Fight club poster landscape"
     },
     {
       "cale_imagine": "interstellar.jpg",
       "titlu": "Interstellar",
-      "descriere": "Interstellar movie poster",
-      "alt": "Interstellar poster"
+      "descriere": "O echipă de exploratori călătorește printr-o gaură de vierme.",
+      "sfert_ora": "1",
+      "alt": "Interstellar cosmic voyage"
     },
     {
       "cale_imagine": "lahaine.jpg",
       "titlu": "La Haine",
-      "descriere": "La Haine movie poster",
-      "alt": "La Haine poster"
+      "descriere": "Trei tineri din suburbiile Parisului trăiesc o zi tensionată.",
+      "sfert_ora": "1",
+      "alt": "La Haine cinematic shot"
     },
     {
       "cale_imagine": "martysupreme.jpg",
       "titlu": "Marty Supreme",
-      "descriere": "Marty Supreme movie poster",
-      "alt": "Marty Supreme poster"
+      "descriere": "O incursiune de excepție în lumea tenisului de masă.",
+      "sfert_ora": "1",
+      "alt": "Marty Supreme dynamic scene"
     },
     {
       "cale_imagine": "nocountryforoldmen.jpg",
       "titlu": "No Country for Old Men",
-      "descriere": "No Country for Old Men movie poster",
-      "alt": "No Country for Old Men poster"
+      "descriere": "Violență și haos se dezlănțuie după ce o afacere dă greș.",
+      "sfert_ora": "1",
+      "alt": "No Country desert sunset"
     },
     {
       "cale_imagine": "nootherchoice.jpg",
       "titlu": "No Other Choice",
-      "descriere": "No Other Choice movie poster",
-      "alt": "No Other Choice poster"
+      "descriere": "Tensiune dramatică și decizii la limita supraviețuirii.",
+      "sfert_ora": "1",
+      "alt": "No Other Choice action posture"
     },
     {
       "cale_imagine": "parasite.jpg",
       "titlu": "Parasite",
-      "descriere": "Parasite movie poster",
-      "alt": "Parasite poster"
+      "descriere": "Lăcomia și discriminarea de clasă amenință o relație.",
+      "sfert_ora": "1",
+      "alt": "Parasite architectural mansion"
     },
     {
       "cale_imagine": "thetrumanshow.jpg",
       "titlu": "The Truman Show",
-      "descriere": "The Truman Show movie poster",
-      "alt": "The Truman Show poster"
+      "descriere": "Un agent de asigurări descoperă că viața lui e o emisiune.",
+      "sfert_ora": "1",
+      "alt": "Truman waving under dome"
     },
     {
       "cale_imagine": "challengers.jpg",
       "titlu": "Challengers",
-      "descriere": "Challengers movie poster",
-      "alt": "Challengers poster"
+      "descriere": "Trei jucători de tenis se întâlnesc din nou într-un turneu.",
+      "sfert_ora": "1",
+      "alt": "Challengers court tension"
+    },
+    {
+      "cale_imagine": "dune.jpg",
+      "titlu": "Dune: Destinul lui Paul",
+      "descriere": "Lupta pentru controlul celei mai valoroase substanțe.",
+      "sfert_ora": "2",
+      "alt": "Dune movie poster landscape",
+      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
+    },
+    {
+      "cale_imagine": "fightclub.jpg",
+      "titlu": "Fight Club: Proiectul Chaos",
+      "descriere": "Eliberarea prin auto-distrugere fizică și mentală.",
+      "sfert_ora": "2",
+      "alt": "Fight club poster landscape"
+    },
+    {
+      "cale_imagine": "interstellar.jpg",
+      "titlu": "Interstellar: Căutarea",
+      "descriere": "Călătoria cosmică dincolo de orizontul cunoașterii.",
+      "sfert_ora": "2",
+      "alt": "Interstellar cosmic voyage"
+    },
+    {
+      "cale_imagine": "lahaine.jpg",
+      "titlu": "La Haine: Orașul Rebel",
+      "descriere": "Realitatea dură a marginalizării sociale pariziene.",
+      "sfert_ora": "2",
+      "alt": "La Haine cinematic shot"
+    },
+    {
+      "cale_imagine": "martysupreme.jpg",
+      "titlu": "Marty Supreme: Campionul",
+      "descriere": "Un portret electrizant al unui geniu excentric.",
+      "sfert_ora": "2",
+      "alt": "Marty Supreme dynamic scene"
+    },
+    {
+      "cale_imagine": "nocountryforoldmen.jpg",
+      "titlu": "No Country: Destinul",
+      "descriere": "Vânătoarea necruțătoare a unui ucigaș tăcut.",
+      "sfert_ora": "2",
+      "alt": "No Country desert sunset"
+    },
+    {
+      "cale_imagine": "nootherchoice.jpg",
+      "titlu": "No Other Choice: Ultima Opțiune",
+      "descriere": "Fiecare secundă contează în confruntarea finală.",
+      "sfert_ora": "2",
+      "alt": "No Other Choice action posture"
+    },
+    {
+      "cale_imagine": "parasite.jpg",
+      "titlu": "Parasite: Simbioza",
+      "descriere": "Două familii din lumi total diferite se întrepătrund.",
+      "sfert_ora": "2",
+      "alt": "Parasite architectural mansion"
+    },
+    {
+      "cale_imagine": "thetrumanshow.jpg",
+      "titlu": "Truman: Lumea Artificială",
+      "descriere": "Zidurile invizibile ale unui studio TV gigantic.",
+      "sfert_ora": "2",
+      "alt": "Truman waving under dome"
+    },
+    {
+      "cale_imagine": "challengers.jpg",
+      "titlu": "Challengers: Meciul Vieții",
+      "descriere": "Competiție sportivă dublată de o rivalitate pasională.",
+      "sfert_ora": "2",
+      "alt": "Challengers court tension"
+    },
+    {
+      "cale_imagine": "dune.jpg",
+      "titlu": "Dune: Deșertul Cosmic",
+      "descriere": "Prețul profețiilor și destinul mesianic al unui tânăr.",
+      "sfert_ora": "3",
+      "alt": "Dune movie poster landscape",
+      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
+    },
+    {
+      "cale_imagine": "fightclub.jpg",
+      "titlu": "Fight Club: Anarhia",
+      "descriere": "Când iluziile societății moderne se destramă.",
+      "sfert_ora": "3",
+      "alt": "Fight club poster landscape"
+    },
+    {
+      "cale_imagine": "interstellar.jpg",
+      "titlu": "Interstellar: Singularitatea",
+      "descriere": "O legătură dincolo de spațiu și timp salvează omenirea.",
+      "sfert_ora": "3",
+      "alt": "Interstellar cosmic voyage"
+    },
+    {
+      "cale_imagine": "lahaine.jpg",
+      "titlu": "La Haine: Conflictul",
+      "descriere": "Furia acumulată explodează în stradă pe parcursul nopții.",
+      "sfert_ora": "3",
+      "alt": "La Haine cinematic shot"
+    },
+    {
+      "cale_imagine": "martysupreme.jpg",
+      "titlu": "Marty Supreme: Tenisul de Masă",
+      "descriere": "O legendă reinventată într-un stil de neegalat.",
+      "sfert_ora": "3",
+      "alt": "Marty Supreme dynamic scene"
+    },
+    {
+      "cale_imagine": "nocountryforoldmen.jpg",
+      "titlu": "No Country: Confruntarea",
+      "descriere": "Într-o lume lipsită de reguli clare, supraviețuirea e la noroc.",
+      "sfert_ora": "3",
+      "alt": "No Country desert sunset"
+    },
+    {
+      "cale_imagine": "nootherchoice.jpg",
+      "titlu": "No Other Choice: Adevărul",
+      "descriere": "Secretele ies la iveală în momentele critice.",
+      "sfert_ora": "3",
+      "alt": "No Other Choice action posture"
+    },
+    {
+      "cale_imagine": "parasite.jpg",
+      "titlu": "Parasite: Subsolul",
+      "descriere": "Adevărata față a diferențelor sociale se dezvăluie brusc.",
+      "sfert_ora": "3",
+      "alt": "Parasite architectural mansion"
+    },
+    {
+      "cale_imagine": "thetrumanshow.jpg",
+      "titlu": "Truman: Evadarea",
+      "descriere": "Îndrăzneala de a trece dincolo de decorurile vieții.",
+      "sfert_ora": "3",
+      "alt": "Truman waving under dome"
+    },
+    {
+      "cale_imagine": "challengers.jpg",
+      "titlu": "Challengers: Rivalii",
+      "descriere": "Punctul decisiv într-o ecuație amoroasă complicată.",
+      "sfert_ora": "3",
+      "alt": "Challengers court tension"
+    },
+    {
+      "cale_imagine": "dune.jpg",
+      "titlu": "Dune: Puterea Mirodeniei",
+      "descriere": "Cea mai mare epopee S.F. a generației noastre.",
+      "sfert_ora": "4",
+      "alt": "Dune movie poster landscape",
+      "credit": "Imagine CC-BY 2.0 (Legendary Pictures)"
+    },
+    {
+      "cale_imagine": "fightclub.jpg",
+      "titlu": "Fight Club: Tyler Durden",
+      "descriere": "O minte dedublată și renașterea prin haos organizat.",
+      "sfert_ora": "4",
+      "alt": "Fight club poster landscape"
+    },
+    {
+      "cale_imagine": "interstellar.jpg",
+      "titlu": "Interstellar: Dincolo de Stele",
+      "descriere": "O capodoperă despre dragoste, gravitație și explorare cosmică.",
+      "sfert_ora": "4",
+      "alt": "Interstellar cosmic voyage"
+    },
+    {
+      "cale_imagine": "lahaine.jpg",
+      "titlu": "La Haine: Punctul Critic",
+      "descriere": "Nu contează căderea, ci aterizarea.",
+      "sfert_ora": "4",
+      "alt": "La Haine cinematic shot"
+    },
+    {
+      "cale_imagine": "martysupreme.jpg",
+      "titlu": "Marty Supreme: Ascensiunea",
+      "descriere": "Spectacolul desăvârșit al unei minți neînțelese.",
+      "sfert_ora": "4",
+      "alt": "Marty Supreme dynamic scene"
+    },
+    {
+      "cale_imagine": "nocountryforoldmen.jpg",
+      "titlu": "No Country: Nicio Șansă",
+      "descriere": "Un thriller neo-western de o intensitate copleșitoare.",
+      "sfert_ora": "4",
+      "alt": "No Country desert sunset"
+    },
+    {
+      "cale_imagine": "nootherchoice.jpg",
+      "titlu": "No Other Choice: Epilog",
+      "descriere": "Urmările unor alegeri inevitabile și extrem de dure.",
+      "sfert_ora": "4",
+      "alt": "No Other Choice action posture"
+    },
+    {
+      "cale_imagine": "parasite.jpg",
+      "titlu": "Parasite: Ploaia",
+      "descriere": "O noapte furtunoasă spală iluziile confortului aparent.",
+      "sfert_ora": "4",
+      "alt": "Parasite architectural mansion"
+    },
+    {
+      "cale_imagine": "thetrumanshow.jpg",
+      "titlu": "Truman: Bună Dimineața!",
+      "descriere": "În caz că nu ne mai vedem: o zi bună și o noapte bună!",
+      "sfert_ora": "4",
+      "alt": "Truman waving under dome"
+    },
+    {
+      "cale_imagine": "challengers.jpg",
+      "titlu": "Challengers: Campionatul",
+      "descriere": "Ultima minge de meci decide viitorul tuturor.",
+      "sfert_ora": "4",
+      "alt": "Challengers court tension"
     }
   ]
 }
