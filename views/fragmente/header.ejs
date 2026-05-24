@@ -32,19 +32,18 @@
                 </ul>
             </li>
 
-            <li class="has-dropdown">
-                <a href="/program" aria-label="Produse Filme">
+            <li>
+                <a href="/filme" aria-label="Filme">
                     <i class="fa-solid fa-film"></i>
-                    <span class="nav-text">Produse</span>
+                    <span class="nav-text">Filme</span>
                 </a>
-                <ul class="dropdown submenu-sections">
-                    <li><a href="/program">Toate</a></li>
-                    <% if (typeof categorii !== 'undefined' && Array.isArray(categorii)) { %>
-                        <% categorii.forEach(function(cat) { %>
-                            <li><a href="/program?tip=<%= cat %>"><%= cat.charAt(0).toUpperCase() + cat.slice(1) %></a></li>
-                        <% }) %>
-                    <% } %>
-                </ul>
+            </li>
+
+            <li>
+                <a href="/galerie" aria-label="Galerie Foto">
+                    <i class="fa-solid fa-images"></i>
+                    <span class="nav-text">Galerie</span>
+                </a>
             </li>
 
             <li>

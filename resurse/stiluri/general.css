@@ -843,7 +843,7 @@ footer a[href^="http"]:hover::before {
     margin-top: 14px;
 }
 
-/* Reflexie (0.15p) - Cerință individuală */
+/* Reflexie */
 .reflect-title {
     display: inline-flex;
     flex-direction: column;
@@ -871,7 +871,7 @@ footer a[href^="http"]:hover::before {
 }
 
 .reflect-title:hover .reflect-copy {
-    transform: scaleY(-1.45) translateY(-0.12em);
+    transform: scaleY(1.45) translateY(0.12em);
     opacity: 0.5;
     filter: blur(2px);
 }
@@ -1019,7 +1019,6 @@ footer a[href^="http"]:hover::before {
     margin: 14px auto 0;
 }
 
-/* Scrierea textului pe coloane (0.025p) */
 .promo-columns-text {
     margin: 14px 0 0 0;
     color: rgba(245, 245, 245, 0.9);
@@ -1029,23 +1028,22 @@ footer a[href^="http"]:hover::before {
     column-rule: 1px solid rgba(229, 177, 67, 0.35);
 }
 
-/* Stilizare hr (0.1p) - Cerință individuală */
+/* Stilizare hr */
 .cinema-hr {
     height: 10px;
     border: 0;
     margin: 0 0 20px;
-    background: linear-gradient(135deg,
-            transparent 0%,
-            transparent 7%,
-            var(--clr-gold) 7%,
-            var(--clr-gold) 46%,
-            transparent 46%,
-            transparent 54%,
-            var(--clr-base-red) 54%,
-            var(--clr-base-red) 93%,
-            transparent 93%,
-            transparent 100%);
-    border-radius: 999px;
+    background: linear-gradient(45deg,
+            var(--clr-base-red) 0%,
+            var(--clr-base-red) 12%,
+            transparent 12%,
+            transparent 17%,
+            var(--clr-base-red) 17%,
+            var(--clr-base-red) 83%,
+            transparent 83%,
+            transparent 88%,
+            var(--clr-base-red) 88%,
+            var(--clr-base-red) 100%);
     box-shadow: 0 0 0 1px rgba(245, 245, 245, 0.08), 0 5px 14px rgba(0, 0, 0, 0.28);
 }
 

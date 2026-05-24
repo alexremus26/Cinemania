@@ -48,48 +48,45 @@ function toClientImagePath(basePath, imagePath) {
     return path.posix.join(basePath, imagePath);
 }
 
-// Compilare automata scss (0.25p)
 function compileazaScss(caleScss, caleCss) {
     try {
-        // Resolve paths
         const pathScss = path.isAbsolute(caleScss) ? caleScss : path.join(obGlobal.folderScss, caleScss);
         let pathCss = caleCss ? (path.isAbsolute(caleCss) ? caleCss : path.join(obGlobal.folderCss, caleCss)) : null;
-        
-        // Auto-derive CSS filename if not provided
+
         if (!pathCss) {
             const nameNoExt = path.parse(caleScss).name;
             pathCss = path.join(obGlobal.folderCss, `${nameNoExt}.css`);
         }
-        
-        // Backup old CSS if it exists
+
         if (fs.existsSync(pathCss)) {
             const backupDir = path.join(__dirname, 'backup', 'resurse', 'css');
             const parsedCssPath = path.parse(pathCss);
             const timestamp = Date.now();
             const cssFileName = `${parsedCssPath.name}_${timestamp}${parsedCssPath.ext}`;
             const backupPath = path.join(backupDir, cssFileName);
-            
+
             try {
-                // Ensure backup directory exists
+
                 if (!fs.existsSync(backupDir)) {
                     fs.mkdirSync(backupDir, { recursive: true });
                 }
-                
+                // Backup old css
                 fs.copyFileSync(pathCss, backupPath);
+
                 console.log(`[SCSS] Backed up: ${cssFileName}`);
             } catch (backupError) {
                 console.error(`[SCSS ERROR] Failed to backup ${cssFileName}:`, backupError.message);
             }
         }
-        
-        // Compile SCSS to CSS
+
+        // Compilare 
         const result = sass.compile(pathScss, {
             style: 'compressed',
             loadPaths: [obGlobal.folderScss, path.join(__dirname, 'node_modules')],
             quietDeps: true
         });
-        
-        // Write CSS file
+
+        // scriere
         fs.writeFileSync(pathCss, result.css);
         console.log(`[SCSS] Compiled: ${path.relative(__dirname, pathScss)} → ${path.basename(pathCss)}`);
     } catch (error) {
@@ -101,16 +98,16 @@ function compileAllScss() {
     try {
         const files = fs.readdirSync(obGlobal.folderScss);
         const scssFiles = files.filter(f => f.endsWith('.scss') && !f.startsWith('_'));
-        
+
         if (scssFiles.length === 0) {
             console.log('[SCSS] No SCSS files to compile.');
             return;
         }
-        
+
         scssFiles.forEach(file => {
             compileazaScss(file, null);
         });
-        
+
         console.log(`[SCSS] Compiled ${scssFiles.length} SCSS file(s).`);
     } catch (error) {
         console.error('[SCSS ERROR] Failed to compile all SCSS files:', error.message);
@@ -119,11 +116,11 @@ function compileAllScss() {
 
 function watchScssFolder() {
     console.log('[SCSS] Watching folder for changes:', obGlobal.folderScss);
-    
+
     fs.watch(obGlobal.folderScss, (eventType, filename) => {
         if (filename && filename.endsWith('.scss')) {
             console.log(`[SCSS] File changed: ${filename}`);
-            // Debounce by adding small delay
+            // delay mic
             setTimeout(() => {
                 compileazaScss(filename, null);
             }, 100);
@@ -131,19 +128,13 @@ function watchScssFolder() {
     });
 }
 
-/**
- * verificareEroriJson()
- * Validates the erori.json file at server startup.
- * Checks A–G cover structural integrity, file system consistency,
- * duplicate key detection, and duplicate identifier detection.
- */
+
 function verificareEroriJson() {
     const jsonPath = path.join(__dirname, 'erori.json');
     let continutBrut;
     let obJson;
 
-    // [A] Verificare: fisierul erori.json nu exista (0.025p)
-    // Daca fisierul lipseste, afisam mesaj detaliat si oprim aplicatia.
+    // A
     if (!fs.existsSync(jsonPath)) {
         console.error('==============================================================');
         console.error('[EROARE CRITICA - A] Fisierul "erori.json" nu a fost gasit!');
@@ -155,21 +146,13 @@ function verificareEroriJson() {
         process.exit(1);
     }
 
-    // Citim continutul brut (string) pentru verificarea F
+    // pt F
+
     continutBrut = fs.readFileSync(jsonPath, 'utf-8');
 
-    try {
-        obJson = JSON.parse(continutBrut);
-    } catch (parseErr) {
-        console.error('==============================================================');
-        console.error('[EROARE - A] Fisierul "erori.json" nu contine JSON valid!');
-        console.error(`  Detalii: ${parseErr.message}`);
-        console.error('==============================================================');
-        process.exit(1);
-    }
+    obJson = JSON.parse(continutBrut);
 
-    // [B] Verificare: lipsesc proprietati obligatorii (info_erori, cale_baza, eroare_default) (0.025p)
-    // Verificam existenta fiecareia din cele 3 proprietati de baza ale fisierului.
+    // [B] Verificare: lipsesc proprietati obligatorii
     const proprietatiObligatorii = ['info_erori', 'cale_baza', 'eroare_default'];
     const proprietatiLipsa = proprietatiObligatorii.filter(prop => !(prop in obJson));
 
@@ -183,8 +166,7 @@ function verificareEroriJson() {
         console.error('==============================================================');
     }
 
-    // [C] Verificare: eroare_default nu are titlu, text sau imagine (0.025p)
-    // Daca eroare_default exista, verificam ca are toate cele 3 sub-proprietati necesare.
+    // [C] Verificare: eroare_default nu are titlu, text sau imagine 
     if (obJson.eroare_default) {
         const propDefault = ['titlu', 'text', 'imagine'];
         const propDefaultLipsa = propDefault.filter(prop => !(prop in obJson.eroare_default));
@@ -193,15 +175,14 @@ function verificareEroriJson() {
             console.error('==============================================================');
             console.error('[EROARE - C] Obiectul "eroare_default" nu contine toate proprietatile necesare!');
             propDefaultLipsa.forEach(prop => {
-                console.error(`  ✗ Proprietatea "${prop}" lipseste din eroare_default.`);
+                console.error(`  x Proprietatea "${prop}" lipseste din eroare_default.`);
             });
             console.error(`  Proprietati necesare in eroare_default: ${propDefault.join(', ')}`);
             console.error('==============================================================');
         }
     }
 
-    // [D] Verificare: folderul cale_baza nu exista in sistemul de fisiere (0.025p)
-    // Rezolvam calea relativa la directorul proiectului si verificam existenta.
+    // [D] Verificare: folderul cale_baza nu exista in sistemul de fisiere
     if (obJson.cale_baza) {
         const caleBazaRelatia = obJson.cale_baza.startsWith('/') ? obJson.cale_baza.substring(1) : obJson.cale_baza;
         const caleBazaAbsoluta = path.join(__dirname, caleBazaRelatia);
@@ -216,13 +197,11 @@ function verificareEroriJson() {
         }
     }
 
-    // [E] Verificare: fisiere imagine asociate erorilor nu exista pe disc (0.05p)
-    // Verificam imaginea din eroare_default si imaginile din fiecare eroare din info_erori.
+    // [E] Verificare: fisiere imagine asociate erorilor nu exista pe disc
     if (obJson.cale_baza) {
         const caleBazaRelatia = obJson.cale_baza.startsWith('/') ? obJson.cale_baza.substring(1) : obJson.cale_baza;
         const caleBazaAbsoluta = path.join(__dirname, caleBazaRelatia);
 
-        // Verificam imaginea din eroare_default
         if (obJson.eroare_default && obJson.eroare_default.imagine) {
             const caleImagineDefault = path.join(caleBazaAbsoluta, path.basename(obJson.eroare_default.imagine));
             if (!fs.existsSync(caleImagineDefault)) {
@@ -233,35 +212,14 @@ function verificareEroriJson() {
                 console.error('==============================================================');
             }
         }
-
-        // Verificam imaginile din fiecare eroare din info_erori
-        if (Array.isArray(obJson.info_erori)) {
-            obJson.info_erori.forEach((eroare, index) => {
-                if (eroare.imagine) {
-                    const caleImagine = path.join(caleBazaAbsoluta, path.basename(eroare.imagine));
-                    if (!fs.existsSync(caleImagine)) {
-                        console.error('==============================================================');
-                        console.error(`[EROARE - E] Imaginea pentru eroarea cu identificatorul ${eroare.identificator || `(index ${index})`} nu exista pe disc!`);
-                        console.error(`  Imagine: "${eroare.imagine}"`);
-                        console.error(`  Calea verificata: ${caleImagine}`);
-                        console.error('==============================================================');
-                    }
-                }
-            });
-        }
     }
 
-    // [F] Verificare: proprietate specificata de mai multe ori in acelasi obiect JSON (0.2p)
-    // JSON.parse() ignora cheile duplicate (pastreaza ultima valoare), asa ca trebuie sa
-    // parcurgem string-ul brut caracter cu caracter, urmarind nivelul de acolade,
-    // si sa extragem cheile din fiecare obiect la fiecare nivel de adancime.
+
     (function verificareCheiiDuplicate() {
-        // Parsam manual string-ul JSON, caracter cu caracter
-        // Tinem un stack de obiecte; fiecare nivel de adancime are propriul set de chei
-        const stackChei = [];         // stack de Map<string, number> (cheie -> numar aparitii)
-        const stackContext = [];      // stack de string-uri ce descriu contextul curent
+
+        const stackChei = [];         // stack de map nr aparitii
+        const stackContext = [];      // stack de string-uri
         let inString = false;
-        let escapeNext = false;
         let currentKey = '';
         let collectingKey = false;
         let lastExtractedKey = '';
@@ -271,23 +229,11 @@ function verificareEroriJson() {
         for (let i = 0; i < continutBrut.length; i++) {
             const ch = continutBrut[i];
 
-            if (escapeNext) {
-                if (collectingKey) currentKey += ch;
-                escapeNext = false;
-                continue;
-            }
-
-            if (ch === '\\') {
-                escapeNext = true;
-                if (collectingKey) currentKey += ch;
-                continue;
-            }
-
             if (ch === '"') {
                 if (!inString) {
                     inString = true;
                     if (!afterColon && stackChei.length > 0) {
-                        // Incepem sa colectam o cheie
+
                         collectingKey = true;
                         currentKey = '';
                     }
@@ -306,9 +252,8 @@ function verificareEroriJson() {
                 continue;
             }
 
-            // In afara string-ului
             if (ch === ':') {
-                // Am gasit o cheie completa
+
                 afterColon = true;
                 if (stackChei.length > 0 && lastExtractedKey) {
                     const nivel = stackChei[stackChei.length - 1];
@@ -329,10 +274,10 @@ function verificareEroriJson() {
                 }
             } else if (ch === '{') {
                 afterColon = false;
-                // Determinam contextul
                 let context = 'obiectul radacina';
+
                 if (stackChei.length > 0 && stackChei[stackChei.length - 1].size > 0) {
-                    // Ultima cheie adaugata este contextul nostru
+
                     const cheileNivel = Array.from(stackChei[stackChei.length - 1].keys());
                     if (cheileNivel.length > 0) {
                         context = `obiectul din proprietatea "${cheileNivel[cheileNivel.length - 1]}"`;
@@ -350,15 +295,9 @@ function verificareEroriJson() {
                 afterColon = false;
             }
         }
-
-        if (!foundDuplicates) {
-            // Nu afisam nimic daca nu sunt chei duplicate — totul este ok
-        }
     })();
 
-    // [G] Verificare: erori cu acelasi identificator (0.15p)
-    // Grupam erorile dupa identificator si afisam proprietatile (fara identificator)
-    // pentru toate erorile care au acelasi identificator, ca sa fie usor de gasit.
+    // [G] Verificare: erori cu acelasi identificator
     if (Array.isArray(obJson.info_erori)) {
         const grupeIdentificator = {};
 
@@ -379,7 +318,7 @@ function verificareEroriJson() {
                 console.error('  Proprietatile erorilor duplicate (fara identificator):');
 
                 erori.forEach((eroare, index) => {
-                    // Afisam toate proprietatile FARA identificator
+
                     const propFaraId = Object.entries(eroare)
                         .filter(([cheie]) => cheie !== 'identificator')
                         .map(([cheie, valoare]) => `${cheie}: "${valoare}"`)
@@ -442,28 +381,34 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     });
 }
 
-// Variable to mock the current date and time for testing the 4 gallery quarters
-// Example: const GALERIE_TEST_DATE = new Date("2026-05-20T22:35:00"); // Quarter 3
+
 const GALERIE_TEST_DATE = null;
 
 async function asiguraImaginiDimensionate(imagine, basePath) {
-    // TODO(security): Prevent directory traversal by sanitizing image filename using path.basename()
-    const originalBasename = path.basename(imagine.cale_imagine);
-    const originalPath = path.join(__dirname, 'resurse', 'imagini', originalBasename);
-    
-    const mediuDir = path.join(__dirname, 'resurse', 'imagini', 'mediu');
-    const micDir = path.join(__dirname, 'resurse', 'imagini', 'mic');
-    
+
+    const cleanBasePath = basePath.startsWith('/') ? basePath.slice(1) : basePath;
+    const baseImagesDir = path.resolve(__dirname, cleanBasePath);
+    const originalPath = path.resolve(baseImagesDir, imagine.cale_imagine);
+
+    const mediuPath = path.resolve(baseImagesDir, 'mediu', imagine.cale_imagine);
+    const micPath = path.resolve(baseImagesDir, 'mic', imagine.cale_imagine);
+
+    const baseMediuDir = path.join(baseImagesDir, 'mediu');
+    const baseMicDir = path.join(baseImagesDir, 'mic');
+    if (!mediuPath.startsWith(baseMediuDir) || !micPath.startsWith(baseMicDir)) {
+        throw new Error('Directory traversal attempt detected');
+    }
+
+    const mediuDir = path.dirname(mediuPath);
+    const micDir = path.dirname(micPath);
+
     if (!fs.existsSync(mediuDir)) {
         fs.mkdirSync(mediuDir, { recursive: true });
     }
     if (!fs.existsSync(micDir)) {
         fs.mkdirSync(micDir, { recursive: true });
     }
-    
-    const mediuPath = path.join(mediuDir, originalBasename);
-    const micPath = path.join(micDir, originalBasename);
-    
+
     if (fs.existsSync(originalPath)) {
         try {
             if (!fs.existsSync(mediuPath)) {
@@ -477,31 +422,30 @@ async function asiguraImaginiDimensionate(imagine, basePath) {
                     .toFile(micPath);
             }
         } catch (error) {
-            console.error(`Error generating resized images for ${originalBasename}:`, error);
+            console.error(`Error generating resized images for ${imagine.cale_imagine}:`, error);
         }
     }
 }
 
+
+// Galerie statica
 async function filterGaleryByQuarter(date, obGalerie) {
     const targetDate = GALERIE_TEST_DATE || date;
     const minutes = targetDate.getMinutes();
     const currentQuarter = Math.floor(minutes / 15) + 1;
-    
+
     if (!obGalerie || !obGalerie.imagini) {
         return [];
     }
-    
-    // Filter images matching current quarter
+
     const matchingImagini = obGalerie.imagini.filter(img => parseInt(img.sfert_ora) === currentQuarter);
-    
-    // Truncate to maximum 10 items
+
     const truncatedImagini = matchingImagini.slice(0, 10);
-    
-    // Asynchronously verify and generate medium/small dimensions using sharp
+
     for (const img of truncatedImagini) {
         await asiguraImaginiDimensionate(img, obGalerie.cale_galerie);
     }
-    
+
     return truncatedImagini.map((imagine) => ({
         ...imagine,
         cale_galerie: obGalerie.cale_galerie,
@@ -538,14 +482,13 @@ function buildGalerieAnimataItems() {
 
         const targetCount = getRandomOdd(GALERIE_ANIMATA_CONFIG.minCount, GALERIE_ANIMATA_CONFIG.maxCount);
 
-        // Păstrăm doar filmele ale căror postere există fizic pe disc (evită link-urile stricate)
         const imaginiValide = (parsed.imagini || []).filter(img => {
             if (!img.cale_imagine) return false;
-            const caleFizicaPoster = path.join(__dirname, 'resurse', 'imagini', img.cale_imagine);
+            const cleanScale = scaleGalerie.startsWith('/') ? scaleGalerie.slice(1) : scaleGalerie;
+            const caleFizicaPoster = path.resolve(__dirname, cleanScale, img.cale_imagine);
             return fs.existsSync(caleFizicaPoster);
         });
 
-        // Deduplicăm și luăm cele mai recente imagini din JSON (parcurgem de la sfârșit spre început)
         const seen = new Set();
         const itemsUnice = [];
         for (let i = imaginiValide.length - 1; i >= 0; i--) {
@@ -560,11 +503,9 @@ function buildGalerieAnimataItems() {
             }
         }
 
-        // Amestecăm aleatoriu imaginile pentru ca la fiecare refresh să apară poze diferite în ordine diferită
         const shuffled = itemsUnice.sort(() => Math.random() - 0.5);
         const items = shuffled.slice(0, targetCount);
 
-        // Ne asigurăm că numărul de elemente rămâne impar
         if (items.length % 2 === 0 && items.length > 1) {
             items.pop();
         }
@@ -612,7 +553,7 @@ function getGalerieAnimataRenderData() {
     return { items, css };
 }
 
-// Galeria statica (0.35p)
+// Galeria statica
 function initGalerie() {
     const jsonPath = path.join(__dirname, 'resurse', 'documente', 'galerie.json');
     try {
@@ -714,7 +655,7 @@ app.get(['/', '/index', '/home'], async (req, res) => {
     });
 });
 
-app.get('/program', async (req, res) => {
+app.get('/filme', async (req, res) => {
     const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
     const galerieAnimataData = getGalerieAnimataRenderData();
 
@@ -722,7 +663,7 @@ app.get('/program', async (req, res) => {
         const totalImages = obGlobal.obGalerie && Array.isArray(obGlobal.obGalerie.imagini)
             ? obGlobal.obGalerie.imagini.length
             : 0;
-        console.warn(`[GALERIE ANIMATA] Program page has no items. Total galerie images: ${totalImages}.`);
+        console.warn(`[GALERIE ANIMATA] Filme page has no items. Total galerie images: ${totalImages}.`);
     }
 
     let produse = [];
@@ -736,10 +677,10 @@ app.get('/program', async (req, res) => {
         const rezultat = await pool.query(query, params);
         produse = rezultat.rows;
     } catch (error) {
-        console.error('[DB] Eroare la preluarea produselor pentru pagina program:', error);
+        console.error('[DB] Eroare la preluarea produselor pentru pagina filme:', error);
     }
 
-    res.render('pagini/program', {
+    res.render('pagini/filme', {
         videoWebm,
         videoMp4,
         videoPoster,
@@ -768,7 +709,7 @@ app.get('/produs/:id', async (req, res) => {
         if (rezultat.rows.length === 0) {
             return afisareEroare(res, 404, 'Produs Negăsit', 'Nu a fost găsit niciun film cu acest ID.');
         }
-        
+
         res.render('pagini/produs', { produs: rezultat.rows[0] });
     } catch (error) {
         console.error('[DB] Eroare la preluarea produsului:', error);

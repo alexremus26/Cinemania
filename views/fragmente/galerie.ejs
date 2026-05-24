@@ -1,5 +1,5 @@
 <style>
-	/* Galeria statica (0.35p) */
+	/* Galeria statica */
 	.galerie-grid {
 		display: grid;
 		gap: 1.5rem;
@@ -8,35 +8,70 @@
 		counter-reset: galerie-counter;
 	}
 
-	/* Large screens: 3x4 O-shape layout (10 elements) */
 	@media (min-width: 1024px) {
 		.galerie-grid {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
 
-		.galerie-item:nth-child(1) { grid-column: 1; grid-row: 1; }
-		.galerie-item:nth-child(2) { grid-column: 2; grid-row: 1; }
-		.galerie-item:nth-child(3) { grid-column: 3; grid-row: 1; }
+		.galerie-item:nth-child(1) {
+			grid-column: 1;
+			grid-row: 1;
+		}
 
-		.galerie-item:nth-child(4) { grid-column: 1; grid-row: 2; }
-		.galerie-item:nth-child(5) { grid-column: 3; grid-row: 2; }
+		.galerie-item:nth-child(2) {
+			grid-column: 2;
+			grid-row: 1;
+		}
 
-		.galerie-item:nth-child(6) { grid-column: 1; grid-row: 3; }
-		.galerie-item:nth-child(7) { grid-column: 3; grid-row: 3; }
+		.galerie-item:nth-child(3) {
+			grid-column: 3;
+			grid-row: 1;
+		}
 
-		.galerie-item:nth-child(8) { grid-column: 1; grid-row: 4; }
-		.galerie-item:nth-child(9) { grid-column: 2; grid-row: 4; }
-		.galerie-item:nth-child(10) { grid-column: 3; grid-row: 4; }
+		.galerie-item:nth-child(4) {
+			grid-column: 1;
+			grid-row: 2;
+		}
+
+		.galerie-item:nth-child(5) {
+			grid-column: 3;
+			grid-row: 2;
+		}
+
+		.galerie-item:nth-child(6) {
+			grid-column: 1;
+			grid-row: 3;
+		}
+
+		.galerie-item:nth-child(7) {
+			grid-column: 3;
+			grid-row: 3;
+		}
+
+		.galerie-item:nth-child(8) {
+			grid-column: 1;
+			grid-row: 4;
+		}
+
+		.galerie-item:nth-child(9) {
+			grid-column: 2;
+			grid-row: 4;
+		}
+
+		.galerie-item:nth-child(10) {
+			grid-column: 3;
+			grid-row: 4;
+		}
 	}
 
-	/* Medium screens: 2 columns */
+	/* med */
 	@media (min-width: 768px) and (max-width: 1023px) {
 		.galerie-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
-	/* Small screens: 1 column */
+	/* small */
 	@media (max-width: 767px) {
 		.galerie-grid {
 			grid-template-columns: 1fr;
@@ -78,18 +113,17 @@
 		display: block;
 		aspect-ratio: 16 / 10;
 		object-fit: cover;
-		border: 0px solid #E5B143; /* Base color or var(--clr-gold) */
+		border: 0px solid #E5B143;
 		box-sizing: border-box;
 		transition: transform 1.2s ease-in-out, border-width 1.2s ease-in-out;
 	}
 
-	/* Hover transition: scales by 25%, rotates 10deg left, border grows to 4px, takes 1.2s */
+	/* tranzitie */
 	.galerie-item:hover img {
 		transform: scale(1.25) rotate(-10deg);
 		border-width: 4px;
 	}
 
-	/* Duotone (0.05p) - Cerință individuală */
 	.dune-duotone .galerie-media {
 		isolation: isolate;
 	}
@@ -163,31 +197,36 @@
 </style>
 
 <div class="galerie-grid">
-	<% if (galerieDate && galerieDate.length > 0) { %>
-		<% galerieDate.forEach((imagine, idx) => { %>
+	<% if (galerieDate && galerieDate.length> 0) { %>
+		<% galerieDate.forEach((imagine, idx)=> { %>
 			<figure class="galerie-item<%= idx === 0 ? ' dune-duotone' : '' %>">
 				<div class="galerie-media">
 					<picture>
-						<source srcset="<%= (imagine.cale_galerie || '/resurse/imagini') + '/mic/' + imagine.cale_imagine %>" media="(max-width: 576px)">
-						<source srcset="<%= (imagine.cale_galerie || '/resurse/imagini') + '/mediu/' + imagine.cale_imagine %>" media="(max-width: 1024px)">
-						<img 
-							src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>" 
-							alt="<%= imagine.alt || imagine.cale_imagine %>"
-							title="<%= imagine.descriere %>"
-						>
+						<source
+							srcset="<%= (imagine.cale_galerie || '/resurse/imagini') + '/mic/' + imagine.cale_imagine %>"
+							media="(max-width: 576px)">
+						<source
+							srcset="<%= (imagine.cale_galerie || '/resurse/imagini') + '/mediu/' + imagine.cale_imagine %>"
+							media="(max-width: 1024px)">
+						<img src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>"
+							alt="<%= imagine.alt || imagine.cale_imagine %>" title="<%= imagine.descriere %>">
 					</picture>
 				</div>
 				<figcaption>
-					<strong><%= imagine.titlu %></strong>: <%= imagine.descriere %>
-					<% if (imagine.credit) { %>
-						<div class="galerie-credit"><%= imagine.credit %></div>
-					<% } %>
+					<strong>
+						<%= imagine.titlu %>
+					</strong>: <%= imagine.descriere %>
+						<% if (imagine.credit) { %>
+							<div class="galerie-credit">
+								<%= imagine.credit %>
+							</div>
+							<% } %>
 				</figcaption>
 			</figure>
-		<% }); %>
-	<% } else { %>
-		<div class="galerie-empty">
-			Nu sunt imagini disponibile în acest moment.
-		</div>
-	<% } %>
+			<% }); %>
+				<% } else { %>
+					<div class="galerie-empty">
+						Nu sunt imagini disponibile în acest moment.
+					</div>
+					<% } %>
 </div>

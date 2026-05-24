@@ -1,0 +1,166 @@
+// ============================================================================
+// CUSTOM PROJECT STYLING & ENHANCEMENTS
+// ============================================================================
+
+@use "sass:color";
+@use "sass:map";
+
+// Override body color with custom dark background
+body {
+    background-color: $dark;
+    color: $light;
+    font-family: $font-family-base;
+}
+
+// Elegant heading styling
+h1, h2, h3, h4, h5, h6 {
+    color: $secondary;
+    font-family: $headings-font-family;
+    letter-spacing: $letter-spacing-expanded;
+}
+
+// Premium button styling
+.btn {
+    border-radius: $border-radius;
+    font-weight: 600;
+    transition: $transition-base;
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $box-shadow-lg;
+    }
+}
+
+// Primary button with custom colors
+.btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+    
+    &:hover {
+        background-color: color.adjust($primary, $lightness: -10%);
+        border-color: color.adjust($primary, $lightness: -10%);
+    }
+    
+    &:active, &.active {
+        background-color: color.adjust($primary, $lightness: -15%);
+        border-color: color.adjust($primary, $lightness: -15%);
+    }
+}
+
+// Secondary button with gold accent
+.btn-secondary {
+    background-color: $secondary;
+    border-color: $secondary;
+    color: #000;
+    
+    &:hover {
+        background-color: color.adjust($secondary, $lightness: -10%);
+        border-color: color.adjust($secondary, $lightness: -10%);
+    }
+}
+
+// Card styling enhancement
+.card {
+    border: none;
+    border-radius: $border-radius-lg;
+    box-shadow: $box-shadow;
+    transition: $transition-base;
+    
+    &:hover {
+        box-shadow: $box-shadow-lg;
+        transform: translateY(-4px);
+    }
+}
+
+// Alert styling
+.alert {
+    border-radius: $border-radius;
+    border: none;
+    
+    &-primary {
+        background-color: color.adjust($primary, $lightness: 40%);
+        color: $primary;
+    }
+    
+    &-secondary {
+        background-color: color.adjust($secondary, $lightness: 30%);
+        color: color.adjust($secondary, $lightness: -20%);
+    }
+}
+
+// Badge styling
+.badge {
+    border-radius: $border-radius-sm;
+    font-weight: 600;
+    padding: $badge-padding-y $badge-padding-x;
+}
+
+// Form controls
+.form-control, .form-select {
+    border-radius: $border-radius;
+    border: 1px solid #ddd;
+    
+    &:focus {
+        border-color: $primary;
+        box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+    }
+}
+
+// Nav styling
+.nav-link {
+    color: $light;
+    font-weight: 500;
+    transition: $transition-base;
+    
+    &:hover {
+        color: $primary;
+    }
+    
+    &.active {
+        color: $primary;
+        font-weight: 600;
+    }
+}
+
+// Tables
+.table {
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    
+    thead {
+        background-color: color.adjust($primary, $lightness: 40%);
+        
+        th {
+            color: $primary;
+            font-weight: 600;
+            border-bottom: 2px solid $primary;
+        }
+    }
+    
+    tbody tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        
+        &:hover {
+            background-color: rgba(166, 25, 46, 0.12);
+        }
+    }
+}
+
+// Responsive adjustments for medium and large screens
+@media (min-width: map.get($grid-breakpoints, md)) {
+    // Slightly larger text on medium screens
+    body {
+        font-size: 1.05rem;
+    }
+}
+
+@media (min-width: map.get($grid-breakpoints, lg)) {
+    // Even more spacing and larger typography on large screens
+    h1 {
+        font-size: 4rem;
+    }
+    
+    h2 {
+        font-size: 3rem;
+    }
+}

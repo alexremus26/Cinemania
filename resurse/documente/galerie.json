@@ -1,115 +1,116 @@
 {
-  "cale_galerie": "/resurse/imagini",
+  "cale_galerie": "/resurse/imagini/filme",
   "imagini": [
     {
       "titlu": "Furiosa",
       "descriere": "O poveste epica plasata in universul Mad Max, in care Furiosa lupta pentru supravietuire intr-o lume post-apocaliptica dura si nemiloasa.",
-      "cale_imagine": "filme/furiosa.webp",
+      "cale_imagine": "furiosa.jpg",
       "alt": "Poster Furiosa",
-      "sfert_ora": "1"
+      "sfert_ora": "1",
+      "credit": "Sursa: Flickr / Autor: Warner Bros Pictures (Licență CC-BY 2.0)"
     },
     {
       "titlu": "Back to the Future",
       "descriere": "Un adolescent este trimis accidental in trecut cu ajutorul unei masini a timpului construite de prietenul sau excentric.",
-      "cale_imagine": "filme/backtothefuture.webp",
+      "cale_imagine": "backtothefuture.jpg",
       "alt": "Poster Back to the Future",
       "sfert_ora": "1"
     },
     {
       "titlu": "Deadpool & Wolverine",
       "descriere": "Cei mai indragiti anti-eroi din universul Marvel fac echipa intr-o comedie de actiune plina de umor negru si spargerea celui de-al patrulea perete.",
-      "cale_imagine": "filme/deadpool.webp",
+      "cale_imagine": "deadpool.jpg",
       "alt": "Poster Deadpool & Wolverine",
       "sfert_ora": "1"
     },
     {
       "titlu": "Inside Out 2",
       "descriere": "Emotiile din mintea lui Riley se confrunta cu noi provocari odata cu trecerea in adolescenta si aparitia unor noi sentimente complexe.",
-      "cale_imagine": "filme/insideout2.webp",
+      "cale_imagine": "insideout2.jpg",
       "alt": "Poster Inside Out 2",
       "sfert_ora": "1"
     },
     {
       "titlu": "Oppenheimer",
       "descriere": "Povestea fascinanta a lui J. Robert Oppenheimer si rolul sau in dezvoltarea bombei atomice, explorand dilemele morale si consecintele actiunilor sale.",
-      "cale_imagine": "filme/oppenheimer.webp",
+      "cale_imagine": "oppenheimer.jpg",
       "alt": "Poster Oppenheimer",
       "sfert_ora": "1"
     },
     {
       "titlu": "Alien Romulus",
       "descriere": "Un grup de tineri colonisti spatiali, explorand o statie spatiala abandonata, se confrunta cu cea mai terifianta forma de viata din univers.",
-      "cale_imagine": "filme/alienromulus.webp",
+      "cale_imagine": "alienromulus.jpg",
       "alt": "Poster Alien Romulus",
       "sfert_ora": "1"
     },
     {
       "titlu": "Gladiator 2",
       "descriere": "La ani distanta de la evenimentele din primul film, o noua generatie de gladiatori intra in arena, luptand pentru onoare si libertate.",
-      "cale_imagine": "filme/gladiator2.webp",
+      "cale_imagine": "gladiator2.jpg",
       "alt": "Poster Gladiator 2",
       "sfert_ora": "1"
     },
     {
       "titlu": "The Substance",
       "descriere": "Un thriller psihologic ce exploreaza obsesia pentru tinerete, folosind o substanta experimentala care permite crearea unei versiuni mai tinere a sinelui.",
-      "cale_imagine": "filme/substance.webp",
+      "cale_imagine": "substance.jpg",
       "alt": "Poster The Substance",
       "sfert_ora": "1"
     },
     {
       "titlu": "Interstellar",
       "descriere": "O echipa de exploratori calatoreste printr-o gaura de vierme in spatiu intr-o incercare disperata de a gasi o noua casa pentru omenire.",
-      "cale_imagine": "filme/interstellar.webp",
+      "cale_imagine": "interstellar.jpg",
       "alt": "Poster Interstellar",
       "sfert_ora": "1"
     },
     {
       "titlu": "Joker: Folie a Deux",
       "descriere": "Arthur Fleck revine, de data aceasta alaturandu-se lui Harley Quinn intr-o poveste intunecata despre nebunie impartasita, intr-un format muzical inedit.",
-      "cale_imagine": "filme/joker2.webp",
+      "cale_imagine": "joker2.jpg",
       "alt": "Poster Joker: Folie a Deux",
       "sfert_ora": "1"
     },
     {
       "titlu": "Smile 2",
       "descriere": "Teroarea continua atunci cand o entitate demonica care se hraneste cu trauma se raspandeste, trecand de la o victima la alta prin zambete sinistre.",
-      "cale_imagine": "filme/smile2.webp",
+      "cale_imagine": "smile2.jpg",
       "alt": "Poster Smile 2",
       "sfert_ora": "2"
     },
     {
       "titlu": "Kingdom of the Planet of the Apes",
       "descriere": "La generatii dupa Cezar, maimutele sunt specia dominanta, iar oamenii traiesc in salbaticie. Un tanar cimpanzeu porneste intr-o calatorie de descoperire.",
-      "cale_imagine": "filme/apes.webp",
+      "cale_imagine": "apes.jpg",
       "alt": "Poster Kingdom of the Planet of the Apes",
       "sfert_ora": "2"
     },
     {
       "titlu": "Kung Fu Panda 4",
       "descriere": "Po, acum Lider Spiritual al Vaii Pacii, trebuie sa aleaga un nou Razboinic Dragon, in timp ce se confrunta cu o noua amenintare formidabila.",
-      "cale_imagine": "filme/kungfupanda4.webp",
+      "cale_imagine": "kungfupanda4.jpg",
       "alt": "Poster Kung Fu Panda 4",
       "sfert_ora": "2"
     },
     {
       "titlu": "The Batman",
       "descriere": "Un Bruce Wayne tanar investigheaza crimele sadice ale lui Riddler in Gotham City, explorand coruptia profunda ce ii afecteaza propria familie.",
-      "cale_imagine": "filme/batman.webp",
+      "cale_imagine": "batman.jpg",
       "alt": "Poster The Batman",
       "sfert_ora": "2"
     },
     {
       "titlu": "Avatar: The Way of Water",
       "descriere": "Jake Sully si familia sa se confrunta cu noi pericole pe Pandora, explorand oceanele planetei si luptand din nou impotriva invaziei umane.",
-      "cale_imagine": "filme/avatar2.webp",
+      "cale_imagine": "avatar2.jpg",
       "alt": "Poster Avatar: The Way of Water",
       "sfert_ora": "2"
     },
     {
       "titlu": "A Quiet Place: Day One",
       "descriere": "Descopera cum lumea a cazut in tacere odata cu primele momente ale invaziei extraterestrilor cu auz hipersensibil, aducand panica in oras.",
-      "cale_imagine": "filme/quietplace.webp",
+      "cale_imagine": "quietplace.jpg",
       "alt": "Poster A Quiet Place: Day One",
       "sfert_ora": "2"
     },
@@ -179,105 +180,105 @@
     {
       "titlu": "The Matrix",
       "descriere": "Un hacker descoperă că lumea sa este de fapt o simulare.",
-      "cale_imagine": "filme/matrix.webp",
+      "cale_imagine": "matrix.jpg",
       "alt": "Poster The Matrix",
       "sfert_ora": "3"
     },
     {
       "titlu": "Inception",
       "descriere": "Un hoț care fură secrete corporative prin utilizarea tehnologiei viselor.",
-      "cale_imagine": "filme/inception.webp",
+      "cale_imagine": "inception.jpg",
       "alt": "Poster Inception",
       "sfert_ora": "3"
     },
     {
       "titlu": "The Godfather",
       "descriere": "Liderul în vârstă al unei dinastii de crimă organizată.",
-      "cale_imagine": "filme/godfather.webp",
+      "cale_imagine": "godfather.jpg",
       "alt": "Poster The Godfather",
       "sfert_ora": "3"
     },
     {
       "titlu": "The Dark Knight",
       "descriere": "Amenințarea cunoscută sub numele de Joker provoacă haos.",
-      "cale_imagine": "filme/darkknight.webp",
+      "cale_imagine": "darkknight.jpg",
       "alt": "Poster The Dark Knight",
       "sfert_ora": "3"
     },
     {
       "titlu": "Forrest Gump",
       "descriere": "Evenimentele majore din istoria SUA prin ochii unui om simplu.",
-      "cale_imagine": "filme/forrestgump.webp",
+      "cale_imagine": "forrestgump.jpg",
       "alt": "Poster Forrest Gump",
       "sfert_ora": "3"
     },
     {
       "titlu": "Star Wars: A New Hope",
       "descriere": "Luke Skywalker face echipă cu un Jedi pentru a salva galaxia.",
-      "cale_imagine": "filme/starwars.webp",
+      "cale_imagine": "starwars.jpg",
       "alt": "Poster Star Wars: A New Hope",
       "sfert_ora": "4"
     },
     {
       "titlu": "The Avengers",
       "descriere": "Cei mai puternici eroi trebuie să se adune pentru a opri o armată extraterestră.",
-      "cale_imagine": "filme/avengers.webp",
+      "cale_imagine": "avengers.jpg",
       "alt": "Poster The Avengers",
       "sfert_ora": "4"
     },
     {
       "titlu": "Jurassic Park",
       "descriere": "Un parc tematic cu dinozauri clonați scapă de sub control.",
-      "cale_imagine": "filme/jurassicpark.webp",
+      "cale_imagine": "jurassicpark.jpg",
       "alt": "Poster Jurassic Park",
       "sfert_ora": "4"
     },
     {
       "titlu": "Spider-Man: No Way Home",
       "descriere": "Peter Parker îi cere ajutorul Doctorului Strange.",
-      "cale_imagine": "filme/spiderman.webp",
+      "cale_imagine": "spiderman.jpg",
       "alt": "Poster Spider-Man: No Way Home",
       "sfert_ora": "4"
     },
     {
       "titlu": "Shrek",
       "descriere": "Un căpcăun morocănos pornește într-o misiune pentru a salva o prințesă.",
-      "cale_imagine": "filme/shrek.webp",
+      "cale_imagine": "shrek.jpg",
       "alt": "Poster Shrek",
       "sfert_ora": "4"
     },
     {
       "titlu": "Toy Story",
       "descriere": "Aventurile lui Woody și Buzz Lightyear.",
-      "cale_imagine": "filme/toystory.webp",
+      "cale_imagine": "toystory.jpg",
       "alt": "Poster Toy Story",
       "sfert_ora": "4"
     },
     {
       "titlu": "Titanic",
       "descriere": "O poveste de dragoste la bordul legendarului R.M.S. Titanic.",
-      "cale_imagine": "filme/titanic.webp",
+      "cale_imagine": "titanic.jpg",
       "alt": "Poster Titanic",
       "sfert_ora": "4"
     },
     {
       "titlu": "The Lord of the Rings",
       "descriere": "Un hobbit moștenește Inelul Unic și trebuie să-l distrugă.",
-      "cale_imagine": "filme/lotr.webp",
+      "cale_imagine": "lotr.jpg",
       "alt": "Poster The Lord of the Rings",
       "sfert_ora": "4"
     },
     {
       "titlu": "Gladiator",
       "descriere": "Un general roman trădat caută răzbunare ca gladiator.",
-      "cale_imagine": "filme/gladiator.webp",
+      "cale_imagine": "gladiator.jpg",
       "alt": "Poster Gladiator",
       "sfert_ora": "4"
     },
     {
       "titlu": "Se7en",
       "descriere": "Doi detectivi vânează un criminal în serie obsedat de cele 7 păcate capitale.",
-      "cale_imagine": "filme/seven.webp",
+      "cale_imagine": "seven.jpg",
       "alt": "Poster Se7en",
       "sfert_ora": "4"
     }
