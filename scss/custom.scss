@@ -31,6 +31,18 @@ $border-radius-sm: 4px;
 $btn-border-radius: $border-radius;
 $input-border-radius: $border-radius;
 
+// CERINȚA A: Raza și grosimea borderului butoanelor setate prin variabile custom
+$btn-border-width: 2px; // Grosime border buton
+
+// CERINȚA F: Customizare Range Input prin variabile SCSS (bulină cu 50% mai mare, culori custom)
+$form-range-thumb-width: 1.5rem; // 50% mai mare față de html font-size
+$form-range-thumb-height: 1.5rem; // 50% mai mare față de html font-size
+$form-range-thumb-bg: $primary; // Culoare bulină
+$form-range-thumb-active-bg: $secondary; // Culoare bulină activă
+$form-range-track-bg: rgba($secondary, 0.3); // Culoare slider/track
+$form-range-track-height: 0.4rem;
+$form-range-thumb-border: none;
+
 $h1-font-size: 3.5rem;
 $h2-font-size: 2.875rem;
 $h3-font-size: 2.25rem;

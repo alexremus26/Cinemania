@@ -32,6 +32,16 @@
 							<strong>Email:</strong> [Conectează-te pentru a vedea]<br>
 							<strong>Membru din:</strong> [Data inscriere]
 						</p>
+						
+						<!-- Loc de afișat cookie personalizat - ultimul produs accesat -->
+						<div id="last-accessed-movie-container" style="display: none; margin-top: 1.25rem; border-top: 1px dashed rgba(0,0,0,0.15); padding-top: 1rem;">
+							<p style="color: #555; margin: 0; font-size: 0.95rem; line-height: 1.4;">
+								<i class="fa-solid fa-clock-rotate-left" style="color: var(--clr-gold); margin-right: 5px;"></i>
+								<strong>Ultimul film vizualizat:</strong> <br>
+								<a id="last-accessed-movie-link" href="#" style="color: var(--clr-base-red); text-decoration: underline; font-weight: bold; font-family: 'Oswald', sans-serif; font-size: 1.1rem; display: inline-block; margin-top: 4px;">[Film]</a>
+							</p>
+						</div>
+
 						<button style="width: 100%; padding: 0.75rem; margin-top: 1rem; background: var(--clr-base-red); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Editeaza Profil</button>
 					</div>
 				</div>
@@ -124,5 +134,25 @@
 	</main>
 
 	<%- include('../fragmente/footer') %>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+			const lastFilmStr = typeof getCookie === "function" ? getCookie("ultimul_film") : null;
+			if (lastFilmStr) {
+				try {
+					const lastFilm = JSON.parse(lastFilmStr);
+					const container = document.getElementById("last-accessed-movie-container");
+					const link = document.getElementById("last-accessed-movie-link");
+					if (container && link) {
+						link.href = "/film/" + lastFilm.id;
+						link.textContent = lastFilm.nume;
+						container.style.display = "block";
+					}
+				} catch (e) {
+					console.error("[COOKIE] Eroare la parsarea cookie-ului ultimul_film pe contul meu:", e);
+				}
+			}
+		});
+	</script>
 </body>
 </html>

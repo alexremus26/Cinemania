@@ -13,8 +13,8 @@ CREATE TABLE filme (
     nume VARCHAR(255) NOT NULL,
     descriere TEXT NOT NULL,
     imagine VARCHAR(255) NOT NULL,
-    categorie_mare gen_film NOT NULL,
-    categorie_minora VARCHAR(50),
+    categorie_mare gen_film NOT NULL, 
+    categorie_minora VARCHAR(50), -- format: 2D,3D..
     pret NUMERIC(10, 2) NOT NULL,
     durata_minute INTEGER NOT NULL,
     data_lansare DATE NOT NULL,
@@ -26,6 +26,28 @@ CREATE TABLE filme (
 GRANT ALL PRIVILEGES ON DATABASE cinemania TO cinemania_user;
 GRANT ALL PRIVILEGES ON TABLE filme TO cinemania_user;
 GRANT USAGE, SELECT ON SEQUENCE filme_id_seq TO cinemania_user;
+
+CREATE TABLE utilizatori (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    nume VARCHAR(50) NOT NULL,
+    prenume VARCHAR(50) NOT NULL,
+    parola VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    culoare_chat VARCHAR(50) NOT NULL DEFAULT 'black',
+    poza VARCHAR(255),
+    cod VARCHAR(255),
+    rol VARCHAR(50) NOT NULL DEFAULT 'comun'
+);
+
+GRANT ALL PRIVILEGES ON TABLE utilizatori TO cinemania_user;
+GRANT USAGE, SELECT ON SEQUENCE utilizatori_id_seq TO cinemania_user;
+
+INSERT INTO utilizatori (username, nume, prenume, parola, email, culoare_chat, poza, rol) VALUES
+('admin', 'Admin', 'Cinemania', '8569a6112ae11ac1daab48610acf3e7f4930c6246014085556ea109225b13c6bcd9de791d4b0d343a7ca25e7b8367a82c48918893dfe5d9c37e004b907764868', 'admin@cinemania.com', 'red', '/resurse/imagini/utilizatori/admin.jpg', 'admin'),
+('client1', 'Popescu', 'Ion', '09145f6f19fbf1612c549c817047fb7860aa61f83bceb77de502bb42c8a771da69841d5d8be46e7694ce3744da68b7bc54b7ff3f13b03731ab7c6c3562f1e2b7', 'ion.popescu@gmail.com', 'blue', '/resurse/imagini/utilizatori/client1.jpg', 'comun'),
+('moderator1', 'Ionescu', 'Vasile', '8e430ab828e5b93ea6ee1c47ff1bec4134d57cc1900bf09db966e47a43dae5cb7566053376771da0d6f67bae2358882efc1347a176b4a63371e7e4caa1175cb8', 'vasile.ionescu@gmail.com', 'green', '/resurse/imagini/utilizatori/moderator1.jpg', 'moderator');
+
 
 INSERT INTO filme (nume, descriere, imagine, categorie_mare, categorie_minora, pret, durata_minute, data_lansare, rating_varsta, limbi_audio, permite_voucher) VALUES
 ('Furiosa', 'O poveste epica plasata in universul Mad Max, in care Furiosa lupta pentru supravietuire intr-o lume post-apocaliptica dura si nemiloasa.', '/resurse/imagini/filme/furiosa.jpg', 'actiune', 'IMAX', 45.00, 148, '2024-05-24', 'N15', 'Ro,En,Hu', false),

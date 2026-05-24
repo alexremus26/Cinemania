@@ -3,190 +3,314 @@
 
 <%- include('../fragmente/head') %>
 
-<body>
-	<div id="top-anchor"></div>
+	<body>
+		<div id="top-anchor"></div>
 
-	<%- include('../fragmente/header') %>
+		<%- include('../fragmente/header') %>
 
-	<main id="grid-pagina">
-		<section id="welcome">
-			<p class="subtitlu">PREMIERELE SĂPTĂMÂNII</p>
-			<h2 class="reflect-title" aria-label="Acum in cinema">
-				<span class="reflect-main">Acum in cinema</span>
-				<span class="reflect-copy" aria-hidden="true">Acum in cinema</span>
-			</h2>
-			<p class="intro">Descoperă experiența vizuală supremă în sălile noastre dotate cu tehnologie de vârf.</p>
-			<%- include('../fragmente/galerie') %>
-		</section>
-		<section id="orar">
-			<h2>Top Premiere</h2>
-			<div class="table-rounded-container">
-				<div class="table-scroll-container">
-					<table>
-						<caption>* Toate premierele includ Combo Premiera.</caption>
-						<thead>
-							<tr>
-								<th>Film</th>
-								<th>Format</th>
-								<th>Data Lansării</th>
-								<th>Sala</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td rowspan="2">Marty Supreme</td>
-								<td>4DX</td>
-								<td>15 Martie</td>
-								<td>S1</td>
-							</tr>
-							<tr>
-								<td>2D</td>
-								<td>15 Martie</td>
-								<td>S4</td>
-							</tr>
-							<tr>
-								<td>Interstellar</td>
-								<td>IMAX</td>
-								<td>10 Martie</td>
-								<td>S2</td>
-							</tr>
-							<tr>
-								<td>The Joker</td>
-								<td>2D</td>
-								<td colspan="2">Disponibil în toate sălile standard</td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr><td colspan="4">Premierele săptămânii beneficiază de bilet 1+1 marțea.</td></tr>
-						</tfoot>
-					</table>
-				</div>
-			</div>
-		</section>
-		<section id="evenimente">
-			<h2>Meniu Cinema</h2>
-			<div class="table-rounded-container">
-				<div class="table-scroll-container">
-					<table>
-						<caption>* Ofertele combo sunt valabile în limita stocului.</caption>
-						<thead>
-							<tr><th>Produs</th><th>Mărime</th><th>Preț</th></tr>
-						</thead>
-						<tbody>
-							<tr><td rowspan="2">Popcorn</td><td>Mediu</td><td>15 RON</td></tr>
-							<tr><td>Mare</td><td>22 RON</td></tr>
-							<tr><td>Nachos</td><td>Standard</td><td>25 RON</td></tr>
-							<tr><td>Suc / Apă</td><td colspan="2">De la 10 RON</td></tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</section>
-		<section id="anunturi">
-			<h2>Promoții Active</h2>
-			<div class="anunt-recurent" aria-label="Anunturi rapide Cinemania">
-				<p class="anunt-recurent-track">
-					<span>Program extins vineri-sambata pana la 01:00 • Bilete online cu selectie locuri • Combo Premiera activ in foyer •</span>
-				</p>
-			</div>
-			<div class="promo-grid">
-				<article class="promo-card promo-card-secondary">
-					<div class="promo-icon"><i class="fas fa-popcorn"></i></div>
-					<div class="promo-content">
-						<p class="promo-label">Combo Premieră</p>
-						<h3>Popcorn mare + suc la 25 RON</h3>
-						<p class="promo-text">Pachet bun pentru seri de premieră.</p>
-						<span class="promo-chip promo-chip-success">Disponibil în foyer</span>
+			<main id="grid-pagina">
+				<section id="welcome">
+					<p class="subtitlu">PREMIERELE SĂPTĂMÂNII</p>
+					<h2 class="reflect-title" aria-label="Acum in cinema">
+						<span class="reflect-main">Acum in cinema</span>
+						<span class="reflect-copy" aria-hidden="true">Acum in cinema</span>
+					</h2>
+					<p class="intro">Descoperă experiența vizuală supremă în sălile noastre dotate cu tehnologie de
+						vârf.</p>
+
+					<!-- Loc de afișat cookie personalizat - ultimul produs accesat -->
+					<div id="welcome-cookie-container" class="alert alert-secondary d-none"
+						style="margin: 20px 0; border-left: 4px solid var(--clr-gold); background: rgba(229,177,67,0.08); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid var(--clr-gold); padding: 1rem 1.5rem;">
+						<div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+							<div style="font-family: 'Montserrat', sans-serif; font-size: 0.95rem; color: #fff;">
+								<i class="fa-solid fa-clock-rotate-left"
+									style="color: var(--clr-gold); margin-right: 8px;"></i>
+								<span>Te-ai întors? Ultimul film accesat de tine: <strong><a id="welcome-cookie-link"
+											href="#"
+											style="color: var(--clr-gold); text-decoration: underline; font-weight: bold;"></a></strong></span>
+							</div>
+							<button class="btn btn-sm text-light p-0 border-0" id="btn-clear-welcome-cookie"
+								style="font-size: 0.85rem; text-decoration: none; cursor: pointer; background: none; opacity: 0.8; transition: opacity 0.2s;"
+								onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.8">
+								<i class="fa-solid fa-trash-can"
+									style="color: var(--clr-base-red); margin-right: 4px;"></i> Șterge Istoric
+							</button>
+						</div>
 					</div>
-				</article>
 
-				<article class="promo-card promo-card-primary">
-					<div class="promo-icon"><i class="fas fa-calendar-check"></i></div>
-					<div class="promo-content">
-						<p class="promo-label">Miercurea Cinematografică</p>
-						<h3>Bilete la 15 RON</h3>
-						<p class="promo-text">Acces rapid la locuri bune.</p>
-						<span class="promo-chip promo-chip-danger">Doar miercurea</span>
+					<!-- Identificator: bootstrap_js_ -->
+					<div class="carousel-filme-container">
+						<div id="carousel-filme" class="carousel slide" data-bs-ride="carousel"
+							data-bs-interval="false">
+							<!-- Indicators -->
+							<div class="carousel-indicators" id="carousel-indicators">
+								<% if (locals.filmeAleatorii && filmeAleatorii.length> 0) { %>
+									<% for (let i=0; i < filmeAleatorii.length; i++) { %>
+										<button type="button" data-bs-target="#carousel-filme"
+											data-bs-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>"
+											aria-current="<%= i === 0 ? 'true' : 'false' %>"
+											aria-label="Slide <%= i + 1 %>"></button>
+										<% } %>
+											<% } %>
+							</div>
+
+							<!-- Inner Items -->
+							<div class="carousel-inner" id="carousel-inner">
+								<% if (locals.filmeAleatorii && filmeAleatorii.length> 0) { %>
+									<% filmeAleatorii.forEach((film, index)=> { %>
+										<div class="carousel-item <%= index === 0 ? 'active' : '' %>"
+											data-film-id="<%= film.id %>">
+											<img src="<%= film.imagine %>" class="d-block w-100"
+												alt="Poster <%= film.nume %>">
+											<div class="carousel-caption">
+												<h3>
+													<%= film.nume %>
+												</h3>
+												<div class="carousel-meta">
+													<span><i class="fa-solid fa-tags"></i>
+														<%= film.categorie_mare.charAt(0).toUpperCase() +
+															film.categorie_mare.slice(1) %> / <%= film.categorie_minora
+																%>
+													</span>
+													<span><i class="fa-solid fa-clock"></i>
+														<%= film.durata_minute %> min
+													</span>
+													<span><i class="fa-solid fa-ticket"></i>
+														<%= film.pret %> RON
+													</span>
+												</div>
+												<p class="descriere-film">
+													<%= film.descriere %>
+												</p>
+												<a href="/film/<%= film.id %>" class="btn btn-view-movie">Detalii
+													Film</a>
+											</div>
+										</div>
+										<% }); %>
+											<% } else { %>
+												<div class="carousel-item active">
+													<div class="d-flex align-items-center justify-content-center"
+														style="height: 520px; background: #111;">
+														<p class="text-muted">Se încarcă filmele...</p>
+													</div>
+												</div>
+												<% } %>
+							</div>
+
+							<!-- Controls -->
+							<button class="carousel-control-prev" type="button" data-bs-target="#carousel-filme"
+								data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Precedent</span>
+							</button>
+							<button class="carousel-control-next" type="button" data-bs-target="#carousel-filme"
+								data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Următor</span>
+							</button>
+						</div>
 					</div>
-				</article>
-			</div>
-		</section>
-		<section id="upcoming">
-			<hr class="cinema-hr" aria-hidden="true">
-			<h2>Trailere Noi</h2>
-			<div class="iframe-interface">
-				<nav class="iframe-nav">
-					<a href="https://www.youtube.com/embed/Mzw2ttJD2qQ" target="video-frame">Trailer 1</a>
-					<a href="https://www.youtube.com/embed/xYcgQMxQwmk" target="video-frame">Trailer 2</a>
-					<a href="https://www.youtube.com/embed/e9HXmMnUEdE" target="video-frame">Trailer 3</a>
-				</nav>
-				<div class="iframe-wrapper">
-					<iframe name="video-frame" src="https://www.youtube.com/embed/Mzw2ttJD2qQ" title="Trailer"></iframe>
-				</div>
-			</div>
-		</section>
-		<section id="account">
-			<h2>Info Cont</h2>
-			<p>Loghează-te pe pagina <strong>Contul meu</strong> pentru istoricul achizițiilor tale.</p>
-		</section>
-		<section id="locatii">
-			<h2>Calculator Preț Bilet</h2>
-			<div class="formula-box" style="margin-top: 15px;">
-				<p style="margin: 0 0 10px 0;"><strong>Formula Preț Bilet:</strong></p>
-				<math xmlns="http://www.w3.org/1998/Math/MathML" display="block" style="text-align: center; font-size: 1.1rem; margin: 20px 0;">
-					<mrow>
-						<msub>
-							<mi>P</mi>
-							<mi>final</mi>
-						</msub>
-						<mo>=</mo>
-						<msub>
-							<mi>P</mi>
-							<mi>base</mi>
-						</msub>
-						<mo>×</mo>
-						<mrow>
-							<mo>(</mo>
-							<mn>1</mn>
-							<mo>−</mo>
-							<mi>r</mi>
-							<mo>)</mo>
-						</mrow>
-						<mo>+</mo>
-						<mi>taxa</mi>
-					</mrow>
-				</math>
-				<p style="margin: 8px 0 0 0; font-size: 0.95rem;">
-					<strong>r</strong> = rata de reducere (ex: student <strong>r = 0.20</strong>, senior <strong>r = 0.30</strong>, fără reducere <strong>r = 0</strong>).
-				</p>
-				<p style="margin: 8px 0 0 0; font-size: 0.9rem;">
-					Exemplu rapid (P<sub>base</sub>=30, taxa=1): student = 25 RON, senior = 22 RON, standard = 31 RON.
-				</p>
-			</div>
-		</section>
-		<section id="facilitati">
-			<h2>Tehnologii</h2>
-			<div class="creative-grid">
-				<a href="https://ro.wikipedia.org/wiki/IMAX" target="_blank" class="cat-card">
-					<i class="fa-solid fa-film fa-2x" style="color: var(--clr-gold); margin-bottom: 10px;"></i>
-					<h3>IMAX</h3>
-					<p>Experiența vizuală supremă.</p>
-				</a>
-				<a href="https://ro.wikipedia.org/wiki/4DX" target="_blank" class="cat-card">
-					<i class="fa-solid fa-gear fa-spin fa-2x" style="color: var(--clr-base-red); margin-bottom: 10px;"></i>
-					<h3>4DX</h3>
-					<p>Imersiune totală senzorială.</p>
-				</a>
-			</div>
-		</section>
-	</main>
 
-	<a href="#top-anchor" id="link-top">
-		<div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
-		<span class="tooltip-text">Revino la Acasă</span>
-	</a>
+					<%- include('../fragmente/galerie') %>
+				</section>
+				<section id="orar">
+					<h2>Top Premiere</h2>
+					<div class="table-rounded-container">
+						<div class="table-scroll-container">
+							<table>
+								<caption>* Toate premierele includ Combo Premiera.</caption>
+								<thead>
+									<tr>
+										<th>Film</th>
+										<th>Format</th>
+										<th>Data Lansării</th>
+										<th>Sala</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td rowspan="2">Marty Supreme</td>
+										<td>4DX</td>
+										<td>15 Martie</td>
+										<td>S1</td>
+									</tr>
+									<tr>
+										<td>2D</td>
+										<td>15 Martie</td>
+										<td>S4</td>
+									</tr>
+									<tr>
+										<td>Interstellar</td>
+										<td>IMAX</td>
+										<td>10 Martie</td>
+										<td>S2</td>
+									</tr>
+									<tr>
+										<td>The Joker</td>
+										<td>2D</td>
+										<td colspan="2">Disponibil în toate sălile standard</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4">Premierele săptămânii beneficiază de bilet 1+1 marțea.</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</section>
+				<section id="evenimente">
+					<h2>Meniu Cinema</h2>
+					<div class="table-rounded-container">
+						<div class="table-scroll-container">
+							<table>
+								<caption>* Ofertele combo sunt valabile în limita stocului.</caption>
+								<thead>
+									<tr>
+										<th>Produs</th>
+										<th>Mărime</th>
+										<th>Preț</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td rowspan="2">Popcorn</td>
+										<td>Mediu</td>
+										<td>15 RON</td>
+									</tr>
+									<tr>
+										<td>Mare</td>
+										<td>22 RON</td>
+									</tr>
+									<tr>
+										<td>Nachos</td>
+										<td>Standard</td>
+										<td>25 RON</td>
+									</tr>
+									<tr>
+										<td>Suc / Apă</td>
+										<td colspan="2">De la 10 RON</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</section>
+				<section id="anunturi">
+					<h2>Promoții Active</h2>
+					<div class="anunt-recurent" aria-label="Anunturi rapide Cinemania">
+						<p class="anunt-recurent-track">
+							<span>Program extins vineri-sambata pana la 01:00 • Bilete online cu selectie locuri • Combo
+								Premiera activ in foyer •</span>
+						</p>
+					</div>
+					<div class="promo-grid">
+						<article class="promo-card promo-card-secondary">
+							<div class="promo-icon"><i class="fas fa-popcorn"></i></div>
+							<div class="promo-content">
+								<p class="promo-label">Combo Premieră</p>
+								<h3>Popcorn mare + suc la 25 RON</h3>
+								<p class="promo-text">Pachet bun pentru seri de premieră.</p>
+								<span class="promo-chip promo-chip-success">Disponibil în foyer</span>
+							</div>
+						</article>
 
-	<%- include('../fragmente/footer') %>
-</body>
+						<article class="promo-card promo-card-primary">
+							<div class="promo-icon"><i class="fas fa-calendar-check"></i></div>
+							<div class="promo-content">
+								<p class="promo-label">Miercurea Cinematografică</p>
+								<h3>Bilete la 15 RON</h3>
+								<p class="promo-text">Acces rapid la locuri bune.</p>
+								<span class="promo-chip promo-chip-danger">Doar miercurea</span>
+							</div>
+						</article>
+					</div>
+				</section>
+				<section id="upcoming">
+					<hr class="cinema-hr" aria-hidden="true">
+					<h2>Trailere Noi</h2>
+					<div class="iframe-interface">
+						<nav class="iframe-nav">
+							<a href="https://www.youtube.com/embed/Mzw2ttJD2qQ" target="video-frame">Trailer 1</a>
+							<a href="https://www.youtube.com/embed/xYcgQMxQwmk" target="video-frame">Trailer 2</a>
+							<a href="https://www.youtube.com/embed/e9HXmMnUEdE" target="video-frame">Trailer 3</a>
+						</nav>
+						<div class="iframe-wrapper">
+							<iframe name="video-frame" src="https://www.youtube.com/embed/Mzw2ttJD2qQ"
+								title="Trailer"></iframe>
+						</div>
+					</div>
+				</section>
+				<section id="account">
+					<h2>Info Cont</h2>
+					<p>Loghează-te pe pagina <strong>Contul meu</strong> pentru istoricul achizițiilor tale.</p>
+				</section>
+				<section id="locatii">
+					<h2>Calculator Preț Bilet</h2>
+					<div class="formula-box" style="margin-top: 15px;">
+						<p style="margin: 0 0 10px 0;"><strong>Formula Preț Bilet:</strong></p>
+						<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"
+							style="text-align: center; font-size: 1.1rem; margin: 20px 0;">
+							<mrow>
+								<msub>
+									<mi>P</mi>
+									<mi>final</mi>
+								</msub>
+								<mo>=</mo>
+								<msub>
+									<mi>P</mi>
+									<mi>base</mi>
+								</msub>
+								<mo>×</mo>
+								<mrow>
+									<mo>(</mo>
+									<mn>1</mn>
+									<mo>−</mo>
+									<mi>r</mi>
+									<mo>)</mo>
+								</mrow>
+								<mo>+</mo>
+								<mi>taxa</mi>
+							</mrow>
+						</math>
+						<p style="margin: 8px 0 0 0; font-size: 0.95rem;">
+							<strong>r</strong> = rata de reducere (ex: student <strong>r = 0.20</strong>, senior
+							<strong>r = 0.30</strong>, fără reducere <strong>r = 0</strong>).
+						</p>
+						<p style="margin: 8px 0 0 0; font-size: 0.9rem;">
+							Exemplu rapid (P<sub>base</sub>=30, taxa=1): student = 25 RON, senior = 22 RON, standard =
+							31 RON.
+						</p>
+					</div>
+				</section>
+				<section id="facilitati">
+					<h2>Tehnologii</h2>
+					<div class="creative-grid">
+						<a href="https://ro.wikipedia.org/wiki/IMAX" target="_blank" class="cat-card">
+							<i class="fa-solid fa-film fa-2x" style="color: var(--clr-gold); margin-bottom: 10px;"></i>
+							<h3>IMAX</h3>
+							<p>Experiența vizuală supremă.</p>
+						</a>
+						<a href="https://ro.wikipedia.org/wiki/4DX" target="_blank" class="cat-card">
+							<i class="fa-solid fa-gear fa-spin fa-2x"
+								style="color: var(--clr-base-red); margin-bottom: 10px;"></i>
+							<h3>4DX</h3>
+							<p>Imersiune totală senzorială.</p>
+						</a>
+					</div>
+				</section>
+			</main>
+
+			<a href="#top-anchor" id="link-top">
+				<div class="circle-outer"><span class="arrow-icon">&#8593;</span></div>
+				<span class="tooltip-text">Revino la Acasă</span>
+			</a>
+
+			<%- include('../fragmente/footer') %>
+
+				<!-- Identificator: bootstrap_js_ -->
+				<script src="/resurse/js/carousel.js" defer></script>
+	</body>
 
 </html>

@@ -115,6 +115,17 @@
         </article>
     </main>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Setează cookie-ul pentru ultimul film accesat
+            const filmId = "<%= produs.id %>";
+            const filmNume = "<%= produs.nume.replace(/"/g, '\\"') %>";
+            if (typeof setCookie === "function") {
+                setCookie("ultimul_film", JSON.stringify({ id: filmId, nume: filmNume }), 30 * 24 * 60 * 60); // expira in 30 de zile
+            }
+        });
+    </script>
+
     <%- include('../fragmente/footer') %>
 </body>
 </html>

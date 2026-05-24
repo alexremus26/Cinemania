@@ -36,6 +36,12 @@ vect_foldere.forEach((numeFolder) => {
     }
 });
 
+/**
+ * Normalizează calea unei imagini pentru a fi servită către client.
+ * @param {string} basePath - Calea de bază a galeriei sau a erorilor.
+ * @param {string} imagePath - Calea relativă a imaginii.
+ * @returns {string} Calea normalizată pentru client.
+ */
 function toClientImagePath(basePath, imagePath) {
     if (!imagePath) {
         return '';
@@ -48,6 +54,11 @@ function toClientImagePath(basePath, imagePath) {
     return path.posix.join(basePath, imagePath);
 }
 
+/**
+ * Compilează un fișier SCSS în format CSS compressed și realizează backup automat.
+ * @param {string} caleScss - Calea relativă sau absolută a fișierului SCSS.
+ * @param {string|null} [caleCss=null] - Calea opțională a fișierului CSS rezultat.
+ */
 function compileazaScss(caleScss, caleCss) {
     try {
         const pathScss = path.isAbsolute(caleScss) ? caleScss : path.join(obGlobal.folderScss, caleScss);
@@ -83,7 +94,8 @@ function compileazaScss(caleScss, caleCss) {
         const result = sass.compile(pathScss, {
             style: 'compressed',
             loadPaths: [obGlobal.folderScss, path.join(__dirname, 'node_modules')],
-            quietDeps: true
+            quietDeps: true,
+            silenceDeprecations: ['import']
         });
 
         // scriere
@@ -597,6 +609,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// middleware pt categorii
 app.use((req, res, next) => {
     const galerieAnimataData = getGalerieAnimataRenderData();
     res.locals.galerieAnimata = galerieAnimataData.items;
@@ -642,19 +655,30 @@ app.get(['/index', '/index.html', '/index.ejs'], (req, res) => {
     res.redirect('/');
 });
 
+/* Identificator: bootstrap_js_ */
 app.get(['/', '/index', '/home'], async (req, res) => {
     const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
 
     const galerieDate = await filterGaleryByQuarter(new Date(), obGlobal.obGalerie);
 
+    let filmeAleatorii = [];
+    try {
+        const rezultatAleatoare = await pool.query('SELECT * FROM filme ORDER BY RANDOM() LIMIT 5');
+        filmeAleatorii = rezultatAleatoare.rows;
+    } catch (error) {
+        console.error('[DB] Eroare la preluarea filmelor aleatorii pentru index:', error);
+    }
+
     res.render('pagini/index', {
         videoWebm,
         videoMp4,
         videoPoster,
-        galerieDate
+        galerieDate,
+        filmeAleatorii
     });
 });
 
+// FILME SI FILTRARE SI SORTARE
 app.get('/filme', async (req, res) => {
     const { videoMp4, videoWebm, videoPoster } = getTrailerAssets();
     const galerieAnimataData = getGalerieAnimataRenderData();
@@ -674,6 +698,7 @@ app.get('/filme', async (req, res) => {
             query += ' WHERE categorie_mare = $1';
             params.push(req.query.tip);
         }
+
         const rezultat = await pool.query(query, params);
         produse = rezultat.rows;
     } catch (error) {
@@ -697,9 +722,10 @@ app.get('/galerie', async (req, res) => {
     });
 });
 
-app.get('/produs/:id', async (req, res) => {
+// film unic 
+app.get('/film/:id', async (req, res) => {
     try {
-        // Validation for SQL Injection: ensure ID is numeric and use parameterized query
+        // // Validation for SQL Injection: ensure ID is numeric and use parameterized query
         const idNumeric = parseInt(req.params.id, 10);
         if (isNaN(idNumeric)) {
             return afisareEroare(res, 400, 'ID Invalid', 'Identificatorul produsului trebuie să fie numeric.');
@@ -707,7 +733,7 @@ app.get('/produs/:id', async (req, res) => {
 
         const rezultat = await pool.query('SELECT * FROM filme WHERE id = $1', [idNumeric]);
         if (rezultat.rows.length === 0) {
-            return afisareEroare(res, 404, 'Produs Negăsit', 'Nu a fost găsit niciun film cu acest ID.');
+            return afisareEroare(res, 404, 'Film Negăsit', 'Nu a fost găsit niciun film cu acest ID.');
         }
 
         res.render('pagini/produs', { produs: rezultat.rows[0] });
@@ -716,6 +742,18 @@ app.get('/produs/:id', async (req, res) => {
         afisareEroare(res, 500);
     }
 });
+
+/* Identificator: bootstrap_js_ */
+app.get('/api/filme/aleatorii', async (req, res) => {
+    try {
+        const rezultat = await pool.query('SELECT * FROM filme ORDER BY RANDOM() LIMIT 5');
+        res.json(rezultat.rows);
+    } catch (error) {
+        console.error('[API] Eroare la preluarea filmelor aleatorii:', error);
+        res.status(500).json({ eroare: 'Eroare de bază de date' });
+    }
+});
+
 
 app.get('/*splat', (req, res) => {
     const paginaCeruta = req.path.replace(/^\/+/g, '').replace(/\/+$/g, '');

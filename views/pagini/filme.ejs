@@ -1,394 +1,465 @@
 <!DOCTYPE html>
 <html lang="ro">
+
 <head>
 	<%- include('../fragmente/head') %>
-	<title>Filme - Cinemania</title>
-	<style>
-        .filtre-container {
-            background-color: var(--secondary-bg, #1a1a1a);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            border: 1px solid var(--border-color, #333);
-        }
-        .filtru-grup {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .filtru-grup label {
-            font-weight: bold;
-            color: var(--text-color, #f5f5f5);
-        }
-        .filtru-grup input[type="text"],
-        .filtru-grup textarea,
-        .filtru-grup select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid var(--border-color, #444);
-            border-radius: 4px;
-            background: var(--input-bg, #2a2a2a);
-            color: var(--text-color, #fff);
-        }
-        .range-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .radio-grup label {
-            font-weight: normal;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-right: 10px;
-        }
-        .butoane-filtre {
-            grid-column: 1 / -1;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        
-        .produse-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 20px;
-        }
-        .produs-card {
-            background: var(--card-bg, #1e1e1e);
-            border-radius: 8px;
-            padding: 15px;
-            border: 1px solid var(--border-color, #333);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .produs-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0,0,0,0.5);
-        }
-        .produs-card h3 {
-            margin-top: 0;
-            color: var(--primary-color, #e50914);
-            border-bottom: 1px solid #333;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        .produs-card h3 a {
-            color: inherit;
-            text-decoration: none;
-        }
-        .produs-card h3 a:hover {
-            text-decoration: underline;
-        }
-        .produs-coloane {
-            display: flex;
-            gap: 15px;
-        }
-        .coloana-1 {
-            flex: 0 0 150px;
-        }
-        .coloana-2 {
-            flex: 1;
-        }
-        .img-produs {
-            width: 100%;
-            height: auto;
-            border-radius: 4px;
-            object-fit: cover;
-            aspect-ratio: 2/3;
-        }
-        .pret-label {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #4caf50;
-        }
-        details {
-            background: #2a2a2a;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
-        details summary {
-            cursor: pointer;
-            font-weight: bold;
-        }
-        details ul {
-            margin-top: 10px;
-            padding-left: 20px;
-            list-style-type: square;
-        }
-        .descriere-produs {
-            font-size: 0.9em;
-            line-height: 1.4;
-            color: #ccc;
-        }
+		<title>Filme - Cinemania</title>
+		<style>
+			.filtre-container {
+				background-color: var(--secondary-bg, #1a1a1a);
+				padding: 20px;
+				border-radius: 8px;
+				margin-bottom: 30px;
+				border: 1px solid var(--border-color, #333);
+			}
 
-        #div-calcul {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.9);
-            color: #fff;
-            padding: 20px 40px;
-            border-radius: 8px;
-            font-size: 1.5rem;
-            z-index: 1000;
-            border: 2px solid var(--primary-color, #e50914);
-        }
-    </style>
-	<script src="/resurse/js/filme.js" defer></script>
+			.filtru-grup {
+				display: flex;
+				flex-direction: column;
+				gap: 5px;
+			}
+
+			.filtru-grup label {
+				font-weight: bold;
+				color: var(--text-color, #f5f5f5);
+			}
+
+			.filtru-grup input[type="text"],
+			.filtru-grup textarea,
+			.filtru-grup select {
+				width: 100%;
+				padding: 8px;
+				border: 1px solid var(--border-color, #444);
+				border-radius: 4px;
+				background: var(--input-bg, #2a2a2a);
+				color: var(--text-color, #fff);
+			}
+
+			.range-container {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+
+			.radio-grup label {
+				font-weight: normal;
+				display: inline-flex;
+				align-items: center;
+				gap: 5px;
+				margin-right: 10px;
+			}
+
+			.butoane-filtre {
+				grid-column: 1 / -1;
+				display: flex;
+				gap: 10px;
+				flex-wrap: wrap;
+				margin-top: 10px;
+			}
+
+			.produse-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+				gap: 20px;
+			}
+
+			.produs-card {
+				background: var(--card-bg, #1e1e1e);
+				border-radius: 8px;
+				padding: 15px;
+				border: 1px solid var(--border-color, #333);
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+				transition: transform 0.2s, box-shadow 0.2s;
+			}
+
+			.produs-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+			}
+
+			.produs-card h3 {
+				margin-top: 0;
+				color: var(--primary-color, #e50914);
+				border-bottom: 1px solid #333;
+				padding-bottom: 10px;
+				margin-bottom: 15px;
+			}
+
+			.produs-card h3 a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			.produs-card h3 a:hover {
+				text-decoration: underline;
+			}
+
+			.produs-coloane {
+				display: flex;
+				gap: 15px;
+			}
+
+			.coloana-1 {
+				flex: 0 0 150px;
+			}
+
+			.coloana-2 {
+				flex: 1;
+			}
+
+			.img-produs {
+				width: 100%;
+				height: auto;
+				border-radius: 4px;
+				object-fit: cover;
+				aspect-ratio: 2/3;
+			}
+
+			.pret-label {
+				font-size: 1.2em;
+				font-weight: bold;
+				color: #4caf50;
+			}
+
+			details {
+				background: #2a2a2a;
+				padding: 10px;
+				border-radius: 4px;
+				margin-bottom: 15px;
+			}
+
+			details summary {
+				cursor: pointer;
+				font-weight: bold;
+			}
+
+			details ul {
+				margin-top: 10px;
+				padding-left: 20px;
+				list-style-type: square;
+			}
+
+			.descriere-produs {
+				font-size: 0.9em;
+				line-height: 1.4;
+				color: #ccc;
+			}
+
+			#div-calcul {
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				background: rgba(0, 0, 0, 0.9);
+				color: #fff;
+				padding: 20px 40px;
+				border-radius: 8px;
+				font-size: 1.5rem;
+				z-index: 1000;
+				border: 2px solid var(--primary-color, #e50914);
+			}
+		</style>
+		<script src="/resurse/js/filme.js" defer></script>
 </head>
+
 <body>
 	<%- include('../fragmente/header') %>
 
-	<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
-		<section id="program-filme">
+		<main id="grid-pagina" class="grid-single" style="padding: 40px var(--page-margin);">
+			<section id="program-filme">
 
-			<!-- SECTIUNE PRODUSE (Filtre + Grid) -->
-			<h2 style="margin-bottom: 1.5rem; color: var(--primary-color, #e50914);">Filme Cinemania</h2>
+				<!-- SECTIUNE PRODUSE (Filtre + Grid) -->
+				<h2 style="margin-bottom: 1.5rem; color: var(--primary-color, #e50914);">Filme Cinemania</h2>
 
-			<!-- SECTIUNE FILTRE -->
-			<section id="filtre-produse" class="filtre-container">
-				<div class="row">
-					<!-- Nume -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="filtru-grup">
-							<label for="inp-nume" class="form-label text-light fw-bold">Căutare după nume:</label>
-							<input type="text" id="inp-nume" class="form-control" placeholder="Ex: Dune">
-						</div>
-					</div>
-
-					<!-- Preț -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="filtru-grup">
-							<label for="inp-pret" class="form-label text-light fw-bold">Preț maxim: <span id="valoare-pret">100</span> RON</label>
-							<div class="d-flex align-items-center gap-2">
-								<span class="text-muted fs-6" id="pret-min">10</span>
-								<input type="range" id="inp-pret" class="form-range flex-grow-1" min="10" max="100" value="100" step="1">
-								<span class="text-muted fs-6" id="pret-max">100</span>
+				<!-- CERINȚA D: AȘEZAREA INPUTURILOR ÎN GRID RESPONSIVE BOOTSTRAP (row, col) -->
+				<!-- SECTIUNE FILTRE -->
+				<section id="filtre-produse" class="filtre-container">
+					<div class="row">
+						<!-- Nume -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="filtru-grup">
+								<label for="inp-nume" class="form-label text-light fw-bold">Căutare după nume:</label>
+								<input type="text" id="inp-nume" class="form-control" placeholder="Ex: Dune">
 							</div>
 						</div>
-					</div>
 
-					<!-- Format -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="filtru-grup">
-							<label for="inp-format" class="form-label text-light fw-bold">Format vizionare:</label>
-							<input type="text" id="inp-format" class="form-control" list="lista-formate" placeholder="Alegeți format">
-							<datalist id="lista-formate">
-								<option value="2D">
-								<option value="3D">
-								<option value="IMAX">
-								<option value="4DX">
-							</datalist>
-						</div>
-					</div>
-
-					<!-- Rating Vârstă Toggle Buttons -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="filtru-grup">
-							<label class="form-label text-light fw-bold">Rating Vârstă:</label>
-							<div class="btn-group d-flex flex-wrap gap-1" role="group" aria-label="Rating Vârstă">
-								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-toate" value="toate" checked autocomplete="off">
-								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-toate">Toate</label>
-
-								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-ag" value="AG" autocomplete="off">
-								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-ag">AG</label>
-
-								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-ap12" value="AP12" autocomplete="off">
-								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-ap12">AP12</label>
-
-								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-n15" value="N15" autocomplete="off">
-								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-n15">N15</label>
-
-								<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-im18" value="IM18" autocomplete="off">
-								<label class="btn btn-outline-primary btn-sm flex-grow-1" for="rad-rating-im18">IM18</label>
-							</div>
-						</div>
-					</div>
-
-					<!-- Voucher Toggle Button -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="filtru-grup">
-							<label class="form-label text-light fw-bold">Discount / Promo:</label>
-							<div class="w-100">
-								<input type="checkbox" class="btn-check" id="inp-voucher" autocomplete="off">
-								<label class="btn btn-outline-secondary btn-sm w-100" for="inp-voucher">
-									<i class="bi bi-tag-fill me-1"></i> afișează doar cu discount pe baza criteriului acceptării de vouchere
-								</label>
-							</div>
-						</div>
-					</div>
-
-					<!-- Descriere (Floating Label) -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="form-floating">
-							<textarea id="inp-descriere" class="form-control text-light bg-dark border-secondary" placeholder="Ex: exploratori..." style="height: 58px; min-height: 58px;"></textarea>
-							<label for="inp-descriere" class="text-secondary">Cuvinte cheie descriere</label>
-						</div>
-					</div>
-
-					<!-- Durată -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="filtru-grup">
-							<label for="inp-durata" class="form-label text-light fw-bold">Durată minimă:</label>
-							<select id="inp-durata" class="form-select">
-								<option value="oricare" selected>Oricare</option>
-								<option value="90">90+ minute</option>
-								<option value="120">120+ minute</option>
-								<option value="150">150+ minute</option>
-							</select>
-						</div>
-					</div>
-
-					<!-- Lună Lansare -->
-					<div class="col-12 col-md-6 col-lg-4 mb-3">
-						<div class="filtru-grup">
-							<label for="inp-luna-lansare" class="form-label text-light fw-bold">Luna lansării:</label>
-							<select id="inp-luna-lansare" class="form-select" multiple size="3">
-								<option value="0" selected>Ianuarie</option>
-								<option value="1" selected>Februarie</option>
-								<option value="2" selected>Martie</option>
-								<option value="3" selected>Aprilie</option>
-								<option value="4" selected>Mai</option>
-								<option value="5" selected>Iunie</option>
-								<option value="6" selected>Iulie</option>
-								<option value="7" selected>August</option>
-								<option value="8" selected>Septembrie</option>
-								<option value="9" selected>Octombrie</option>
-								<option value="10" selected>Noiembrie</option>
-								<option value="11" selected>Decembrie</option>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<!-- Butoane Filtre cu Bootstrap Icons si Responsive Display -->
-				<div class="butoane-filtre mt-3 d-flex flex-wrap gap-2">
-					<button id="btn-filtrare" class="btn btn-primary d-flex align-items-center gap-1">
-						<i class="bi bi-filter"></i>
-						<span class="d-none d-md-inline">Filtrează</span>
-					</button>
-					<button id="btn-sort-asc" class="btn btn-secondary d-flex align-items-center gap-1">
-						<i class="bi bi-sort-numeric-down"></i>
-						<span class="d-none d-md-inline">Sortare Ascendentă</span>
-					</button>
-					<button id="btn-sort-desc" class="btn btn-secondary d-flex align-items-center gap-1">
-						<i class="bi bi-sort-numeric-up-alt"></i>
-						<span class="d-none d-md-inline">Sortare Descendentă</span>
-					</button>
-					<button id="btn-calculeaza" class="btn btn-secondary d-flex align-items-center gap-1">
-						<i class="bi bi-calculator"></i>
-						<span class="d-none d-md-inline">Medie Preț Afișate</span>
-					</button>
-					<button id="btn-reset" class="btn btn-danger d-flex align-items-center gap-1">
-						<i class="bi bi-arrow-clockwise"></i>
-						<span class="d-none d-md-inline">Resetare Filtre</span>
-					</button>
-				</div>
-			</section>
-
-			<!-- SECTIUNE PRODUSE -->
-			<section id="grid-produse" class="produse-grid">
-				<% if (typeof produse !== 'undefined' && produse.length > 0) { %>
-					<% produse.forEach(function(produs) { %>
-						<article id="produs_<%= produs.id %>" class="produs-card <%= produs.categorie_mare %>">
-							<h3><a href="/produs/<%= produs.id %>"><%= produs.nume %></a></h3>
-							<div class="produs-coloane">
-								<div class="coloana-1">
-									<figure>
-										<img src="<%= produs.imagine %>" alt="Poster <%= produs.nume %>" class="img-produs">
-									</figure>
-									<p class="categorie-label">Categorie: <strong><span class="val-categorie"><%= produs.categorie_mare %></span></strong></p>
-									<p class="pret-label">Preț: <span class="val-pret"><%= produs.pret %></span> RON</p>
+						<!-- Preț -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="filtru-grup">
+								<label for="inp-pret" class="form-label text-light fw-bold">Preț maxim: <span
+										id="valoare-pret">100</span> RON</label>
+								<div class="d-flex align-items-center gap-2">
+									<span class="text-muted fs-6" id="pret-min">10</span>
+									<input type="range" id="inp-pret" class="form-range flex-grow-1" min="10" max="100"
+										value="100" step="1">
+									<span class="text-muted fs-6" id="pret-max">100</span>
 								</div>
-								<div class="coloana-2">
-									<details>
-										<summary>Specificații</summary>
-										<ul>
-											<li><strong>Rating:</strong> <em><span class="val-rating"><%= produs.rating_varsta %></span></em></li>
-											<li><strong>Limbi audio:</strong> <em><span class="val-limbi"><%= produs.limbi_audio %></span></em></li>
-											<li><strong>Durată (min):</strong> <em><span class="val-durata"><%= produs.durata_minute %></span></em></li>
-											<li><strong>Data Lansare:</strong> 
-												<em>
-													<% 
-														const zile = ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata'];
-														const luni = ['Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'];
-														const data = new Date(produs.data_lansare);
-														const textData = `${data.getDate()}-${luni[data.getMonth()]}-${data.getFullYear()} (${zile[data.getDay()]})`;
-													%>
-													<time class="val-data" datetime="<%= data.toISOString() %>"><%= textData %></time>
-												</em>
-											</li>
-											<li><strong>Permite Voucher:</strong> <em><span class="val-voucher"><%= produs.permite_voucher ? 'Da' : 'Nu' %></span></em></li>
-											<li><strong>Format:</strong> <em><span class="val-format"><%= produs.categorie_minora %></span></em></li>
-										</ul>
-									</details>
-									<div class="descriere-produs">
-										<p class="val-descriere"><%= produs.descriere %></p>
+							</div>
+						</div>
+
+						<!-- Format -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="filtru-grup">
+								<label for="inp-format" class="form-label text-light fw-bold">Format vizionare:</label>
+								<input type="text" id="inp-format" class="form-control" list="lista-formate"
+									placeholder="Alegeți format">
+								<datalist id="lista-formate">
+									<option value="2D">
+									<option value="3D">
+									<option value="IMAX">
+									<option value="4DX">
+								</datalist>
+							</div>
+						</div>
+
+						<!-- CERINȚA C: RADIO STILIZATE CA TOGGLE BUTTONS (btn-outline-primary, btn-check) -->
+						<!-- Rating Vârstă Toggle Buttons -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="filtru-grup">
+								<label class="form-label text-light fw-bold">Rating Vârstă:</label>
+								<div class="btn-group d-flex flex-wrap gap-1" role="group" aria-label="Rating Vârstă">
+									<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-toate"
+										value="toate" checked autocomplete="off">
+									<label class="btn btn-outline-primary btn-sm flex-grow-1"
+										for="rad-rating-toate">Toate</label>
+
+									<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-ag"
+										value="AG" autocomplete="off">
+									<label class="btn btn-outline-primary btn-sm flex-grow-1"
+										for="rad-rating-ag">AG</label>
+
+									<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-ap12"
+										value="AP12" autocomplete="off">
+									<label class="btn btn-outline-primary btn-sm flex-grow-1"
+										for="rad-rating-ap12">AP12</label>
+
+									<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-n15"
+										value="N15" autocomplete="off">
+									<label class="btn btn-outline-primary btn-sm flex-grow-1"
+										for="rad-rating-n15">N15</label>
+
+									<input type="radio" class="btn-check" name="rad-rating" id="rad-rating-im18"
+										value="IM18" autocomplete="off">
+									<label class="btn btn-outline-primary btn-sm flex-grow-1"
+										for="rad-rating-im18">IM18</label>
+								</div>
+							</div>
+						</div>
+
+						<!-- CERINȚA C: CHECKBOX STILIZAT CA TOGGLE BUTTON (btn-outline-secondary, btn-check) -->
+						<!-- Voucher Toggle Button -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="filtru-grup">
+								<label class="form-label text-light fw-bold">Discount / Promo:</label>
+								<div class="w-100">
+									<input type="checkbox" class="btn-check" id="inp-voucher" autocomplete="off">
+									<label class="btn btn-outline-secondary btn-sm w-100" for="inp-voucher">
+										<i class="bi bi-tag-fill me-1"></i> afișează doar cu discount pe baza
+										criteriului acceptării de vouchere
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<!-- CERINȚA B: TEXTAREA CU FLOATING LABEL (Bootstrap) -->
+						<!-- Descriere (Floating Label) -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="form-floating">
+								<textarea id="inp-descriere" class="form-control text-light bg-dark border-secondary"
+									placeholder="Ex: exploratori..." style="height: 58px; min-height: 58px;"></textarea>
+								<label for="inp-descriere" class="text-secondary">Cuvinte cheie descriere</label>
+							</div>
+						</div>
+
+						<!-- Durată -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="filtru-grup">
+								<label for="inp-durata" class="form-label text-light fw-bold">Durată minimă:</label>
+								<select id="inp-durata" class="form-select">
+									<option value="oricare" selected>Oricare</option>
+									<option value="90">90+ minute</option>
+									<option value="120">120+ minute</option>
+									<option value="150">150+ minute</option>
+								</select>
+							</div>
+						</div>
+
+						<!-- Lună Lansare -->
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+							<div class="filtru-grup">
+								<label for="inp-luna-lansare" class="form-label text-light fw-bold">Luna
+									lansării:</label>
+								<select id="inp-luna-lansare" class="form-select" multiple size="3">
+									<option value="0" selected>Ianuarie</option>
+									<option value="1" selected>Februarie</option>
+									<option value="2" selected>Martie</option>
+									<option value="3" selected>Aprilie</option>
+									<option value="4" selected>Mai</option>
+									<option value="5" selected>Iunie</option>
+									<option value="6" selected>Iulie</option>
+									<option value="7" selected>August</option>
+									<option value="8" selected>Septembrie</option>
+									<option value="9" selected>Octombrie</option>
+									<option value="10" selected>Noiembrie</option>
+									<option value="11" selected>Decembrie</option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<!-- CERINȚA A: BUTOANE STILIZATE PRIN TEMA BOOTSTRAP, CU ICONIȚE ȘI RECEPTIVITATE (fără text pe ecran mic) -->
+					<!-- Butoane Filtre cu Bootstrap Icons si Responsive Display -->
+					<div class="butoane-filtre mt-3 d-flex flex-wrap gap-2">
+						<button id="btn-filtrare" class="btn btn-primary d-flex align-items-center gap-1">
+							<i class="bi bi-filter"></i>
+							<span class="d-none d-md-inline">Filtrează</span>
+						</button>
+						<button id="btn-sort-asc" class="btn btn-secondary d-flex align-items-center gap-1">
+							<i class="bi bi-sort-numeric-down"></i>
+							<span class="d-none d-md-inline">Sortare Ascendentă</span>
+						</button>
+						<button id="btn-sort-desc" class="btn btn-secondary d-flex align-items-center gap-1">
+							<i class="bi bi-sort-numeric-up-alt"></i>
+							<span class="d-none d-md-inline">Sortare Descendentă</span>
+						</button>
+						<button id="btn-calculeaza" class="btn btn-secondary d-flex align-items-center gap-1">
+							<i class="bi bi-calculator"></i>
+							<span class="d-none d-md-inline">Medie Preț Afișate</span>
+						</button>
+						<button id="btn-reset" class="btn btn-danger d-flex align-items-center gap-1">
+							<i class="bi bi-arrow-clockwise"></i>
+							<span class="d-none d-md-inline">Resetare Filtre</span>
+						</button>
+					</div>
+				</section>
+
+				<!-- SECTIUNE PRODUSE -->
+				<section id="grid-produse" class="produse-grid">
+					<% if (typeof produse !=='undefined' && produse.length> 0) { %>
+						<% produse.forEach(function(produs) { %>
+							<article id="produs_<%= produs.id %>" class="produs-card <%= produs.categorie_mare %>">
+								<h3><a href="/produs/<%= produs.id %>">
+										<%= produs.nume %>
+									</a></h3>
+								<div class="produs-coloane">
+									<div class="coloana-1">
+										<figure>
+											<img src="<%= produs.imagine %>" alt="Poster <%= produs.nume %>"
+												class="img-produs">
+										</figure>
+										<p class="categorie-label">Categorie: <strong><span class="val-categorie">
+													<%= produs.categorie_mare %>
+												</span></strong></p>
+										<p class="pret-label">Preț: <span class="val-pret">
+												<%= produs.pret %>
+											</span> RON</p>
+									</div>
+									<div class="coloana-2">
+										<details>
+											<summary>Specificații</summary>
+											<ul>
+												<li><strong>Rating:</strong> <em><span class="val-rating">
+															<%= produs.rating_varsta %>
+														</span></em></li>
+												<li><strong>Limbi audio:</strong> <em><span class="val-limbi">
+															<%= produs.limbi_audio %>
+														</span></em></li>
+												<li><strong>Durată (min):</strong> <em><span class="val-durata">
+															<%= produs.durata_minute %>
+														</span></em></li>
+												<li><strong>Data Lansare:</strong>
+													<em>
+														<% const zile=['Duminica', 'Luni' , 'Marti' , 'Miercuri' , 'Joi'
+															, 'Vineri' , 'Sambata' ]; const
+															luni=['Ianuarie', 'Februarie' , 'Martie' , 'Aprilie' , 'Mai'
+															, 'Iunie' , 'Iulie' , 'August' , 'Septembrie' , 'Octombrie'
+															, 'Noiembrie' , 'Decembrie' ]; const data=new
+															Date(produs.data_lansare); const
+															textData=`${data.getDate()}-${luni[data.getMonth()]}-${data.getFullYear()}
+															(${zile[data.getDay()]})`; %>
+															<time class="val-data" datetime="<%= data.toISOString() %>">
+																<%= textData %>
+															</time>
+													</em>
+												</li>
+												<li><strong>Permite Voucher:</strong> <em><span class="val-voucher">
+															<%= produs.permite_voucher ? 'Da' : 'Nu' %>
+														</span></em></li>
+												<li><strong>Format:</strong> <em><span class="val-format">
+															<%= produs.categorie_minora %>
+														</span></em></li>
+											</ul>
+										</details>
+										<div class="descriere-produs">
+											<p class="val-descriere">
+												<%= produs.descriere %>
+											</p>
+										</div>
 									</div>
 								</div>
-							</div>
-						</article>
-					<% }) %>
-				<% } else { %>
-					<p>Nu există filme în această categorie momentan.</p>
-				<% } %>
-			</section>
-			<!-- END SECTIUNE PRODUSE -->
+							</article>
+							<% }) %>
+								<% } else { %>
+									<p>Nu există filme în această categorie momentan.</p>
+									<% } %>
+				</section>
+				<!-- END SECTIUNE PRODUSE -->
 
-			<!-- Galerie animata -->
-			<h2 class="galerie-animata-titlu" style="margin-top: 3.5rem; margin-bottom: 1.5rem; text-align: center; color: var(--primary-color, #e50914);">Filmele Momentului</h2>
-			<% if (typeof galerieAnimataCss !== 'undefined' && galerieAnimataCss) { %>
-				<style><%- galerieAnimataCss %></style>
-			<% } %>
-			<div class="galerie-animata" id="galerie-animata" aria-label="Galerie animata filme" data-count="<%= (typeof galerieAnimata !== 'undefined' && Array.isArray(galerieAnimata)) ? galerieAnimata.length : 0 %>" data-source-count="<%= typeof galerieAnimataSourceCount !== 'undefined' ? galerieAnimataSourceCount : 0 %>">
-				<% if (typeof galerieAnimata !== 'undefined' && galerieAnimata.length > 0) { %>
-					<% galerieAnimata.forEach((imagine) => { %>
-						<figure class="galerie-animata__item">
-							<img
-								class="galerie-animata__img"
-								src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>"
-								alt="<%= imagine.alt || imagine.cale_imagine %>"
-								title="<%= imagine.titlu || imagine.descriere || imagine.cale_imagine %>"
-							>
-						</figure>
-					<% }); %>
-				<% } else { %>
-					<div class="galerie-animata__empty">Galeria nu este disponibila.</div>
-				<% } %>
-			</div>
-			<!-- End Galerie animata -->
+				<!-- Galerie animata -->
+				<h2 class="galerie-animata-titlu"
+					style="margin-top: 3.5rem; margin-bottom: 1.5rem; text-align: center; color: var(--primary-color, #e50914);">
+					Filmele Momentului</h2>
+				<% if (typeof galerieAnimataCss !=='undefined' && galerieAnimataCss) { %>
+					<style>
+						<%- galerieAnimataCss %>
+					</style>
+					<% } %>
+						<div class="galerie-animata" id="galerie-animata" aria-label="Galerie animata filme"
+							data-count="<%= (typeof galerieAnimata !== 'undefined' && Array.isArray(galerieAnimata)) ? galerieAnimata.length : 0 %>"
+							data-source-count="<%= typeof galerieAnimataSourceCount !== 'undefined' ? galerieAnimataSourceCount : 0 %>">
+							<% if (typeof galerieAnimata !=='undefined' && galerieAnimata.length> 0) { %>
+								<% galerieAnimata.forEach((imagine)=> { %>
+									<figure class="galerie-animata__item">
+										<img class="galerie-animata__img"
+											src="<%= (imagine.cale_galerie || '/resurse/imagini') + '/' + imagine.cale_imagine %>"
+											alt="<%= imagine.alt || imagine.cale_imagine %>"
+											title="<%= imagine.titlu || imagine.descriere || imagine.cale_imagine %>">
+									</figure>
+									<% }); %>
+										<% } else { %>
+											<div class="galerie-animata__empty">Galeria nu este disponibila.</div>
+											<% } %>
+						</div>
+						<!-- End Galerie animata -->
 
-			<section id="video-prezentare-section" style="margin-top: 3rem; margin-bottom: 2.5rem;">
-				<h2>Trailer Dune 3</h2>
-				<p>Urmărește trailerul celui mai așteptat film al anului.</p>
-				<div class="video-box">
-					<video
-						id="trailer-cinemania"
-						controls
-						preload="none"
-						poster="<%= typeof videoPoster !== 'undefined' ? videoPoster : '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp' %>">
-						<% if (typeof videoMp4 !== 'undefined' && videoMp4) { %>
-							<source src="/resurse/video/<%= videoMp4 %>" type="video/mp4">
-						<% } %>
-						<% if (typeof videoWebm !== 'undefined' && videoWebm) { %>
-							<source src="/resurse/video/<%= videoWebm %>" type="video/webm">
-						<% } %>
-						<track src="/resurse/video/subtitrari/trailer-ro.vtt" kind="subtitles" srclang="ro" label="Română" default>
-						<track src="/resurse/video/subtitrari/trailer-en.vtt" kind="subtitles" srclang="en" label="English">
-						<% if ((!videoWebm && !videoMp4) || (typeof videoWebm === 'undefined' && typeof videoMp4 === 'undefined')) { %>
-							Nu exista inca fisiere video in /resurse/video.
-						<% } else { %>
-							Browserul tău nu suportă elementul video.
-						<% } %>
-					</video>
+						<section id="video-prezentare-section" style="margin-top: 3rem; margin-bottom: 2.5rem;">
+							<h2>Trailer Dune 3</h2>
+							<p>Urmărește trailerul celui mai așteptat film al anului.</p>
+							<div class="video-box">
+								<video id="trailer-cinemania" controls preload="none"
+									poster="<%= typeof videoPoster !== 'undefined' ? videoPoster : '/resurse/imagini/trailer_dune3/3_9vCamtuPY-HD-1200w.webp' %>">
+									<% if (typeof videoMp4 !=='undefined' && videoMp4) { %>
+										<source src="/resurse/video/<%= videoMp4 %>" type="video/mp4">
+										<% } %>
+											<% if (typeof videoWebm !=='undefined' && videoWebm) { %>
+												<source src="/resurse/video/<%= videoWebm %>" type="video/webm">
+												<% } %>
+													<track src="/resurse/video/subtitrari/trailer-ro.vtt"
+														kind="subtitles" srclang="ro" label="Română" default>
+													<track src="/resurse/video/subtitrari/trailer-en.vtt"
+														kind="subtitles" srclang="en" label="English">
+													<% if ((!videoWebm && !videoMp4) || (typeof videoWebm==='undefined'
+														&& typeof videoMp4==='undefined' )) { %>
+														Nu exista inca fisiere video in /resurse/video.
+														<% } else { %>
+															Browserul tău nu suportă elementul video.
+															<% } %>
+								</video>
 
-		</section>
-	</main>
+						</section>
+		</main>
 
-	<%- include('../fragmente/footer') %>
+		<%- include('../fragmente/footer') %>
 </body>
+
 </html>

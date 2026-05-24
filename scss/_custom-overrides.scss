@@ -13,7 +13,12 @@ body {
 }
 
 // Elegant heading styling
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: $secondary;
     font-family: $headings-font-family;
     letter-spacing: $letter-spacing-expanded;
@@ -24,7 +29,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: $border-radius;
     font-weight: 600;
     transition: $transition-base;
-    
+
     &:hover {
         transform: translateY(-2px);
         box-shadow: $box-shadow-lg;
@@ -35,13 +40,14 @@ h1, h2, h3, h4, h5, h6 {
 .btn-primary {
     background-color: $primary;
     border-color: $primary;
-    
+
     &:hover {
         background-color: color.adjust($primary, $lightness: -10%);
         border-color: color.adjust($primary, $lightness: -10%);
     }
-    
-    &:active, &.active {
+
+    &:active,
+    &.active {
         background-color: color.adjust($primary, $lightness: -15%);
         border-color: color.adjust($primary, $lightness: -15%);
     }
@@ -52,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: $secondary;
     border-color: $secondary;
     color: #000;
-    
+
     &:hover {
         background-color: color.adjust($secondary, $lightness: -10%);
         border-color: color.adjust($secondary, $lightness: -10%);
@@ -65,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: $border-radius-lg;
     box-shadow: $box-shadow;
     transition: $transition-base;
-    
+
     &:hover {
         box-shadow: $box-shadow-lg;
         transform: translateY(-4px);
@@ -76,12 +82,12 @@ h1, h2, h3, h4, h5, h6 {
 .alert {
     border-radius: $border-radius;
     border: none;
-    
+
     &-primary {
         background-color: color.adjust($primary, $lightness: 40%);
         color: $primary;
     }
-    
+
     &-secondary {
         background-color: color.adjust($secondary, $lightness: 30%);
         color: color.adjust($secondary, $lightness: -20%);
@@ -96,10 +102,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 // Form controls
-.form-control, .form-select {
+.form-control,
+.form-select {
     border-radius: $border-radius;
     border: 1px solid #ddd;
-    
+
     &:focus {
         border-color: $primary;
         box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
@@ -111,11 +118,11 @@ h1, h2, h3, h4, h5, h6 {
     color: $light;
     font-weight: 500;
     transition: $transition-base;
-    
+
     &:hover {
         color: $primary;
     }
-    
+
     &.active {
         color: $primary;
         font-weight: 600;
@@ -126,20 +133,20 @@ h1, h2, h3, h4, h5, h6 {
 .table {
     border-collapse: collapse;
     font-size: 0.95rem;
-    
+
     thead {
         background-color: color.adjust($primary, $lightness: 40%);
-        
+
         th {
             color: $primary;
             font-weight: 600;
             border-bottom: 2px solid $primary;
         }
     }
-    
+
     tbody tr {
         border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-        
+
         &:hover {
             background-color: rgba(166, 25, 46, 0.12);
         }
@@ -148,6 +155,7 @@ h1, h2, h3, h4, h5, h6 {
 
 // Responsive adjustments for medium and large screens
 @media (min-width: map.get($grid-breakpoints, md)) {
+
     // Slightly larger text on medium screens
     body {
         font-size: 1.05rem;
@@ -155,12 +163,284 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (min-width: map.get($grid-breakpoints, lg)) {
+
     // Even more spacing and larger typography on large screens
     h1 {
         font-size: 4rem;
     }
-    
+
     h2 {
         font-size: 3rem;
+    }
+}
+
+// ============================================================================
+// Identificator: bootstrap_js_ - CAROUSEL PREMIUM STYLING
+// ============================================================================
+.carousel-filme-container {
+    margin: 3rem 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #111;
+    position: relative;
+}
+
+#carousel-filme {
+    .carousel-item {
+        height: 520px;
+        background-color: #050505;
+
+        img {
+            object-fit: cover;
+            object-position: center 20%;
+            width: 100%;
+            height: 100%;
+            opacity: 0.65;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        &.active img {
+            opacity: 0.65;
+        }
+    }
+
+    .carousel-caption {
+        background: rgba(18, 18, 18, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 2rem 2.5rem;
+        bottom: 3rem;
+        max-width: 650px;
+        margin: 0 auto;
+        left: 5%;
+        right: auto;
+        text-align: left;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+
+        h3 {
+            color: $secondary; // Gold
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .carousel-meta {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 0.75rem;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+
+            span {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                i {
+                    color: $secondary;
+                }
+            }
+        }
+
+        p.descriere-film {
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #e5f4f1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-view-movie {
+            background: linear-gradient(135deg, $primary, color.adjust($primary, $lightness: -10%));
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba($primary, 0.3);
+
+            &:hover {
+                background: linear-gradient(135deg, $secondary, color.adjust($secondary, $lightness: -10%));
+                color: #000;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba($secondary, 0.4);
+            }
+        }
+    }
+
+    .carousel-indicators [data-bs-target] {
+        background-color: $secondary;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 6px;
+        opacity: 0.5;
+        border: none;
+
+        &.active {
+            opacity: 1;
+            transform: scale(1.2);
+            background-color: $secondary;
+        }
+    }
+
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 8%;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: rgba(229, 177, 67, 0.85); // Transparent Gold
+        border-radius: 50%;
+        padding: 1.5rem;
+        background-size: 45%;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    #carousel-filme {
+        .carousel-item {
+            height: 380px;
+        }
+
+        .carousel-caption {
+            left: 5%;
+            right: 5%;
+            bottom: 1.5rem;
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+
+            h3 {
+                font-size: 1.4rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .carousel-meta {
+                font-size: 0.8rem;
+                margin-bottom: 0.5rem;
+                gap: 10px;
+            }
+
+            p.descriere-film {
+                display: none;
+            }
+
+            .btn-view-movie {
+                padding: 0.35rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    }
+}
+
+// ============================================================================
+// Identificator: animatie-banner - COOKIE & SCHOLAR BANNER STYLING
+// ============================================================================
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.5);
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    // Configurație statică implicită (pentru mobile și tablete / ecran mediu și mic)
+    background-color: $dark; // c2 (#121212)
+    border-top: 5px solid $secondary; // c3 (#E5B143)
+    transform: none;
+
+    .cookie-banner-content {
+        max-width: 1200px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .cookie-text {
+        margin: 0;
+        font-family: $font-family-sans-serif;
+        font-size: 0.95rem;
+        color: $light;
+        line-height: 1.4;
+
+        strong {
+            color: $secondary;
+        }
+    }
+
+    &.hidden-initially {
+        display: none !important;
+    }
+}
+
+// Configurație cu animație liniară pentru ecrane mari (desktop, >= 768px)
+@media (min-width: 768px) {
+    .cookie-banner {
+        // Valori inițiale înainte de pornirea animației
+        transform: translateX(-100%);
+        background-color: $primary; // c1 (#A6192E)
+        border-top: 5px solid $secondary; // c3 (#E5B143)
+
+        // Declanșează animația liniară de 5 secunde, menținând starea finală (forwards)
+        animation: animatie-slide-banner 5s linear forwards;
+    }
+}
+
+// Keyframes conform schemei: c1 -> c3 -> c2 (background) și c3 -> c2 -> c3 (border)
+@keyframes animatie-slide-banner {
+    0% {
+        transform: translateX(-100%);
+        background-color: $primary; // c1 (#A6192E)
+        border-top: 5px solid $secondary; // c3 (#E5B143)
+    }
+
+    50% {
+        transform: translateX(-50%);
+        background-color: $secondary; // c3 (#E5B143)
+        border-top: 5px solid $dark; // c2 (#121212)
+    }
+
+    100% {
+        transform: translateX(0);
+        background-color: $dark; // c2 (#121212)
+        border-top: 5px solid $secondary; // c3 (#E5B143)
     }
 }
