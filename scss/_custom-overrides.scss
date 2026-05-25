@@ -1,11 +1,6 @@
-// ============================================================================
-// CUSTOM PROJECT STYLING & ENHANCEMENTS
-// ============================================================================
-
 @use "sass:color";
 @use "sass:map";
 
-// Override body color with custom dark background
 body {
     background-color: $dark;
     color: $light;
@@ -363,9 +358,7 @@ h6 {
     }
 }
 
-// ============================================================================
-// Identificator: animatie-banner - COOKIE & SCHOLAR BANNER STYLING
-// ============================================================================
+// Identificator: animatie-banner
 .cookie-banner {
     position: fixed;
     bottom: 0;
@@ -379,9 +372,9 @@ h6 {
     align-items: center;
     box-sizing: border-box;
 
-    // Configurație statică implicită (pentru mobile și tablete / ecran mediu și mic)
-    background-color: $dark; // c2 (#121212)
-    border-top: 5px solid $secondary; // c3 (#E5B143)
+    // ecran mic
+    background-color: $dark;
+    border-top: 5px solid $secondary;
     transform: none;
 
     .cookie-banner-content {
@@ -411,13 +404,12 @@ h6 {
     }
 }
 
-// Configurație cu animație liniară pentru ecrane mari (desktop, >= 768px)
 @media (min-width: 768px) {
     .cookie-banner {
         // Valori inițiale înainte de pornirea animației
         transform: translateX(-100%);
-        background-color: $primary; // c1 (#A6192E)
-        border-top: 5px solid $secondary; // c3 (#E5B143)
+        background-color: $primary;
+        border-top: 5px solid $secondary;
 
         // Declanșează animația liniară de 5 secunde, menținând starea finală (forwards)
         animation: animatie-slide-banner 5s linear forwards;
@@ -428,19 +420,19 @@ h6 {
 @keyframes animatie-slide-banner {
     0% {
         transform: translateX(-100%);
-        background-color: $primary; // c1 (#A6192E)
-        border-top: 5px solid $secondary; // c3 (#E5B143)
+        background-color: $primary;
+        border-top: 5px solid $secondary;
     }
 
     50% {
         transform: translateX(-50%);
-        background-color: $secondary; // c3 (#E5B143)
-        border-top: 5px solid $dark; // c2 (#121212)
+        background-color: $secondary;
+        border-top: 5px solid $dark;
     }
 
     100% {
         transform: translateX(0);
-        background-color: $dark; // c2 (#121212)
-        border-top: 5px solid $secondary; // c3 (#E5B143)
+        background-color: $dark;
+        border-top: 5px solid $secondary;
     }
 }

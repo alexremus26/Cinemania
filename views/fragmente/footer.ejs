@@ -1,56 +1,59 @@
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <p>&copy; 2026 Cinemania. Toate drepturile rezervate.</p>
-                <p>Telefon: <a href="tel:+40123456789">+40 (123) 456-789</a></p>
-                <p>IP utilizator: <strong><%= ipUtilizator %></strong></p>
-                <p id="school-banner">Acesta este un proiect școlar!</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Identificator: animatie-banner -->
-    <div id="cookie-banner" class="cookie-banner hidden-initially">
-        <div class="cookie-banner-content">
-            <p class="cookie-text">
-                <i class="fa-solid fa-circle-info info-icon" style="color: var(--clr-gold); margin-right: 8px;"></i>
-                Acesta este un <strong>proiect școlar</strong>. Acceptați utilizarea cookie-urilor pe site?
-            </p>
-            <button id="btn-accept-cookie" class="btn btn-secondary btn-sm" style="font-weight: bold; padding: 0.25rem 1.25rem;">OK</button>
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <p>&copy; 2026 Cinemania. Toate drepturile rezervate.</p>
+            <p>Telefon: <a href="tel:+40123456789">+40 (123) 456-789</a></p>
+            <p>IP utilizator: <strong>
+                    <%= ipUtilizator %>
+                </strong></p>
+            <p id="school-banner">Acesta este un proiect școlar!</p>
         </div>
     </div>
+</footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const banner = document.getElementById("cookie-banner");
-            const btnAccept = document.getElementById("btn-accept-cookie");
-            
-            if (banner && btnAccept) {
-                // Verificăm dacă cookie-ul a fost deja acceptat
-                const accepted = typeof getCookie === "function" ? getCookie("cookie_accepted") : null;
-                
-                if (!accepted) {
-                    // Eliminăm clasa care ține bannerul ascuns înainte ca animația să pornească
-                    banner.classList.remove("hidden-initially");
-                } else {
-                    banner.style.display = "none";
-                }
-                
-                btnAccept.addEventListener("click", function() {
-                    // Setăm cookie-ul să expire în 6 secunde conform cerinței (deși în mod normal ar fi 1 zi = 86400 secunde)
-                    if (typeof setCookie === "function") {
-                        setCookie("cookie_accepted", "true", 6);
-                    }
-                    
-                    // Efect de fade out și glisare jos la dispariție
-                    banner.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-                    banner.style.opacity = "0";
-                    banner.style.transform = "translateY(100%)";
-                    
-                    setTimeout(function() {
-                        banner.style.display = "none";
-                    }, 400);
-                });
+<!-- Identificator: animatie-banner -->
+<div id="cookie-banner" class="cookie-banner hidden-initially">
+    <div class="cookie-banner-content">
+        <p class="cookie-text">
+            <i class="fa-solid fa-circle-info info-icon" style="color: var(--clr-gold); margin-right: 8px;"></i>
+            Acesta este un <strong>proiect școlar</strong>. Acceptați utilizarea cookie-urilor pe site?
+        </p>
+        <button id="btn-accept-cookie" class="btn btn-secondary btn-sm"
+            style="font-weight: bold; padding: 0.25rem 1.25rem;">OK</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const banner = document.getElementById("cookie-banner");
+        const btnAccept = document.getElementById("btn-accept-cookie");
+
+        if (banner && btnAccept) {
+            // Verificăm dacă cookie-ul a fost deja acceptat
+            const accepted = typeof getCookie === "function" ? getCookie("cookie_accepted") : null;
+
+            if (!accepted) {
+                // Eliminăm clasa care ține bannerul ascuns înainte ca animația să pornească
+                banner.classList.remove("hidden-initially");
+            } else {
+                banner.style.display = "none";
             }
-        });
-    </script>
+
+            btnAccept.addEventListener("click", function () {
+
+                // daca s a incarcat intra in if
+                if (typeof setCookie === "function") {
+                    setCookie("cookie_accepted", "true", 6);
+                }
+
+                banner.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+                banner.style.opacity = "0";
+                banner.style.transform = "translateY(100%)";
+
+                setTimeout(function () {
+                    banner.style.display = "none";
+                }, 400);
+            });
+        }
+    });
+</script>

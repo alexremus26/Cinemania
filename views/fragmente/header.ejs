@@ -39,11 +39,13 @@
                 </a>
                 <ul class="dropdown submenu-sections">
                     <li><a href="/filme">Toate</a></li>
-                    <% if (locals.categorii && categorii.length > 0) { %>
+                    <% if (locals.categorii && categorii.length> 0) { %>
                         <% categorii.forEach(function(categ) { %>
-                            <li><a href="/filme?tip=<%= categ %>"><%= categ.charAt(0).toUpperCase() + categ.slice(1) %></a></li>
-                        <% }) %>
-                    <% } %>
+                            <li><a href="/filme?tip=<%= categ %>">
+                                    <%= categ.charAt(0).toUpperCase() + categ.slice(1) %>
+                                </a></li>
+                            <% }) %>
+                                <% } %>
                 </ul>
             </li>
 
@@ -74,12 +76,14 @@
                     <span class="nav-text">Contul Meu</span>
                 </a>
             </li>
-            <!-- CERINȚA E: SWITCH BOOTSTRAP PENTRU SCHIMBAREA TEMEI -->
+
             <li class="d-flex align-items-center ps-4 ps-lg-5" style="min-height: 40px;">
                 <div class="form-check form-switch p-0 m-0 d-flex align-items-center gap-2">
-                    <input class="form-check-input" type="checkbox" id="theme-toggle" role="switch" style="cursor: pointer; width: 2.2em; height: 1.1em; margin-top: 0;" aria-label="Schimbă tema">
+                    <input class="form-check-input" type="checkbox" id="theme-toggle" role="switch"
+                        style="cursor: pointer; width: 2.2em; height: 1.1em; margin-top: 0;" aria-label="Schimbă tema">
                     <label class="form-check-label" for="theme-toggle" style="cursor: pointer; line-height: 1;">
-                        <i id="theme-icon" class="fa-solid fa-moon text-light" style="font-size: 1.1rem; transition: all 0.3s ease;"></i>
+                        <i id="theme-icon" class="fa-solid fa-moon text-light"
+                            style="font-size: 1.1rem; transition: all 0.3s ease;"></i>
                     </label>
                 </div>
             </li>

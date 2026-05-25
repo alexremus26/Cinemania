@@ -11,11 +11,11 @@ function setCookie(name, value, seconds) {
     if (seconds !== undefined && seconds !== null) {
         const date = new Date();
         date.setTime(date.getTime() + (seconds * 1000));
-        expires = "; expires=" + date.toUTCString();
+        expires = ";expires=" + date.toUTCString(); // Generăm textul doar dacă avem secunde
     }
-    document.cookie = name + "=" + encodeURIComponent(value || "") + expires + "; path=/; SameSite=Lax";
-    console.log(`[COOKIE] Setat cookie "${name}" cu valoarea "${value}" expirând în ${seconds} secunde.`);
+    document.cookie = name + "=" + value + expires + ";path=/";
 }
+
 
 /**
  * Preluarea valorii unui cookie după nume.
@@ -23,12 +23,13 @@ function setCookie(name, value, seconds) {
  * @returns {string|null} Valoarea cookie-ului sau null dacă nu există.
  */
 function getCookie(name) {
-    const nameEQ = name + "=";
-    const ca = document.cookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return decodeURIComponent(c.substring(nameEQ.length, c.length));
+    let vector = document.cookie.split("; ");
+
+    for (let c of vector) {
+        let [key, value] = c.split("=");
+        if (key === name) {
+            return value;
+        }
     }
     return null;
 }
@@ -39,12 +40,9 @@ function getCookie(name) {
  */
 function deleteCookie(name) {
     document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=Lax';
-    console.log(`[COOKIE] Șters cookie "${name}".`);
 }
 
-/**
- * Șterge toate cookie-urile setate pe site.
- */
+
 function deleteAllCookies() {
     const cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {
@@ -53,5 +51,4 @@ function deleteAllCookies() {
         const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
         deleteCookie(name);
     }
-    console.log("[COOKIE] Toate cookie-urile au fost șterse.");
 }

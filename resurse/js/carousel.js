@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // -------------------------------------------------------------
     const carouselEl = document.getElementById("carousel-filme");
     if (carouselEl) {
-        // Inițializăm caruselul din Bootstrap (fără auto-rotire nativă rapidă a Bootstrap)
+        // Inițializăm caruselul din Bootstrap (fără auto-rotire nativă a Bootstrap)
         const carouselInstance = new bootstrap.Carousel(carouselEl, {
             ride: false,
             interval: false
@@ -50,70 +50,44 @@ document.addEventListener("DOMContentLoaded", function () {
         setInterval(updateCarouselData, 15000);
     }
 
-    /**
-     * Efectuează apelul AJAX pentru a obține 5 filme noi aleatorii și actualizează DOM-ul
-     */
     async function updateCarouselData() {
         try {
-            console.log("[CAROUSEL] Se încarcă filme noi aleatorii...");
+            // Preluăm 5 filme aleatorii de la endpoint-ul API
             const res = await fetch("/api/filme/aleatorii");
-            if (!res.ok) throw new Error("Răspuns server necorespunzător");
-
             const filme = await res.json();
-            if (!Array.isArray(filme) || filme.length === 0) {
-                console.warn("[CAROUSEL] Nu s-au primit filme din baza de date.");
-                return;
-            }
 
             const inner = document.getElementById("carousel-inner");
             const indicators = document.getElementById("carousel-indicators");
 
             if (inner && indicators) {
-                // Efect fluid de fade out
-                inner.style.transition = "opacity 0.4s ease";
-                inner.style.opacity = "0";
+                // 1. Reconstrucție Indicatori
+                let indicatorsHtml = "";
+                for (let i = 0; i < filme.length; i++) {
+                    indicatorsHtml += `<button type="button" data-bs-target="#carousel-filme" data-bs-slide-to="${i}" class="${i === 0 ? 'active' : ''}"></button>`;
+                }
+                indicators.innerHTML = indicatorsHtml;
 
-                setTimeout(() => {
-                    // 1. Reconstrucție Indicatori
-                    let indicatorsHtml = "";
-                    for (let i = 0; i < filme.length; i++) {
-                        indicatorsHtml += `<button type="button" data-bs-target="#carousel-filme" data-bs-slide-to="${i}" class="${i === 0 ? 'active' : ''}" aria-current="${i === 0 ? 'true' : 'false'}" aria-label="Slide ${i + 1}"></button>`;
-                    }
-                    indicators.innerHTML = indicatorsHtml;
-
-                    // 2. Reconstrucție Slide-uri
-                    let slidesHtml = "";
-                    filme.forEach((film, index) => {
-                        const catMare = film.categorie_mare.charAt(0).toUpperCase() + film.categorie_mare.slice(1);
-                        slidesHtml += `
-                            <div class="carousel-item ${index === 0 ? 'active' : ''}" data-film-id="${film.id}">
-                                <img src="${film.imagine}" class="d-block w-100" alt="Poster ${film.nume}">
-                                <div class="carousel-caption">
-                                    <h3>${film.nume}</h3>
-                                    <div class="carousel-meta">
-                                        <span><i class="fa-solid fa-tags"></i> ${catMare} / ${film.categorie_minora}</span>
-                                        <span><i class="fa-solid fa-clock"></i> ${film.durata_minute} min</span>
-                                        <span><i class="fa-solid fa-ticket"></i> ${film.pret} RON</span>
-                                    </div>
-                                    <p class="descriere-film">${film.descriere}</p>
-                                    <a href="/film/${film.id}" class="btn btn-view-movie">Detalii Film</a>
-                                </div>
+                // 2. Reconstrucție Slide-uri (Imagine + Captiune cu Nume, Categorie, Pret)
+                let slidesHtml = "";
+                filme.forEach((film, index) => {
+                    slidesHtml += `
+                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                            <img src="${film.imagine}" class="d-block w-100" alt="${film.nume}">
+                            <div class="carousel-caption">
+                                <h3>${film.nume}</h3>
+                                <p>Gen: ${film.categorie_mare} | Preț: ${film.pret} RON</p>
                             </div>
-                        `;
-                    });
-                    inner.innerHTML = slidesHtml;
+                        </div>
+                    `;
+                });
+                inner.innerHTML = slidesHtml;
 
-                    // 3. Re-sincronizare instanță carusel și resetare pe primul slide
-                    const activeCarousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
-                    activeCarousel.to(0);
-
-                    // Efect fluid de fade in
-                    inner.style.opacity = "1";
-                    console.log("[CAROUSEL] Datele caruselului au fost reîmprospătate cu succes.");
-                }, 400);
+                // 3. Resetăm caruselul pe primul slide
+                const activeCarousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
+                activeCarousel.to(0);
             }
         } catch (error) {
-            console.error("[CAROUSEL ERROR] Eroare la actualizarea AJAX a caruselului:", error);
+            console.error("Eroare la actualizarea AJAX a caruselului:", error);
         }
     }
 });

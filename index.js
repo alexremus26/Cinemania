@@ -106,6 +106,9 @@ function compileazaScss(caleScss, caleCss) {
     }
 }
 
+/**
+ * Compilează toate fișierele SCSS din folderul de stiluri care nu sunt parțiale (nu încep cu "_").
+ */
 function compileAllScss() {
     try {
         const files = fs.readdirSync(obGlobal.folderScss);
@@ -126,6 +129,9 @@ function compileAllScss() {
     }
 }
 
+/**
+ * Urmărește automat modificările aduse fișierelor din folderul SCSS și le recompilează instantaneu.
+ */
 function watchScssFolder() {
     console.log('[SCSS] Watching folder for changes:', obGlobal.folderScss);
 
@@ -141,6 +147,10 @@ function watchScssFolder() {
 }
 
 
+/**
+ * Validează structura fișierului de configurare erori.json și existența resurselor de eroare asociate.
+ * Rulează la pornirea aplicației și afișează erori explicative în consolă la detectarea neregulilor.
+ */
 function verificareEroriJson() {
     const jsonPath = path.join(__dirname, 'erori.json');
     let continutBrut;
@@ -164,7 +174,6 @@ function verificareEroriJson() {
 
     obJson = JSON.parse(continutBrut);
 
-    // [B] Verificare: lipsesc proprietati obligatorii
     const proprietatiObligatorii = ['info_erori', 'cale_baza', 'eroare_default'];
     const proprietatiLipsa = proprietatiObligatorii.filter(prop => !(prop in obJson));
 
@@ -178,7 +187,6 @@ function verificareEroriJson() {
         console.error('==============================================================');
     }
 
-    // [C] Verificare: eroare_default nu are titlu, text sau imagine 
     if (obJson.eroare_default) {
         const propDefault = ['titlu', 'text', 'imagine'];
         const propDefaultLipsa = propDefault.filter(prop => !(prop in obJson.eroare_default));
@@ -194,7 +202,6 @@ function verificareEroriJson() {
         }
     }
 
-    // [D] Verificare: folderul cale_baza nu exista in sistemul de fisiere
     if (obJson.cale_baza) {
         const caleBazaRelatia = obJson.cale_baza.startsWith('/') ? obJson.cale_baza.substring(1) : obJson.cale_baza;
         const caleBazaAbsoluta = path.join(__dirname, caleBazaRelatia);
@@ -209,7 +216,6 @@ function verificareEroriJson() {
         }
     }
 
-    // [E] Verificare: fisiere imagine asociate erorilor nu exista pe disc
     if (obJson.cale_baza) {
         const caleBazaRelatia = obJson.cale_baza.startsWith('/') ? obJson.cale_baza.substring(1) : obJson.cale_baza;
         const caleBazaAbsoluta = path.join(__dirname, caleBazaRelatia);
@@ -347,6 +353,9 @@ function verificareEroriJson() {
     console.log('[VERIFICARE] Verificarea fisierului erori.json s-a incheiat.');
 }
 
+/**
+ * Inițializează configurările de erori prin parsarea JSON-ului și stabilirea căilor de imagini.
+ */
 function initErori() {
     const jsonPath = path.join(__dirname, 'erori.json');
     const jsonContent = fs.readFileSync(jsonPath, 'utf-8');
@@ -363,6 +372,14 @@ function initErori() {
     obGlobal.obErori = obErori;
 }
 
+/**
+ * Randează o pagină de eroare personalizată cu status code-ul corespunzător.
+ * @param {object} res - Obiectul de răspuns Express res
+ * @param {number|string} identificator - Codul HTTP de status sau identificatorul erorii
+ * @param {string} [titlu] - Titlu custom opțional
+ * @param {string} [text] - Text explicativ custom opțional
+ * @param {string} [imagine] - Cale imagine custom opțională
+ */
 function afisareEroare(res, identificator, titlu, text, imagine) {
     const obErori = obGlobal.obErori;
     const idNumeric = Number(identificator);
@@ -396,6 +413,12 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
 
 const GALERIE_TEST_DATE = null;
 
+/**
+ * Asigură generarea automată a imaginilor redimensionate (mediu și mic) utilizând sharp.
+ * Previne Directory Traversal prin verificări stricte de căi absolute.
+ * @param {object} imagine - Obiectul ce conține cale_imagine și metadate
+ * @param {string} basePath - Calea directorului părinte al imaginilor pe disc
+ */
 async function asiguraImaginiDimensionate(imagine, basePath) {
 
     const cleanBasePath = basePath.startsWith('/') ? basePath.slice(1) : basePath;
@@ -440,7 +463,12 @@ async function asiguraImaginiDimensionate(imagine, basePath) {
 }
 
 
-// Galerie statica
+/**
+ * Filtrează dinamic imaginile din galerie în funcție de sfertul curent de oră (minute / 15).
+ * @param {Date} date - Obiectul dată de testare sau curent
+ * @param {object} obGalerie - Datele complete ale galeriei din fișierul galerie.json
+ * @returns {Promise<object[]>} Lista de imagini filtrate și redimensionate pentru quarter-ul curent
+ */
 async function filterGaleryByQuarter(date, obGalerie) {
     const targetDate = GALERIE_TEST_DATE || date;
     const minutes = targetDate.getMinutes();
@@ -472,6 +500,12 @@ const GALERIE_ANIMATA_CONFIG = {
     borderImage: '/resurse/imagini/cinematografe-harta.svg'
 };
 
+/**
+ * Generează un număr impar aleatoriu într-un interval închis [min, max].
+ * @param {number} min - Limita minimă a intervalului
+ * @param {number} max - Limita maximă a intervalului
+ * @returns {number} Un număr impar generat aleatoriu
+ */
 function getRandomOdd(min, max) {
     const minOdd = min % 2 === 0 ? min + 1 : min;
     const maxOdd = max % 2 === 0 ? max - 1 : max;
@@ -484,6 +518,10 @@ function getRandomOdd(min, max) {
     return minOdd + 2 * Math.floor(Math.random() * countOdds);
 }
 
+/**
+ * Încarcă, filtrează și alege un set unic și aleatoriu de imagini pentru galeria animată.
+ * @returns {object} Un obiect ce conține vectorul de elemente alese (items) și numărul target de elemente
+ */
 function buildGalerieAnimataItems() {
     try {
         const jsonPath = path.join(__dirname, 'resurse', 'documente', 'galerie.json');
@@ -533,6 +571,11 @@ function buildGalerieAnimataItems() {
     }
 }
 
+/**
+ * Compilează dinamic un fișier SCSS string cu parametri asociați numărului de imagini din galeria animată.
+ * @param {number} imageCount - Numărul de imagini din galerie
+ * @returns {string} Codul CSS rezultat din compilarea SCSS-ului
+ */
 function compileGalerieAnimataCss(imageCount) {
     if (!imageCount || imageCount < GALERIE_ANIMATA_CONFIG.minCount) {
         return '';
@@ -559,13 +602,19 @@ function compileGalerieAnimataCss(imageCount) {
     }
 }
 
+/**
+ * Returnează setul complet de date necesar randării galeriei animate (imagini și CSS compilat dinamic).
+ * @returns {object} Obiectul cu proprietățile items și css
+ */
 function getGalerieAnimataRenderData() {
     const { items, targetCount } = buildGalerieAnimataItems();
     const css = compileGalerieAnimataCss(items.length || targetCount);
     return { items, css };
 }
 
-// Galeria statica
+/**
+ * Inițializează datele galeriei statice din fișierul galerie.json.
+ */
 function initGalerie() {
     const jsonPath = path.join(__dirname, 'resurse', 'documente', 'galerie.json');
     try {
@@ -580,6 +629,10 @@ function initGalerie() {
     }
 }
 
+/**
+ * Scanează resursele locale de tip trailer video și poster de copertă de pe disc pentru pagina principală.
+ * @returns {object} Obiectul cu resursele detectate: videoMp4, videoWebm și videoPoster
+ */
 function getTrailerAssets() {
     const mp4File = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.mp4');
     const webmFile = path.join(__dirname, 'resurse', 'video', 'trailer_dune3.webm');
@@ -722,8 +775,8 @@ app.get('/galerie', async (req, res) => {
     });
 });
 
-// film unic 
-app.get('/film/:id', async (req, res) => {
+// film unic (suportă atât /produs/:id din EJS cât și /film/:id)
+app.get(['/film/:id', '/produs/:id'], async (req, res) => {
     try {
         // // Validation for SQL Injection: ensure ID is numeric and use parameterized query
         const idNumeric = parseInt(req.params.id, 10);

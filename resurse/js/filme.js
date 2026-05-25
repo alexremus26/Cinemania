@@ -16,6 +16,18 @@ window.addEventListener("DOMContentLoaded", function () {
         };
     }
 
+    // Validare dinamică pentru numele introdus (roșu dacă e doar spațiu)
+    const inpNumeEl = document.getElementById("inp-nume");
+    if (inpNumeEl) {
+        inpNumeEl.addEventListener("input", function () {
+            if (this.value.length > 0 && this.value.trim() === "") {
+                this.classList.add("is-invalid");
+            } else {
+                this.classList.remove("is-invalid");
+            }
+        });
+    }
+
     // CERINȚA B: Validare dinamică textarea și setare automată/corectare floating label 'is-invalid'
     const inpDescriereEl = document.getElementById("inp-descriere");
     if (inpDescriereEl) {
@@ -30,14 +42,26 @@ window.addEventListener("DOMContentLoaded", function () {
 
     // ----- Validarea Inputurilor -----
     function valideazaInputuri() {
-        const inpNume = document.getElementById("inp-nume").value.trim();
-        if (inpNume !== "") {
-            // Numele nu ar trebui sa aiba cifre in acest context de cautare daca impunem o regula restrictiva,
-            // Dar numele filmelor (ex. "Dune 2") au cifre. Deci validam sa nu fie DOAR cifre sau caractere speciale.
-            // Pentru exercitiu, o validare simpla: sa nu inceapa cu un caracter special
-            if (/^[^a-zA-Z0-9]/.test(inpNume)) {
-                alert("Eroare: Numele introdus nu poate începe cu un caracter special.");
+        const inpNumeEl = document.getElementById("inp-nume");
+        if (inpNumeEl) {
+            const valNumeRaw = inpNumeEl.value;
+            if (valNumeRaw.length > 0 && valNumeRaw.trim() === "") {
+                inpNumeEl.classList.add("is-invalid");
+                alert("Eroare: Căutarea după nume conține doar spații!");
                 return false;
+            } else {
+                inpNumeEl.classList.remove("is-invalid");
+            }
+
+            const inpNume = valNumeRaw.trim();
+            if (inpNume !== "") {
+                // Numele nu ar trebui sa aiba cifre in acest context de cautare daca impunem o regula restrictiva,
+                // Dar numele filmelor (ex. "Dune 2") au cifre. Deci validam sa nu fie DOAR cifre sau caractere speciale.
+                // Pentru exercitiu, o validare simpla: sa nu inceapa cu un caracter special
+                if (/^[^a-zA-Z0-9]/.test(inpNume)) {
+                    alert("Eroare: Numele introdus nu poate începe cu un caracter special.");
+                    return false;
+                }
             }
         }
 
@@ -67,7 +91,7 @@ window.addEventListener("DOMContentLoaded", function () {
         if (!valideazaInputuri()) return;
 
         // Preluam valorile
-        const valNume = document.getElementById("inp-nume").value.toLowerCase();
+        const valNume = document.getElementById("inp-nume").value.trim().toLowerCase();
         const valPretMax = parseFloat(document.getElementById("inp-pret").value);
         const valFormat = document.getElementById("inp-format").value.toLowerCase();
         const valRating = document.querySelector('input[name="rad-rating"]:checked').value;
@@ -88,11 +112,11 @@ window.addEventListener("DOMContentLoaded", function () {
             // Preluam valorile din DOM pentru articol
             const numeF = art.querySelector("h3 a").textContent.toLowerCase();
             const pretF = parseFloat(art.querySelector(".val-pret").textContent);
-            const formatF = art.querySelector(".val-format").textContent.toLowerCase();
-            const ratingF = art.querySelector(".val-rating").textContent;
-            const voucherF = art.querySelector(".val-voucher").textContent === "Da";
-            const descriereF = art.querySelector(".val-descriere").textContent.toLowerCase();
-            const durataF = parseInt(art.querySelector(".val-durata").textContent);
+            const formatF = art.querySelector(".val-format").textContent.trim().toLowerCase();
+            const ratingF = art.querySelector(".val-rating").textContent.trim();
+            const voucherF = art.querySelector(".val-voucher").textContent.trim() === "Da";
+            const descriereF = art.querySelector(".val-descriere").textContent.trim().toLowerCase();
+            const durataF = parseInt(art.querySelector(".val-durata").textContent.trim());
 
             // Pentru Data, trebuie sa extragem luna
             // Tag-ul time are un datetime de forma ISO ("2024-03-01T00:00:00.000Z")

@@ -1,8 +1,3 @@
-/**
- * Definiția drepturilor posibile pe site-ul Cinemania.
- * Fiecare drept este unic reprezentat printr-un Symbol.
- * Există minim 7 drepturi distincte care reglementează securitatea aplicației.
- */
 const Drepturi = {
     // Drepturi referitoare la Produse (Filme)
     vizualizareProduse: Symbol("vizualizareProduse"),

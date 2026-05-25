@@ -1,19 +1,16 @@
-// ============================================================================
-// LIGHT MODE CUSTOM THEME (SCSS Overrides in SASS)
-// ============================================================================
 html.light-mode {
     // Override Bootstrap native light mode CSS variables for components
     --bs-body-bg: #F8F9FA;
     --bs-body-color: #212529;
     --bs-tertiary-bg: #E9ECEF;
-    
+
     body {
-        --clr-black: #FFFFFF;              // Card background
-        --clr-dark-grey: #F1F3F5;          // Background accent
-        --clr-white: #212529;              // Main text color
+        --clr-black: #FFFFFF; // Card background
+        --clr-dark-grey: #F1F3F5; // Background accent
+        --clr-white: #212529; // Main text color
         --clr-pure-black: rgba(0, 0, 0, 0.08); // Subtle drop shadow color
-        --clr-pure-white: #121212;         // Inverted pure white
-        --clr-gradient-dark: #EAECEF;      // Card gradient secondary
+        --clr-pure-white: #121212; // Inverted pure white
+        --clr-gradient-dark: #EAECEF; // Card gradient secondary
         --clr-overlay-red: rgba(166, 25, 46, 0.08);
         --clr-overlay-white-light: rgba(0, 0, 0, 0.02);
         --clr-overlay-white-mid: rgba(0, 0, 0, 0.04);
@@ -36,9 +33,9 @@ html.light-mode {
     }
 
     // Ensure links in header are highly visible and premium
-    .nav-main > li > a {
+    .nav-main>li>a {
         color: #212529 !important;
-        
+
         &:hover {
             color: #A6192E !important;
         }
@@ -50,14 +47,14 @@ html.light-mode {
     }
 
     // Dropdown list in header - premium look in light mode
-    .nav-main > li .dropdown {
+    .nav-main>li .dropdown {
         background: linear-gradient(160deg, #FFFFFF, #F1F3F5) !important;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
         border: 1px solid rgba(166, 25, 46, 0.15);
-        
-        li > a {
+
+        li>a {
             color: #212529 !important;
-            
+
             &:hover {
                 background: rgba(166, 25, 46, 0.05) !important;
                 color: #A6192E !important;
@@ -66,7 +63,8 @@ html.light-mode {
     }
 
     // Custom sections inside #grid-pagina
-    #grid-pagina > section, footer {
+    #grid-pagina>section,
+    footer {
         background: linear-gradient(135deg, #FFFFFF, #F8F9FA) !important;
         border: 1px solid rgba(166, 25, 46, 0.2) !important;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06) !important;
@@ -74,11 +72,15 @@ html.light-mode {
     }
 
     // Adjust titles to look elegant and high-contrast
-    h1, h2, h3, #title, .reflect-title {
+    h1,
+    h2,
+    h3,
+    #title,
+    .reflect-title {
         color: #A6192E !important;
     }
-    
-    .nav-main > li:hover > a {
+
+    .nav-main>li:hover>a {
         color: #A6192E !important;
     }
 
@@ -88,12 +90,12 @@ html.light-mode {
         background-color: #FFFFFF !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
-    
+
     th {
         background-color: #A6192E !important;
         color: #FFFFFF !important;
     }
-    
+
     tfoot td {
         background-color: #F1F3F5 !important;
         color: #A6192E !important;
@@ -103,7 +105,7 @@ html.light-mode {
     .cat-card {
         border: 1px solid #A6192E !important;
         color: #212529 !important;
-        
+
         &:hover {
             background: rgba(166, 25, 46, 0.05) !important;
             box-shadow: 0 5px 15px rgba(166, 25, 46, 0.15) !important;
@@ -111,11 +113,12 @@ html.light-mode {
     }
 
     // Textarea input and selects
-    .form-control, .form-select {
+    .form-control,
+    .form-select {
         background-color: #FFFFFF !important;
         color: #212529 !important;
         border: 1px solid #CCCCCC !important;
-        
+
         &:focus {
             border-color: #A6192E !important;
             box-shadow: 0 0 0 0.2rem rgba(166, 25, 46, 0.15) !important;
@@ -128,13 +131,14 @@ html.light-mode {
         border: 1px solid rgba(166, 25, 46, 0.15) !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
         color: #212529 !important;
-        
+
         &:hover {
             box-shadow: 0 8px 24px rgba(166, 25, 46, 0.12) !important;
         }
 
         h3 {
             border-bottom: 1px solid rgba(166, 25, 46, 0.15) !important;
+
             a {
                 color: #A6192E !important;
             }
@@ -144,7 +148,8 @@ html.light-mode {
             color: #495057 !important;
         }
 
-        .categorie-label, .pret-label {
+        .categorie-label,
+        .pret-label {
             color: #212529 !important;
         }
     }
@@ -153,18 +158,18 @@ html.light-mode {
         background: #F1F3F5 !important;
         border: 1px solid rgba(166, 25, 46, 0.1) !important;
         color: #212529 !important;
-        
+
         summary {
             color: #A6192E !important;
         }
-        
+
         li {
             color: #495057 !important;
-            
+
             strong {
                 color: #212529 !important;
             }
-            
+
             em {
                 color: #495057 !important;
             }
@@ -187,7 +192,7 @@ html.light-mode {
 
         .detaliu-item {
             color: #212529 !important;
-            
+
             strong {
                 color: #495057 !important;
             }
@@ -216,7 +221,8 @@ html.light-mode {
         color: #212529 !important;
 
         // Override Bootstrap's text-light utility on labels inside filtre-container
-        .text-light, label.text-light {
+        .text-light,
+        label.text-light {
             color: #212529 !important;
         }
 
@@ -225,13 +231,13 @@ html.light-mode {
             background-color: #FFFFFF !important;
             color: #212529 !important;
             border-color: #CCCCCC !important;
-            
+
             &:focus {
                 border-color: #A6192E !important;
                 box-shadow: 0 0 0 0.2rem rgba(166, 25, 46, 0.15) !important;
             }
         }
-        
+
         // Muted values on range slider
         .text-muted {
             color: #6C757D !important;
@@ -246,7 +252,7 @@ html.light-mode {
         option {
             background-color: #FFFFFF !important;
             color: #212529 !important;
-            
+
             &:checked {
                 background-color: rgba(166, 25, 46, 0.15) !important;
                 color: #A6192E !important;
@@ -267,7 +273,7 @@ html.light-mode {
         }
 
         // Active state when checked (Bootstrap uses .btn-check:checked + .btn-outline-primary)
-        .btn-check:checked + .btn-outline-primary {
+        .btn-check:checked+.btn-outline-primary {
             background-color: #A6192E !important;
             color: #FFFFFF !important;
             border-color: #A6192E !important;
@@ -288,7 +294,7 @@ html.light-mode {
         }
 
         // Active state when checked (Discount/Promo toggle active state)
-        .btn-check:checked + .btn-outline-secondary {
+        .btn-check:checked+.btn-outline-secondary {
             background-color: #E5B143 !important;
             color: #212529 !important;
             border-color: #B38624 !important;

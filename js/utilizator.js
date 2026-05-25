@@ -5,10 +5,7 @@ const { RolFactory } = require('./roluri.js');
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 
-/**
- * Clasa Utilizator - Gestionează datele de profil, validările, persistența în baza de date PostgreSQL,
- * controlul accesului bazat pe roluri (RBAC) și serviciul de e-mail.
- */
+
 class Utilizator {
     /** @type {string} Configurație pentru tipul conexiunii active la BD. */
     static tipConexiune = "local";
@@ -49,6 +46,8 @@ class Utilizator {
      * @param {string} [param.culoare_chat="black"] - Culoarea preferată pentru chat
      * @param {string} [param.poza] - Calea către avatar
      */
+
+    // cu obiect {}
     constructor({ id, username, nume, prenume, email, parola, rol, culoare_chat = "black", poza } = {}) {
         this.id = id;
 
@@ -64,6 +63,7 @@ class Utilizator {
             this.#eroare = e.message;
         }
 
+        // parcurge toate proprietatile din obiectul primit ca argument
         if (arguments[0]) {
             for (let prop in arguments[0]) {
                 this[prop] = arguments[0][prop];
@@ -149,20 +149,19 @@ class Utilizator {
     }
 
     /**
-     * Salvează utilizatorul în baza de date. Criptează parola, generează tokenul
-     * și trimite un mail de confirmare la succes.
-     * Aruncă eroare dacă username-ul deja există în baza de date (cerință barem).
-     * @throws {Error} Dacă utilizatorul există deja
+     * Salvează utilizatorul în baza de date.
+     * Aruncă eroare dacă username-ul deja există în baza de date.
      */
     salvareUtilizator() {
         let utiliz = this;
         let db = AccesBD.getInstanta(Utilizator.tipConexiune);
-        
+
+        // 1. Verificăm dacă username-ul există deja în baza de date
         db.select({
             tabel: Utilizator.tabel,
             campuri: ['*'],
             conditiiAnd: [`username = '${this.username}'`]
-        }, function(err, rezSelect) {
+        }, function (err, rezSelect) {
             if (err) {
                 console.error(err);
                 return;
@@ -171,29 +170,23 @@ class Utilizator {
                 throw new Error("Eroare salvareUtilizator: Username-ul deja exista!");
             }
 
-            let parolaCriptata = Utilizator.criptareParola(utiliz.parola);
-            let token = parole.genereazaToken(100);
+            // 2. Inserăm direct utilizatorul în baza de date
             db.insert({
                 tabel: Utilizator.tabel,
                 campuri: {
                     username: utiliz.username,
                     nume: utiliz.nume,
                     prenume: utiliz.prenume,
-                    parola: parolaCriptata,
+                    parola: utiliz.parola, // salvăm parola direct (brută, simplificată)
                     email: utiliz.email,
                     culoare_chat: utiliz.culoare_chat,
-                    cod: token,
                     poza: utiliz.poza
                 }
-            }, function(err2, rez) {
+            }, function (err2, rez) {
                 if (err2) {
-                    console.log(err2);
+                    console.log("Eroare la inserare utilizator:", err2);
                 } else {
-                    utiliz.trimiteMail(
-                        "Te-ai inregistrat cu succes",
-                        "Username-ul tau este " + utiliz.username,
-                        `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${utiliz.username}.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`
-                    );
+                    console.log("Utilizator salvat cu succes în baza de date!");
                 }
             });
         });
@@ -206,9 +199,8 @@ class Utilizator {
      * @throws {Error} Dacă utilizatorul nu există în baza de date
      */
     async modifica(obiectNou) {
-        if (!this.id && !this.username) {
-            throw new Error("Nu se poate modifica: lipseste identificatorul utilizatorului!");
-        }
+
+        // o unica conex la bd
         let db = AccesBD.getInstanta(Utilizator.tipConexiune);
         let conditie = this.id ? `id = ${this.id}` : `username = '${this.username}'`;
 
@@ -362,7 +354,7 @@ class Utilizator {
         });
         console.log("trimis mail");
     }
-   
+
     /**
      * Căutare asincronă după username care returnează o instanță Utilizator.
      * @param {string} username - Username-ul căutat
@@ -401,7 +393,7 @@ class Utilizator {
             tabel: "utilizatori",
             campuri: ['*'],
             conditiiAnd: [`username='${username}'`]
-        }, function(err, rezSelect) {
+        }, function (err, rezSelect) {
             if (err) {
                 console.error("Utilizator:", err);
                 eroare = -2;
